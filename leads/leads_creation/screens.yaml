@@ -1,0 +1,660 @@
+# /leads/lead_creation/screens.yaml
+# Source: Live DOM scan of Create Lead form
+# URL: /crm/org60043078423/tab/Leads/create?layoutId=955332000000425337&redirect=false
+# Date scanned: 2026-02-26
+screens:
+  - screen_id: SCR_LEADS_LIST
+    screen_name: Leads List View
+    url_pattern: /tab/Leads/custom-view/{view_id}/list
+    module: Leads
+    purpose: Entry point for lead creation
+    entry_point:
+      button_label: Create Lead
+      button_type: split_button
+      button_color: blue_solid
+      position: top_right_toolbar
+      ref: ref_79
+      adjacent_elements:
+        - label: More
+          type: dropdown_arrow
+          ref: ref_80
+        - label: Actions
+          type: three_dot_menu
+          ref: ref_81
+      navigation_result:
+        url: /tab/Leads/create?layoutId=955332000000425337&redirect=false
+        page_title: Create Lead - Zoho CRM
+  - screen_id: SCR_LEAD_CREATE_FORM
+    screen_name: Create Lead Form
+    url_pattern: /tab/Leads/create
+    url_params:
+      layoutId: "955332000000425337"
+      redirect: "false"
+    module: Leads
+    layout_id: "955332000000425337"
+    page_title: Create Lead - Zoho CRM
+    header:
+      breadcrumb: Leads
+      form_title: Create Lead
+      secondary_link:
+        label: Edit Page Layout
+        href: /crm/org60043078423/settings/modules/Leads/layouts/955332000000425337
+    form_controls:
+      region: Form Controls
+      buttons:
+        - label: Save
+          type: submit
+          color: blue_solid
+          position: top_right
+          ref: ref_405
+        - label: Save and New
+          type: button
+          color: white_outline
+          position: top_right
+          ref: ref_407
+        - label: Cancel
+          type: button
+          color: white_outline
+          position: top_right
+          ref: ref_409
+    sections:
+      - section_id: SEC_LEAD_INFORMATION
+        label: Lead Information
+        layout: two_column_grid
+        column_count: 2
+        fields:
+          - field_label: Last Name
+            column: left
+            row: 1
+            input_type: text
+            required: true
+            required_indicator: red_border_on_load
+            default_value: ""
+            placeholder: ""
+            ref: ref_419
+          - field_label: Mobile
+            column: right
+            row: 1
+            input_type: text
+            required: true
+            required_indicator: red_border_on_load
+            default_value: ""
+            placeholder: ""
+            ref: ref_484
+          - field_label: Lead Type
+            column: left
+            row: 2
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_421
+            options:
+              - value: "-None-"
+                display: "-None-"
+                indicator: none
+              - value: Hot
+                display: Hot
+                indicator: red_dot
+              - value: Warm
+                display: Warm
+                indicator: yellow_dot
+              - value: Cold
+                display: Cold
+                indicator: blue_dot
+              - value: Junk
+                display: Junk
+                indicator: grey_dot
+          - field_label: Lead Source
+            column: right
+            row: 2
+            input_type: picklist
+            searchable: true
+            required: false
+            default_value: "-None-"
+            ref: ref_486
+            options:
+              - "-None-"
+              - Offline Marketing
+              - Cold Call
+              - 99 Acres
+              - MagicBicks
+              - Housing.Com
+              - Employee Referral
+              - Inbound Referral
+              - External Referral
+              - Meta Ads
+              - Walkins
+              - Google Ads
+              - Expo
+          - field_label: Client Location
+            column: left
+            row: 3
+            input_type: text
+            required: false
+            default_value: ""
+            ref: ref_427
+          - field_label: Lead Status
+            column: right
+            row: 3
+            input_type: picklist
+            searchable: true
+            required: false
+            default_value: Lead Bucket
+            ref: ref_492
+            options:
+              - "-None-"
+              - Lead Bucket # default on create
+              - Lead for Initial Sales Process
+              - Attempted to Contact
+              - Contact in Future
+              - Lead Scoring Using BANT
+              - Junk Lead
+              - Qualified
+              - Site Visit Completed
+              - Site Visit Scheduled
+              - Confirm Site Visit
+              - Attempted
+              - Advance Payed
+              - Deal Closed
+          - field_label: Company
+            column: left
+            row: 4
+            input_type: lookup_autocomplete
+            required: false
+            default_value: ""
+            ref: ref_429
+          - field_label: Email
+            column: right
+            row: 4
+            input_type: text
+            required: false
+            default_value: ""
+            ref: ref_498
+          - field_label: Telecaller
+            column: left
+            row: 5
+            input_type: user_lookup
+            required: false
+            default_value: ""
+            ref: ref_434
+            open_picker_button: ref_440
+            picker_icon: true
+          - field_label: Estimated Budget
+            column: right
+            row: 5
+            input_type: currency_text
+            required: false
+            default_value: ""
+            prefix: "₹"
+            info_icon: true
+            ref: ref_500
+          - field_label: Manager
+            column: left
+            row: 6
+            input_type: user_lookup
+            required: false
+            default_value: ""
+            ref: ref_442
+            open_picker_button: ref_448
+            picker_icon: true
+          - field_label: Preferred Communication Channel
+            column: right
+            row: 6
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_502
+            options:
+              - "-None-"
+              - WhatsApp
+              - Phone Call
+              - Email
+          - field_label: Reason Qualified Out
+            column: left
+            row: 7
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_450
+            options: # VERIFY: full option list not captured
+          - field_label: Type of Property
+            column: right
+            row: 7
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_508
+            options:
+              - "-None-"
+              - Plot
+              - Villa
+              - Apartment
+              - Commercial
+          - field_label: Language Preference
+            column: left
+            row: 8
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_456
+            options:
+              - "-None-"
+              - English
+              - Tamil
+          - field_label: Preferred Size (Sq.Ft or Cents)
+            column: right
+            row: 8
+            input_type: text
+            required: false
+            default_value: ""
+            ref: ref_514
+          - field_label: Budget Range Min
+            column: left
+            row: 9
+            input_type: text
+            required: false
+            default_value: ""
+            info_icon: true
+            ref: ref_462
+          - field_label: Family Decision Involved?
+            column: right
+            row: 9
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_516
+            options:
+              - "-None-"
+              - Yes
+              - No
+          - field_label: Budget Range Max
+            column: left
+            row: 10
+            input_type: text
+            required: false
+            default_value: ""
+            info_icon: true
+            ref: ref_464
+          - field_label: Deal Closed Time
+            column: right
+            row: 10
+            input_type: datetime
+            required: false
+            date_placeholder: DD/MM/YYYY
+            time_default: "04:00 PM"
+            components:
+              - type: date_text
+                placeholder: DD/MM/YYYY
+                ref: ref_522
+              - type: time_text
+                default: "04:00 PM"
+                ref: ref_523
+              - type: am_pm_selector
+                ref: ref_524
+          - field_label: Budget Range
+            column: left
+            row: 11
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_466
+            options:
+              - "-None-"
+              - "₹5L–₹10L"
+              - "₹10L–₹25L"
+              - "₹25L–₹50L"
+              - "₹50L–₹1Cr"
+              - "Above ₹1Cr"
+          - field_label: Social Lead ID
+            column: right
+            row: 11
+            input_type: text
+            required: false
+            default_value: ""
+            ref: ref_529
+          - field_label: Timeframe to Purchase
+            column: left
+            row: 12
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_472
+            options:
+              - "-None-"
+              - Immediate
+              - Within 3 Months
+              - 3–6 Months
+              - 6–12 Months
+              - Not Decided
+          - field_label: Loan Requirement
+            column: left
+            row: 13
+            input_type: picklist
+            required: false
+            default_value: "-None-"
+            ref: ref_478
+            options:
+              - "-None-"
+              - Yes
+              - No
+              - Considering
+      - section_id: SEC_REQUIREMENT_ASSESSMENT
+        label: Requirement Assessment
+        layout: two_column_grid
+        fields:
+          - field_label: Preferred Location
+            input_type: text
+            ref: ref_534
+          - field_label: 1. Preferred Location
+            input_type: text
+            ref: ref_536
+          - field_label: 2. Preferred Location
+            input_type: text
+            ref: ref_538
+          - field_label: 3. Preferred Location
+            input_type: text
+            ref: ref_540
+          - field_label: Comfortable Price
+            input_type: currency_text
+            ref: ref_542
+          - field_label: Up to Price
+            input_type: currency_text
+            ref: ref_544
+          - field_label: Requirement Property Type
+            input_type: text
+            ref: ref_546
+          - field_label: Client Major Concern on Purchase
+            input_type: text
+            ref: ref_548
+          - field_label: Purpose Of Purchase
+            input_type: text
+            ref: ref_550
+          - field_label: Down Payment
+            input_type: currency_text
+            ref: ref_552
+          - field_label: Payment Type
+            input_type: text
+            ref: ref_554
+          - field_label: Land Area in cents
+            input_type: text
+            ref: ref_556
+          - field_label: Rooms in BHK
+            input_type: text
+            ref: ref_558 # VERIFY: field type
+      - section_id: SEC_LEAD_ASSESSMENT
+        label: Lead Assessment
+        layout: two_column_grid
+        notes: BANT scoring fields — written to by [Lead] Set Lead Type workflow function
+        fields:
+          - field_label: Budget
+            input_type: text
+            ref: ref_562
+          - field_label: Need
+            input_type: text
+            ref: ref_564
+          - field_label: Authority
+            input_type: text
+            ref: ref_566
+          - field_label: Time
+            input_type: text
+            ref: ref_567 # VERIFY: exact ref
+      - section_id: SEC_ADDRESS_INFORMATION
+        label: Address Information
+        layout: two_column_grid
+        fields:
+          - field_label: Street
+            input_type: text
+            ref: ref_572
+          - field_label: State
+            input_type: text
+            ref: ref_574
+          - field_label: Country
+            input_type: text
+            ref: ref_576
+          - field_label: City
+            input_type: text
+            ref: ref_578
+          - field_label: Zip Code
+            input_type: text
+            ref: ref_580 # VERIFY: exact ref
+      - section_id: SEC_DESCRIPTION_INFORMATION
+        label: Description Information
+        fields:
+          - field_label: Description
+            input_type: textarea
+            ref: ref_584
+          - field_label: Client Feedback after the Site Visit
+            input_type: textarea
+            ref: ref_586
+          - field_label: BDM Feedback
+            input_type: textarea
+            ref: ref_588 # VERIFY
+      - section_id: SEC_QUALIFICATION_FORM
+        label: Qualification Form
+        fields:
+          - field_label: Does the lead have the financial capability to purchase?
+            input_type: text
+            ref: ref_592
+          - field_label: Does the project match the lead's location preference?
+            input_type: text
+            ref: ref_594
+          - field_label: Who is making the decision for this purchase?
+            input_type: text
+            ref: ref_596
+          - field_label: When is the lead planning to buy?
+            input_type: text
+            ref: ref_598 # VERIFY
+      - section_id: SEC_CLIENT_FEEDBACK
+        label: Client Feedback
+        fields:
+          - field_label: Feedback URL
+            input_type: text
+            ref: ref_602
+          - field_label: Client Rating
+            input_type: text
+            ref: ref_604
+          - field_label: Comments
+            input_type: text
+            ref: ref_606 # VERIFY
+      - section_id: SEC_TEAM_LEAD
+        label: Team Lead Section
+        fields:
+          - field_label: Approval for Closure
+            input_type: text
+            ref: ref_610 # VERIFY
+      - section_id: SEC_SITE_VISIT_INFORMATION
+        label: Site Visit Information # note: UI label is "Site Visit Infomation" (typo in system)
+        fields:
+          - field_label: Site Visit URL
+            input_type: text
+            ref: ref_614
+          - field_label: Client Comments
+            input_type: text
+            ref: ref_616
+          - field_label: BDM Form URL
+            input_type: text
+            ref: ref_618
+          - field_label: When Are You Planning to Start
+            input_type: text
+            ref: ref_620
+          - field_label: Visit Status
+            input_type: text
+            ref: ref_622
+          - field_label: Site Visit Location
+            input_type: text
+            ref: ref_624
+          - field_label: Site Visit Date
+            input_type: text
+            ref: ref_626
+          - field_label: BDM
+            input_type: text
+            ref: ref_628
+          - field_label: Is There is Any Other Specific Concerns
+            input_type: text
+            ref: ref_630 # VERIFY
+      - section_id: SEC_SITE_COMPLETION
+        label: Site Completion Form Submission
+        fields:
+          - field_label: Visit Date
+            ref: ref_634
+          - field_label: Client's Overall Impression
+            ref: ref_636
+          - field_label: Real Objections
+            ref: ref_638
+          - field_label: Decision Influencers
+            ref: ref_640
+          - field_label: Next Committed Step
+            ref: ref_642
+          - field_label: Follow-up date
+            ref: ref_644
+          - field_label: Visit Verified
+            ref: ref_646
+          - field_label: Objection Status
+            ref: ref_648
+          - field_label: Urgency Level
+            ref: ref_650
+          - field_label: BDM Notes
+            ref: ref_652
+          - field_label: Amenities / Facility Expectation Description
+            ref: ref_654
+          - field_label: Other Description
+            ref: ref_656
+          - field_label: Travel mode / Notes
+            ref: ref_658
+          - field_label: Location Mismatch Description
+            ref: ref_660
+          - field_label: Timing Description
+            ref: ref_662
+          - field_label: Loan Delay / Bank Issue Description
+            ref: ref_664
+          - field_label: Need to Discuss with Family Description
+            ref: ref_666
+          - field_label: Competing Project Comparison Description
+            ref: ref_668
+          - field_label: Budget Concern Description
+            ref: ref_670
+          - field_label: Legal / Approvals Clarification Description
+            ref: ref_672 # VERIFY
+      - section_id: SEC_REFERRAL
+        label: Referral Information
+        fields:
+          - field_label: Referred By
+            ref: ref_676
+          - field_label: Referred Date
+            ref: ref_678
+          - field_label: Referrer Relationship
+            ref: ref_680
+          - field_label: Referral Form URL
+            ref: ref_682 # VERIFY
+      - section_id: SEC_CENTILIO_TRACKING
+        label: Centilio Tracking
+        notes: "# CUSTOM: Centilio is a third-party lead tracking integration specific to this org"
+        fields:
+          - field_label: First Click Channel
+            ref: ref_686
+          - field_label: First Click Campaign
+            ref: ref_688
+          - field_label: First Click Term
+            ref: ref_690
+          - field_label: First Click Medium
+            ref: ref_692
+          - field_label: First Click Content
+            ref: ref_694
+          - field_label: First Click Referrer
+            ref: ref_696
+          - field_label: First Click Source
+            ref: ref_698
+          - field_label: First Click Landing Page
+            ref: ref_700
+          - field_label: First Click Landing Page Url
+            ref: ref_702
+          - field_label: First Click Timestamp
+            ref: ref_704
+          - field_label: IP Address
+            ref: ref_706
+          - field_label: City (from IP address)
+            ref: ref_708
+          - field_label: Country (from IP address)
+            ref: ref_710
+          - field_label: Browser
+            ref: ref_712
+          - field_label: Operating System
+            ref: ref_714
+          - field_label: Latitude
+            ref: ref_716
+          - field_label: Longitude
+            ref: ref_718
+          - field_label: Ads Form Name
+            ref: ref_720
+          - field_label: Ads Lead Created Time
+            ref: ref_722
+          - field_label: Meta Lead Created Time
+            ref: ref_724
+          - field_label: Last Click Channel
+            ref: ref_726
+          - field_label: Last Click Campaign
+            ref: ref_728
+          - field_label: Last Click Term
+            ref: ref_730
+          - field_label: Last Click Medium
+            ref: ref_732
+          - field_label: Last Click Content
+            ref: ref_734
+          - field_label: Last Click Referrer
+            ref: ref_736
+          - field_label: Last Click Source
+            ref: ref_738
+          - field_label: Last Click Landing Page
+            ref: ref_740
+          - field_label: Last Click Landing Page Url
+            ref: ref_742
+          - field_label: Last Click Timestamp
+            ref: ref_744
+          - field_label: Time Zone
+            ref: ref_746
+          - field_label: GA Client ID
+            ref: ref_748
+          - field_label: GCLID (GA Connector)
+            ref: ref_750
+          - field_label: GA Session ID
+            ref: ref_752
+          - field_label: GA Measurement ID
+            ref: ref_754
+          - field_label: Pages Visited
+            ref: ref_756
+          - field_label: All Traffic Sources
+            ref: ref_758
+          - field_label: Ads Lead ID
+            ref: ref_760
+          - field_label: Ads Forms ID
+            ref: ref_762 # VERIFY
+      - section_id: SEC_INTERNAL_USE
+        label: Internal Use
+        fields:
+          - field_label: Folder ID
+            ref: ref_766
+          - field_label: Folder URL
+            ref: ref_768
+          - field_label: Attempt
+            ref: ref_770
+          - field_label: Old Created Date
+            ref: ref_772
+          - field_label: Email Opt Out
+            input_type: checkbox
+            ref: ref_773
+          - field_label: Connected To
+            input_type: lookup
+            ref: ref_776
+          - field_label: New Contact
+            ref: ref_780
+          - field_label: Lead Owner
+            input_type: user_lookup
+            open_picker_button: ref_786
+            search_placeholder: Search Users
+            ref: ref_787
+          - field_label: BANT Form URL
+            ref: ref_797
+          - field_label: Preferred Project
+            ref: ref_799
+          - field_label: Old Status
+            ref: ref_801

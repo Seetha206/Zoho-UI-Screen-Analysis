@@ -1,0 +1,122 @@
+# reporting_standardization.yaml — Home Dashboard
+# Module: Home Dashboard
+# URL: /crm/org60043078423/tab/Home/begin
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+# Purpose: Standardised reporting view of this screen for three audience roles
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# Audience: CEO / Elangovan (high-level performance snapshot)
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Pipeline health, lead volume, team activity
+  dashboard_name: "Kurinjee Promoters's Home"
+  kpi_widgets:
+    - label: My Open Deals
+      value: 6
+      type: count
+      significance: Active sales opportunities in progress
+    - label: My Untouched Deals
+      value: 0
+      type: count
+      significance: Deals with no recent activity (healthy = 0)
+    - label: My Calls Today
+      value: 0
+      type: count
+      significance: Calls scheduled or completed today
+    - label: My Leads
+      value: 2076
+      type: count
+      significance: Total leads assigned to owner — top-of-funnel volume
+  pipeline_funnel:
+    widget: My Pipeline Deals By Stage
+    stages:
+      - label: Visit Pending
+        count: 5
+        color: purple
+      - label: Visit Completed
+        count: 1
+        color: green
+    note: 5 of 6 open deals still at Visit Pending — conversion bottleneck visible here
+  closing_this_month:
+    widget: My Deals Closing This Month
+    state: empty
+    note: No deals scheduled to close this month — revenue pipeline risk
+  alerts:
+    - "0 calls today — team may not be actively following up"
+    - "All 6 open deals are still pre-booking — no bookings in progress"
+    - "2,076 leads with only 6 open deals = very low lead-to-deal conversion visible"
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# Audience: Marketing / Property Sales promoter tracking property interest
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Lead volume, property interest signals, site visit pipeline
+  key_signals_from_home_dashboard:
+    - label: Total Leads
+      value: 2076
+      note: High volume — indicates active marketing campaigns generating enquiries
+    - label: Site Visits in Pipeline
+      deals_at_visit_pending: 5
+      deals_at_visit_completed: 1
+      note: 5 prospects scheduled for site visits — promoter should ensure materials/BDM availability
+    - label: Active Deals
+      value: 6
+      note: 6 real buyers in active sales process
+  quick_create_access:
+    - Lead (ref_868) — new enquiry from any campaign
+    - Project Portfolio (ref_876) — new property listing
+  dashboard_view_options:
+    - Classic View
+    - "Kurinjee Promoters's Home (active)"
+    - "Manager's Home (New!) — not yet configured"
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# Audience: BDM, Telecaller, Admin — daily operational view
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / Telecaller / CRM Admin
+  primary_concern: Today's tasks, meetings, follow-ups, quick record creation
+  task_widget:
+    name: My Open Tasks
+    columns: [Subject, Due Date, Status, Priority, Related To, Contact Name]
+    rows_visible: 10
+    pagination: "1 - 10 of more"
+    all_status: Not Started
+    all_priority: Normal
+    note: Team must work through open tasks — all showing Not Started status
+  meetings_widget:
+    name: My Meetings
+    columns: [Title, From, To, Related To, Contact Name]
+    rows_visible: 3
+    pagination: "1 - 3"
+  quick_create_module_access:
+    internal_records:
+      - Lead
+      - Contact
+      - Account
+      - Deal
+      - Task
+      - Meeting
+      - Call
+      - Prospecting Lead
+      - Log
+      - Scheduler
+    custom_modules:
+      - Project Portfolio
+      - Employee Portfolios
+      - Customer Feedbacks
+  navigation_shortcuts:
+    sidebar_modules: [Leads, Workqueue, Contacts, Accounts, Deals, Projects Portfolio, Employee Portfolio, Tasks, Meetings, Calls]
+    header_icons: [Ask Zia, Signals, Calendar, Marketplace, Setup]
+  dashboard_controls:
+    - Refresh All (reloads all widgets)
+    - Dashboard Switcher (Classic / Kurinjee Promoters's Home / Manager's Home)
+    - Add Component
+    - Reorder
+    - View in Full Screen

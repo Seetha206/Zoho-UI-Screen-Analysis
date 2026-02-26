@@ -1,0 +1,60 @@
+@startuml
+title Tasks - Lifecycle (Zoho CRM UI DOM Scan)
+[*] --> Not_Started : Create Task
+Not_Started --> In_Progress       : [Status changed to In Progress]
+Not_Started --> Deferred          : [Status changed to Deferred]
+Not_Started --> Waiting_for_input : [Status changed to Waiting for input]
+Not_Started --> Completed         : [Status changed to Completed]
+In_Progress --> Not_Started       : [Status changed to Not Started]
+In_Progress --> Deferred          : [Status changed to Deferred]
+In_Progress --> Waiting_for_input : [Status changed to Waiting for input]
+In_Progress --> Completed         : Close Task button
+In_Progress --> Completed         : [Status changed to Completed]
+Deferred --> Not_Started          : [Status changed to Not Started]
+Deferred --> In_Progress          : [Status changed to In Progress]
+Deferred --> Waiting_for_input    : [Status changed to Waiting for input]
+Deferred --> Completed            : [Status changed to Completed]
+Waiting_for_input --> Not_Started : [Status changed to Not Started]
+Waiting_for_input --> In_Progress : [Status changed to In Progress]
+Waiting_for_input --> Deferred    : [Status changed to Deferred]
+Waiting_for_input --> Completed   : [Status changed to Completed]
+Completed --> [*]
+state "Status Options (visible in dropdown)" as SO {
+  SO : Not Started
+  SO : Deferred
+  SO : In Progress
+  SO : Waiting for input
+  SO : Completed
+}
+state "Header Actions" as HA {
+  HA : Close Task
+  HA : Edit
+  HA : New Appointment (dropdown)
+  HA : Clone (More Options)
+  HA : Delete (More Options)
+  HA : Print Preview (More Options)
+  HA : Customize Business Card (More Options)
+  HA : Organize Task Details (More Options)
+  HA : Create Button (More Options)
+}
+state "Task Fields" as TF {
+  TF : Subject
+  TF : Type
+  TF : Due Date
+  TF : Status
+  TF : Priority (High / Normal / Low)
+  TF : Telecaller
+  TF : Approver
+  TF : Related To
+  TF : Repeat
+  TF : Auto Close
+  TF : Closed Time
+  TF : Reminder
+}
+state "Side Panel" as SP {
+  SP : Info (Contact card)
+  SP : Conversations
+  SP : Deal Summary
+  SP : Open Activities (Tasks / Meetings / Calls)
+}
+@enduml

@@ -1,0 +1,557 @@
+leads_module:
+  module_name: Leads
+  url_pattern: /crm/org60043078423/tab/Leads
+  total_records: 2077
+  pagination: 1 to 100 per page (Previous / Next buttons)
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/Leads/custom-view/955332000000441406/list
+    columns_visible:
+      - name: Lead Name
+        filterable: true
+        filter_options: [All]
+        sortable: true
+      - name: Lead Source
+        sortable: true
+      - name: Mobile
+        sortable: true
+        inline_call_icon: true
+      - name: Lead Status
+        sortable: true
+      - name: BDM
+        sortable: true
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: All Leads
+        type: public_view
+        active: true
+      - name: Open Leads
+        type: public_view
+      - name: Site Visit Scheduled Leads
+        type: public_view
+      - name: "..." more_views_dropdown:
+          groups:
+            - group: Created By Me
+              views:
+                - Arthi - View
+                - Cold Leads
+                - Hot Leads
+                - Junk Lead
+                - Nurturing Leads
+                - Pranesj
+                - Site Visit Scheduled Leads
+                - Telecaller Leads
+                - Warm Leads
+            - group: Public Views
+              views:
+                - All Leads (active/checked)
+                - All Locked Leads
+                - Converted Leads
+                - Junk Leads
+                - Mailing Labels
+                - My Converted Leads
+                - My Leads
+          options:
+            - Show custom views as Dropdown (toggle)
+            - New Custom View (link)
+            - Manage Custom View (link)
+    view_switchers:
+      - type: List View
+        icon: list icon
+        active: true
+      - type: Kanban View
+        icon: kanban icon
+      - type: Table View
+        icon: table icon
+      - type: Activity View
+        icon: activity/clock icon
+      - type: Map View
+        icon: map pin icon
+      - type: Compact View
+        icon: compact icon
+      - type: More Views dropdown
+        icon: chevron down
+    toolbar_actions:
+      filter:
+        trigger: Filter button (left of toolbar)
+        panel_label: "Filter Leads by"
+        panel_sections:
+          - section: System Defined Filters
+            options:
+              - Touched Records
+              - Untouched Records
+              - Record Action
+              - Related Records Action
+              - Locked
+              - Latest Email Status
+              - Activities
+              - Cadences
+          - section: Website Activity
+            options:
+              - Average Time Spent (Minutes)
+              - Days Visited
+              - First Page Visited
+              - First Visit
+              - Most Recent Visit
+              - Number Of Chats
+              - Referrer
+              - Visitor Score
+          - section: Filter By Fields
+            options:
+              - "1. Preferred (location)"
+              - (more field filters below scroll)
+        search_box: true (inside filter panel)
+      sort:
+        trigger: Sort button
+        behavior: opens sort criteria selector
+      refresh:
+        trigger: Refresh Custom View button (circular arrow icon)
+    bulk_actions_menu (three_dots top-right "Actions"):
+      items:
+        - Mass Delete
+        - Mass Update
+        - Mass Convert
+        - Manage Tags
+        - Drafts
+        - Mass Email
+        - Autoresponders
+        - Approve Leads
+        - Deduplicate Leads
+        - Create Client Script ✨
+        - Export Leads
+        - Zoho Sheet View
+        - Print View ✨ (submenu arrow)
+    create_lead_button:
+      label: Create Lead
+      type: primary button (blue)
+      split_arrow: true (dropdown arrow for alternate create forms)
+    row_actions (hover "..." on each row):
+      primary_menu:
+        - Edit
+        - Send Email
+        - Create Task
+        - Add Tags
+        - Convert
+        - Delete
+        - Copy URL
+      more_submenu:
+        - Create Call
+          sub_options:
+            - Schedule a call
+            - Log a call
+        - Create Meeting
+    row_indicators:
+      - color_tag: green (Feb 27, Feb 28) = future follow-up date
+      - color_tag: orange (Today) = due today
+  # ─────────────────────────────────────────────
+  # LEAD DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/Leads/{leadId}
+    sample_url: /crm/org60043078423/tab/Leads/955332000006926001
+    lead_name_shown: Ram
+    header:
+      breadcrumb: Leads > Lead Name
+      back_button: true
+      lead_name: Ram
+      tags: Add Tags (link)
+      last_update: "Last Update : 10:32 AM"
+      navigation: Previous Record / Next Record (arrow buttons)
+    header_action_buttons:
+      - label: Send Email
+        type: primary button
+      - label: Convert
+        type: secondary button
+      - label: Edit
+        type: secondary button
+      - label: Fetch Lead Status
+        type: split button (dropdown arrow)
+        dropdown_options:
+          - Fetch Lead Status
+          - New Appointment
+          - Email Booking URL
+      - label: More Options (...)
+        type: icon button
+        dropdown_items:
+          - Clone
+          - Delete
+          - Print Preview
+          - Find and Merge Duplicates
+          - Mail Merge
+          - Run Macro
+          - Customize Business Card
+          - Organize Lead Details
+          - Add Related List
+          - Review History
+          - Enroll to Cadence
+          - Add Kiosk ✨
+          - Create Button
+          - Create Client Script ✨
+    tabs:
+      - name: Overview
+        default: true
+        sub_sections:
+          - Blueprint State Bar
+          - Business Card Details (inline)
+          - Next Action section
+          - Hide Details toggle
+          - Lead Information (full fields)
+          - Requirement Assessment
+          - Lead Assessment
+          - Address Information
+          - Qualification Form
+          - Client Feedback
+          - Team Lead Section
+          - Site Visit Information
+          - Site Completion Form Submission
+          - Referral Information
+          - Scoring Rules (widget)
+          - Notes panel
+          - Connected Records
+          - Open Activities
+          - Cadences
+          - Projects
+          - Referrals
+          - Documents
+          - Emails (Mails / Drafts / Scheduled tabs)
+          - Closed Activities
+          - Invited Meetings
+          - Schedules
+          - Voice of the Customer
+          - Customer Feedback
+      - name: Timeline
+        sub_tabs:
+          - name: History
+            features:
+              - Timeline History (with filter icon)
+              - 0 Upcoming Automated Actions (collapsible)
+              - Date-grouped entries (e.g., Feb 26, 2026)
+              - Entry types: field updates, function calls, task added, note added
+              - Via: Function name, Workflow Rule name, Blueprint transition
+          - name: Interactions
+            features:
+              - Customer Interactions (with filter icon)
+              - View By: All (dropdown)
+              - Signals (green dot legend)
+              - Follow-ups (teal dot legend)
+              - Empty state: "No logs available"
+    blueprint_section:
+      current_state: Attempted
+      view_configured_actions: link (top right)
+      transition_buttons:
+        - Re Attempted (yellow/orange)
+        - Contact in Future (orange)
+        - Lead (pink/red)
+        - Site Visit Completed (blue)
+        - Qualify Out (pink)
+        - Junk (gray/red)
+        - Exit Blueprint (dark gray)
+    business_card_fields_visible:
+      - Mobile: (988) 421-0274 (with call icon)
+      - Email: —
+      - Lead Status: Attempted
+      - Lead Source: Offline Marketing
+      - Lead Owner: Kurinjee Promoters (inline editable, pencil icon, popover shows role + email + phone)
+    next_action_section:
+      entries:
+        - FEB 27 — Attempt 2 (link to task)
+        - FEB 27 — Attempt 1 (link to task)
+    related_list_sidebar:
+      items:
+        - Notes (count: 1)
+        - Connected Records
+        - Open Activities (count: 2)
+        - Cadences
+        - Projects
+        - Referrals
+        - Documents
+        - Emails
+        - Closed Activities
+        - Invited Meetings
+        - Schedules (count: 1)
+        - Voice of the Customer
+        - Customer Feedback
+        - Add Related List (button)
+      links_section:
+        - Workdrive
+        - Add Link
+  # ─────────────────────────────────────────────
+  # EDIT LEAD FORM (Full Fields)
+  # ─────────────────────────────────────────────
+  edit_form:
+    url_pattern: /crm/org60043078423/tab/Leads/{leadId}/edit
+    page_title: Edit Lead
+    edit_page_layout_link: visible
+    buttons:
+      - Cancel
+      - Save and New
+      - Save
+    sections:
+      - section: Lead Information
+        fields:
+          - Last Name (required, text)
+          - Mobile (text)
+          - Lead Type (dropdown: -None-)
+          - Lead Source (dropdown: Offline Marketing, Meta Ads, MagicBicks, etc.)
+          - Client Location (text)
+          - Lead Status (dropdown, lock icon: Attempted)
+          - Company (text)
+          - Email (text)
+          - Telecaller (lookup with icon)
+          - Estimated Budget (currency: ₹4500000)
+          - Manager (lookup with icon)
+          - Preferred Communication Channel (dropdown: -None-)
+          - Reason Qualified Out (dropdown: Budget Constraints)
+          - Type of Property (dropdown: Commercial)
+          - Language Preference (dropdown: Tamil)
+          - Preferred Size (Sq.Ft or Cents) (text: 5cents)
+          - Budget Range Min (currency)
+          - Family Decision Involved? (dropdown: -None-)
+          - Budget Range Max (currency)
+          - Deal Closed Time (date + time)
+          - Budget Range (dropdown: ₹25L–₹50L)
+          - Social Lead ID (text)
+          - Timeframe to Purchase (dropdown: -None-)
+          - Loan Requirement (dropdown: -None-)
+      - section: Requirement Assessment
+        fields:
+          - Preferred Location (text)
+          - Purpose Of Purchase (text)
+          - 1. Preferred Location (dropdown: -None-)
+          - Down Payment (text)
+          - 2. Preferred Location (dropdown: -None-)
+          - Payment Type (text)
+          - 3. Preferred Location (dropdown: -None-)
+          - Land Area in cents (text: 3 to 5cents)
+          - Comfortable Price (currency)
+          - Rooms in BHK (text)
+          - Up to Price (currency)
+          - Requirement Property Type (dropdown: -None-)
+          - Client Major Concern on Purchase (dropdown: None)
+      - section: Lead Assessment
+        fields:
+          - Budget (dropdown: Mismatch)
+          - Authority (dropdown: Self)
+          - Need (dropdown: 5-10 Km)
+          - Time (dropdown: 1-3 Months)
+      - section: Address Information
+        fields:
+          - Street (text)
+          - City (text: coimbatore)
+          - State (text: Tamil Nadu)
+          - Zip Code (text)
+          - Country (text)
+      - section: Qualification Form
+        fields:
+          - Does the lead have the financial capability to purchase? (checkbox)
+          - Who is making the decision for this purchase? (dropdown: -None-)
+          - Does the project match the lead's location preference? (dropdown: -None-)
+          - When is the lead planning to buy? (dropdown: -None-)
+      - section: Client Feedback
+        fields:
+          - Feedback URL (text: pre-filled URL)
+          - Comments (textarea)
+          - Client Rating (dropdown: -None-)
+      - section: Team Lead Section
+        fields:
+          - Approval for Closure (checkbox)
+      - section: Site Visit Information
+        fields:
+          - Site Visit URL (text: pre-filled)
+          - Visit Status (dropdown: -None-)
+          - Client Comments (textarea)
+          - Site Visit Location (text with map icon)
+          - BDM Form URL (text: pre-filled)
+          - Site Visit Date (date + time)
+          - When Are You Planning to Start (text)
+          - BDM (text)
+          - Is There is Any Other Specific Concerns (text)
+      - section: Site Completion Form Submission
+        fields:
+          - Visit Date (date)
+          - Travel mode / Notes (text)
+          - Client's Overall Impression (text)
+          - Location Mismatch Description (text)
+          - Real Objections (text)
+          - Timing Description (text)
+          - Decision Influencers (text)
+          - Loan Delay / Bank Issue Description (text)
+          - Next Committed Step (text)
+          - Need to Discuss with Family Description (text)
+          - Follow-up date (date)
+          - Competing Project Comparison Description (text)
+          - Visit Verified (text)
+          - Budget Concern Description (text)
+          - Objection Status (text)
+          - Legal / Approvals Clarification Description (text)
+          - Urgency Level (text)
+          - BDM Notes (text)
+          - Amenities / Facility Expectation Description (text)
+          - Other Description (text)
+  # ─────────────────────────────────────────────
+  # ASSIGNMENT FLOW
+  # ─────────────────────────────────────────────
+  assignment_flow:
+    trigger_methods:
+      - method: inline_edit_on_detail_view
+        steps:
+          - Hover over Lead Owner field in Business Card section
+          - Pencil (edit) icon appears
+          - Click pencil icon → field becomes inline editable text input
+          - Type or select new owner name
+          - Save by clicking away or pressing Enter
+      - method: edit_form
+        steps:
+          - Click "Edit" header button → full Edit Lead form opens
+          - Lead Owner field shown in Lead Information section
+          - Select from user lookup dropdown
+          - Click "Save"
+      - method: mass_update
+        steps:
+          - Select checkboxes in list view
+          - Actions menu → Mass Update → set Lead Owner field
+    owner_field:
+      field_name: Lead Owner
+      type: lookup (user)
+      current_value: Kurinjee Promoters
+      popover_on_hover:
+        shows:
+          - Avatar (K)
+          - Full name: Kurinjee Promoters
+          - Role: CEO, Administrator
+          - Email: kurinjeecrm01@gmail.com
+          - Phone: 9597736066
+    confirmation: auto-save on inline edit; Save button on full edit form
+  # ─────────────────────────────────────────────
+  # STAGE CHANGE FLOW (BLUEPRINT)
+  # ─────────────────────────────────────────────
+  stage_change_flow:
+    mechanism: Blueprint (Lead Qualification Blueprint)
+    current_state_display: shown in Overview tab top bar
+    blueprint_name: Lead Qualification
+    current_state: Attempted
+    transition_buttons_visible_for_state:
+      - Re Attempted
+      - Contact in Future
+      - Lead
+      - Site Visit Completed
+      - Qualify Out
+      - Junk
+      - Exit Blueprint
+    additional_option: View configured actions (link)
+    history_tracking:
+      location: Timeline > History tab
+      entry_format: "Function [name] was called via [Workflow/Blueprint] Transition [StateName]"
+      example: "Function RescheduleFollowUps was called by Kurinjee Promoters through Transition - Attempted in Blueprint - Lead Qualification. Feb 26, 2026"
+    validation_rules:
+      - Lead Status field has lock icon in Edit form (Blueprint-managed, not freely editable)
+    automated_actions_on_transition:
+      - Functions triggered (e.g., RescheduleFollowUps, [Leads] Update Mobile Number)
+      - Tasks auto-created (e.g., Attempt 2 via Function RescheduleFollowUps)
+      - Notes auto-added
+      - Workflow Rules fire (e.g., Update Mobile Number)
+  # ─────────────────────────────────────────────
+  # CONVERT LEAD FLOW
+  # ─────────────────────────────────────────────
+  convert_lead_flow:
+    trigger: "Convert" button in Lead detail header
+    url: /crm/org60043078423/tab/Leads/{leadId}/convert?showPortalChange=false
+    page_title: "Convert Lead (Ram)"
+    steps:
+      step_1_contact:
+        label: Create New Contact
+        pre_filled_name: Ram (shown as tag/chip)
+        behavior: auto-creates Contact from Lead data
+      step_2_deal:
+        checkbox: "Create a new Deal for this Contact."
+        default: unchecked
+        when_checked_fields_shown:
+          - Amount (currency field, required)
+          - Deal Name (text, pre-filled: "Ram")
+          - Closing Date (date, DD/MM/YYYY)
+          - Stage (dropdown, default: Closed Won)
+          - Contact Role (dropdown, default: None)
+      step_3_owner:
+        label: Owner of the New Records
+        value: Kurinjee Promoters (shown as text, changeable)
+      buttons:
+        - Convert (primary, blue)
+        - Cancel (secondary)
+    quick_links_sidebar:
+      - Lead Conversion Mapping (link)
+      - Help (link with icon)
+    notes:
+      - Account creation not shown as separate step (may be implicit)
+      - No explicit mapping screen shown — mapping configured separately via "Lead Conversion Mapping"
+  # ─────────────────────────────────────────────
+  # FOLLOW-UP ACTIONS
+  # ─────────────────────────────────────────────
+  follow_up_actions:
+    access_points:
+      - Open Activities section → Add New dropdown
+      - Row context menu → Create Task / More → Create Call / Create Meeting
+      - Quick Create (+) in header
+    create_task:
+      modal_title: Create Task
+      trigger: Add New → Task
+      fields:
+        primary:
+          - Subject (text, required, AI-assist icon)
+          - Due Date (date, DD/MM/YYYY)
+          - Priority (dropdown, default: High)
+          - Owner (lookup, default: Kurinjee Promoters, add person icon)
+          - Reminder (toggle, default: off)
+          - Repeat (toggle, default: off)
+          - More Fields (expandable section)
+        more_fields:
+          - Telecaller (dropdown: None)
+          - Type (dropdown: None)
+          - Approver (dropdown: None)
+          - Related To (dropdown: Account)
+          - Status (dropdown: Not Started)
+          - Auto Close (checkbox)
+          - Description (textarea)
+      buttons:
+        - Cancel
+        - Save
+      open_tasks_shown: Attempt 1, Attempt 2 (with date 27/02/2026, Owner, Status: Not Started, Priority: Normal)
+    create_meeting:
+      modal_title: Meeting Information
+      trigger: Add New → Meeting
+      fields:
+        - Title (text, default: "New Meeting")
+        - Meeting Venue (dropdown, default: Client location)
+        - Location (text)
+        - All day (checkbox)
+        - From (date: 26/02/2026, time: 02:00 PM)
+        - To (date: 26/02/2026, time: 03:00 PM)
+        - Meeting From (dropdown, default: Self)
+        - Type Of Visit (dropdown: None)
+      link: Add more details (expands to full meeting form)
+      buttons:
+        - Cancel
+        - Save
+    log_call:
+      modal_title: Log a call
+      trigger: Add New → Call → Log a call
+      sections:
+        call_information:
+          - Call For (module selector: Lead, value: Ram, search icon)
+          - Related To (module selector: Account)
+          - Call Type (dropdown: Outbound)
+          - Outgoing Call Status (dropdown: Completed, lock icon)
+          - Call Start Time (date: 26/02/2026, time: 01:30 PM)
+          - Call Duration (minutes + seconds: 00 min 00 sec)
+          - Subject (text, default: "Outgoing call to Ram")
+          - Voice Recording (text)
+        purpose_of_outgoing_call:
+          - Call By (dropdown: -None-)
+          - Call Purpose (dropdown: -None-)
+      buttons:
+        - Cancel
+        - Save
+    schedule_call:
+      trigger: Add New → Call → Schedule a call
+      behavior: opens scheduling form (separate from log call)

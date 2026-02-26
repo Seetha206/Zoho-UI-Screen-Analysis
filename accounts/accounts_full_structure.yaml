@@ -1,0 +1,369 @@
+# accounts_full_structure.yaml
+# Source: Live DOM scan of Accounts list view
+# URL: https://crm.zoho.in/crm/org60043078423/tab/Accounts/custom-view/955332000000441417/list
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+page:
+  name: Accounts
+  module: Accounts
+  internal_module_name: Accounts
+  module_type: Standard CRM Module
+  url: /crm/org60043078423/tab/Accounts/custom-view/955332000000441417/list
+  custom_view_id: "955332000000441417"
+  active_view_label: All Accounts
+  organization: Kurinjee Promoters
+  org_id: "60043078423"
+  total_records: 11
+  records_per_page: 10
+  browser_tab_title: Accounts - Zoho CRM
+
+# ─────────────────────────────────────────
+# LIST VIEW — COLUMNS
+# ─────────────────────────────────────────
+list_view:
+  columns:
+    - name: "(Checkbox)"
+      type: multi_select
+      sortable: false
+      description: Bulk select all / individual rows
+    - name: Account Name
+      type: text_link
+      sortable: true
+      filter_dropdown: All
+      column_options: true
+      description: Click to open Account detail view
+    - name: Account Owner
+      type: text
+      sortable: true
+      column_options: true
+    - name: "(Column settings icon)"
+      type: column_configuration
+  note: Only 2 data columns visible (Account Name, Account Owner) — minimal default layout
+
+# ─────────────────────────────────────────
+# FILTER PANEL
+# ─────────────────────────────────────────
+filter_panel:
+  title: "Filter Accounts by"
+  has_search: true
+  search_placeholder: Search
+  system_defined_filters:
+    count: 6
+    options:
+      - Touched Records
+      - Untouched Records
+      - Record Action
+      - Related Records Action
+      - Locked
+      - Cadences
+    note: "6 system filters — no Latest Email Status or Activities (unlike Contacts/Deals with 8)"
+  filter_by_fields:
+    fields:
+      # Core account fields
+      - Account Name
+      - Account Owner
+      - Account Type
+      - Email
+      - Mobile
+      - Code
+      - Connected To
+      # Address fields
+      - City
+      - State
+      - Country
+      - Street
+      # Real estate custom fields
+      - Available Plots
+      - Land Area In Cents
+      - Property Type
+      - Purpose Of Purchase
+      - Room in BHK
+      - Unit Price
+      - Features
+      - Promotor
+      # Financial fields
+      - Estimated Budget
+      # System tracking fields
+      - Created By
+      - Created Time
+      - Last Activity Time
+      - Modified By
+      - Modified Time
+      - Tag
+      # Marketing attribution — First Click
+      - First Click Campaign
+      - First Click Content
+      - First Click Landing Page
+      - First Click Landing Page Url
+      - First Click Medium
+      - First Click Source
+      - First Click Term
+      - First Click Timestamp
+      # Marketing attribution — Last Click
+      - Last Click Campaign
+      - Last Click Channel
+      - Last Click Content
+      - Last Click Landing Page
+      - Last Click Landing Page Url
+      - Last Click Medium
+      - Last Click Referrer
+      - Last Click Source
+      - Last Click Term
+      - Last Click Timestamp
+      # Google Analytics
+      - All Traffic Sources
+      - GA Client ID
+      - GA Measurement ID
+      - GA Session ID
+      - GCLID (GA Connector)
+      # Geo / device tracking
+      - IP Address
+      - City (from IP address)
+      - Country (from IP address)
+      - Latitude
+      - Longitude
+      - Browser
+      - Operating System
+      - Pages Visited
+      - Time Zone
+  filter_by_related_modules:
+    count: 6
+    modules:
+      - "Accounts (Member Accounts)"
+      - "Accounts (Plots Owned By)"
+      - Contacts
+      - Deals
+      - Emails
+      - "Leads (Converted Leads)"
+
+# ─────────────────────────────────────────
+# TOOLBAR ACTIONS
+# ─────────────────────────────────────────
+toolbar:
+  primary_cta:
+    label: Create Account
+    style: blue_solid_split_button
+    url: /tab/Accounts/create
+  view_tabs:
+    - name: All Accounts
+      type: custom_view
+      active: true
+      custom_view_id: "955332000000441417"
+    - name: "... more_views_dropdown"
+      options:
+        - New Custom View
+        - Manage Custom View
+        - Show custom views as Dropdown
+  view_toggles:
+    - List View (active)
+    - Split View
+    - Table View
+    - Clock / Activity View
+    - Kanban / Pipeline View
+    - Compact View
+    - More views (chevron dropdown)
+  filter_sort:
+    - label: Filter
+      behavior: toggle_filter_panel
+    - label: Sort
+      behavior: open_sort_options
+    - label: Refresh Custom View
+      behavior: reload_current_view
+  actions_menu:
+    - label: Import Accounts
+      href: /crm/org60043078423/settings/import?module=Accounts&step=1
+    - label: Mass Delete
+      href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_delete
+    - label: Mass Update
+      href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_update
+    - label: Manage Tags
+      href: /crm/org60043078423/settings/manage-tags?module=Accounts
+    - label: Drafts
+      href: /crm/org60043078423/tab/Accounts/actions/draft?module=Accounts
+    - label: Deduplicate Accounts
+      type: in_page_action
+    - label: Create Client Script
+      type: in_page_action
+    - label: Export Accounts
+      type: in_page_action
+    - label: Zoho Sheet View
+      type: in_page_action
+    - label: Print View
+      type: in_page_action
+  note: "No Mass Email or Autoresponders — Accounts are entities, not individual people"
+
+# ─────────────────────────────────────────
+# CREATE ACCOUNT FORM (fields inferred from filter panel + module conventions)
+# ─────────────────────────────────────────
+create_form:
+  url: /crm/org60043078423/tab/Accounts/create
+  title: Create Account
+  note: "Create form not directly scanned — field list inferred from filter panel fields and Zoho standard Accounts module conventions"
+  action_buttons:
+    - label: Save
+      type: primary_blue
+      behavior: Save and navigate to account detail view
+    - label: Save and New
+      type: secondary_outline
+      behavior: Save and reload blank form
+    - label: Cancel
+      type: secondary_outline
+      behavior: Discard with unsaved-changes guard dialog
+  sections:
+    account_information:
+      label: Account Information
+      fields_expected:
+        - label: Account Name
+          type: text_input
+          required: true
+        - label: Account Type
+          type: dropdown
+          required: false
+        - label: Phone
+          type: text_input
+          required: false
+        - label: Mobile
+          type: text_input
+          required: false
+        - label: Email
+          type: text_input
+          required: false
+        - label: Website
+          type: text_input
+          required: false
+        - label: Code
+          type: text_input
+          required: false
+    address_information:
+      label: Address Information
+      fields_expected:
+        - label: Street
+          type: text_input
+        - label: City
+          type: text_input
+        - label: State
+          type: text_input
+        - label: Zip Code
+          type: text_input
+        - label: Country
+          type: text_input
+    property_information:
+      label: Property Information
+      note: Real-estate specific custom section
+      fields_expected:
+        - label: Property Type
+          type: dropdown
+          options_observed: [Plot, Villa, Apartment, Commercial]
+        - label: Available Plots
+          type: number_input
+        - label: Unit Price
+          type: currency_input
+        - label: Land Area In Cents
+          type: number_input
+        - label: Room in BHK
+          type: text_input
+        - label: Purpose Of Purchase
+          type: text_input
+        - label: Estimated Budget
+          type: currency_input
+        - label: Features
+          type: text_input
+        - label: Promotor
+          type: text_input
+    description_information:
+      label: Description Information
+      fields_expected:
+        - label: Description
+          type: textarea
+    internal_use:
+      label: Internal Use
+      fields_expected:
+        - label: Connected To
+          type: lookup
+          target_module: Leads
+          note: Links this account back to the originating Lead
+        - label: Account Owner
+          type: user_lookup
+          default_value: Kurinjee Promoters
+
+# ─────────────────────────────────────────
+# CURRENT ACCOUNT RECORDS (live scan)
+# ─────────────────────────────────────────
+account_records:
+  - row: 1
+    account_name: Kurinjee Promoters
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000669142"
+    record_href: /crm/org60043078423/tab/Accounts/955332000000669142
+    type: Real (organisation's own record)
+    hover_popup:
+      name: Kurinjee Promoters
+      title: CEO, Administrator
+      email: kurinjeecrm01@gmail.com
+      phone: "9597736066"
+  - row: 2
+    account_name: King (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419622"
+    record_href: /crm/org60043078423/tab/Accounts/955332000000419622
+    type: Zoho sample record
+  - row: 3
+    account_name: Truhlar And Truhlar (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419621"
+    type: Zoho sample record
+  - row: 4
+    account_name: Commercial Press (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419620"
+    type: Zoho sample record
+  - row: 5
+    account_name: Morlong Associates (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419619"
+    type: Zoho sample record
+  - row: 6
+    account_name: Chapman (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419618"
+    type: Zoho sample record
+  - row: 7
+    account_name: Printing Dimensions (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419617"
+    type: Zoho sample record
+  - row: 8
+    account_name: Feltz Printing Service (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419616"
+    type: Zoho sample record
+  - row: 9
+    account_name: Chemel (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419615"
+    type: Zoho sample record
+  - row: 10
+    account_name: Chanay (Sample)
+    account_owner: Kurinjee Promoters
+    record_id: "955332000000419614"
+    type: Zoho sample record
+
+record_summary:
+  total: 11
+  real_accounts: 1
+  sample_accounts: 10
+  note: "10 Zoho-provided sample records; only 1 real account (Kurinjee Promoters). Module is lightly used — leads/contacts are primary focus."
+
+# ─────────────────────────────────────────
+# INLINE POPUP (OBSERVED ON HOVER)
+# ─────────────────────────────────────────
+inline_popup_observed:
+  triggered_by: Hover on Kurinjee Promoters row
+  popup_content:
+    name: Kurinjee Promoters
+    title: CEO, Administrator
+    email: kurinjeecrm01@gmail.com
+    phone: "9597736066"
+  email_link: clickable
+  phone_displayed: true

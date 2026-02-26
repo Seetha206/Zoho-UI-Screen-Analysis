@@ -1,0 +1,99 @@
+@startuml
+title Leads - Blueprint Lifecycle (Zoho CRM UI DOM Scan)
+[*] --> Not_Contacted : Lead Created (entry)
+Not_Contacted --> Attempted         : [initial attempt made]
+Not_Contacted --> Junk_Lead         : [marked junk]
+Attempted --> Re_Attempted          : Re Attempted (transition button)
+Attempted --> Contact_in_Future     : Contact in Future (transition button)
+Attempted --> Lead                  : Lead (transition button)
+Attempted --> Site_Visit_Completed  : Site Visit Completed (transition button)
+Attempted --> Qualify_Out           : Qualify Out (transition button)
+Attempted --> Junk_Lead             : Junk (transition button)
+Attempted --> [*]                   : Exit Blueprint (transition button)
+Contacted --> Book_Site_Visit       : Book Site Visit (transition button)
+Contacted --> Attempted             : Attempted (transition button)
+Contacted --> Contact_in_Future     : Contact in Future (transition button)
+Contacted --> Site_Visit_Completed  : Site Visit Completed (transition button)
+Contacted --> Qualify_Out           : Qualify Out (transition button)
+Contacted --> Junk_Lead             : Junk (transition button)
+Contacted --> [*]                   : Exit Blueprint (transition button)
+Contact_in_Future --> Lead                  : Lead (transition button)
+Contact_in_Future --> Attempted             : Attempted (transition button)
+Contact_in_Future --> Site_Visit_Completed  : Site Visit Completed (transition button)
+Contact_in_Future --> Junk_Lead             : Junk (transition button)
+Contact_in_Future --> Deal_Closed           : Deal Closed (transition button)
+Contact_in_Future --> [*]                   : Exit Blueprint (transition button)
+Contact_in_Future --> Qualify_Out           : Qualify Out (transition button)
+state "Lead Detail Actions" as LDA {
+  LDA : Send Email
+  LDA : Convert
+  LDA : Edit
+  LDA : Fetch Lead Status
+  LDA : Clone (More Options)
+  LDA : Delete (More Options)
+  LDA : Print Preview (More Options)
+  LDA : Find and Merge Duplicates (More Options)
+  LDA : Mail Merge (More Options)
+  LDA : Run Macro (More Options)
+  LDA : Enroll to Cadence (More Options)
+  LDA : Review History (More Options)
+}
+state "Lead Status Values (visible in list)" as LSV {
+  LSV : Not Contacted
+  LSV : Attempted
+  LSV : Contacted
+  LSV : Contact in Future
+  LSV : Not Qualified
+  LSV : Junk Lead
+}
+state "List Views" as LV {
+  LV : All Leads
+  LV : Open Leads
+  LV : Site Visit Scheduled Leads
+}
+state "Lead Fields" as LF {
+  LF : Lead Name
+  LF : Lead Type
+  LF : Client Location
+  LF : Company
+  LF : Telecaller
+  LF : Manager
+  LF : Reason Qualified Out
+  LF : Language Preference
+  LF : Budget Range Min / Max / Range
+  LF : Timeframe to Purchase
+  LF : Loan Requirement
+  LF : Lead Source
+  LF : Lead Status
+  LF : Mobile
+  LF : Email
+  LF : Estimated Budget
+  LF : Preferred Communication Channel
+  LF : Type of Property
+  LF : Preferred Size (Sq.Ft or Cents)
+  LF : Family Decision Involved?
+  LF : Deal Closed Time
+  LF : Social Lead ID
+}
+state "Related Lists" as LRL {
+  LRL : Notes
+  LRL : Connected Records
+  LRL : Open Activities
+  LRL : Cadences
+  LRL : Projects
+  LRL : Referrals
+  LRL : Documents
+  LRL : Emails
+  LRL : Closed Activities
+  LRL : Invited Meetings
+  LRL : Schedules
+  LRL : Voice of the Customer
+  LRL : Customer Feedback
+}
+state "Next Action Tasks" as NAT {
+  NAT : Attempt 1
+  NAT : Attempt 2
+  NAT : Followup Task 1 .. N
+  NAT : Call
+}
+@enduml

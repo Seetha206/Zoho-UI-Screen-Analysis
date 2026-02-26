@@ -1,0 +1,176 @@
+# reporting_standardization.yaml — Leads Module
+# Module: Leads
+# URL: /crm/org60043078423/tab/Leads
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Lead volume, conversion health, pipeline quality
+  key_metrics:
+    total_leads: 2077
+    layout_id: "955332000000425337"
+    custom_view_id: "955332000000441406"
+    active_blueprint: Lead Qualification
+  pipeline_stage_distribution:
+    note: "Exact count per stage not in list scan — visible via Reports/Analytics module"
+    stages_in_blueprint:
+      - Lead Bucket (default entry stage)
+      - Lead for Initial Sales Process
+      - Attempted to Contact
+      - Contact in Future
+      - Lead Scoring Using BANT
+      - Junk Lead
+      - Qualified
+      - Site Visit Scheduled
+      - Site Visit Completed
+      - Confirm Site Visit
+      - Attempted
+      - Advance Payed
+      - Deal Closed
+  custom_views_available:
+    - Hot Leads
+    - Cold Leads
+    - Warm Leads
+    - Junk Lead
+    - Nurturing Leads
+    - Telecaller Leads
+    - Site Visit Scheduled Leads
+  conversion_path: "Lead → Contact + Account + Deal (on qualification)"
+  lead_to_deal_ratio_observed: "2077 leads : 9 deals (0.43% conversion rate)"
+  post_creation_automations:
+    - Update Attempt Field (field update)
+    - Update Lead Status (field update)
+    - "[Lead] Send Welcome Message (WhatsApp/Email function)"
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Lead source quality, property interest, budget qualification
+  lead_source_options:
+    - Offline Marketing
+    - Cold Call
+    - 99 Acres
+    - MagicBicks
+    - Housing.Com
+    - Employee Referral
+    - Inbound Referral
+    - External Referral
+    - Meta Ads
+    - Walkins
+    - Google Ads
+    - Expo
+  property_interest_fields:
+    - label: Type of Property
+      options: [Plot, Villa, Apartment, Commercial]
+    - label: Preferred Location (3 slots)
+    - label: Budget Range
+      options: ["₹5L–₹10L", "₹10L–₹25L", "₹25L–₹50L", "₹50L–₹1Cr", "Above ₹1Cr"]
+    - label: Budget Range Min / Max
+    - label: Estimated Budget (currency ₹)
+    - label: Comfortable Price / Up to Price
+    - label: Preferred Size (Sq.Ft or Cents)
+    - label: Land Area in cents
+    - label: Rooms in BHK
+    - label: Requirement Property Type
+    - label: Purpose Of Purchase
+    - label: Payment Type
+    - label: Down Payment
+    - label: Loan Requirement
+      options: [Yes, No, Considering]
+    - label: Timeframe to Purchase
+      options: [Immediate, "Within 3 Months", "3–6 Months", "6–12 Months", "Not Decided"]
+    - label: Preferred Project
+    - label: Client Major Concern on Purchase
+  marketing_attribution_tracking:
+    first_click: [Channel, Campaign, Term, Medium, Content, Referrer, Source, Landing Page, Landing Page URL, Timestamp]
+    last_click: [Channel, Campaign, Term, Medium, Content, Referrer, Source, Landing Page, Landing Page URL, Timestamp]
+    google_analytics: [GA Client ID, GCLID, GA Session ID, GA Measurement ID]
+    device_geo: [IP Address, City, Country, Browser, Operating System, Latitude, Longitude, Time Zone]
+    meta_ads: [Ads Form Name, Ads Lead Created Time, Meta Lead Created Time, Ads Lead ID, Ads Forms ID]
+  site_visit_tracking_fields:
+    - Site Visit URL
+    - Site Visit Date
+    - Site Visit Location
+    - Visit Status
+    - BDM Form URL
+    - Client Comments after Visit
+    - Client's Overall Impression
+    - Real Objections / Objection Status
+    - Decision Influencers
+    - Next Committed Step
+    - Follow-up date
+    - Urgency Level
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / Telecaller / CRM Admin
+  primary_concern: Daily lead management, call assignments, blueprint transitions
+  create_form_entry_points:
+    - label: Create Lead (blue CTA)
+      url: /tab/Leads/create?layoutId=955332000000425337&redirect=false
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+      opens: quick_create_modal
+    - label: Lead Conversion (from Contacts)
+      note: Not an entry to Leads module — converts Lead out
+  required_fields_on_create:
+    - Last Name (red border on load)
+    - Mobile (red border on load)
+  form_sections_count: 13
+  form_fields_count_approx: 94
+  key_operational_fields:
+    - label: Lead Type
+      type: dropdown
+      options: [Hot, Warm, Cold, Junk]
+    - label: Lead Status
+      type: dropdown
+      default: Lead Bucket
+    - label: Telecaller
+      type: lookup_user_picker
+    - label: BDM
+      type: lookup_user_picker
+    - label: Manager
+      type: lookup_user_picker
+    - label: Preferred Communication Channel
+      type: dropdown
+      options: [WhatsApp, Phone Call, Email]
+    - label: Language Preference
+      type: dropdown
+      options: [English, Tamil]
+    - label: Family Decision Involved?
+      type: dropdown
+      options: [Yes, No]
+  save_behavior:
+    save: Navigates to new Lead detail view at /tab/Leads/{record_id}
+    save_and_new: Reloads blank Create Lead form
+    cancel: Unsaved changes guard → return to Leads list
+  blueprint_transitions_visible:
+    - Re Attempted
+    - Contact in Future
+    - Site Visit Scheduled
+    - Site Visit Completed
+    - Qualify Out
+    - Junk
+  actions_menu:
+    - Import Leads → /settings/import?module=Leads&step=1
+    - Mass Delete / Mass Update
+    - Manage Tags
+    - Mass Email / Autoresponders
+    - Approve Leads
+    - Deduplicate Leads
+    - Export Leads
+    - Zoho Sheet View
+    - Print View
+  filter_panel:
+    system_filters: 8 (incl. Website Activity, Activities, Cadences)
+    field_filters: 130+
+    related_module_filters: 11 modules

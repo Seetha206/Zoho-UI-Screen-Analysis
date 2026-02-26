@@ -1,0 +1,38 @@
+@startuml
+title Home Page - Dashboard Lifecycle / Widgets (Zoho CRM UI DOM Scan)
+[*] --> Home_Dashboard : Navigate to Home
+state Home_Dashboard {
+  Home_Dashboard : Welcome [User Name]
+  Home_Dashboard : Dashboard Name: Kurinjee Promoters's Home
+}
+state "KPI Widgets (top row)" as KPI {
+  KPI : My Open Deals = 6
+  KPI : My Untouched Deals = 0
+  KPI : My Calls Today = 0
+  KPI : My Leads = 2076
+}
+state "My Open Tasks Widget" as TOW {
+  TOW : Subject (Call / Attempt 1 / Followup Task / Review Task)
+  TOW : Due Date
+  TOW : Status (Not Started visible)
+  TOW : Priority (Normal / High)
+  TOW : Related To (linked Lead / Account)
+  TOW : Pagination (1-10 per page, Next Page button)
+}
+state "My Meetings Widget" as MMW {
+  MMW : Title (Site Visit with Hello / Webinar)
+  MMW : From datetime
+  MMW : To datetime
+  MMW : Related To (Account link)
+  MMW : Contact Name (Contact link)
+  MMW : Pagination (1-3)
+}
+state "My Pipeline Deals By Stage" as PDS {
+  PDS : Funnel chart visualization
+  PDS : Visit Pending : 5
+  PDS : Visit Completed : 1
+}
+state "My Deals Closing This Month" as DCM {
+  DCM : No Deals found (current state)
+}
+state "Dashboard Controls" as DC {

@@ -1,0 +1,68 @@
+@startuml
+title Projects Portfolio - Lifecycle (Zoho CRM UI DOM Scan)
+[*] --> Project_Created : Create Project Portfolio
+state Project_Created {
+  Project_Created : Project Portfolio Name
+  Project_Created : Budget
+  Project_Created : Project Type (Plots / Mixed Use)
+  Project_Created : No Of Units
+  Project_Created : Land Area
+  Project_Created : Base Price Per Unit
+  Project_Created : Estimated Completion Date
+  Project_Created : Price Advantages
+}
+state "Development Stage" as DS {
+  DS : [None]
+  DS --> Land_Acquisition      : set to Land acquisition
+  DS --> Under_Construction    : set to Under construction
+  DS --> Ready_to_Move_Dev     : set to Ready-to-move
+}
+state "Completion Stage" as CS {
+  CS : [None]
+  CS --> In_Progress_Comp      : set to In Progress
+  CS --> Completed_Stage       : set to Completed
+  CS --> Ready_to_Move_Comp    : set to Ready to move
+}
+Project_Created --> DS : Development Stage field
+Project_Created --> CS : Completion Stage field
+Land_Acquisition --> Under_Construction   : [progress update]
+Under_Construction --> Ready_to_Move_Dev  : [progress update]
+In_Progress_Comp --> Completed_Stage      : [stage update]
+In_Progress_Comp --> Ready_to_Move_Comp   : [stage update]
+Completed_Stage  --> Ready_to_Move_Comp   : [stage update]
+Ready_to_Move_Dev --> [*]
+Ready_to_Move_Comp --> [*]
+state "Header Actions" as PPA {
+  PPA : Send Email
+  PPA : Edit
+  PPA : Clone (More Options)
+  PPA : Delete (More Options)
+  PPA : Print Preview (More Options)
+  PPA : Find and Merge Duplicates (More Options)
+  PPA : Mail Merge (More Options)
+  PPA : Run Macro (More Options)
+  PPA : Review History (More Options)
+  PPA : Add Kiosk (More Options)
+  PPA : Create Button (More Options)
+  PPA : Create Client Script (More Options)
+}
+state "Related Lists" as PPR {
+  PPR : Notes
+  PPR : Documents
+  PPR : Emails
+  PPR : Open Activities
+  PPR : Closed Activities
+  PPR : Leads Site Visit Location (count shown)
+  PPR : Deals Site Visit Location
+}
+state "Location Fields" as LOC {
+  LOC : Street
+  LOC : City
+  LOC : District
+  LOC : State
+  LOC : Pincode
+  LOC : Landmarks
+  LOC : Nearest NH
+  LOC : Highway Distance
+}
+@enduml

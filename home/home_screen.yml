@@ -1,0 +1,315 @@
+page:
+  name: Home
+  module: Home Dashboard
+  url: /crm/org60043078423/tab/Home/begin
+  organization: Kurinjee Promoters
+  org_id: "60043078423"
+  active_user: Kurinjee
+  active_dashboard: "Kurinjee Promoters's Home"
+layout:
+  header:
+    logo: Zoho CRM
+    page_title: Home
+    search_bar:
+      placeholder: "Search records"
+      type: text
+    quick_actions:
+      - label: Create
+        icon: "+"
+        type: button
+        triggers: quick_create
+    nav_icons:
+      - id: ask_zia
+        label: Ask Zia
+        icon: ZA
+      - id: signals
+        label: Signals
+        icon: bell
+      - id: calendar
+        label: Calendar
+        link: /crm/org60043078423/calendar?date=26-02-2026&viewType=day
+      - id: marketplace
+        label: Marketplace
+        link: /crm/org60043078423/settings/extensions/all
+      - id: setup
+        label: Setup
+        icon: gear
+        link: /crm/org60043078423/settings/index
+      - id: profile
+        label: Kurinjee
+        icon: K (red avatar)
+      - id: app_switcher
+        icon: 9-dot grid
+  sidebar:
+    theme: dark
+    width: ~210px
+    primary_nav:
+      - label: Home
+        url: /tab/Home/begin
+        state: active
+      - label: Reports
+        url: /tab/Reports
+      - label: Analytics
+        url: /tab/Dashboards
+      - label: My Requests
+        url: /tab/Requesters
+    teamspace:
+      label: CRM Teamspace
+      expandable: true
+      more_actions:
+        - New Teamspace
+        - Create Folder
+        - Associate Modules
+        - Manage CRM Teamspace
+        - View All Teamspace
+    search:
+      type: text
+      placeholder: Search
+    modules:
+      - label: Leads
+        url: /tab/Leads
+        has_more_actions: true
+      - label: Workqueue
+        url: /tab/Workqueue
+        badge: sparkle (AI)
+      - label: Contacts
+        url: /tab/Contacts
+        has_more_actions: true
+      - label: Accounts
+        url: /tab/Accounts
+        has_more_actions: true
+      - label: Deals
+        url: /tab/Potentials
+        has_more_actions: true
+      - label: Projects Portfolio
+        url: /tab/CustomModule3
+        type: custom_module
+      - label: Employee Portfolio
+        url: /tab/CustomModule5
+        type: custom_module
+      - label: Customer Feedback
+        url: /tab/CustomModule7
+        type: custom_module
+      - label: Tasks
+        url: /tab/Tasks
+        has_more_actions: true
+      - label: Meetings
+        url: /tab/Events
+        has_more_actions: true
+      - label: Calls
+        url: /tab/Calls
+        has_more_actions: true
+      - label: Prospecting Leads
+        url: /tab/CustomModule1
+        type: custom_module
+      - label: Logs
+        url: /tab/CustomModule4
+        type: custom_module
+      - label: Scheduler
+        url: /tab/CustomModule6
+        type: custom_module
+      - label: Voice of the Customer
+        url: /tab/Voice of the Customer
+        type: custom_module
+    bottom_icons:
+      - Chats
+      - Channels
+      - Contacts
+  main_content:
+    welcome_banner:
+      text: "Welcome Kurinjee Promoters"
+      controls:
+        - refresh_all: button
+        - dashboard_switcher:
+            options:
+              - Classic View
+              - Kurinjee Promoters's Home (selected)
+              - Manager's Home (New!)
+        - more_options:
+            items:
+              - Add Component
+              - Reorder
+              - View in Full Screen
+    widgets:
+      row_1:
+        type: kpi_summary
+        layout: 4-column grid
+        items:
+          - name: My Open Deals
+            value: 6
+            data_type: count
+          - name: My Untouched Deals
+            value: 0
+            data_type: count
+          - name: My Calls Today
+            value: 0
+            data_type: count
+          - name: My Leads
+            value: 2076
+            data_type: count
+      row_2:
+        type: table_widgets
+        layout: 2-column grid
+        items:
+          - name: My Open Tasks
+            data_type: list/table
+            columns:
+              - Subject
+              - Due Date
+              - Status
+              - Priority
+              - Related To
+              - Contact Name
+            rows_visible: 10
+            pagination:
+              current: "1 - 10"
+              controls: prev/next
+            all_rows_status: Not Started
+            all_rows_priority: Normal
+          - name: My Meetings
+            data_type: list/table
+            columns:
+              - Title
+              - From
+              - To
+              - Related To
+              - Contact Name
+            rows_visible: 3
+            pagination:
+              current: "1 - 3"
+              controls: prev/next
+      row_3:
+        type: mixed_widgets
+        layout: 2-column grid
+        items:
+          - name: My Pipeline Deals By Stage
+            data_type: funnel_chart
+            stages:
+              - label: Visit Pending
+                value: 5
+                color: purple
+              - label: Visit Completed
+                value: 1
+                color: green
+          - name: My Deals Closing This Month
+            data_type: list/table
+            state: empty
+            message: "No Deals found."
+quick_create:
+  location: top_header
+  trigger: plus_icon_near_search
+  type: modal_overlay
+  title: "Quick Create"
+  subtitle: "Add records or build new modules instantly."
+  behavior: opens_as_floating_modal_over_current_page
+  modal_has_search: true
+  groups:
+    - group_name: "Create Records"
+      icon_style: "+" prefix on each item (text-based plus symbol, no custom icons per item)
+      items:
+        - name: Lead
+          dom_ref: ref_868
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Contact
+          dom_ref: ref_870
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Account
+          dom_ref: ref_872
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Deal
+          dom_ref: ref_874
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Project Portfolio
+          dom_ref: ref_876
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+        - name: Employee Portfolios
+          dom_ref: ref_878
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+        - name: Customer Feedbacks
+          dom_ref: ref_880
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+        - name: Task
+          dom_ref: ref_882
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Meeting
+          dom_ref: ref_884
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Call
+          dom_ref: ref_886
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+        - name: Prospecting Lead
+          dom_ref: ref_888
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+        - name: Log
+          dom_ref: ref_890
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+          visibility: visible_only_after_scrolling
+        - name: Scheduler
+          dom_ref: ref_892
+          action_type: button
+          navigation: opens_quick_create_form_inline_or_modal
+          note: custom_module
+          visibility: visible_only_after_scrolling
+    - group_name: "New Configurations"
+      icon_style: SVG icons per item
+      items:
+        - name: New Org Module
+          dom_ref: ref_896
+          action_type: button
+          icon: grid/org-module SVG
+          description: "Manages org level data and provides access to any users in the org."
+          navigation: opens_module_creation_flow
+        - name: New Team Module
+          dom_ref: ref_899
+          action_type: button
+          icon: nodes/team-module SVG
+          description: "Manages team-specific data and provides access for users within that team."
+          navigation: opens_module_creation_flow
+        - name: Create Module Using Zia
+          dom_ref: ref_902
+          action_type: button
+          icon: Zia-logo SVG
+          description: "Describe a module's scope to create a org or team module using Zia"
+          navigation: opens_zia_ai_module_builder_flow
+  total_options:
+    create_records_count: 13
+    new_configurations_count: 3
+    grand_total: 16
+  required_fields_preview: not_shown_in_modal
+  dismiss_behavior: click_outside_modal_or_press_escape
+footer:
+  left:
+    - Chats
+    - Channels
+    - Contacts
+  center:
+    - smart_chat_bar:
+        placeholder: "Here is your Smart Chat (Ctrl+Space)"
+  right:
+    - Visitors Online
+    - Feedback on New UI (highlighted: purple)
+    - Announcements
+    - Mail
+    - Motivator
+    - Sticky Notes
+    - Zia
+    - Activity Reminders
+    - Recent Items
+    - Accessibility

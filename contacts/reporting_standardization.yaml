@@ -1,0 +1,118 @@
+# reporting_standardization.yaml — Contacts Module
+# Module: Contacts
+# URL: /crm/org60043078423/tab/Contacts
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Qualified buyer count, relationship health, deal linkage
+  key_metrics:
+    total_contacts: 26
+    layout_id: "955332000000425339"
+    custom_view_id: "955332000000441440"
+    active_view: My Contacts
+  context: >
+    Only 26 contacts vs 2,077 leads = 1.25% lead-to-contact conversion.
+    Contacts represent confirmed, qualified buyers — each one is a real
+    sales relationship requiring active management.
+  conversion_path: "Lead (qualified) → Contact + Account + Deal"
+  related_module_scope:
+    - Accounts (buyer's household/company)
+    - Deals (property opportunities)
+    - Tasks (follow-up actions)
+    - Calls / Emails / Meetings (communication history)
+    - Notes (relationship notes)
+  business_risk_indicators:
+    - Low contact count relative to leads → most leads are not being converted
+    - All contacts owned by single user → single point of failure
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Buyer budget, property preferences, marketing attribution
+  property_interest_fields:
+    - label: Estimated Budget
+      type: currency (₹)
+    - label: Connected To
+      type: lookup → Leads
+      note: Traces back to originating lead
+  marketing_attribution_fields:
+    first_click: [Source, Campaign, Medium, Content, Term, Referrer, Landing Page, Timestamp]
+    last_click: [Source, Campaign, Medium, Content, Term, Referrer, Landing Page, Timestamp]
+    google_analytics: [GA Client ID, GA Measurement ID, GA Session ID, GCLID]
+    device_geo: [IP Address, City, Country, Browser, Operating System, Latitude, Longitude, Time Zone, Pages Visited]
+  lead_source_visibility:
+    note: "Lead Source field inherited from Lead conversion — promoter can filter contacts by source"
+  actions_available_to_promoter:
+    - Mass Email → /settings/manage-mass-mail?module=Contacts
+    - Autoresponders → /settings/auto-responders?module=Contacts
+    - Export Contacts (for campaign targeting)
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / Telecaller / CRM Admin
+  primary_concern: Contact creation, communication logging, deal linkage
+  create_form_entry_points:
+    - label: Create Contact (blue CTA)
+      url: /tab/Contacts/create?layoutId=955332000000425339&redirect=false
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+    - label: Lead Conversion
+      note: Primary creation path — Contact created automatically when a Lead is converted
+  required_fields_on_create:
+    - Last Name (red border on load)
+  form_sections:
+    - Contact Information
+    - Address Information
+    - Description Information
+    - Internal Use
+    - Visit Summary (site-visit specific section)
+  key_fields:
+    - label: Last Name
+      type: text_input
+      required: true
+    - label: Account Name
+      type: lookup → Accounts
+    - label: Email
+      type: text_input
+    - label: Mobile
+      type: text_input
+    - label: Lead Source
+      type: dropdown
+    - label: Estimated Budget
+      type: currency (₹)
+    - label: Reporting To
+      type: lookup → Contacts (self-referencing for family/corporate hierarchy)
+    - label: Connected To
+      type: lookup → Leads
+    - label: Contact Owner
+      type: user_lookup
+      default: Kurinjee Promoters
+    - label: Email Opt Out
+      type: checkbox
+  save_behavior:
+    save: Navigates to new Contact detail view at /tab/Contacts/{record_id}
+    save_and_new: Reloads blank Create Contact form
+    cancel: Unsaved changes guard → return to Contacts list
+  filter_panel:
+    system_filters: 8 (incl. Website Activity, Activities, Cadences, Latest Email Status)
+    field_filters: 70+
+    related_module_filters: 11 modules (Calls, Deals, Emails, Leads, Meetings, Notes, Tasks, etc.)
+  actions_menu:
+    - Import Contacts
+    - Mass Delete / Mass Update
+    - Mass Email / Autoresponders
+    - Approve Contacts
+    - Deduplicate Contacts
+    - Manage Tags
+    - Export Contacts
+    - Zoho Sheet View / Print View

@@ -1,0 +1,688 @@
+@startuml Accounts_Lifecycle_Zoho_CRM
+skinparam backgroundColor #FAFAFA
+skinparam state {
+  BackgroundColor #EEF4FF
+  BorderColor #4A6CF7
+  FontColor #1A1A2E
+  ArrowColor #4A6CF7
+}
+skinparam note {
+  BackgroundColor #FFF8E1
+  BorderColor #FFC107
+}
+title Zoho CRM — Accounts Module Lifecycle\\n(Org: Kurinjee Promoters | Blueprint: Lead Qualification)
+' ─────────────────────────────────────
+' ENTRY POINTS
+' ─────────────────────────────────────
+[*] --> Home : Launch CRM
+Home --> AccountsList : Sidebar → Accounts (active/highlighted)
+' ─────────────────────────────────────
+' LEAD CONVERSION ENTRY (alternate path)
+' ─────────────────────────────────────
+[*] --> LeadConversion : Lead reaches "Convert" transition\\nin Blueprint - Lead Qualification
+state LeadConversion {
+  LeadConversion : Blueprint: Lead Qualification
+  LeadConversion : Transition: Convert
+  LeadConversion : Source Lead: Radhakrishnan
+  LeadConversion : Timestamp: Aug 4, 2025 | 03:55 PM
+  LeadConversion : Action: Account auto-created from Lead data
+  LeadConversion : Related filter: Leads (Converted Leads)
+  LeadConversion : Link: View Lead History
+}
+LeadConversion --> AccountDetail : Account record created\\nfrom Lead conversion
+' ─────────────────────────────────────
+' ACCOUNTS LIST VIEW
+' ─────────────────────────────────────
+state AccountsList {
+  state "List View" as LV {
+    LV : Page Title: Accounts
+    LV : Active Custom View: All Accounts
+    LV : Custom View ID: 955332000000441417
+    LV : URL: /tab/Accounts/custom-view/955332000000441417/list
+    LV : Columns visible: Account Name (sortable + filter dropdown: All ▼)
+    LV : Columns visible: Account Owner (sortable)
+    LV : Row: checkbox | More options (…) | Account Name link | Account Owner
+    LV : Total Records: 11 | Pagination: 1 to 10
+    LV : Pagination controls: ◀ Previous | Next ▶
+    LV : Hover on row: inline popup (Name, Title, Email, Phone)
+    LV : View Settings button (column configuration)
+  }
+  state "View Switchers" as VS {
+    VS : List View (active — lines icon)
+    VS : Split View (dual-panel icon)
+    VS : Table View (grid icon)
+    VS : Activity View (clock icon)
+    VS : Kanban / Pipeline View
+    VS : Compact View
+    VS : More Views ˅ (chevron dropdown)
+    VS : Refresh Custom View (↻ icon)
+  }
+  state "Custom View Management" as CVM {
+    CVM : Active Tab: All Accounts
+    CVM : ... (ellipsis) → more options
+    CVM : New Custom View → /tab/Accounts/custom-views/create
+    CVM : Manage Custom View → /tab/Accounts/custom-views/manage
+    CVM : Show custom views as Dropdown toggle
+  }
+  state "Toolbar" as TB {
+    TB : Filter button (toggle filter panel)
+    TB : Sort button (open sort options)
+    TB : Create Account (primary blue CTA)
+    TB : ▼ Create Dropdown arrow
+    TB : ... Actions Menu (see ActionsMenu state)
+  }
+  state "ActionsMenu" as AM {
+    AM : Import Accounts → /settings/import?module=Accounts&step=1
+    AM : Mass Delete → /tab/Accounts/actions/mass-tools?type=mass_delete
+    AM : Mass Update → /tab/Accounts/actions/mass-tools?type=mass_update
+    AM : Manage Tags → /settings/manage-tags?module=Accounts
+    AM : Drafts → /tab/Accounts/actions/draft?module=Accounts
+    AM : Deduplicate Accounts
+    AM : Create Client Script ✨
+    AM : Export Accounts
+    AM : Zoho Sheet View
+    AM : Print View ▶ (sub-menu)
+    AM :   └─ Print Default view
+    AM :   └─ Print Using Canvas
+  }
+  state "FilterPanel" as FP {
+    FP : Label: Filter Accounts by
+    FP : Search box (filters the field list)
+    FP : ── System Defined Filters (collapsible) ──
+    FP : ☐ Touched Records
+    FP : ☐ Untouched Records
+    FP : ☐ Record Action
+    FP : ☐ Related Records Action
+    FP : ☐ Locked
+    FP : ☐ Cadences
+    FP : ── Filter By Fields (collapsible) ──
+    FP : ☐ Account Name | ☐ Account Owner | ☐ Account Type
+    FP : ☐ All Traffic Sources | ☐ Available Plots
+    FP : ☐ Browser | ☐ City | ☐ City (from IP address)
+    FP : ☐ Code | ☐ Connected To | ☐ Country
+    FP : ☐ Country (from IP address) | ☐ Created By
+    FP : ☐ Created Time | ☐ Email | ☐ Estimated Budget
+    FP : ☐ Features | ☐ First Click Campaign
+    FP : ☐ First Click Content | ☐ First Click Landing Page
+    FP : ☐ First Click Landing Page Url
+    FP : ☐ First Click Medium | ☐ First Click Source
+    FP : ☐ First Click Term | ☐ First Click Timestamp
+    FP : ☐ GA Client ID | ☐ GA Measurement ID
+    FP : ☐ GA Session ID | ☐ GCLID (GA Connector)
+    FP : ☐ IP Address | ☐ Land Area In Cents
+    FP : ☐ Last Activity Time | ☐ Last Click Campaign
+    FP : ☐ Last Click Channel | ☐ Last Click Content
+    FP : ☐ Last Click Landing Page
+    FP : ☐ Last Click Landing Page Url
+    FP : ☐ Last Click Medium | ☐ Last Click Referrer
+    FP : ☐ Last Click Source | ☐ Last Click Term
+    FP : ☐ Last Click Timestamp | ☐ Latitude
+    FP : ☐ Longitude | ☐ Mobile | ☐ Modified By
+    FP : ☐ Modified Time | ☐ Operating System
+    FP : ☐ Pages Visited | ☐ Promotor
+    FP : ☐ Property Type | ☐ Purpose Of Purchase
+    FP : ☐ Room in BHK | ☐ State | ☐ Street
+    FP : ☐ Tag | ☐ Time Zone | ☐ Unit Price
+    FP : ── Filter By Related Modules (collapsible) ──
+    FP : ☐ Accounts (Member Accounts)
+    FP : ☐ Accounts (Plots Owned By)
+    FP : ☐ Contacts | ☐ Deals | ☐ Emails
+    FP : ☐ Leads (Converted Leads)
+  }
+  state "SampleRecords" as SR {
+    SR : Row 1 — Kurinjee Promoters / Kurinjee Promoters
+    SR : Row 2 — King (Sample) / Kurinjee Promoters
+    SR : Row 3 — Truhlar And Truhlar (Sample) / Kurinjee Promoters
+    SR : Row 4 — Commercial Press (Sample) / Kurinjee Promoters
+    SR : Row 5 — Morlong Associates (Sample) / Kurinjee Promoters
+    SR : Row 6 — Chapman (Sample) / Kurinjee Promoters
+    SR : Row 7 — Printing Dimensions (Sample) / Kurinjee Promoters
+    SR : Row 8 — Feltz Printing Service (Sample) / Kurinjee Promoters
+    SR : Row 9 — Chemel (Sample) / Kurinjee Promoters
+    SR : Row 10 — Chanay (Sample) / Kurinjee Promoters
+  }
+}
+note right of AccountsList
+  Hover popup on list row reveals:
+  Name | Title: CEO, Administrator
+  Email: kurinjeecrm01@gmail.com
+  Phone: 9597736066
+  (email is clickable mailto link)
+end note
+' ─────────────────────────────────────
+' CREATE ACCOUNT FORM
+' ─────────────────────────────────────
+AccountsList --> CreateAccount : Click "Create Account" button
+state CreateAccount {
+  state "FormHeader" as FH {
+    FH : Title: Create Account
+    FH : Link: Edit Page Layout
+    FH : Layout ID: 955332000000425338
+    FH : URL: /tab/Accounts/create?layoutId=955332000000425338&redirect=false
+    FH : Buttons: Save | Save and New | Cancel
+    FH : Bottom: Create Form Views → Standard View
+    FH : Bottom: Create a custom form page (button)
+  }
+  state "Section: Account Information" as SAI {
+    SAI : Account Owner (combobox — default: Kurinjee Promoters)
+    SAI : Account Name [text — REQUIRED, highlighted red border]
+    SAI : Account Type (combobox — default: -None-)
+    SAI : Mobile (text)
+    SAI : Email (text)
+    SAI : Last Click Channel (text)
+    SAI : Last Click Medium (text)
+    SAI : Last Click Term (text)
+    SAI : Last Click Content (text)
+    SAI : Last Click Source (text)
+    SAI : Last Click Referrer (text)
+    SAI : Last Click Campaign (text)
+    SAI : Last Click Landing Page (text)
+    SAI : Last Click Landing Page Url (rich text)
+    SAI : Last Click Timestamp (text)
+    SAI : First Click Source (text)
+    SAI : First Click Medium (text)
+    SAI : First Click Campaign (text)
+    SAI : First Click Term (text)
+    SAI : First Click Content (text)
+    SAI : First Click Landing Page (text)
+    SAI : First Click Landing Page Url (rich text)
+    SAI : First Click Timestamp (text)
+    SAI : GA Client ID (text)
+    SAI : GA Measurement ID (text)
+    SAI : GA Session ID (text)
+    SAI : GCLID (GA Connector) (text)
+    SAI : Pages Visited (text)
+    SAI : Operating System (text)
+    SAI : Browser (text)
+    SAI : IP Address (text)
+    SAI : City (from IP address) (text)
+    SAI : Country (from IP address) (text)
+    SAI : Time Zone (text)
+    SAI : Latitude (text)
+    SAI : Longitude (text)
+    SAI : All Traffic Sources (text)
+    SAI : Estimated Budget (currency — ₹)
+    SAI : Connected To (lookup → Leads)
+  }
+  state "Section: Lead Assessment" as SLA {
+    SLA : Purpose Of Purchase (combobox)
+  }
+  state "Section: Address Information" as SADDR {
+    SADDR : Street (text)
+    SADDR : City (text)
+    SADDR : State (text)
+    SADDR : Country (text)
+    SADDR : Code (text)
+  }
+  state "Section: Additional Information" as SADD {
+    SADD : Promotor (lookup → Accounts, New Account option)
+    SADD : Features (multiselect combobox)
+    SADD : Available Plots (text)
+    SADD : Unit Price (currency — ₹ with info icon)
+    SADD : Property Type (combobox)
+    SADD : Land Area In Cents (text)
+    SADD : Room in BHK (text)
+  }
+  state "Section: Description Information" as SDESC {
+    SDESC : Description (textarea)
+  }
+}
+note right of CreateAccount
+  Form also contains hidden sections:
+  Quick Create (region)
+  Business Card (region)
+  These are layout/display regions
+  not visible as input fields
+end note
+' ─────────────────────────────────────
+' ACCOUNT DETAIL PAGE
+' ─────────────────────────────────────
+CreateAccount --> AccountDetail : Click Save\\n(record created)
+AccountsList --> AccountDetail : Click Account Name link\\n(e.g. /tab/Accounts/955332000000669142)
+state AccountDetail {
+  state "DetailHeader" as DH {
+    DH : ← Back (returns to list)
+    DH : Record Title: [Account Name]
+    DH : 🏷 Add Tags button
+    DH : Send Email (primary blue button)
+    DH : Edit (white button)
+    DH : ... More Options (dropdown — see MoreOptionsMenu)
+    DH : Run Macro (combobox button)
+    DH : ◀ Previous Record | Next Record ▶
+    DH : Last Update: 206 day(s) ago
+    DH : Breadcrumb module: Accounts
+  }
+  state "MoreOptionsMenu" as MOM {
+    MOM : Clone
+    MOM : Delete
+    MOM : Print Preview
+    MOM : Find and Merge Duplicates
+    MOM : Mail Merge
+    MOM : Customize Business Card
+    MOM : Organize Account Details
+    MOM : Add Related List
+    MOM : Review History
+    MOM : Add Kiosk ✨
+    MOM : Create Button
+    MOM : Create Client Script ✨
+  }
+  state "Tab: Overview" as OVW {
+    state "BusinessCardSection" as BCS {
+      BCS : Field: Account Owner (inline editable)
+      BCS : Value: Kurinjee Promoters
+      BCS : Save | Cancel inline buttons
+    }
+    state "HideDetails toggle" as HDT {
+      HDT : Button: Hide Details / Show Details
+      HDT : Collapses/expands Record Details region
+    }
+    state "RecordDetails" as RD {
+      state "Account Information fields" as AIF {
+        AIF : Account Owner — Kurinjee Promoters (inline editable)
+        AIF : Account Name — Kurinjee Promoters (inline editable)
+        AIF : Account Type — — (empty, inline editable)
+        AIF : Last Click Channel — —
+        AIF : Last Click Medium — —
+        AIF : Last Click Term — —
+        AIF : Last Click Content — —
+        AIF : Last Click Source — —
+        AIF : Last Click Referrer — —
+        AIF : Last Click Campaign — —
+        AIF : Last Click Landing Page — —
+        AIF : Last Click Landing Page Url — —
+        AIF : Last Click Timestamp — —
+        AIF : First Click Source — —
+        AIF : First Click Medium — —
+        AIF : First Click Campaign — —
+        AIF : First Click Term — —
+        AIF : First Click Content — —
+        AIF : First Click Landing Page — —
+        AIF : First Click Landing Page Url — —
+        AIF : First Click Timestamp — —
+        AIF : GA Client ID — —
+        AIF : GA Measurement ID — —
+        AIF : GA Session ID — —
+        AIF : GCLID (GA Connector) — —
+        AIF : Pages Visited — —
+        AIF : Operating System — —
+        AIF : Browser — —
+        AIF : IP Address — —
+        AIF : City (from IP address) — —
+        AIF : Country (from IP address) — —
+        AIF : Time Zone — —
+        AIF : Latitude — —
+        AIF : Longitude — —
+        AIF : All Traffic Sources — —
+        AIF : Estimated Budget — ₹ 35,00,000.00
+        AIF : Mobile — —
+        AIF : Email — —
+        AIF : Created By — Kurinjee Promoters | Mon, 4 Aug 2025 03:55 PM
+        AIF : Modified By — Kurinjee Promoters | Mon, 4 Aug 2025 03:55 PM
+        AIF : Connected To — — (lookup to Leads)
+      }
+      state "Lead Assessment fields" as LAF {
+        LAF : Purpose Of Purchase — Personal Use
+      }
+      state "Address Information fields" as ADRF {
+        ADRF : Street — site no:29, Eswara Nagar, Pachampalayam, Avinashi
+        ADRF : City — —
+        ADRF : State — Tamilnadu
+        ADRF : Country — India
+        ADRF : Code — —
+        ADRF : Locate Map button (opens map view)
+      }
+      state "Additional Information fields" as ADDIF {
+        ADDIF : Promotor — —
+        ADDIF : Features — PRICE; DTCP APPROVED; LOCATION;\\nPROJECT LEGAL OPINIONS; RESALE VALUE;\\nMAINTANCE; TRANSPORT; AMENITIES
+        ADDIF : Available Plots — —
+        ADDIF : Unit Price — —
+        ADDIF : Property Type — —
+        ADDIF : Land Area In Cents — —
+        ADDIF : Room in BHK — —
+      }
+      state "Description Information fields" as DESIF {
+        DESIF : Description — "customer Looking 2BHK house for Living\\npurpose and they have 5Lakhs cash in hand"
+        DESIF : Show More / Show Less toggle
+      }
+    }
+    state "ScoringRules" as SRC {
+      SRC : Scoring Rules (section label visible)
+    }
+  }
+  state "Tab: Timeline" as TL {
+    TL : Sub-tab: History (active)
+    TL : Header: Timeline History
+    TL : Filter icon (funnel)
+    TL : Counter: 0 Upcoming Automated Actions
+    TL : ── Entry: Aug 4, 2025 ──
+    TL : 03:55 PM — Account created by converting
+    TL :   the Lead: Radhakrishnan
+    TL :   Link: View Lead History
+    TL :   through Transition - Convert
+    TL :   in Blueprint - Lead Qualification
+    TL :   Timestamp: Aug 4, 2025
+  }
+}
+note right of AccountDetail
+  URL pattern: /tab/Accounts/{record_id}
+  Sample record ID: 955332000000669142
+  All fields support inline editing:
+  Click field → type → Save | Cancel
+  Record page view: Standard View
+  Option: Create a custom record page
+end note
+' ─────────────────────────────────────
+' INLINE EDIT FLOW
+' ─────────────────────────────────────
+AccountDetail --> InlineEdit : Click any field value
+state InlineEdit {
+  InlineEdit : Field becomes editable (text/combobox/lookup)
+  InlineEdit : Save button (confirms change)
+  InlineEdit : Cancel button (reverts)
+  InlineEdit : Applies to ALL fields in Record Details
+  InlineEdit : Also applies to Account Owner in Business Card
+}
+InlineEdit --> AccountDetail : Save (field updated)\\nOR Cancel (no change)
+' ─────────────────────────────────────
+' FULL EDIT MODE
+' ─────────────────────────────────────
+AccountDetail --> FullEdit : Click "Edit" button (header)
+state FullEdit {
+  FullEdit : Opens same layout as Create Account form
+  FullEdit : All fields editable simultaneously
+  FullEdit : Buttons: Save | Cancel
+}
+FullEdit --> AccountDetail : Save\\nOR Cancel
+' ─────────────────────────────────────
+' LEFT PANEL — RELATED LIST NAVIGATION
+' ─────────────────────────────────────
+state "RelatedListPanel" as RLP {
+  RLP : Label: Related List
+  RLP : Organise Accounts Details button
+  RLP : (click any item to scroll/jump to section)
+  RLP : ─────────────────
+  RLP : Notes
+  RLP : Connected Records
+  RLP : Attachments
+  RLP : Deals
+  RLP : Contacts
+  RLP : Open Activities
+  RLP : Emails
+  RLP : Closed Activities
+  RLP : Social
+  RLP : Zoho Projects
+  RLP : Plots Owned By
+  RLP : Zoho Desk
+  RLP : Add Related List (link)
+  RLP : ─────────────────
+  RLP : Links section
+  RLP : No Links Found
+  RLP : Add Link button
+}
+AccountDetail --> RelatedSections : Scroll / click Related List item
+' ─────────────────────────────────────
+' RELATED SECTIONS (in detail page body)
+' ─────────────────────────────────────
+state RelatedSections {
+  state "Notes" as NS {
+    NS : Sort dropdown: Recent First | Recent Last
+    NS : Inline input: "Add a note" (text box)
+    NS : + Add button
+    NS : Status: (empty — no notes shown)
+  }
+  state "Connected Records" as CRS {
+    CRS : Button: Add New ▼ (dropdown)
+    CRS : Status: No records found
+  }
+  state "Attachments" as ATS {
+    ATS : Button: Attach ▼ (dropdown)
+    ATS :   └─ Upload File
+    ATS :   └─ Zoho WorkDrive
+    ATS :   └─ Other Cloud Drives
+    ATS :   └─ Link (URL)
+    ATS : Status: No Attachment
+  }
+  state "Deals" as DS {
+    DS : Button: Add ▼ | New ▼
+    DS : Status: No records found
+  }
+  state "Contacts" as CS {
+    CS : Button: Assign | New | Edit
+    CS : Status: No records found
+    CS : (Multiple contacts can be linked)
+  }
+  state "Open Activities" as OAS {
+    OAS : Button: Add New ▼ (dropdown)
+    OAS :   └─ Task
+    OAS :   └─ Meeting
+    OAS :   └─ Call
+    OAS : Status: No records found
+  }
+  state "Emails" as ES {
+    ES : Button: Compose Email (×2 — top and inline)
+    ES : Sub-tabs: Mails | Drafts | Scheduled
+    ES : Filter combobox: Accounts - Sent emails from CRM
+    ES : Row actions: Clear | Delete
+    ES : Status: No records found
+  }
+  state "Closed Activities" as CAS {
+    CAS : Button: Add ▼
+    CAS : Status: No records found
+  }
+  state "Social" as SOS {
+    SOS : Message: "Start interacting with your connections
+    SOS :   on social networks"
+    SOS : (no add button visible)
+  }
+  state "Zoho Projects" as ZPS {
+    ZPS : Filter combobox: Active Projects | Archived Projects
+    ZPS : Button: New Project
+    ZPS : Button: Associate Project
+    ZPS : Status: No records found
+  }
+  state "Plots Owned By" as POB {
+    POB : Button: Assign | New | Edit
+    POB : Status: No records found
+    POB : (Custom real-estate module)
+  }
+  state "Zoho Desk" as ZDS {
+    ZDS : Metric: All Tickets (count)
+    ZDS : Metric: Overdue Tickets (count)
+    ZDS : Metric: Avg. Response Time — 00:00 Hrs
+    ZDS : Metric: Avg. Resolution Time — 00:00 Hrs
+    ZDS : Metric: Customer Happiness Rating — No ratings yet
+    ZDS : Filter combobox: All Tickets | Overdue Tickets | High Priority Tickets
+    ZDS : Row actions: Update Field | Close | Delete
+    ZDS : Status: No records found
+  }
+  state "AddRelatedList" as ARL {
+    ARL : Button: Add Related List
+    ARL : Available to connect:
+    ARL :   └─ Prospecting Lead (custom module)
+    ARL :   └─ Project Portfolio (custom module)
+    ARL :   └─ Log (custom module)
+    ARL : Record detail page views: Standard View ▼
+    ARL : Button: Create a custom record page
+  }
+}
+' ─────────────────────────────────────
+' ACCOUNT-LEVEL ACTIONS FROM DETAIL
+' ─────────────────────────────────────
+AccountDetail --> SendEmail     : Click "Send Email" button
+AccountDetail --> EditRecord    : Click "Edit" button → FullEdit
+AccountDetail --> CloneRecord   : More Options → Clone
+AccountDetail --> DeleteRecord  : More Options → Delete
+AccountDetail --> PrintPreview  : More Options → Print Preview
+AccountDetail --> MergeDups     : More Options → Find and Merge Duplicates
+AccountDetail --> MailMerge     : More Options → Mail Merge
+AccountDetail --> ReviewHistory : More Options → Review History
+AccountDetail --> AddKiosk      : More Options → Add Kiosk ✨
+AccountDetail --> CreateButton  : More Options → Create Button
+AccountDetail --> ClientScript  : More Options → Create Client Script ✨
+state SendEmail {
+  SendEmail : Opens compose email dialog
+  SendEmail : Linked to account email field
+}
+state CloneRecord {
+  CloneRecord : Duplicates all field values into new record
+  CloneRecord : Opens new form pre-filled
+}
+state DeleteRecord {
+  DeleteRecord : Confirmation dialog appears
+  DeleteRecord : Note: "This action can't be undone"
+  DeleteRecord : ☐ Notify Owner (checkbox)
+  DeleteRecord : Buttons: Delete | Cancel
+}
+state ReviewHistory {
+  ReviewHistory : Audit trail — all field changes
+  ReviewHistory : Timestamped change log
+  ReviewHistory : Field-by-field diff view
+}
+state MergeDups {
+  MergeDups : Search for duplicate Account records
+  MergeDups : Select master record
+  MergeDups : Merge field values
+}
+' ─────────────────────────────────────
+' RELATED RECORD CREATION FROM DETAIL
+' ─────────────────────────────────────
+AccountDetail --> NewContact      : Contacts → New button
+AccountDetail --> AssignContact   : Contacts → Assign button
+AccountDetail --> NewDeal         : Deals → Add / New button
+AccountDetail --> NewTask         : Open Activities → Add New → Task
+AccountDetail --> NewMeeting      : Open Activities → Add New → Meeting
+AccountDetail --> NewCall         : Open Activities → Add New → Call
+AccountDetail --> ComposeEmail    : Emails → Compose Email
+AccountDetail --> NewProject      : Zoho Projects → New Project
+AccountDetail --> AssocProject    : Zoho Projects → Associate Project
+AccountDetail --> NewPlot         : Plots Owned By → New
+AccountDetail --> AssignPlot      : Plots Owned By → Assign
+AccountDetail --> AddNote         : Notes → Add a note (inline)
+AccountDetail --> AttachFile      : Attachments → Attach ▼
+AccountDetail --> AddLink         : Links → Add Link
+' ─────────────────────────────────────
+' NAVIGATION FLOWS
+' ─────────────────────────────────────
+AccountDetail --> AccountsList    : Click ← Back button
+AccountDetail --> AccountDetail   : Click ◀ Previous Record
+AccountDetail --> AccountDetail   : Click Next Record ▶
+' ─────────────────────────────────────
+' TERMINAL / END STATES
+' ─────────────────────────────────────
+DeleteRecord  --> [*] : Record permanently deleted\\n(irreversible — no trash/recycle)
+AccountsList  --> [*] : User navigates to another module
+' ─────────────────────────────────────
+' FOOTER / GLOBAL UTILITIES (always visible)
+' ─────────────────────────────────────
+state GlobalFooter {
+  GlobalFooter : Smart Chat bar: "Here is your Smart Chat (Ctrl+Space)"
+  GlobalFooter : Visitors Online button
+  GlobalFooter : Feedback on New UI (purple highlight button)
+  GlobalFooter : Announcements
+  GlobalFooter : Mail
+  GlobalFooter : Motivator
+  GlobalFooter : Sticky Notes
+  GlobalFooter : Zia (AI assistant)
+  GlobalFooter : Activity Reminders
+  GlobalFooter : Recent Items
+  GlobalFooter : Accessibility
+  GlobalFooter : Bottom tabs: Chats | Channels | Contacts
+}
+state GlobalTopBar {
+  GlobalTopBar : Page Title: Accounts
+  GlobalTopBar : Search records (global search bar)
+  GlobalTopBar : [+] Quick Create button
+  GlobalTopBar : Ask Zia icon (AI)
+  GlobalTopBar : Signals (Bell / Notifications)
+  GlobalTopBar : Calendar → /calendar?date=26-02-2026&viewType=day
+  GlobalTopBar : Marketplace → /settings/extensions/all
+  GlobalTopBar : Setup (Gear) → /settings/index
+  GlobalTopBar : Profile Avatar: K (Kurinjee — CEO, Administrator)
+  GlobalTopBar : App Switcher (9-dot waffle grid)
+}
+state GlobalSidebar {
+  GlobalSidebar : Logo: Zoho CRM | Hide Menu button
+  GlobalSidebar : Home → /tab/Home/begin
+  GlobalSidebar : Reports → /tab/Reports
+  GlobalSidebar : Analytics → /tab/Dashboards
+  GlobalSidebar : My Requests → /tab/Requesters
+  GlobalSidebar : CRM Teamspace ▼ (workspace selector)
+  GlobalSidebar :   └─ New Teamspace | Create Folder
+  GlobalSidebar :   └─ Associate Modules
+  GlobalSidebar :   └─ Manage CRM Teamspace
+  GlobalSidebar :   └─ View All Teamspace
+  GlobalSidebar : [Search box — module filter]
+  GlobalSidebar : ── CRM Modules ──
+  GlobalSidebar : Leads → /tab/Leads
+  GlobalSidebar : Workqueue ✨ → /tab/Workqueue
+  GlobalSidebar : Contacts → /tab/Contacts
+  GlobalSidebar : Accounts → /tab/Accounts  ◄ ACTIVE
+  GlobalSidebar : Deals → /tab/Potentials
+  GlobalSidebar : Projects Portfolio → /tab/CustomModule3
+  GlobalSidebar : Employee Portfolio → /tab/CustomModule5
+  GlobalSidebar : Customer Feedback → /tab/CustomModule7
+  GlobalSidebar : Tasks → /tab/Tasks
+  GlobalSidebar : Meetings → /tab/Events
+  GlobalSidebar : Calls → /tab/Calls
+  GlobalSidebar : Prospecting Leads → /tab/CustomModule1
+  GlobalSidebar : Logs → /tab/CustomModule4
+  GlobalSidebar : Scheduler → /tab/CustomModule6
+  GlobalSidebar : Voice of the Customer → /tab/Voice of the Customer
+}
+state GlobalLegalFooter {
+  GlobalLegalFooter : Privacy Policy → http://www.zoho.in/privacy.html
+  GlobalLegalFooter : Terms of Service → http://www.zoho.in/crm/zohocrm-terms.html
+  GlobalLegalFooter : © 2026 Corp. All rights reserved.
+}
+' ─────────────────────────────────────
+' NOTES — KEY BUSINESS DATA
+' ─────────────────────────────────────
+note bottom of AccountDetail
+  Live record: Kurinjee Promoters
+  ─────────────────────────────────────
+  Created via Lead Conversion (Aug 4, 2025 03:55 PM)
+  Blueprint: Lead Qualification | Transition: Convert
+  Source Lead: Radhakrishnan
+  ─────────────────────────────────────
+  Estimated Budget: ₹ 35,00,000.00
+  Purpose of Purchase: Personal Use
+  Street: site no:29, Eswara Nagar,
+          Pachampalayam, Avinashi
+  State: Tamilnadu | Country: India
+  ─────────────────────────────────────
+  Features: PRICE; DTCP APPROVED; LOCATION;
+    PROJECT LEGAL OPINIONS; RESALE VALUE;
+    MAINTANCE; TRANSPORT; AMENITIES
+  ─────────────────────────────────────
+  Description: "customer Looking 2BHK house
+    for Living purpose and they have
+    5Lakhs cash in hand"
+  ─────────────────────────────────────
+  Organisation: Kurinjee Promoters
+  Admin: CEO / Administrator
+  Email: kurinjeecrm01@gmail.com
+  Phone: 9597736066
+  Subscription: 1 user license (upgrade prompt visible)
+end note
+note bottom of LeadConversion
+  Confirmed from Timeline Tab:
+  "Account created by converting the Lead
+   Radhakrishnan — View Lead History
+   through Transition - Convert in
+   Blueprint - Lead Qualification.
+   Aug 4, 2025"
+  This is the ONLY entry in timeline history.
+  0 Upcoming Automated Actions.
+end note
+note bottom of CreateAccount
+  Layout ID: 955332000000425338
+  Edit Page Layout → /settings/modules/
+    Accounts/layouts/955332000000425338
+  Required field: Account Name (red border)
+  Default owner: Kurinjee Promoters
+  Form regions: Account Information,
+    Lead Assessment, Address Information,
+    Additional Information (real estate),
+    Description Information
+end note
+@enduml

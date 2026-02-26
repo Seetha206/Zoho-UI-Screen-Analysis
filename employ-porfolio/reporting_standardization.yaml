@@ -1,0 +1,156 @@
+# reporting_standardization.yaml — Employee Portfolio Module
+# Module: Employee Portfolio (CustomModule5)
+# URL: /crm/org60043078423/tab/CustomModule5
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Team roster, role coverage, employee-to-lead assignment health
+  key_metrics:
+    total_employees: 8
+    type_distribution:
+      Telecaller: 2
+      BDM: 5
+      CEO: 1
+    layout_id: "955332000001288040"
+    custom_view_id: "955332000001288053"
+  team_roster:
+    - name: Elangovan
+      type: CEO
+      mobile: "(978) 927-7775"
+      record_id: "955332000003787087"
+    - name: Arun pandian
+      type: BDM
+      mobile: "(915) 002-4013"
+      record_id: "955332000003787133"
+    - name: Dinesh kumar
+      type: BDM
+      mobile: "(915) 002-4014"
+      record_id: "955332000003787123"
+    - name: Vinoth kumar
+      type: BDM
+      mobile: "(915) 002-4021"
+      record_id: "955332000003787097"
+    - name: Moorthy
+      type: BDM
+      mobile: "(915) 002-4015"
+      record_id: "955332000001289471"
+    - name: Radhakrishnan
+      type: BDM
+      mobile: "(915) 002-4018"
+      email: kurinjeepromoters.cbe@gmail.com
+      record_id: "955332000001289466"
+    - name: Sumathi
+      type: Telecaller
+      record_id: "955332000005376001"
+    - name: Vijayasri
+      type: Telecaller
+      record_id: "955332000005376006"
+  operational_gaps:
+    - "2 Telecallers managing 4,276 tasks — high task-per-telecaller ratio"
+    - "5 BDMs for 2,077 leads and 9 deals — lead-to-BDM ratio needs monitoring"
+    - "Telecallers (Sumathi, Vijayasri) have no mobile or email recorded"
+    - "System constraint: 1 user license limit reached — cannot create more CRM users"
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: BDM assignment for site visits, telecaller follow-up chain
+  bdm_assignment_to_deals:
+    note: BDM field on Leads and Deals links to Employee Portfolio BDM-type records
+    bdms_available: [Arun pandian, Dinesh kumar, Vinoth kumar, Moorthy, Radhakrishnan]
+  telecaller_to_task_chain:
+    note: Telecaller field on Tasks links to Employee Portfolio Telecaller-type records
+    telecallers_active: [Sumathi, Vijayasri]
+    tasks_per_telecaller_approx: 2138
+  broker_management:
+    note: >
+      The Broker Information section allows tracking external channel partners.
+      Verified Broker checkbox, Year of Experience, Broker Type, and Location
+      fields enable channel partner segmentation and commission tracking.
+    broker_fields:
+      - Broker Type
+      - Year of Experience
+      - Location (multi-select)
+      - Verified Broker (checkbox)
+      - Manager (self-referencing lookup)
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: CRM Admin / HR
+  primary_concern: Employee record creation, role assignment, linkage to CRM modules
+  create_form_entry_points:
+    - label: Create Employee Portfolios (blue CTA, truncated to "Create Employe...")
+      url: /tab/CustomModule5/create?layoutId=955332000001288040&redirect=false
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+  required_fields_on_create:
+    - Employee Name (red border on load; cursor focuses here)
+    - Type (red border on load; options: Telecaller, BDM, CEO)
+  form_sections: 3
+  form_fields_count: 10
+  complete_field_list:
+    employee_portfolios_information:
+      - label: Employee Name
+        type: text_input
+        required: true
+        note: Cursor auto-focuses on form open
+      - label: Type
+        type: dropdown
+        required: true
+        options_observed: [Telecaller, BDM, CEO]
+      - label: Email
+        type: text_input
+      - label: Mobile
+        type: text_input
+      - label: Secondary Email
+        type: text_input
+    broker_information:
+      - label: Broker Type
+        type: dropdown
+        default: "-None-"
+      - label: Year of Experience
+        type: text_input
+      - label: Location
+        type: multi_select_combobox
+        note: Tag-style; multiple locations allowed
+      - label: Manager
+        type: lookup
+        target: Employee Portfolios (self-referencing)
+        has_new_record_option: true
+      - label: Verified Broker
+        type: checkbox_toggle
+        default: unchecked
+    internal_use:
+      - label: Employee Portfolios Owner
+        type: user_lookup
+        default: Kurinjee Promoters
+        system_alert: "Maximum number of Employee Portfolio for this user is reached."
+  save_behavior:
+    save: Navigates to new Employee Portfolio detail view at /tab/CustomModule5/{record_id}
+    save_and_new: Reloads blank form
+    cancel: Unsaved changes guard → return to Employee Portfolio list
+  post_creation_effect: >
+    New employee record immediately available as:
+    - Telecaller lookup in Tasks
+    - BDM lookup in Leads and Deals
+    - Manager lookup in Leads and other Employee Portfolios
+  filter_panel:
+    system_filters: 8 (full set incl. Latest Email Status, Activities, Cadences)
+    field_filters: 19
+    related_module_filters: 10 (Calls, Deals-BDM, Emails, Employee-Brokers, Leads-BDM, Leads-Telecaller, Leads-Manager, Meetings, Notes, Tasks)
+  actions_menu:
+    - Import / Mass Delete / Mass Update / Manage Tags / Drafts
+    - Mass Email / Autoresponders
+    - Approve Employee Portfolio
+    - Deduplicate / Create Client Script
+    - Export / Zoho Sheet View / Print View

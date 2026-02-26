@@ -1,0 +1,175 @@
+@startuml
+title Deals - Lifecycle / Stage Pipeline (Zoho CRM UI DOM Scan)
+[*] --> Visit_Pending : Create Deal (Lead Converted)
+Visit_Pending --> Visit_Completed      : [Stage updated]
+Visit_Pending --> Booking_Completed    : [Stage updated]
+Visit_Pending --> Closed_Won           : [Stage updated]
+Visit_Pending --> Closed_Lost          : [Stage updated - red indicator]
+Visit_Pending --> Closed_Lost_to_Comp  : [Stage updated - red indicator]
+Visit_Completed --> Visit_Pending       : [Stage updated]
+Visit_Completed --> Booking_Completed   : [Stage updated]
+Visit_Completed --> Closed_Won          : [Stage updated - green indicator]
+Visit_Completed --> Closed_Lost         : [Stage updated - red indicator]
+Visit_Completed --> Closed_Lost_to_Comp : [Stage updated - red indicator]
+Booking_Completed --> Visit_Pending       : [Stage updated]
+Booking_Completed --> Visit_Completed     : [Stage updated]
+Booking_Completed --> Closed_Won          : [Stage updated - green indicator]
+Booking_Completed --> Closed_Lost         : [Stage updated - red indicator]
+Booking_Completed --> Closed_Lost_to_Comp : [Stage updated - red indicator]
+Closed_Won --> [*]
+Closed_Lost --> [*]
+Closed_Lost_to_Comp --> [*]
+state Visit_Pending {
+  Visit_Pending : Probability = 10%
+}
+state Visit_Completed {
+  Visit_Completed : Probability = 15%
+}
+state Booking_Completed {
+  Booking_Completed : Probability = 100%
+}
+state Closed_Won {
+  Closed_Won : green indicator
+}
+state Closed_Lost {
+  Closed_Lost : red indicator
+}
+state "Closed Lost to Competition" as Closed_Lost_to_Comp {
+  Closed_Lost_to_Comp : red indicator
+}
+state "Pipeline Bar (visible in detail view)" as PB {
+  PB : Closed Won
+  PB : Closed Lost
+  PB : Closed Lost to Competition
+  PB : [current stage dropdown]
+}
+state "Header Actions" as DA {
+  DA : Send Email
+  DA : Edit
+  DA : Clone (More Options)
+  DA : Delete (More Options)
+  DA : Print Preview (More Options)
+  DA : Find and Merge Duplicates (More Options)
+  DA : Mail Merge (More Options)
+}
+state "Related Lists" as DRL {
+  DRL : Notes
+  DRL : Connected Records
+  DRL : Attachments
+  DRL : Stage History
+  DRL : Competitors
+  DRL : Cadences
+  DRL : Open Activities
+  DRL : Documents
+  DRL : Closed Activities
+  DRL : Contact Roles
+  DRL : Emails
+  DRL : Zoho Projects
+  DRL : Zoho Desk
+  DRL : Documents
+  DRL : Referrals
+}
+state "Key Deal Fields" as DF {
+  DF : Deal Name
+  DF : Contact Name
+  DF : Closing Date
+  DF : Stage
+  DF : Probability (%)
+  DF : Amount
+  DF : Expected Revenue
+  DF : Lead Source
+  DF : Next Step
+  DF : Client Location
+  DF : Estimated Budget
+  DF : Telecaller
+  DF : Reason Qualified Out
+  DF : Lead Type
+}
+@enduml@startuml
+title Deals - Lifecycle / Stage Pipeline (Zoho CRM UI DOM Scan)
+[*] --> Visit_Pending : Create Deal (Lead Converted)
+Visit_Pending --> Visit_Completed      : [Stage updated]
+Visit_Pending --> Booking_Completed    : [Stage updated]
+Visit_Pending --> Closed_Won           : [Stage updated]
+Visit_Pending --> Closed_Lost          : [Stage updated - red indicator]
+Visit_Pending --> Closed_Lost_to_Comp  : [Stage updated - red indicator]
+Visit_Completed --> Visit_Pending       : [Stage updated]
+Visit_Completed --> Booking_Completed   : [Stage updated]
+Visit_Completed --> Closed_Won          : [Stage updated - green indicator]
+Visit_Completed --> Closed_Lost         : [Stage updated - red indicator]
+Visit_Completed --> Closed_Lost_to_Comp : [Stage updated - red indicator]
+Booking_Completed --> Visit_Pending       : [Stage updated]
+Booking_Completed --> Visit_Completed     : [Stage updated]
+Booking_Completed --> Closed_Won          : [Stage updated - green indicator]
+Booking_Completed --> Closed_Lost         : [Stage updated - red indicator]
+Booking_Completed --> Closed_Lost_to_Comp : [Stage updated - red indicator]
+Closed_Won --> [*]
+Closed_Lost --> [*]
+Closed_Lost_to_Comp --> [*]
+state Visit_Pending {
+  Visit_Pending : Probability = 10%
+}
+state Visit_Completed {
+  Visit_Completed : Probability = 15%
+}
+state Booking_Completed {
+  Booking_Completed : Probability = 100%
+}
+state Closed_Won {
+  Closed_Won : green indicator
+}
+state Closed_Lost {
+  Closed_Lost : red indicator
+}
+state "Closed Lost to Competition" as Closed_Lost_to_Comp {
+  Closed_Lost_to_Comp : red indicator
+}
+state "Pipeline Bar (visible in detail view)" as PB {
+  PB : Closed Won
+  PB : Closed Lost
+  PB : Closed Lost to Competition
+  PB : [current stage dropdown]
+}
+state "Header Actions" as DA {
+  DA : Send Email
+  DA : Edit
+  DA : Clone (More Options)
+  DA : Delete (More Options)
+  DA : Print Preview (More Options)
+  DA : Find and Merge Duplicates (More Options)
+  DA : Mail Merge (More Options)
+}
+state "Related Lists" as DRL {
+  DRL : Notes
+  DRL : Connected Records
+  DRL : Attachments
+  DRL : Stage History
+  DRL : Competitors
+  DRL : Cadences
+  DRL : Open Activities
+  DRL : Documents
+  DRL : Closed Activities
+  DRL : Contact Roles
+  DRL : Emails
+  DRL : Zoho Projects
+  DRL : Zoho Desk
+  DRL : Documents
+  DRL : Referrals
+}
+state "Key Deal Fields" as DF {
+  DF : Deal Name
+  DF : Contact Name
+  DF : Closing Date
+  DF : Stage
+  DF : Probability (%)
+  DF : Amount
+  DF : Expected Revenue
+  DF : Lead Source
+  DF : Next Step
+  DF : Client Location
+  DF : Estimated Budget
+  DF : Telecaller
+  DF : Reason Qualified Out
+  DF : Lead Type
+}
+@enduml

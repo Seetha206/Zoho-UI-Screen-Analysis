@@ -1,0 +1,183 @@
+# reporting_standardization.yaml — Projects Portfolio Module
+# Module: Projects Portfolio (CustomModule3)
+# URL: /crm/org60043078423/tab/CustomModule3
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Property project status, pricing, unit availability, revenue potential
+  key_metrics:
+    total_projects: 3
+    layout_id: "955332000000425393"
+    custom_view_id: "955332000000436287"
+    active_view: All Projects Portfolio
+  known_projects:
+    - name: Mettupalayam (inferred from task subject "Eswaranagar" and scan data)
+    - name: Mullai Nagar
+    - name: Eswara Nagar
+  project_financial_fields:
+    - label: Budget
+      type: currency (₹)
+    - label: Base Price Per Unit
+      type: currency (₹)
+    - label: No Of Units
+      type: number
+    - label: Appreciation Rate (%)
+      type: number/text
+    - label: Sales Revenue Target
+      type: currency (₹)
+    - label: Marketing Budget — Digital
+      type: currency (₹)
+    - label: Marketing Budget — Offline
+      type: currency (₹)
+    - label: Marketing Budget — Partnerships
+      type: currency (₹)
+    - label: Monthly Lead Target
+      type: number
+    - label: Expected Conversion Rate (%)
+      type: number
+    - label: Monthly Maintenance Fee
+      type: currency (₹)
+  project_status_fields:
+    - label: Development Stage
+      type: dropdown
+    - label: Completion Stage
+      type: dropdown
+    - label: Estimated Completion Date
+      type: date_picker
+  approvals_and_compliance:
+    - DTCP Approved (checkbox)
+    - RERA Registered (checkbox)
+    - Land Ownership Verified (checkbox)
+    - Litigation Risk (field)
+  system_constraint: "Maximum number of Projects Portfolio for this user is reached."
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Project details, marketing strategy, competitive analysis, USPs
+  project_identity_fields:
+    - label: Project Portfolio Name
+      type: text_input
+      required: true
+    - label: Project Type
+      type: dropdown
+      required: true
+    - label: Land Area
+      type: number
+    - label: No Of Units
+      type: number
+    - label: Base Price Per Unit
+      type: currency (₹)
+    - label: Price Advantages
+      type: textarea
+    - label: Unique Selling Points
+      type: textarea
+  location_fields:
+    - Street (required), City, District, State (default: Tamil Nadu), Pincode
+    - Nearest NH / Highway Distance / Landmarks
+  accessibility_fields:
+    - Railway Station distance
+    - Bus Stop distance
+    - Airport distance
+    - Restaurants / Colleges / Banks / Grocery / Hospitals nearby
+    - Major Infrastructure Projects
+    - Approach Roads
+    - Appreciation Rate / Population Growth
+    - Property Value Trends / Job Creation
+    - Map Link
+  property_features:
+    legal: [DTCP Approved, RERA Registered, Land Ownership Verified, Litigation Risk]
+    infrastructure: [Gated Community, Road Type, Compound Wall, Road Widths]
+    utilities: [Water Supply, Storm Water Drainage, Electricity, Solar Street Light]
+    amenities: [Childrens Park, Customization Available, Other Amenities, Customization Options, Maintenance Services]
+    maintenance: [Monthly Maintenance Fee]
+  competitive_analysis_subform:
+    type: repeatable_subform
+    columns:
+      - Competitor Name
+      - Location
+      - Distance From Highway
+      - Price Range
+      - Key Strengths
+      - Key Weaknesses
+  target_audience_fields:
+    - Target Professions
+    - Buyer Age Range Min / Max
+    - Income Level Min / Max
+    - Pain Points
+    - Lifestyle Preferences
+  marketing_strategy_fields:
+    - Digital Channels (textarea)
+    - Offline Strategies (textarea)
+    - Monthly Lead Target
+    - Expected Conversion Rate (%)
+    - Sales Revenue Target
+    - Marketing Budget (Digital / Offline / Partnerships)
+  connected_to_field:
+    label: Connected To
+    type: lookup → Leads
+    note: Links project to originating lead enquiry
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / CRM Admin / Project Manager
+  primary_concern: Project data completeness, competitive matrix, internal folder management
+  create_form_entry_points:
+    - label: Create Project Portfolio (blue CTA)
+      url: /tab/CustomModule3/create?layoutId=955332000000425393&redirect=false
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+  required_fields_on_create:
+    - Project Portfolio Name (red border on load)
+    - Street (required — location is mandatory)
+    - Project Type (required)
+  form_sections_count: 8
+  form_fields_count_approx: 80+
+  form_sections:
+    - Project Overview (12 fields)
+    - Location (9 fields)
+    - Location and Accessibility (18 fields)
+    - Project Features (22 fields)
+    - Competitive Analysis (subform — repeatable rows with 6 columns)
+    - Target Audience (7 fields)
+    - Marketing and Sales Strategy (8 fields)
+    - Internal Use (4 fields: Folder ID, Folder URL, Website Project Link, Project Portfolio Owner)
+  internal_use_fields:
+    - label: Folder ID
+      type: text_input
+      note: Links to Zoho WorkDrive / external storage folder ID
+    - label: Folder URL
+      type: text_input
+      note: Direct URL to project's document folder
+    - label: Website Project Link
+      type: text_input
+    - label: Project Portfolio Owner
+      type: user_lookup
+      default: Kurinjee Promoters
+  save_behavior:
+    save: Navigates to new Project Portfolio detail view at /tab/CustomModule3/{record_id}
+    save_and_new: Reloads blank form
+    cancel: Unsaved changes guard → return to Projects Portfolio list
+  filter_panel:
+    system_filters: 8
+    field_filters: 70+
+    related_module_filters: Multiple (Leads via Connected To)
+  actions_menu:
+    - Import / Mass Delete / Mass Update / Manage Tags / Drafts
+    - Mass Email / Autoresponders
+    - Approve / Deduplicate
+    - Create Client Script / Export / Zoho Sheet View / Print View
+  competitive_analysis_note: >
+    The Competitive Analysis section is a repeatable subform — unique to this module.
+    Each row represents a competing project with 6 data columns.
+    This is the most complex UI element across all scanned modules.

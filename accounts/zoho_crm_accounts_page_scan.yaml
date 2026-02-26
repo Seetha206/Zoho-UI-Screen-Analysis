@@ -1,0 +1,571 @@
+# ============================================================
+# FILE: zoho_crm_accounts_page_scan.yaml
+# Description: Full visible DOM scan of the Accounts List View
+#              in Zoho CRM. Extracted directly from live UI.
+#              No assumptions. No guesses. UI-only extraction.
+# Date Scanned: 2026-02-26
+# ============================================================
+page_identity:
+  page_name: "Accounts"
+  module: "Accounts"
+  platform: "Zoho CRM"
+  organization_id: "org60043078423"
+  url_pattern: "https://crm.zoho.in/crm/org60043078423/tab/Accounts/custom-view/955332000000441417/list"
+  url_components:
+    base_domain: "crm.zoho.in"
+    org_path: "/crm/org60043078423"
+    module_path: "/tab/Accounts"
+    view_type: "custom-view"
+    view_id: "955332000000441417"
+    list_suffix: "/list"
+  browser_tab_title: "Accounts - Zoho CRM"
+  active_custom_view: "All Accounts"
+# ============================================================
+layout_structure:
+  top_header:
+    description: "Horizontal bar spanning full width above main content"
+    elements:
+      - page_title: "Accounts"
+      - search_bar:
+          placeholder: "Search records"
+          type: "global record search"
+      - create_button:
+          label: "Create Account"
+          type: "primary CTA button"
+          has_dropdown_arrow: true
+      - quick_action_plus: "[ + ] button (Quick Create)"
+      - icon_bar:
+          - icon: "Ask Zia (Zia AI)"
+          - icon: "Signals (Bell / Notifications)"
+          - icon: "Calendar"
+          - icon: "Marketplace"
+          - icon: "Setup (Gear / Settings)"
+          - icon: "Profile (K - Avatar, pink/red circle)"
+          - icon: "Grid / App Switcher (9-dot waffle)"
+  subheader_toolbar:
+    description: "Second row below page title — view controls and actions"
+    elements:
+      - active_view_tab: "All Accounts"
+      - view_more_options: "... (ellipsis)"
+      - filter_button: "Filter"
+      - sort_button: "Sort"
+      - view_toggle_buttons:
+          - "List View (lines icon)"
+          - "Split View (dual-panel icon)"
+          - "Table View (grid icon)"
+          - "Clock / Activity View"
+          - "Kanban / Pipeline View"
+          - "Compact View"
+          - "More views (chevron dropdown)"
+      - refresh_custom_view_button: "Refresh Custom View"
+      - create_account_button: "Create Account (primary, blue)"
+      - create_dropdown_arrow: "▼ dropdown"
+      - actions_menu: "... (Actions)"
+  sidebar_navigation:
+    description: "Left dark-navy sidebar — primary app navigation"
+    position: "left"
+    width_approx: "244px"
+  advanced_filter_panel:
+    description: "Left sub-panel within main area — filter controls"
+    label: "Filter Accounts by"
+    position: "left of records list"
+  main_content_area:
+    description: "Records list table — center and right of screen"
+  footer:
+    description: "Bottom bar spanning full width"
+    elements:
+      - smart_chat_bar: "Here is your Smart Chat (Ctrl+Space)"
+      - bottom_action_icons:
+          - "Visitors Online"
+          - "Feedback on New UI (highlighted purple button)"
+          - "Announcements"
+          - "Mail"
+          - "Motivator"
+          - "Sticky Notes"
+          - "Zia"
+          - "Activity Reminders"
+          - "Recent Items"
+          - "Accessibility"
+      - bottom_nav_tabs:
+          - "Chats"
+          - "Channels"
+          - "Contacts"
+# ============================================================
+sidebar_analysis:
+  brand:
+    logo: "Zoho CRM"
+    toggle_button: "Hide Menu"
+  primary_navigation_items:
+    - label: "Home"
+      href: "/crm/org60043078423/tab/Home/begin"
+      primary: true
+    - label: "Reports"
+      href: "/crm/org60043078423/tab/Reports"
+      primary: true
+    - label: "Analytics"
+      href: "/crm/org60043078423/tab/Dashboards"
+      primary: true
+    - label: "My Requests"
+      href: "/crm/org60043078423/tab/Requesters"
+      primary: true
+  teamspace:
+    label: "CRM Teamspace"
+    type: "workspace selector with dropdown"
+    options:
+      - "New Teamspace"
+      - "Create Folder"
+      - "Associate Modules"
+      - "Manage CRM Teamspace"
+      - "View All Teamspace"
+  module_search:
+    type: "textbox"
+    placeholder: "Search"
+  crm_modules:
+    - label: "Leads"
+      href: "/crm/org60043078423/tab/Leads"
+      active: false
+    - label: "Workqueue ✨"
+      href: "/crm/org60043078423/tab/Workqueue"
+      active: false
+    - label: "Contacts"
+      href: "/crm/org60043078423/tab/Contacts"
+      active: false
+    - label: "Accounts"
+      href: "/crm/org60043078423/tab/Accounts"
+      active: true
+      highlighted: true
+    - label: "Deals"
+      href: "/crm/org60043078423/tab/Potentials"
+      active: false
+    - label: "Projects Portfolio"
+      href: "/crm/org60043078423/tab/CustomModule3"
+      active: false
+      type: "custom module"
+    - label: "Employee Portfolio"
+      href: "/crm/org60043078423/tab/CustomModule5"
+      active: false
+      type: "custom module"
+    - label: "Customer Feedback"
+      href: "/crm/org60043078423/tab/CustomModule7"
+      active: false
+      type: "custom module"
+    - label: "Tasks"
+      href: "/crm/org60043078423/tab/Tasks"
+      active: false
+    - label: "Meetings"
+      href: "/crm/org60043078423/tab/Events"
+      active: false
+    - label: "Calls"
+      href: "/crm/org60043078423/tab/Calls"
+      active: false
+    - label: "Prospecting Leads"
+      href: "/crm/org60043078423/tab/CustomModule1"
+      active: false
+      type: "custom module"
+    - label: "Logs"
+      href: "/crm/org60043078423/tab/CustomModule4"
+      active: false
+      type: "custom module"
+    - label: "Scheduler"
+      href: "/crm/org60043078423/tab/CustomModule6"
+      active: false
+      type: "custom module"
+    - label: "Voice of the Customer"
+      href: "/crm/org60043078423/tab/Voice of the Customer"
+      active: false
+      type: "custom module"
+# ============================================================
+header_analysis:
+  page_title:
+    label: "Accounts"
+    position: "top-left of main content"
+  search_bar:
+    visible: true
+    placeholder: "Search records"
+    position: "top-center"
+    type: "global search input"
+  create_button:
+    label: "Create Account"
+    color: "blue (primary)"
+    position: "top-right of toolbar"
+    has_dropdown: true
+    dropdown_arrow: true
+  quick_add_button:
+    label: "+"
+    position: "next to search bar"
+    purpose: "Quick Create shortcut"
+  notification_icons:
+    - name: "Ask Zia"
+      icon_type: "Zia AI assistant"
+    - name: "Signals"
+      icon_type: "Bell / Notifications"
+    - name: "Calendar"
+      link: "/crm/org60043078423/calendar?date=26-02-2026&viewType=day"
+    - name: "Marketplace"
+      link: "/crm/org60043078423/settings/extensions/all"
+    - name: "Setup"
+      link: "/crm/org60043078423/settings/index"
+  profile_section:
+    avatar: "K (pink/red circle avatar)"
+    name: "Kurinjee"
+    role: "Administrator / CEO"
+    email: "kurinjeecrm01@gmail.com"
+    phone: "9597736066"
+    status: "Available"
+  app_switcher:
+    icon: "9-dot grid (waffle icon)"
+    position: "far top-right"
+# ============================================================
+advanced_filter_panel:
+  label: "Filter Accounts by"
+  has_search: true
+  search_placeholder: "Search"
+  system_defined_filters:
+    label: "System Defined Filters"
+    collapsible: true
+    filters:
+      - "Touched Records"
+      - "Untouched Records"
+      - "Record Action"
+      - "Related Records Action"
+      - "Locked"
+      - "Cadences"
+  filter_by_fields:
+    label: "Filter By Fields"
+    collapsible: true
+    fields_visible:
+      - "Account Name"
+      - "Account Owner"
+      - "Account Type"
+      - "All Traffic Sources"
+      - "Available Plots"
+      - "Browser"
+      - "City"
+      - "City (from IP address)"
+      - "Code"
+      - "Connected To"
+      - "Country"
+      - "Country (from IP address)"
+      - "Created By"
+      - "Created Time"
+      - "Email"
+      - "Estimated Budget"
+      - "Features"
+      - "First Click Campaign"
+      - "First Click Content"
+      - "First Click Landing Page"
+      - "First Click Landing Page Url"
+      - "First Click Medium"
+      - "First Click Source"
+      - "First Click Term"
+      - "First Click Timestamp"
+      - "GA Client ID"
+      - "GA Measurement ID"
+      - "GA Session ID"
+      - "GCLID (GA Connector)"
+      - "IP Address"
+      - "Land Area In Cents"
+      - "Last Activity Time"
+      - "Last Click Campaign"
+      - "Last Click Channel"
+      - "Last Click Content"
+      - "Last Click Landing Page"
+      - "Last Click Landing Page Url"
+      - "Last Click Medium"
+      - "Last Click Referrer"
+      - "Last Click Source"
+      - "Last Click Term"
+      - "Last Click Timestamp"
+      - "Latitude"
+      - "Longitude"
+      - "Mobile"
+      - "Modified By"
+      - "Modified Time"
+      - "Operating System"
+      - "Pages Visited"
+      - "Promotor"
+      - "Property Type"
+      - "Purpose Of Purchase"
+      - "Room in BHK"
+      - "State"
+      - "Street"
+      - "Tag"
+      - "Time Zone"
+      - "Unit Price"
+  filter_by_related_modules:
+    label: "Filter By Related Modules"
+    collapsible: true
+    modules:
+      - "Accounts (Member Accounts)"
+      - "Accounts (Plots Owned By)"
+      - "Contacts"
+      - "Deals"
+      - "Emails"
+      - "Leads (Converted Leads)"
+# ============================================================
+table_analysis:
+  table_label: "Records List View"
+  location: "main content area, right side"
+  column_headers:
+    - name: "Checkbox (Select All)"
+      sortable: false
+      type: "bulk select"
+    - name: "Account Name"
+      sortable: true
+      filter_dropdown: "All"
+      has_column_options: true
+    - name: "Account Owner"
+      sortable: true
+      has_column_options: true
+  rows:
+    - row: 1
+      account_name: "Kurinjee Promoters"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000669142"
+    - row: 2
+      account_name: "King (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419622"
+    - row: 3
+      account_name: "Truhlar And Truhlar (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419621"
+    - row: 4
+      account_name: "Commercial Press (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419620"
+    - row: 5
+      account_name: "Morlong Associates (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419619"
+    - row: 6
+      account_name: "Chapman (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419618"
+    - row: 7
+      account_name: "Printing Dimensions (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419617"
+    - row: 8
+      account_name: "Feltz Printing Service (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419616"
+    - row: 9
+      account_name: "Chemel (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419615"
+    - row: 10
+      account_name: "Chanay (Sample)"
+      account_owner: "Kurinjee Promoters"
+      record_link: "/crm/org60043078423/tab/Accounts/955332000000419614"
+  pagination:
+    total_records: 11
+    current_page_display: "1 to 10"
+    previous_button: true
+    next_button: true
+  row_actions:
+    - "More options (per row ellipsis)"
+    - "Checkbox (per row select)"
+    - "Click account name → opens record detail"
+  sort_capability:
+    account_name_column: true
+    account_owner_column: true
+  view_settings_button: true
+# ============================================================
+widgets_analysis:
+  description: >
+    No dashboard-style metric widgets are visible on this list view page.
+    The page is a records list view, not a home dashboard.
+  bottom_bar_utility_widgets:
+    - name: "Visitors Online"
+      type: "live visitor tracker"
+      data_type: "count / live"
+    - name: "Feedback on New UI"
+      type: "feedback prompt"
+      style: "highlighted purple button"
+    - name: "Announcements"
+      type: "notifications"
+    - name: "Mail"
+      type: "email quick-access"
+    - name: "Motivator"
+      type: "gamification / motivational widget"
+    - name: "Sticky Notes"
+      type: "notes widget"
+    - name: "Zia"
+      type: "AI assistant trigger"
+    - name: "Activity Reminders"
+      type: "reminders panel"
+      data_type: "list / count"
+    - name: "Recent Items"
+      type: "recently accessed records"
+      data_type: "list"
+    - name: "Accessibility"
+      type: "accessibility settings"
+# ============================================================
+interaction_mapping:
+  header_actions:
+    - "Click 'Accounts' page title (no action, label)"
+    - "Click Search bar → type to search records"
+    - "Click [+] quick add button → quick create record"
+    - "Click Ask Zia icon → open Zia AI"
+    - "Click Bell (Signals) → open notifications"
+    - "Click Calendar icon → go to calendar view"
+    - "Click Marketplace icon → go to extensions"
+    - "Click Setup (gear) icon → go to settings"
+    - "Click Profile avatar (K) → open profile menu"
+    - "Click Grid (waffle) icon → open app switcher"
+  toolbar_actions:
+    - "Click 'All Accounts' tab → active view"
+    - "Click '...' next to All Accounts → more custom view options"
+    - "Click 'New Custom View' link → create custom view"
+    - "Click 'Manage Custom View' link → manage views"
+    - "Click 'Filter' button → toggle filter panel"
+    - "Click 'Sort' button → open sort options"
+    - "Click List View icon → switch to list layout"
+    - "Click Split View icon → switch to split layout"
+    - "Click Table View icon → switch to table layout"
+    - "Click Clock/Activity icon → activity view"
+    - "Click Kanban icon → pipeline/kanban view"
+    - "Click Compact View icon → compact layout"
+    - "Click '˅' chevron → more view options"
+    - "Click 'Create Account' → open create account form"
+    - "Click '▼' dropdown next to Create Account → dropdown actions"
+    - "Click '...' Actions menu → actions: Import, Mass Delete, Mass Update, Manage Tags, Drafts, Deduplicate, Create Client Script, Export, Zoho Sheet View, Print View"
+  filter_panel_actions:
+    - "Type in 'Search' box → filter fields list"
+    - "Click/expand 'System Defined Filters' → toggle section"
+    - "Check 'Touched Records' checkbox → apply filter"
+    - "Check 'Untouched Records' checkbox → apply filter"
+    - "Check 'Record Action' checkbox → apply filter"
+    - "Check 'Related Records Action' checkbox → apply filter"
+    - "Check 'Locked' checkbox → apply filter"
+    - "Check 'Cadences' checkbox → apply filter"
+    - "Click/expand 'Filter By Fields' → toggle section"
+    - "Check any field checkbox → apply field filter"
+    - "Click/expand 'Filter By Related Modules' → toggle section"
+    - "Check related module checkbox → apply relation filter"
+  table_actions:
+    - "Click checkbox (header) → select all records"
+    - "Click checkbox (per row) → select individual record"
+    - "Click Account Name link → open Account detail page"
+    - "Hover row → reveal 'More options' (...) per row"
+    - "Click 'More options' on row → row-level actions"
+    - "Click column header 'Account Name' → sort"
+    - "Click column header 'Account Owner' → sort"
+    - "Click 'Column options' on header → column settings"
+    - "Click 'Account Name All ▼' filter → filter by all/owned/etc."
+    - "Click 'View Settings' → configure list columns"
+    - "Click '◀ Previous' pagination button"
+    - "Click 'Next ▶' pagination button"
+  footer_actions:
+    - "Click 'Feedback on New UI' → open feedback form"
+    - "Click 'Visitors Online' → view online visitors"
+    - "Click 'Announcements' → view org announcements"
+    - "Click 'Mail' → open mail widget"
+    - "Click 'Motivator' → open motivator widget"
+    - "Click 'Sticky Notes' → open notes"
+    - "Click 'Zia' → open Zia assistant"
+    - "Click 'Activity Reminders' → open reminders panel"
+    - "Click 'Recent Items' → view recently accessed records"
+    - "Click 'Accessibility' → accessibility settings"
+    - "Click 'Chats' tab → open chat panel"
+    - "Click 'Channels' tab → open channels panel"
+    - "Click 'Contacts' tab → open contacts panel"
+    - "Click 'Smart Chat (Ctrl+Space)' bar → expand chat"
+  inline_popup_observed:
+    description: "Hovering last visible row triggered an inline contact card popup"
+    popup_data:
+      triggered_by: "Hover on row (Kurinjee Promoters)"
+      popup_content:
+        name: "Kurinjee Promoters"
+        title: "CEO, Administrator"
+        email: "kurinjeecrm01@gmail.com"
+        phone: "9597736066"
+      email_link: clickable
+      phone_displayed: true
+  actions_menu_items:
+    - label: "Import Accounts"
+      href: "/crm/org60043078423/settings/import?module=Accounts&step=1"
+    - label: "Mass Delete"
+      href: "/crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_delete"
+    - label: "Mass Update"
+      href: "/crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_update"
+    - label: "Manage Tags"
+      href: "/crm/org60043078423/settings/manage-tags?module=Accounts"
+    - label: "Drafts"
+      href: "/crm/org60043078423/tab/Accounts/actions/draft?module=Accounts"
+    - label: "Deduplicate Accounts"
+    - label: "Create Client Script"
+    - label: "Export Accounts"
+    - label: "Zoho Sheet View"
+    - label: "Print View"
+# ============================================================
+accounts_module_context:
+  description: >
+    The Accounts module in Zoho CRM stores company-level information.
+    Each account can be linked to multiple contacts, attached to multiple
+    deals, and used to track account-level revenue. Accounts can be
+    created manually or generated from Lead conversion.
+  visible_record_count:
+    total: 11
+    per_page: 10
+    current_page: "1 to 10"
+  sample_accounts_visible:
+    - "Kurinjee Promoters"
+    - "King (Sample)"
+    - "Truhlar And Truhlar (Sample)"
+    - "Commercial Press (Sample)"
+    - "Morlong Associates (Sample)"
+    - "Chapman (Sample)"
+    - "Printing Dimensions (Sample)"
+    - "Feltz Printing Service (Sample)"
+    - "Chemel (Sample)"
+    - "Chanay (Sample)"
+  account_owner_all_records: "Kurinjee Promoters"
+  related_modules_linked_to_accounts:
+    - "Contacts"
+    - "Deals"
+    - "Emails"
+    - "Leads (Converted Leads)"
+    - "Accounts (Member Accounts)"
+    - "Accounts (Plots Owned By)"
+  custom_fields_visible_in_filters:
+    real_estate_specific:
+      - "Available Plots"
+      - "Land Area In Cents"
+      - "Property Type"
+      - "Purpose Of Purchase"
+      - "Room in BHK"
+      - "Unit Price"
+      - "Promotor"
+    marketing_attribution:
+      - "All Traffic Sources"
+      - "First Click Campaign / Content / Medium / Source / Term / Timestamp"
+      - "Last Click Campaign / Channel / Content / Medium / Referrer / Source / Term / Timestamp"
+      - "GA Client ID / Measurement ID / Session ID"
+      - "GCLID (GA Connector)"
+    geo_tracking:
+      - "IP Address"
+      - "City (from IP address)"
+      - "Country (from IP address)"
+      - "Latitude"
+      - "Longitude"
+      - "Browser"
+      - "Operating System"
+      - "Pages Visited"
+      - "Time Zone"
+  org_info:
+    org_id: "org60043078423"
+    admin_user: "Kurinjee Promoters"
+    admin_email: "kurinjeecrm01@gmail.com"
+    admin_phone: "9597736066"
+    admin_title: "CEO, Administrator"
+    subscription_note: "1 user license active (upgrade prompt visible)"
+# ============================================================
+footer_legal:
+  links:
+    - label: "Privacy Policy"
+      href: "http://www.zoho.in/privacy.html"
+    - label: "Terms of Service"
+      href: "http://www.zoho.in/crm/zohocrm-terms.html"
+  copyright: "© 2026 Corp. All rights reserved."

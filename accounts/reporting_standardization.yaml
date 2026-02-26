@@ -1,0 +1,120 @@
+# reporting_standardization.yaml — Accounts Module
+# Module: Accounts
+# URL: /crm/org60043078423/tab/Accounts
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Property portfolio, buyer account health, asset linkage
+  key_metrics:
+    total_accounts: 11
+    real_accounts: 1
+    sample_accounts: 10
+    active_view: All Accounts (custom_view_id: 955332000000441417)
+  context: >
+    Only 1 real account (Kurinjee Promoters — the organisation's own record).
+    10 remaining are Zoho sample data. Accounts module is currently underutilised —
+    buyer accounts are not being systematically created on lead conversion.
+    Recommend ensuring Account creation is enforced during Lead Conversion workflow.
+  property_fields_at_account_level:
+    - Available Plots (track inventory)
+    - Unit Price (pricing per plot)
+    - Land Area In Cents (plot size)
+    - Property Type (Plot / Villa / Apartment / Commercial)
+    - Room in BHK (apartment configuration)
+    - Estimated Budget (buyer budget)
+  hierarchy_available:
+    - Member Accounts (sub-accounts under a parent — project or family grouping)
+    - Plots Owned By (tracks which plots are owned — property ownership register)
+  admin_details:
+    admin_user: Kurinjee Promoters
+    admin_email: kurinjeecrm01@gmail.com
+    admin_phone: "9597736066"
+    admin_title: CEO, Administrator
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Property inventory tracking, buyer budget, lead-to-account conversion
+  property_inventory_fields:
+    - label: Available Plots
+      type: number
+      usage: Track how many plots remain for sale under this account
+    - label: Unit Price
+      type: currency (₹)
+      usage: Standard plot/unit pricing
+    - label: Land Area In Cents
+      type: number
+      usage: South Indian measurement unit for plot size
+    - label: Property Type
+      type: dropdown
+      options: [Plot, Villa, Apartment, Commercial]
+    - label: Room in BHK
+      type: text
+      usage: Apartment bedroom count
+    - label: Purpose Of Purchase
+      type: text
+      usage: Investment vs self-use classification
+    - label: Promotor
+      type: text
+      usage: Developer/promoter attribution
+    - label: Features
+      type: text
+      usage: Property feature highlights
+  marketing_attribution:
+    note: Full UTM + Google Analytics tracking fields present at Account level
+    fields: [First/Last Click Channel, Campaign, Source, Medium, Term, Timestamp, Landing Page, GA IDs, IP, Geo, Device]
+  plots_owned_by_relationship:
+    note: "Plots Owned By" related module allows linking sub-accounts to a parent property/project — enables property ownership register
+  lead_to_account_path:
+    entry: Lead Conversion dialog
+    auto_populates: Account Name from Lead Company/Name
+    links_back_via: Connected To field → source Lead
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / Admin
+  primary_concern: Account creation (on lead conversion), property data entry, deduplication
+  create_form_entry_points:
+    - label: Create Account (blue CTA)
+      url: /tab/Accounts/create
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+    - label: Lead Conversion
+      note: Recommended primary creation path — Account created from converted Lead
+      warning: Form not directly deep-scanned — fields inferred from filter panel
+  required_fields_on_create:
+    - Account Name (confirmed required by Zoho standard)
+  form_sections_inferred:
+    - Account Information (Name, Type, Phone, Mobile, Email, Website, Code)
+    - Address Information (Street, City, State, Zip, Country)
+    - Property Information (custom — Available Plots, Unit Price, Land Area, Room in BHK, Property Type, Purpose, Budget, Features, Promotor)
+    - Description Information (Description)
+    - Internal Use (Connected To → Leads, Account Owner)
+  scan_coverage_warning: >
+    ⚠️ Create Account form was NOT directly scanned in the live DOM capture.
+    Fields are inferred from the filter panel field list and Zoho module conventions.
+    VERIFY by deep-scanning /tab/Accounts/create before using for reverse engineering.
+  save_behavior:
+    save: Navigates to new Account detail view at /tab/Accounts/{record_id}
+    save_and_new: Reloads blank form
+    cancel: Unsaved changes guard → return to Accounts list
+  filter_panel:
+    system_filters: 6 (no Latest Email Status or Activities — less than Contacts/Deals)
+    field_filters: 55+ (incl. real estate + full UTM/geo)
+    related_module_filters: 6 (Accounts-Member, Accounts-Plots, Contacts, Deals, Emails, Leads-Converted)
+  actions_menu:
+    - Import Accounts / Mass Delete / Mass Update
+    - Manage Tags / Drafts
+    - Deduplicate Accounts
+    - Create Client Script / Export / Zoho Sheet View / Print View
+    note: "No Mass Email or Autoresponders — Accounts are entities not email recipients"

@@ -1,0 +1,152 @@
+# reporting_standardization.yaml — Deals Module
+# Module: Deals (Potentials)
+# URL: /crm/org60043078423/tab/Potentials
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Revenue pipeline, deal stage health, closing forecast
+  key_metrics:
+    total_deals: 9
+    active_view: All Deals
+    module_internal: Potentials
+    url: /crm/org60043078423/tab/Potentials
+  pipeline_by_stage:
+    - stage: Visit Pending
+      count: 5
+      note: Majority — BDMs need to schedule/confirm site visits
+    - stage: Visit Completed
+      count: 1
+      note: One deal post-visit — awaiting booking decision
+    - stage: Booking Completed
+      count: 0
+    - stage: Closed Won
+      count: 0
+      note: No closed deals — all active deals are pre-closure
+    - stage: Closed Lost
+      count: 0
+  revenue_risk:
+    - "0 Closed Won deals — no revenue realised yet"
+    - "5 deals at Visit Pending — site visit conversion is the key bottleneck"
+    - "9 deals for 26 contacts = 34.6% contact-to-deal ratio (reasonable for real estate)"
+  deal_amount_note: "Specific deal amounts not visible in list scan — check detail views for financial data"
+  closing_this_month: "0 deals scheduled to close this month (per Home dashboard)"
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Site visit tracking, property preferences, deal progression
+  site_visit_fields:
+    - Site Visit URL
+    - Site Visit Date / Site Visit Location
+    - Visit Status
+    - BDM (assigned site visit coordinator)
+    - BDM Form URL
+    - Client Comments after Visit
+    - Client's Overall Impression
+    - Real Objections / Objection Status
+    - Urgency Level
+    - Decision Influencers
+    - Next Committed Step
+    - Follow-up date
+    - When Are You Planning to Start
+    - Is There Any Other Specific Concerns
+    - Amenities / Facility Expectation Description
+    - Location Mismatch Description / Timing Description
+    - Loan Delay / Bank Issue Description
+    - Competing Project Comparison Description
+    - Budget Concern Description
+    - Legal / Approvals Clarification Description
+  booking_tracking_fields:
+    - label: Stage
+      options: [Visit Pending, Visit Completed, Booking Completed, Closed Won, Closed Lost]
+    - label: Probability (%)
+      default: 100%
+      note: Auto-set; Closed Won = 100%
+    - label: Amount
+      type: currency (₹)
+    - label: Closing Date
+      type: date_picker
+      required: true
+    - label: Advance Payed (Lead Status value cross-referenced)
+  qualification_fields:
+    - Budget (BANT)
+    - Need (BANT)
+    - Authority (BANT)
+    - Time (BANT)
+    - Does the lead have financial capability?
+    - Does project match location preference?
+    - Who is making the decision?
+    - When is lead planning to buy?
+  marketing_attribution:
+    centilio_tracking_fields_count: 39
+    includes: [First Click, Last Click, GA IDs, Device/Geo, Meta Ads, Pages Visited]
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / CRM Admin
+  primary_concern: Deal creation, stage transitions, site visit coordination, Centilio tracking
+  create_form_entry_points:
+    - label: Create Deal (blue CTA)
+      url: /tab/Potentials/create
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+    - label: Lead Conversion
+      note: Primary path — Deal created automatically when Lead is converted (optional)
+  required_fields_on_create:
+    - Deal Name (red border on load)
+    - Closing Date (red border on load)
+    - Stage (red border, default: Closed Won — ⚠️ verify this default is intentional)
+  form_sections_count: 8
+  form_fields_count_approx: 100+
+  key_operational_fields:
+    - label: Deal Name
+      type: text_input
+      required: true
+    - label: Contact Name
+      type: lookup → Contacts
+    - label: Account Name
+      type: lookup → Accounts
+    - label: Stage
+      type: dropdown
+      options: [Visit Pending, Visit Completed, Booking Completed, Closed Won, Closed Lost]
+      required: true
+      default: Closed Won
+    - label: Amount
+      type: currency (₹)
+    - label: Closing Date
+      type: date_picker
+      required: true
+    - label: Probability (%)
+      type: number
+      default: 100
+    - label: BDM
+      type: lookup → Employee Portfolio
+    - label: Deal Owner
+      type: user_lookup
+      default: Kurinjee Promoters
+    - label: Connected To
+      type: lookup → Leads
+  save_behavior:
+    save: Navigates to new Deal detail view at /tab/Potentials/{record_id}
+    save_and_new: Reloads blank Create Deal form
+    cancel: Unsaved changes guard → return to Deals list
+  filter_panel:
+    system_filters: 8
+    field_filters: 130+
+    related_module_filters: 8+ modules
+  actions_menu:
+    - Import Deals / Mass Delete / Mass Update
+    - Mass Email / Autoresponders
+    - Approve Deals / Deduplicate Deals
+    - Manage Tags / Drafts
+    - Create Client Script / Export / Zoho Sheet View / Print View

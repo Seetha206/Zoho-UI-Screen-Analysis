@@ -1,0 +1,331 @@
+employee_portfolio_module:
+  module_name: Employee Portfolio
+  internal_module_name: CustomModule5
+  url_pattern: /crm/org60043078423/tab/CustomModule5
+  total_records: 8
+  layout_id: "955332000001288040"
+  account_id: "955332000000406001"
+  organisation: Kurinjee Promoters
+  org_id: "60043078423"
+  module_type: Custom Module
+  pagination: 1 to 8 per page (single page - all records visible)
+
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/CustomModule5/custom-view/955332000001288053/list?page=1
+    custom_view_id: "955332000001288053"
+    active_view_label: All Employee Portfolio
+    columns_visible:
+      - name: "(Row options)"
+        type: hover_action_menu
+        sortable: false
+      - name: "(Checkbox)"
+        type: multi_select
+        sortable: false
+      - name: "(Activity date badge)"
+        type: last_activity_date
+        style: none_visible
+        sortable: false
+      - name: Employee Name
+        type: text_link
+        sortable: true
+        filter_dropdown: All
+        column_options: true
+      - name: Type
+        type: text
+        sortable: true
+        column_options: true
+      - name: Mobile
+        type: phone_link
+        sortable: true
+        column_options: true
+      - name: Email
+        type: email_link
+        sortable: true
+        column_options: true
+      - name: "(Column settings icon)"
+        type: column_configuration
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: All Employee Portfolio
+        type: custom_view
+        active: true
+        custom_view_id: "955332000001288053"
+      - name: "... more_views_dropdown"
+        options:
+          - New Custom View
+          - Manage Custom View
+          - Show custom views as Dropdown
+    view_switchers:
+      - icon: List View
+        active: true
+      - icon: Kanban / Split View
+      - icon: Table / Grid View
+      - icon: Canvas / Clock View
+      - icon: Custom List View
+      - icon: Tile View
+      - icon: Chevron dropdown (more views)
+    toolbar_buttons:
+      - label: Filter
+        icon: funnel
+        behavior: opens_closes_filter_panel
+      - label: Sort
+        icon: sort_arrows
+        behavior: opens_sort_options
+      - label: Refresh Custom View
+        behavior: reloads_current_view
+      - label: Create Employee Portfolios
+        type: split_button
+        color: blue_solid
+        truncated_label: "Create Employe..."
+        primary_nav: /tab/CustomModule5/create?layoutId=955332000001288040
+        secondary_arrow: "▼ dropdown"
+      - label: "Actions (...)"
+        type: overflow_menu
+        items:
+          - label: Import Employee Portfolio
+            href: /crm/org60043078423/settings/import?module=CustomModule5&step=1
+          - label: Mass Delete
+            href: /crm/org60043078423/tab/CustomModule5/actions/mass-tools?type=mass_delete
+          - label: Mass Update
+            href: /crm/org60043078423/tab/CustomModule5/actions/mass-tools?type=mass_update
+          - label: Manage Tags
+            href: /crm/org60043078423/settings/manage-tags?module=CustomModule5
+          - label: Drafts
+            href: /crm/org60043078423/tab/CustomModule5/actions/draft?module=CustomModule5
+          - label: Mass Email
+            href: /crm/org60043078423/settings/manage-mass-mail?module=CustomModule5
+          - label: Autoresponders
+            href: /crm/org60043078423/settings/auto-responders?module=CustomModule5
+          - label: Approve Employee Portfolio
+            href: /crm/org60043078423/tab/CustomModule5/actions/approvals
+          - label: Deduplicate Employee Portfolio
+            type: in_page_action
+          - label: Create Client Script
+            type: in_page_action
+          - label: Export Employee Portfolio
+            type: in_page_action
+          - label: Zoho Sheet View
+            type: in_page_action
+          - label: Print View
+            type: in_page_action
+
+  # ─────────────────────────────────────────────
+  # FILTER PANEL
+  # ─────────────────────────────────────────────
+  filter_panel:
+    title: "Filter Employee Portfolio by"
+    search_input:
+      placeholder: Search
+      type: text
+    sections:
+      system_defined_filters:
+        label: System Defined Filters
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Touched Records
+          - Untouched Records
+          - Record Action
+          - Related Records Action
+          - Locked
+          - Latest Email Status
+          - Activities
+          - Cadences
+      filter_by_fields:
+        label: Filter By Fields
+        collapsible: true
+        filter_type: checkbox
+        total_fields: 19
+        fields:
+          - Broker Type
+          - Created By
+          - Created Time
+          - Email
+          - Employee Name
+          - Employee Portfolios Owner
+          - Last Activity Time
+          - Location
+          - Manager
+          - Mobile
+          - Modified By
+          - Modified Time
+          - Secondary Email
+          - Tag
+          - Type
+          - Unsubscribed Mode
+          - Unsubscribed Time
+          - Verified Broker
+          - Year of Experience
+      filter_by_related_modules:
+        label: Filter By Related Modules
+        collapsible: true
+        filter_type: checkbox
+        modules:
+          - Calls
+          - Deals (Deals BDM)
+          - Emails
+          - Employee Portfolio (Brokers)
+          - Leads (Leads BDM)
+          - Leads (Leads Telecaller)
+          - Leads (Manager)
+          - Meetings
+          - Notes
+          - Tasks
+
+  # ─────────────────────────────────────────────
+  # RECORDS (ALL 8 EMPLOYEES)
+  # ─────────────────────────────────────────────
+  records:
+    - row: 1
+      employee_name: Vijayasri
+      record_id: "955332000005376006"
+      type: Telecaller
+      mobile: ""
+      email: ""
+      last_activity: "(none visible)"
+    - row: 2
+      employee_name: Sumathi
+      record_id: "955332000005376001"
+      type: Telecaller
+      mobile: ""
+      email: ""
+      last_activity: "(none visible)"
+    - row: 3
+      employee_name: Arun pandian
+      record_id: "955332000003787133"
+      type: BDM
+      mobile: "(915) 002-4013"
+      mobile_clickable: true
+      email: ""
+      last_activity: "(none visible)"
+    - row: 4
+      employee_name: Dinesh kumar
+      record_id: "955332000003787123"
+      type: BDM
+      mobile: "(915) 002-4014"
+      mobile_clickable: true
+      email: ""
+      last_activity: "(none visible)"
+    - row: 5
+      employee_name: Vinoth kumar
+      record_id: "955332000003787097"
+      type: BDM
+      mobile: "(915) 002-4021"
+      mobile_clickable: true
+      email: ""
+      last_activity: "(none visible)"
+    - row: 6
+      employee_name: Elangovan
+      record_id: "955332000003787087"
+      type: CEO
+      mobile: "(978) 927-7775"
+      mobile_clickable: true
+      email: ""
+      last_activity: "(none visible)"
+    - row: 7
+      employee_name: Moorthy
+      record_id: "955332000001289471"
+      type: BDM
+      mobile: "(915) 002-4015"
+      mobile_clickable: true
+      email: ""
+      last_activity: "(none visible)"
+    - row: 8
+      employee_name: Radhakrishnan
+      record_id: "955332000001289466"
+      type: BDM
+      mobile: "(915) 002-4018"
+      mobile_clickable: true
+      email: "kurinjeepromoters.cbe@gmail.com"
+      email_clickable: true
+      last_activity: "(none visible)"
+
+  # ─────────────────────────────────────────────
+  # TYPE DISTRIBUTION
+  # ─────────────────────────────────────────────
+  type_distribution:
+    BDM: 5
+    Telecaller: 2
+    CEO: 1
+  contact_summary:
+    mobile_visible: 6
+    mobile_blank: 2
+    email_visible: 1
+    email_blank: 7
+
+  # ─────────────────────────────────────────────
+  # CREATE EMPLOYEE FORM
+  # ─────────────────────────────────────────────
+  create_employee_form:
+    url: /crm/org60043078423/tab/CustomModule5/create?layoutId=955332000001288040
+    layout_id: "955332000001288040"
+    edit_layout_link: /crm/org60043078423/settings/modules/CustomModule5/layouts/955332000001288040
+    form_actions:
+      - label: Save
+        type: primary_blue
+        behavior: save_and_navigate_to_detail
+      - label: Save and New
+        type: secondary_outline
+        behavior: save_and_open_fresh_form
+      - label: Cancel
+        type: secondary_outline
+        behavior: discard_and_return_to_list
+    navigation_guard:
+      message: "You have not saved your changes."
+      sub_message: "Are you sure you want to move away from this page?"
+      actions: ["Yes, Leave Page", "Stay Here"]
+    right_panel:
+      - label: Client Script
+        type: slide_out_tab
+        orientation: vertical
+        position: far_right_edge
+    sections:
+      - section: Employee Information
+        fields: [Employee Name, Type, Email, Secondary Email, Mobile, Location, Manager, Employee Portfolios Owner]
+      - section: Employment Metadata
+        fields: [Verified Broker, Broker Type, Year of Experience, Tag]
+
+  # ─────────────────────────────────────────────
+  # DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/CustomModule5/{record_id}
+    access: click Employee Name from list view
+    tabs:
+      - Overview
+      - Related Lists (Leads, Deals, Tasks, Calls, Meetings, Emails, Notes)
+
+  # ─────────────────────────────────────────────
+  # BOTTOM STATUS BAR (PERSISTENT)
+  # ─────────────────────────────────────────────
+  bottom_status_bar:
+    widgets:
+      - name: Visitors Online
+        type: live_counter
+      - name: Feedback on New UI
+        type: action_trigger
+        style: highlighted_purple
+      - name: Announcements
+        type: notification_list
+      - name: Mail
+        type: inbox_shortcut
+      - name: Motivator
+        type: gamification_leaderboard
+      - name: Sticky Notes
+        type: text_note_input
+      - name: Zia
+        type: ai_assistant
+      - name: Activity Reminders
+        type: reminder_list
+      - name: Recent Items
+        type: recently_viewed
+      - name: Accessibility
+        type: settings_panel
+    chat_bar:
+      - Chats
+      - Channels
+      - Contacts
+      - smart_chat_input: "Here is your Smart Chat (Ctrl+Space)"

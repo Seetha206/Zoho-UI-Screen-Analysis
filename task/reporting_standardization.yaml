@@ -1,0 +1,156 @@
+# reporting_standardization.yaml — Tasks Module
+# Module: Tasks
+# URL: /crm/org60043078423/tab/Tasks
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+
+# ─────────────────────────────────────────────────────
+# BUSINESS OWNER VIEW
+# ─────────────────────────────────────────────────────
+business_owner:
+  role: CEO / Business Head
+  primary_concern: Team follow-up discipline, task completion rates, workload visibility
+  key_metrics:
+    total_tasks: 4276
+    records_per_page: 100
+    total_pages_approx: 43
+    default_sort: Due Date (ascending)
+    active_telecallers: [Sumathi, Vijayasri]
+  operational_insight:
+    - "4,276 tasks for 2,077 leads = ~2 tasks per lead average — structured follow-up confirmed"
+    - "Majority of tasks are 'Call Followup' with sequential daily due dates (Aug 2025+)"
+    - "All visible tasks are Not Started or In Progress — no Completed tasks in current view"
+    - "Telecaller assignment is visible per row — manager can track workload distribution"
+  task_volume_vs_other_modules:
+    leads: 2077
+    contacts: 26
+    deals: 9
+    tasks: 4276
+    note: Tasks outnumber leads 2:1 — indicates multi-attempt follow-up policy per lead
+  what_owner_cannot_see_from_list:
+    - Completion rate (requires Reports/Analytics)
+    - Tasks by telecaller (requires custom view or filter)
+    - Overdue task count (requires filter by Due Date < today)
+
+# ─────────────────────────────────────────────────────
+# PROMOTER VIEW
+# ─────────────────────────────────────────────────────
+promoter:
+  role: Property Marketing / Sales Promoter
+  primary_concern: Site visit follow-up tasks, property-specific task linkage
+  note: >
+    Tasks is primarily an internal operational module. Promoters are indirectly
+    affected through the SellBot-360 integration where tasks auto-trigger
+    WhatsApp messages to leads when not completed on time.
+  sellbot_task_automation:
+    step_4_lead_assignment:
+      tasks_auto_created: 5
+      pattern: "Call Attempt 1 → 5, one per day for 5 days"
+      missed_task_consequence: "WhatsApp message automatically sent to lead"
+      day_6_action: "TL review task created"
+    hot_lead_followup:
+      tasks_created: 8
+      duration: 60 days
+    warm_lead_followup:
+      tasks_created: 4
+      duration: 30 days
+  property_task_subjects_observed:
+    - "Call Followup (bulk — majority)"
+    - "Eswaranagar (project-specific task linked to Lead)"
+    - "Call (generic call task)"
+  tasks_linked_to_projects:
+    related_to_options: [Account, Deal, Prospecting Lead, Project Portfolio, Log, Employee Portfolios, Scheduler, Customer Feedbacks]
+
+# ─────────────────────────────────────────────────────
+# INTERNAL TEAM VIEW
+# ─────────────────────────────────────────────────────
+internal_team:
+  role: BDM / Telecaller / CRM Admin
+  primary_concern: Daily task list, call assignments, due date management
+  create_form_entry_points:
+    - label: Create Task (blue CTA)
+      url: /tab/Tasks/create?layoutId=955332000000425353&redirect=false
+      position: top_right_toolbar
+    - label: Quick Create (+)
+      position: header bar
+  required_fields_on_create:
+    - Subject (red border on load)
+  form_sections: 3
+  form_fields_count: 14
+  complete_field_list:
+    task_information:
+      - label: Subject
+        type: text_input
+        required: true
+        column: left
+      - label: Telecaller
+        type: dropdown
+        default: "-None-"
+        column: right
+        note: Lookup to Employee Portfolio (Telecaller type)
+      - label: Type
+        type: dropdown
+        default: "-None-"
+        column: left
+      - label: Approver
+        type: dropdown
+        default: "-None-"
+        column: right
+      - label: Due Date
+        type: date_picker
+        placeholder: DD/MM/YYYY
+        column: left
+      - label: Related To (module selector + lookup)
+        type: module_selector_lookup
+        default_module: Account
+        module_options: [Account, Deal, Prospecting Lead, Project Portfolio, Log, Employee Portfolios, Scheduler, Customer Feedbacks]
+        column: right
+      - label: Status
+        type: dropdown
+        default: Not Started
+        options: [Not Started, In Progress, Completed]
+        column: left
+      - label: Repeat
+        type: toggle_switch
+        default: "off"
+        column: right
+      - label: Priority
+        type: dropdown
+        default: High
+        options: [High, Normal, Low]
+        column: left
+      - label: Auto Close
+        type: checkbox
+        default: unchecked
+        column: right
+      - label: Reminder
+        type: toggle_switch
+        default: "off"
+        column: right
+    description_information:
+      - label: Description
+        type: textarea
+    internal_use:
+      - label: Contact Name
+        type: module_selector_lookup
+        default_module: Contact
+      - label: Task Owner
+        type: user_lookup
+        default: Kurinjee Promoters
+  save_behavior:
+    save: Navigates to new Task detail view at /tab/Tasks/{record_id}
+    save_and_new: Reloads blank Create Task form
+    cancel: Unsaved changes guard → return to Tasks list
+  post_creation_automation: None observed (manual task only; auto-creation is via SellBot-360 blueprint)
+  filter_panel:
+    system_filters: 5 (fewer than Contacts/Deals — no Latest Email Status, Activities, Cadences)
+    field_filters: 18
+    related_module_filters: 1 (Notes only)
+  actions_menu:
+    - Import Tasks / Mass Delete / Mass Update / Manage Tags
+    - Export Tasks / Print View
+    note: "No Mass Email, Autoresponders, Approve, Deduplicate, Client Script, Zoho Sheet View"
+  telecaller_assignment_note: >
+    The Telecaller field on each task links to Employee Portfolio records.
+    Only Sumathi and Vijayasri are currently assigned as Telecallers.
+    Blank Telecaller = unassigned task (many rows have no telecaller).

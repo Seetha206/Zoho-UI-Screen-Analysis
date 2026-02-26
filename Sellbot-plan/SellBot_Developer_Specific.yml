@@ -1,0 +1,2133 @@
+# ============================================================
+# SELLBOT-360™ — COMPLETE DEVELOPER IMPLEMENTATION BLUEPRINT
+# ============================================================
+# Platform: Zoho CRM + WATI/Interakt (WhatsApp) + Google Calendar + Zoho Analytics
+# Target Market: Real Estate Developers (India — South Indian focus)
+# ============================================================
+
+sellbot_360:
+  version: "1.0"
+  platform:
+    crm: "Zoho CRM"
+    whatsapp: "WATI / Interakt / Twilio"
+    calendar: "Google Calendar"
+    analytics: "Zoho Analytics"
+    storage: "Zoho WorkDrive / AWS S3"
+  total_steps: 14
+
+# ============================================================
+# STEP 1 — ADD CURRENT PROJECT (Foundation Setup)
+# ============================================================
+step_01_add_current_project:
+  title: "Add Current Project"
+  description: >
+    Foundation of SellBot-360. Before automation begins, every project must be
+    fully uploaded with all marketing, branding, and sales communication assets.
+    These resources help WhatsApp, Email, and CRM automations deliver complete
+    project information without manual effort.
+
+  digital_assets:
+
+    brochure:
+      format: "PDF"
+      pages: "4–6"
+      must_include:
+        - Project overview
+        - Layout
+        - Approvals
+        - Amenities
+        - Visuals
+        - Pricing range
+        - Property highlights
+      storage: "Attach as downloadable PDF link inside CRM"
+
+    videos:
+      intro_video:
+        duration: "1–2 minutes"
+      walkthrough_video:
+        duration: "2–4 minutes"
+        type: "Drone or walkthrough"
+      optional_videos:
+        - Client testimonial
+        - Promoter message
+      storage: "All video links stored for auto-sharing via WhatsApp and Email"
+
+    location:
+      type: "Google Map Link"
+      requirements:
+        - Verified map pin with driving directions
+        - Key landmarks and accessibility info (schools, hospitals, roads)
+        - Attach 1-page "Location Advantage" sheet in PDF
+
+    company_profile:
+      must_include:
+        - Company vision and mission
+        - Credibility sheet
+        - Completed project list with images
+        - Client testimonials
+        - Brand story
+      format: "PDF or website link"
+
+    social_media_and_website:
+      links:
+        - Company Website
+        - Facebook
+        - Instagram
+        - LinkedIn
+        - YouTube
+        - Google My Business
+      requirement: "All links must be live, verified, and added in CRM templates"
+
+    site_visit_invitation_template:
+      channels:
+        - WhatsApp
+        - Email
+      must_include:
+        - Location map
+        - CRM contact
+        - Calendar booking link
+      optional: "QR code or digital invite poster"
+
+    nearby_project_comparison_chart:
+      compare_count: "3–5 nearby projects"
+      metrics:
+        - Pricing
+        - Distance
+        - Approvals
+        - Amenities
+        - USP
+      purpose: "Objection handling & trust building"
+
+    marketing_posters:
+      count: "40–50 templates"
+      channels:
+        - WhatsApp
+        - Facebook
+        - Instagram
+      categories:
+        - Project Highlights (features, offers, benefits)
+        - Location Advantages
+        - Brand & Credibility Posts (about the promoter)
+        - Buyer Testimonials
+        - Festival Greetings (Diwali, Pongal, New Year)
+        - Price Offers / Booking Alerts
+      reused_during:
+        - Weekly nurturing campaigns
+        - WhatsApp broadcast messages
+        - Social media engagement
+      format:
+        dimensions: "1080×1080"
+        file_types: "JPEG / PNG"
+        extras: "Short caption text file"
+
+    additional_optional_files:
+      - DTCP / RERA Certificates
+      - Bank Tie-Up Letters (SBI / HDFC / LIC)
+      - Launch Posters
+      - Offer Flyers
+      - Canopy Designs
+
+  output_on_completion:
+    - CRM & WhatsApp automation templates activate automatically
+    - Marketing team gains a ready creative library
+    - BDMs can send brochures, posters, and videos instantly
+    - Promoter dashboard shows "Project Readiness: 100%"
+
+
+# ============================================================
+# STEP 2 — LEAD CAPTURING
+# ============================================================
+step_02_lead_capturing:
+  title: "Lead Capturing"
+  description: "Standardized form for auto lead capture and manual entry"
+
+  form_sections:
+    section_1_lead_basic_information:
+      fields:
+        - Lead Name
+        - Mobile Number
+        - Email Address
+        - Source (Facebook / Google / Portal / Referral / Walk-in / Other)
+        - Date of Enquiry
+        - Assigned CRM Executive
+
+    section_2_property_preference_details:
+      fields:
+        - Preferred Location / Area
+        - Property Type (Plot / Villa / Apartment / Commercial)
+        - Budget Range
+        - Purpose (Self Use / Investment)
+        - Timeline to Buy
+        - Financing (Home Loan / Own Funds)
+        - BHK Requirement
+        - Any Specific Notes
+
+
+# ============================================================
+# STEP 3 — AUTO WELCOME MESSAGE
+# ============================================================
+step_03_auto_welcome_message:
+  title: "Auto Welcome Message"
+  trigger: "Immediate — on lead creation"
+
+  whatsapp_template:
+    template_name: "auto_welcome_message_project"
+    trigger: "Auto-Trigger on lead capture"
+    body: |
+      🌟 Thank you for your enquiry! 🌟
+
+      Hi {{Name}},
+
+      We're truly glad to receive your interest in our project. Our team is excited
+      to connect with you and help you explore the best options that match your goals
+      and preferences.
+
+      At [Company Name], customer happiness and transparency are always our top
+      priorities. 🤝
+
+      One of our CRM executives will reach out to you shortly to understand your
+      requirements and guide you through the next steps.
+
+      Meanwhile, you can learn more about our company and current projects by
+      visiting our website below 👇
+      🌐 [Insert Website Link]
+
+      Thank you once again for choosing us — we look forward to serving you and
+      making your property journey smooth and memorable! 😊
+
+      — Team [Company Name]
+
+  email_template:
+    trigger: "Auto-Trigger on lead capture"
+    subject: "Thank You for Your Enquiry – Welcome to [Company Name]"
+    body: |
+      Dear {{Name}},
+
+      Thank you for reaching out and showing interest in our project. We're delighted
+      to have you with us!
+
+      At [Company Name], we believe every customer deserves clarity, comfort, and
+      confidence before making an investment decision. Our dedicated CRM team will
+      contact you shortly to understand your requirements and share the most suitable
+      options.
+
+      ✨ Our Promise:
+      - Customer happiness is our first priority
+      - Transparent communication at every step
+      - Timely support and regular updates
+
+      In the meantime, you can explore more about our company and ongoing projects here:
+      👉 Visit: [Insert Website Link]
+
+      If you have any urgent questions, feel free to reply to this email or message
+      us directly on WhatsApp at [Insert WhatsApp Number].
+
+      Warm regards,
+      Team [Company Name]
+      📞 [Contact Number] | 🌐 [Website Link]
+      📍 [City / Location]
+
+
+# ============================================================
+# STEP 4 — LEAD ASSIGNMENT & CALL ATTEMPTS
+# ============================================================
+step_04_lead_assignment_and_call_attempts:
+  title: "Lead Assignment & Call Attempts"
+  objective: >
+    Ensure every new lead receives 5 structured call attempts within 5 days —
+    with automatic WhatsApp messages and optional brochure/catalog attachments
+    when appropriate. After the 6th message (post TL approval), unresponsive
+    leads are moved to "Not Qualified" or "Marketing Nurture."
+
+  process_flow:
+
+    lead_assignment:
+      - Every new lead is automatically assigned to a CRM Executive (Telecaller)
+      - System auto-creates 5 tasks labeled Call Attempt 1 → Call Attempt 5
+      - Each task remains Pending until CRM marks it Completed
+      - Tasks cannot be skipped — sequential progress required
+      - If a task is not completed before due time → automation sends WhatsApp message to lead automatically
+
+    optional_attachments:
+      description: "For every call attempt, CRM telecaller gets an 'Attach from Project Assets' dropdown"
+      options:
+        - Project Brochure (PDF)
+        - Intro/Walkthrough Video
+        - Google Map Location
+        - Company Profile Document
+        - Website & Social Media Links
+      rule: "Attachments are optional — only sent if customer explicitly requests more details"
+      behavior: "Once attached, auto-appends below WhatsApp message (as media + caption)"
+
+    team_leader_review:
+      trigger: "Day 6 — after 5 failed attempts"
+      tl_options:
+        approve_not_qualified: "System closes lead"
+        retry: "Generates new 3-call batch"
+      rule: "No lead moves out of CRM without TL approval"
+
+  automation_summary:
+    - 5 Auto WhatsApp Messages (Day 1–5)
+    - Optional Attachments available on each message
+    - 6th Final Message (Post TL Approval) — informs lead about closure
+    - No email triggers (WhatsApp only for simplicity)
+
+  whatsapp_templates:
+
+    day_1_first_attempt:
+      message: |
+        👋 Hi {{Name}}, this is {{CRM Executive}} from [Company Name].
+        We tried reaching you regarding your recent enquiry. Thank you for your interest 🙏.
+        We'd love to share more about our project and help you find the best match for your needs.
+        Please let us know a convenient time to connect 📞.
+        📎 Optional Attachment: [Brochure / Video / Map Link / Website]
+
+    day_2_second_attempt:
+      message: |
+        🌞 Hi {{Name}}, following up on your enquiry!
+        We couldn't connect yesterday — no worries 😊.
+        I'd be glad to share some new project updates and help you explore suitable options.
+        Please share your preferred time to talk.
+        📎 Optional Attachment: [Brochure / Company Profile / Location Map]
+
+    day_3_third_attempt:
+      message: |
+        👋 Hello {{Name}}, hope your day's going well!
+        Just wanted to reconnect regarding your enquiry.
+        It'll just take 2 minutes for me to share a few personalized options based on your requirements.
+        Kindly let me know when I can call. 🙏
+        📎 Optional Attachment: [Brochure / Video / Website Link]
+
+    day_4_fourth_attempt:
+      message: |
+        🌟 Hi {{Name}}, this is a gentle reminder from [Company Name].
+        We've been trying to reach you regarding your enquiry.
+        Would you like us to share some project details and nearby location comparisons?
+        Just reply YES to get them instantly.
+        📎 Optional Attachment: [Brochure / Comparison Chart / Map Link]
+
+    day_5_fifth_attempt:
+      message: |
+        ⚡ Hi {{Name}}, this is our final follow-up message from [Company Name].
+        We completely understand you may be busy 🕒.
+        If you're still exploring, reply YES and we'll call you back at your preferred time.
+        Otherwise, we'll keep you updated about upcoming projects later.
+        Thank you for your time 🙏.
+        📎 Optional Attachment: [Brochure / Project PDF]
+
+    day_6_final_message_post_tl_approval:
+      message: |
+        🗓️ Hi {{Name}}, thank you for your earlier enquiry with [Company Name].
+        Since we couldn't reach you after multiple attempts, we'll now pause our follow-ups
+        to respect your time.
+        💡 Don't worry — you'll continue receiving updates about our future projects through WhatsApp.
+        If you'd like to reconnect, just reply HELLO anytime — we'll be happy to assist 😊.
+
+  developer_notes:
+    task_auto_creation:
+      - 5 Tasks (Day 1–5) on Lead Assignment
+      - 1 Review Task (Day 6) for Team Leader
+
+    whatsapp_integration:
+      platform: "WATI / Interakt"
+      behavior: "Auto-send template if call marked Not Connected"
+      feature: "Allow file attachment from Project Assets Module"
+
+    attachment_field_logic:
+      crm_field_name: "Attach from Project Assets"
+      multi_select: true
+      default_options:
+        - Brochure PDF
+        - Video Walkthrough
+        - Google Map Link
+        - Company Profile
+        - Website / Social Media
+
+    lead_closure:
+      - TL must mark Approved to close unresponsive lead
+      - System logs all attempts, messages, and attachments sent
+
+  result:
+    - Clean 5-day follow-up system
+    - WhatsApp-driven (no email complexity)
+    - Optional attachments allow flexible sharing
+    - Team Leader maintains control
+    - 100% traceability for all follow-ups
+
+
+# ============================================================
+# STEP 5 — LEAD QUALIFICATION
+# ============================================================
+step_05_lead_qualification:
+  title: "Sales Qualification Call (with Knowledge Base)"
+  objective: >
+    Help every CRM executive follow a consistent, simple, and professional method
+    for qualifying real estate leads. The entire process — opening call, qualifying
+    questions, scoring, and next steps — is available in the CRM under a
+    Knowledge Base Reference Section.
+
+  knowledge_base:
+
+    opening_call_first_30_seconds:
+      purpose: "Build trust and create interest before asking questions"
+      script: |
+        "Hi {{Name}}, this is {{CRM Executive}} from [Company Name].
+        Thanks for enquiring about our project! Before I suggest the right property,
+        may I take a couple of minutes to understand your exact requirement?
+        This helps me share the best options that match your need."
+      guidelines:
+        - Always speak with a smile — sound confident and polite
+        - Don't rush into project details immediately
+        - Focus on understanding the customer first
+        - Keep the call short and natural (maximum 7 minutes)
+
+    qualifying_questions:
+      total: 8
+      questions:
+        budget:
+          script: '"May I know your approximate budget range for the property?"'
+          purpose: "Check if customer's budget fits the project"
+
+        decision_authority:
+          script: '"Will you be taking the final decision yourself or along with your family?"'
+          purpose: "Know who influences the buying decision"
+
+        purpose:
+          script: '"Are you planning to buy for your own stay or as an investment?"'
+          purpose: "Identify emotional vs. financial motive"
+
+        timeline:
+          script: '"When do you plan to buy — this month, in the next few months, or later?"'
+          purpose: "Decide urgency level"
+
+        location:
+          script: '"Which area or locality are you looking for?"'
+          purpose: "Verify whether project matches preferred location"
+
+        financing:
+          script: '"Will you be using a home loan or your own funds?"'
+          purpose: "Understand readiness"
+
+        followup_permission:
+          script: '"Can we share project updates and assist you with a site visit?"'
+          purpose: "Take soft permission before follow-up"
+
+        engagement_level:
+          observation: "Tone, energy, and involvement during conversation"
+          purpose: "Note if they sound curious, responsive, or disinterested"
+
+    lead_scoring:
+      fields_and_max_points:
+        budget_clarity: 10
+        authority_to_decide: 10
+        purpose: 15
+        timeline: 10
+        location_match: 10
+        financing_readiness: 5
+        followup_willingness: 10
+        engagement: 10
+      total_max: 80
+
+      classification:
+        hot_lead:
+          range: "80–100"
+          description: "Ready to buy soon"
+        warm_lead:
+          range: "60–79"
+          description: "Interested but deciding"
+        cold_lead:
+          range: "40–59"
+          description: "Long-term or slow"
+        junk_lead:
+          range: "below 40"
+          description: "Not relevant or unresponsive"
+
+    next_steps_after_qualification:
+      hot_lead:
+        - Send WhatsApp message inviting for a site visit
+        - Optionally attach brochure, video, or map from project assets
+        - Create 8 follow-up tasks for 60 days
+
+      warm_lead:
+        - Send WhatsApp message confirming details and offer updates
+        - Schedule soft follow-up after 2 days
+        - Encourage tentative weekend visit
+
+      cold_lead:
+        - Add to 16-week marketing nurture system
+        - Send polite message saying you'll keep them updated
+
+      junk_lead:
+        - No follow-up unless TL approves
+        - Send final courtesy message about future project updates
+
+    whatsapp_followup_templates:
+      hot_lead: |
+        "Hi {{Name}}, thank you for your time today! Based on our discussion,
+        I'd love to invite you for a site visit to explore the project personally.
+        Our team will share available slots soon. Looking forward to meeting you 😊."
+
+      warm_lead: |
+        "Hi {{Name}}, thanks for speaking with me earlier. I've noted your requirements
+        and will share new project updates that match your interest.
+        Shall I book a tentative visit slot for this weekend? 🙂"
+
+      cold_lead: |
+        "Hi {{Name}}, thank you for your time. We'll keep you updated about new projects
+        and areas that fit your plan. Whenever you're ready to visit, just reply HELLO
+        and we'll assist instantly 🤝."
+
+      junk_lead: |
+        "Hi {{Name}}, thank you for your enquiry. We'll pause active follow-ups for now
+        to respect your time. You'll still receive updates about future launches through
+        WhatsApp 💬. If you'd like to reconnect later, reply HELLO."
+
+    knowledge_base_crm_display:
+      sections:
+        - Opening Call Script (copy text)
+        - 8 Qualification Questions (short list)
+        - Scoring Reference (summary text)
+        - Next-Step Instructions for Each Lead Type (Hot/Warm/Cold/Junk)
+        - Example WhatsApp Templates (click to copy)
+      purpose: "Built-in training manual for all telecallers — 100% consistency even with new team members"
+
+  developer_notes:
+
+    lead_scoring_logic:
+      field_type: "Numeric dropdown fields"
+      value_mapping:
+        High: 10
+        Medium: 5
+        Low: 0
+      hidden_field: "Lead_Score_Total (auto-calculated SUM)"
+      auto_tags:
+        gte_80: "Hot"
+        range_60_79: "Warm"
+        range_40_59: "Cold"
+        lt_40: "Junk"
+
+    automation_rules:
+      trigger: "When status changes to Qualified"
+      actions:
+        - Send WhatsApp template based on lead type
+        - Create tasks:
+            Hot: "8 follow-ups (60 days)"
+            Warm: "4 follow-ups (30 days)"
+            Cold: "Move to Marketing Nurture Module (16 weeks)"
+        - Junk: "Move only after Team Leader approval flag = True"
+
+    optional_attachment_system:
+      crm_field: "Attach_from_Project_Assets (multi-select lookup)"
+      linked_module: "Project Assets Library"
+      file_types:
+        - Brochure PDF
+        - Walkthrough Video URL
+        - Google Map Link
+        - Company Profile
+        - Website/Social Links
+      api_integration: "WATI / Interakt / Twilio — include selected attachments automatically"
+
+    knowledge_base_embedding:
+      component: "Static HTML / rich-text widget — Telecaller Knowledge Base"
+      location: "Lead Detail Page sidebar and Training tab"
+
+    audit_and_reporting:
+      logging: "Every scoring change with timestamp and user"
+      history_field: "Score_Revision_Log"
+      dashboard_widgets:
+        - Average Lead Score per CRM Executive
+        - Hot/Warm/Cold/Junk distribution
+        - Conversion ratio (Hot → Site Visit)
+
+    team_leader_control:
+      field: "TL_Approved_for_Closure (checkbox)"
+      junk_archive_trigger: "Only when TL_Approved_for_Closure = True"
+      tl_digest: "Daily — Leads scored today + status summary"
+
+    error_handling:
+      validation: "If any of 8 fields is blank → prevent status change to Qualified"
+      whatsapp_failure: "Create CRM notification 'Message Not Sent – Retry Required'"
+
+  outcome:
+    - Completely rule-based and low-maintenance qualification engine
+    - Zero manual data interpretation
+    - Uniform training and reporting through built-in knowledge base
+    - Ready for future AI Lead Scoring module integration
+
+
+# ============================================================
+# STEP 6 — SITE VISIT INVITATION
+# ============================================================
+step_06_site_visit_invitation:
+  title: "Site Visit Invitation"
+  objective: >
+    Formally invite a qualified lead for a site visit and generate the Google
+    Calendar booking with all essential details and automated notifications.
+
+  process_flow:
+
+    booking:
+      trigger: "Lead classified as Hot or Warm → CRM Executive clicks 'Book Site Visit'"
+      auto_creates:
+        - Google Calendar event (Date | Time | Location Link)
+        - Task "Site Visit Booked" in lead timeline
+        - WhatsApp confirmation messages (Client / BDM / Team Leader)
+
+    data_captured:
+      - Client Name
+      - Mobile Number
+      - Project Name
+      - Preferred Date & Time
+      - Assigned BDM
+      - Google Map Link
+      - Optional notes (special requests, pickup point, etc.)
+
+    plan_drop_rule:
+      options: "Confirm or Reschedule Request only"
+      plan_dropped_requires: "Team Leader approval"
+
+  whatsapp_templates:
+
+    client_confirmation:
+      message: |
+        👋 Hi {{Name}}, your site visit for [Project Name] is booked on {{Date}} at {{Time}} ⏰.
+        We're excited to welcome you and walk you through the project.
+        📍 Location: [Google Map Link]
+        If you need to reschedule, just reply RESCHEDULE and our team will adjust your slot.
+        Thank you for choosing us 🙂
+
+    bdm_notification:
+      message: |
+        📢 New Site Visit Booked by {{CRM Executive}}
+        👤 Client: {{Client Name}} 📞 {{Client Mobile}}
+        📅 {{Date}} ⏰ {{Time}} 📍 [Map Link]
+        Kindly coordinate and update feedback after the visit.
+
+    team_leader_notification:
+      message: |
+        📊 Site Visit Booked – Project: {{Project Name}}
+        Client: {{Client Name}} | BDM: {{BDM Name}} | CRM: {{CRM Executive}}
+        Date: {{Date}} | Time: {{Time}}
+        Please monitor progress and review post-visit feedback.
+
+  developer_notes:
+    button: "Book Site Visit"
+    on_click:
+      - Generate Google Calendar event (Primary calendar ID)
+      - Send 3 WhatsApp templates (Client / BDM / TL)
+      - Store Event ID in CRM field: Calendar_Event_ID
+    status_field:
+      name: "Visit_Status"
+      values: ["Booked", "Rescheduled", "Completed"]
+    validation: "Cannot book without Date + Time + Map Link"
+    auto_next_task: "Send 24-Hour Reminder (links to Step 7)"
+
+
+# ============================================================
+# STEP 7 — SITE VISIT CONFIRMATION & REMINDERS
+# ============================================================
+step_07_site_visit_reminders:
+  title: "Site Visit Confirmation & Reminders"
+  objective: >
+    Ensure every confirmed site visit is reminded, tracked, and followed up
+    through automation and manual tasks over eight weeks until the visit happens.
+
+  process_flow:
+
+    pre_visit_24hr_reminder:
+      channels:
+        - WhatsApp
+        - Email (optional)
+      timing: "24 hours before visit"
+      notifies:
+        - Client
+        - BDM
+        - Team Leader
+
+    reschedule_option:
+      trigger: "Client replies RESCHEDULE"
+      action:
+        - Create new Google Calendar event with updated time
+        - Auto-cancel old event
+        - Tag old event as "Rescheduled by Client"
+
+    eight_week_followup_cycle:
+      tasks: "8 auto-created tasks (one per week) for CRM Executive"
+      whatsapp: "8 WhatsApp reminders auto-sent if visit not completed"
+      after_8_weeks: "System creates Team Leader Review task for approval or closure"
+
+    completion_trigger:
+      trigger: "BDM marks visit as Completed"
+      action: "Stop reminders; move lead to Feedback Stage (Step 8)"
+
+  whatsapp_templates:
+
+    reminder_24hr:
+      message: |
+        🌞 Hi {{Name}}, just a reminder about your site visit tomorrow ({{Date}} at {{Time}}).
+        Please reach 10 minutes early for a comfortable experience 🚗.
+        📍 [Google Map Link]
+        Need to change time? Reply RESCHEDULE.
+
+    missed_visit_next_day:
+      message: |
+        👋 Hi {{Name}}, we noticed you couldn't attend your visit yesterday.
+        Would you like to book another slot? Just reply YES and we'll reconfirm immediately.
+
+    weekly_reminders_weeks_2_to_7:
+      message: |
+        🌟 Hi {{Name}}, hope you're doing well!
+        We'd love to welcome you for your site visit this week.
+        Reply VISIT to choose a new date 📅.
+
+    final_reminder_week_8:
+      message: |
+        🙏 Hi {{Name}}, this is our final follow-up for your pending site visit.
+        If you'd still like to schedule it, reply YES and our team will book it for you.
+        Otherwise, we'll pause reminders and keep you posted on future projects.
+
+  developer_notes:
+    automation_trigger: "Visit_Date – 1 day → send 24-hour template"
+    weekly_workflow: "If Visit_Status ≠ Completed → send next template and increment Reminder_Count"
+    reminder_count_field: "Reminder_Count (1–8)"
+    after_8_reminders: "Create task: Team Leader Review"
+    tl_options:
+      - Reschedule
+      - Move to Nurture
+      - Close
+    dashboard_cards:
+      - Upcoming Visits
+      - Missed Visits
+      - Reminders Sent
+      - Conversion Rate
+
+
+# ============================================================
+# STEP 8 — POST-VISIT FEEDBACK & OBJECTION CAPTURE
+# ============================================================
+step_08_post_visit_feedback:
+  title: "Post-Site Visit Feedback & Objection Capture Flow"
+  purpose: >
+    Verify that a site visit actually happened, capture the client's real reaction
+    and objections, log proof (photo/signature/video), and trigger the correct
+    thank-you + next-step automation that feeds the 60-day objection-resolution
+    flow (Step 9).
+
+  roles:
+    BDM: "Marks visit completed, captures proof, fills feedback/objections, proposes next step"
+    CRM_Executive: "Reviews BDM input, aligns next steps, schedules follow-ups/tasks"
+    Team_Leader: "Audits proofs & entries, approves exceptions, monitors SLAs"
+
+  trigger: "Moment BDM taps 'Mark Visit Completed' — Site Visit Feedback Form opens (mobile-friendly)"
+
+  feedback_form:
+
+    section_A_visit_verification:
+      client_photo_at_site:
+        required: true
+        capture: "Device camera only (no gallery upload)"
+        metadata: "Geotag + timestamp stored"
+      bdm_client_selfie:
+        required: true
+        capture: "Device camera only"
+        metadata: "Geotag + timestamp stored"
+      client_signature:
+        required: false
+        type: "Digital signature pad"
+      client_short_video:
+        required: false
+        max_duration: "20 seconds"
+        script_prompt: '"I am [Name]. I visited [Project Name] today."'
+      auto_proof_status:
+        visit_verified_yes: "Client Photo + BDM Selfie both present"
+        visit_verified_pending: "Blocks submission unless TL override"
+
+    section_B_visit_meta:
+      fields:
+        - Visit Date (default today, editable)
+        - Visit Time
+        - BDM Name (auto)
+        - CRM Executive (auto)
+        - Project Name (auto)
+        - Google Map Link (auto)
+        - Travel Mode / Notes (optional)
+
+    section_C_overall_impression:
+      type: "Single-select"
+      options:
+        - Loved It
+        - Okay
+        - Disappointed
+        - Couldn't Assess (bad weather/time/closed)
+
+    section_D_objections:
+      type: "Multi-select + Description"
+      options:
+        location_mismatch: "Describe the concern"
+        budget_concern: "State gap or benchmark"
+        loan_delay_bank_issue: "Bank name / doc pending"
+        family_discussion: "Who must approve (spouse/parents/others)"
+        legal_approvals_clarification: "Which doc (RERA/DTCP/EC/Patta/etc.)"
+        amenities_facility_expectation: "Which amenity"
+        competing_project_comparison: "Project name / point compared"
+        timing_delay: "Expected month/quarter"
+        other: "Free text"
+
+    section_E_decision_influencers:
+      type: "Multi-select"
+      options:
+        - Self
+        - Spouse
+        - Parents
+        - Siblings
+        - Friends
+        - Consultant
+        - Other
+
+    section_F_urgency_level:
+      options:
+        - High (0–30 days)
+        - Medium (1–3 months)
+        - Low (3–6 months+)
+        - Not Decided
+
+    section_G_next_committed_step:
+      type: "Choose one + Date"
+      options:
+        - Second Site Visit (family)
+        - Loan Discussion / Document Collection
+        - Share Legal Documents (info session)
+        - Price/Unit Options Discussion
+        - Hold Unit (tentative)
+        - Open House Invite
+        - Follow-up in [X] Days (date selector)
+
+    section_H_bdm_notes:
+      type: "Free text"
+      content: "Key quotes, emotional cues, special requests"
+
+    section_I_attachments:
+      required: false
+      options:
+        - Photos (max 3 additional)
+        - Doc snapshot (PAN/Aadhaar/Pre-approval)
+
+    section_J_submission_controls:
+      options:
+        save_and_send_thankyou: "Triggers all automations"
+        save_draft: "TL sees draft on dashboard"
+        request_tl_override: "When proof incomplete"
+
+  automations_on_submit:
+    status_updates:
+      - Visit_Status: "Completed"
+      - Visit_Verified: "Yes / Pending (per proof logic)"
+      - Objection_Status: "Captured (if any selected)"
+    thankyou_message: "Sent to client via WhatsApp; email if available"
+    internal_alerts:
+      to: "CRM Executive & TL"
+      content:
+        - Proof received (Yes/Pending)
+        - Objection type(s)
+        - Next committed step + due date
+    next_step_tasks:
+      second_visit: "Create 'Book Family Visit' task (due 2–5 days)"
+      loan_docs: "Create 'Collect Documents' task (due 2 days)"
+      legal_clarification: "Create 'Share Legal Pack / Q&A' task (due 2 days)"
+      options_discussion: "Create 'Present 2–3 Alternatives' task (due 2 days)"
+      followup: "Create 'Scheduled Follow-up' task (due date selected)"
+    step_9_pipe:
+      condition: "If any objection captured"
+      action: "Enroll lead into Step 9 objection-specific track"
+      start_day: "Form submission date"
+
+  whatsapp_templates:
+
+    immediate_thankyou:
+      message: |
+        🙏 Hi {{Name}}, thank you for visiting [Project Name] today.
+        We appreciate your time and hope the visit was helpful.
+        If you'd like to plan a second visit with family, discuss options, or review documents,
+        just reply HELP and our team will assist right away.
+        We're here to make this simple and transparent for you. 😊
+
+    next_step_confirmation:
+      message: |
+        📅 Hi {{Name}}, we've noted your next step: {{Next Step}} on {{Date}}.
+        Our team will call you to coordinate and ensure everything is ready.
+        If you wish to change the date/time, reply RESCHEDULE.
+
+    feedback_link:
+      required: false
+      message: |
+        🌟 We value your experience. Would you mind sharing quick feedback (10 seconds)?
+        [Feedback Link]
+        Your inputs help us serve you better. Thank you! 🙏
+
+  internal_notifications:
+
+    to_crm_executive: |
+      ✅ Site Visit Completed – {{Client}} ({{Mobile}})
+      Impression: {{Loved/Okay/Disappointed}}
+      Objection(s): {{Selected}}
+      Next Step: {{Next Step}} by {{Due Date}}
+      Proof: {{Verified/Pending}}
+      Please action the task(s) created.
+
+    to_team_leader: |
+      🧭 Visit Logged – {{Client}} / {{Project}} by {{BDM}}
+      Proof: {{Verified/Pending}} | Objection: {{Selected/None}}
+      SLA Tasks created: {{Task Names}}
+      Review exceptions if any (Pending Proof / TL Override requests).
+
+  validation_and_overrides:
+    proof_required: "Client photo + BDM selfie mandatory"
+    missing_proof: "Submission blocked; BDM can 'Request TL Override'"
+    tl_override: "TL can approve with reason; audit trail stored"
+    geo_lock: "Optional — warn if photo geolocation is >300m from site pin"
+
+  developer_notes:
+    form_implementation:
+      module_name: "Site_Visit_Feedback (sub-form or related module)"
+      camera_enforcement: "Disable gallery upload where possible"
+      media_storage: "Zoho WorkDrive / AWS S3 — path: lead_id/visit_feedback/"
+    proof_logic:
+      condition: "Client_Photo AND BDM_Selfie present → Visit_Verified = Yes"
+      else: "Visit_Verified = Pending; block 'SAVE & SEND' unless TL_Override = True"
+    automations:
+      on_submit:
+        - Update Lead fields (Visit_Status, Objection_Status, Urgency_Level)
+        - Create tasks per Next Committed Step (owner = CRM Executive)
+        - Enroll in Step 9 if any objection ≠ null
+    messaging:
+      templates:
+        - post_visit_thankyou
+        - post_visit_nextstep_confirm
+        - post_visit_feedback_link (optional)
+      merge_fields:
+        - "{{Name}}"
+        - "{{Project Name}}"
+        - "{{Next Step}}"
+        - "{{Date}}"
+    security_and_audit:
+      log_fields: "Who captured, when, device, location coords"
+      tl_override_log: "Reason mandatory"
+      media_access: "Restricted to CRM, BDM, TL roles only"
+    reporting_widgets:
+      - Visits Completed (by day/week)
+      - Verified vs Pending Proof (%)
+      - Objection Distribution (location/budget/loan/family/legal/amenities/timing)
+      - Average time from Visit → Next Step
+      - Visit → Booking conversion (BDM-wise)
+      - SLA breaches (tasks overdue)
+    edge_cases:
+      client_refuses_photo: "Capture signature + TL note → allow with TL override"
+      bad_network_on_site: "Allow 'Save Draft' offline; auto-sync later"
+      multiple_visits: "Store each as separate feedback record linked to the lead"
+
+  outcomes:
+    - Hard proof that visits truly happened (photos/signature/video + geotag)
+    - Clear structured objection capture that directly powers Step 9
+    - Immediate classy thank-you + next-step confirmations to client
+    - Transparent accountability for BDM and CRM, with TL oversight
+    - Clean analytics for management across visits, objections, and conversion
+
+  knowledge_base_for_bdm:
+    title: "How to Fill the Site Visit Feedback Form & Complete Post-Visit Actions"
+
+    before_site_visit:
+      confirm_visit_details:
+        - Review client details in CRM (Name, Contact, Project, Time)
+        - Check Google Map link & ensure directions are correct
+      prepare_professionally:
+        - Dress neatly (as per company dress code)
+        - Carry ID card, visiting card, and brochure copies
+        - Be at site 15 minutes early
+      prepare_for_client:
+        - Keep project brochure and rate sheet ready
+        - Know nearby landmarks and project highlights
+        - Keep phone charged and internet active for CRM access
+
+    during_site_visit:
+      - "Greet client warmly — smile, use name, thank them for coming"
+      - "Start visit with context: 'Let me walk you through the project and explain the highlights.'"
+      - "Ask 2–3 open questions about preferences, budget, and family needs"
+      - "Avoid pressure sales — be informative, not pushy"
+      - "End politely: 'Would you like to take a second visit with your family?'"
+      - "Note client response in phone right away"
+
+    after_site_visit:
+      step_1_capture_proof:
+        - Click Client Photo at Site (geotag ON)
+        - Click BDM + Client Selfie (smile, clear face)
+        - Politely ask for optional signature or short acknowledgment video
+        - Script: '"Sir, this is just for internal record — may I take a quick photo/video confirmation?"'
+        - Upload both photos in feedback form
+
+      step_2_fill_feedback_form:
+        client_details: "Verify client name, project name, date/time"
+        overall_impression:
+          tip: "Choose 'Okay' only if neutral — avoid guessing"
+        objection_capture:
+          example_budget: "If client said 'Budget is slightly high' → tick Budget Concern"
+          example_family: "If client said 'I'll come with family' → tick Family Discussion"
+          description: "Write 2–3 sentences in Description"
+        urgency_level:
+          high: "Client said 'Will decide next week'"
+          medium: "Maybe 2–3 months later"
+          low: "Not now"
+        next_committed_step: "Select one and date"
+        notes: "Write key takeaways e.g. 'Client liked location but wants 3BHK. Will visit with wife.'"
+        save_and_submit: "Click SAVE & SEND THANK-YOU after review"
+
+      step_3_confirm_automation:
+        check:
+          - WhatsApp Thank You sent to client
+          - Internal notification reached CRM Executive
+          - Next task created
+
+    important_tips:
+      - Fill form immediately after visit — don't wait till evening
+      - Don't submit without both photos — TL approval needed otherwise
+      - Be accurate — avoid guessing objections
+      - Respect client privacy — never post or forward photos/videos elsewhere
+      - Communicate politely and end with "Thank you for visiting us"
+
+    common_mistakes_to_avoid:
+      - Forgetting to capture proof photos
+      - Entering "No Objection" for everyone
+      - Using casual language in feedback
+      - Skipping next-step selection
+      - Submitting without sending Thank You automation
+
+    quality_standards:
+      monthly_tracking:
+        - "% Verified Visits (with proof)"
+        - "% Timely Form Submission"
+        - "% Objection Accuracy"
+        - "Conversion Ratio (Visit → Booking)"
+      goal: "100% verified visits, 0 delayed submissions"
+
+
+# ============================================================
+# STEP 9 — 60-DAY FOLLOW-UP & NURTURING FLOW
+# ============================================================
+step_09_60day_followup_nurturing:
+  title: "60-Day Objection-Resolution & Follow-Up System"
+  objective: >
+    After a site visit, systematically nurture every prospect for 60 days (8 weeks),
+    assign clear CRM tasks (manual calls) and parallel WhatsApp automation,
+    resolve objections through structured conversation, and keep the lead warm
+    until conversion or TL-approved drop.
+
+  overall_flow:
+    - "Site visit completed → feedback form submitted (Step 8)"
+    - "CRM receives new task set = 8 follow-up tasks (spaced 1 week apart)"
+    - "For each task: CRM calls client (manual) → records notes → WhatsApp auto-triggers"
+    - "After 60 days (8 tasks): CRM requests TL review → Closed / Extended / Junk"
+
+  roles:
+    CRM_Executive: "Executes 8 manual follow-ups, updates status, triggers responses"
+    Team_Leader: "Approves movement after 60 days; monitors call quality"
+    Automation: "Sends weekly WhatsApp nurturing messages (based on objection)"
+
+  knowledge_base_for_crm_executives:
+
+    track_loved_it:
+      title: "Client Impression = Loved It"
+      objective: "Push sale forward — assist with financing, documentation, and urgency"
+      tasks_8_weeks:
+        week_1: "Confirm next step, share any doc requested, call within 24 hrs"
+        week_2: "Follow up on loan/docs; connect with bank if needed"
+        week_3: "Check family decision status; book family visit if needed"
+        week_4: "Share unit options / pricing; negotiate if possible"
+        week_5: "Confirm holding of unit; check for any new objections"
+        week_6: "Push for booking formality — token amount discussion"
+        week_7: "Follow up on booking paperwork"
+        week_8: "Closure attempt or TL review"
+
+    track_okay:
+      title: "Client Impression = Okay"
+      objective: "Rebuild interest and clarity, handle mild objections"
+      tasks_8_weeks:
+        week_1: "Understand what was missing; send comparison or updated info"
+        week_2: "Provide clarification (location / amenity / price) via call"
+        week_3: "Share new photos/videos or updated site progress"
+        week_4: "Offer alternate unit options if possible"
+        week_5: "Reconnect on key objection — address with solution"
+        week_6: "Invite for second visit (soft)"
+        week_7: "Family invite or open house invitation"
+        week_8: "Final attempt or TL review"
+
+    track_disappointed:
+      title: "Client Impression = Disappointed"
+      objective: "Recover the relationship or gracefully close lead"
+      tasks_8_weeks:
+        week_1: "Acknowledge concern; apologize if needed; send alternative info"
+        week_2: "Provide detailed clarification on objection type"
+        week_3: "Share third-party validation (legal docs, bank approval)"
+        week_4: "Offer alternate unit / project if available"
+        week_5: "Check if interest recovered"
+        week_6: "One last invite — open house or family visit"
+        week_7: "Final soft follow-up"
+        week_8: "Close or move to long-term nurture"
+
+  objection_whatsapp_templates:
+
+    location_concern:
+      week_1: |
+        📍 Hi {{Name}}, thank you for your visit! We understand location matters most.
+        You'll be happy to know that {{Project Area}} is now seeing new schools & road projects. 🌆
+        Want a short call with our CRM executive to explain how this improves access & value?
+        Just reply CALL ME and we'll connect you instantly. ☎️
+      week_2: |
+        🚗 New updates near {{Project Area}}! Infrastructure growth & travel time improvements
+        already started. These are turning points for future appreciation.
+        Let's have a quick 5-minute talk with our business development manager.
+        Reply TALK NOW 📞
+      week_3: |
+        🌳 Families who visited earlier are surprised by the area's development this month.
+        We'd love to show you live updates and future growth visuals.
+        Would you like our field expert to explain on call? Type YES and we'll connect today.
+      week_4: |
+        🏗️ Rapid updates around {{Project}} are creating excellent investment potential.
+        Our project consultant can walk you through area advantages.
+        Reply BOOK CALL to schedule a chat today!
+      week_5: |
+        🌅 We're mapping new commercial projects nearby that increase rental & resale value.
+        Talk to our investment advisor for complete insights — reply CALL BACK to connect.
+      week_6: |
+        🏡 Property values in {{Project Area}} are climbing steadily.
+        Don't miss current price levels before next revision!
+        Our CRM expert can update you right away — shall we call now? 📞
+      week_7: |
+        🗓️ We're arranging area-focus calls for selected clients to discuss growth plans & location benefits.
+        Would you like to join the discussion? Reply JOIN and our BDM will connect you today.
+      week_8: |
+        🙏 Thank you {{Name}} for staying in touch! We'll keep sharing real updates from {{Project Area}}.
+        If you'd like a final review call with our senior consultant, just reply REVIEW CALL
+        and we'll schedule it immediately.
+
+    budget_concern:
+      week_1: |
+        💬 Hi {{Name}}, we completely understand your budget comfort.
+        We have new flexible options that fit better without compromising quality.
+        Can our CRM executive explain the latest variants? Reply SHOW OPTIONS to connect now.
+      week_2: |
+        📉 Special offers just released this week — perfect fit for your plan.
+        Want our pricing advisor to walk you through? Type CALL NOW 📞
+      week_3: |
+        💡 Let's evaluate cost vs. appreciation. Many clients realised the difference after a 10-minute discussion.
+        Shall our finance expert explain? Reply DISCUSS to fix a quick call.
+      week_4: |
+        🧾 Hi {{Name}}, we can assist with structured payment plans & stage-wise release options.
+        Reply PLAN CALL to connect with our finance desk today.
+      week_5: |
+        💳 Bank partnerships active now — lowest processing fees & quick approval support.
+        Talk to our loan coordinator today — reply LOAN HELP.
+      week_6: |
+        🏗️ Prices may rise after next phase launch. Secure current rate before update.
+        Would you like our sales advisor to brief you? Reply BOOK CALL to connect.
+      week_7: |
+        📞 We can customise EMI models for you. Shall our CRM share the breakdown?
+        Reply SEND PLAN and we'll send details & call you.
+      week_8: |
+        🙏 Thanks for evaluating {{Project}}. We'll keep you updated on festive offers.
+        For early access, talk to our sales expert — reply PRIORITY CALL.
+
+    loan_bank_delay:
+      week_1: |
+        🏦 Hi {{Name}}, bank process pending? Our finance team can help coordinate with your
+        bank & clear it faster. Reply HELP ME to arrange immediate assistance.
+      week_2: |
+        📄 Sometimes a missing document causes delay. Our loan support desk can review your
+        file in 5 minutes. Want to do that now? Reply CHECK FILE.
+      week_3: |
+        💰 We're connected with top banks — approvals within 48 hrs.
+        Shall we connect you to our bank partner today? Reply CONNECT.
+      week_4: |
+        🗓️ We can hold your preferred unit while loan formalities finish.
+        Talk to our CRM for confirmation — reply HOLD UNIT.
+      week_5: |
+        📞 Quick reminder — interest rates revising soon. Let our loan consultant assist you before that.
+        Reply RATE HELP to connect.
+      week_6: |
+        💬 We can even prepare your sanction letter draft for bank verification.
+        Want our finance advisor to guide you? Reply DRAFT CALL.
+      week_7: |
+        🧾 Approval queues clearing this week. Shall we resubmit your file?
+        Talk to our bank liaison officer — reply RESUBMIT.
+      week_8: |
+        ✅ Almost there, {{Name}}! If your bank cleared approval, our registration desk can finalise quickly.
+        Reply FINALISE to proceed now.
+
+    family_decision:
+      week_1: |
+        👨‍👩‍👧‍👦 Hi {{Name}}, we understand family discussions take time. Let us arrange a family visit
+        with our CRM to explain all details. Reply BOOK FAMILY VISIT now.
+      week_2: |
+        💬 Has your family seen the project brochure yet? We can send details & explain over a call.
+        Reply TALK TO CRM.
+      week_3: |
+        📅 We're hosting personalised family walkthroughs this weekend.
+        Reply JOIN VISIT and our BDM will book your slot.
+      week_4: |
+        🌟 Family feedback matters! Let's schedule a clarity call with our consultant to address everyone's points.
+        Reply FAMILY CALL.
+      week_5: |
+        💞 Your family deserves clear information — our project advisor can explain approvals, loan & documents
+        in Tamil/English. Reply LANGUAGE CALL to book.
+      week_6: |
+        🏠 Shall we hold your preferred unit until your family finalises?
+        Reply HOLD NOW and our CRM will confirm instantly.
+      week_7: |
+        📞 Weekend reminder — we have open house sessions for families.
+        Reply VISIT SLOT to reserve one.
+      week_8: |
+        🙏 Thank you, {{Name}}. Whenever your family is ready, our CRM team is here to help you finalise happily.
+        Reply CONNECT AGAIN.
+
+    legal_documentation_doubts:
+      week_1: |
+        📑 Hi {{Name}}, approvals & legal clarity are important. Our legal consultant can explain every detail personally.
+        Reply LEGAL CALL to fix it now.
+      week_2: |
+        🧾 We have RERA, DTCP & bank approvals ready to review anytime.
+        Reply SHARE DOCS and our legal team will contact you.
+      week_3: |
+        ⚖️ Legal verification is simple when guided correctly. Shall we set a 10-min call with our documentation expert?
+        Reply BOOK NOW.
+      week_4: |
+        📂 We can share key approval pages during a short review session.
+        Talk to our legal desk — reply REVIEW CALL.
+      week_5: |
+        🏡 Every property's safety starts with verified approvals. Want our consultant to clarify doubts?
+        Reply VERIFY.
+      week_6: |
+        🗓️ Our legal partner available this week — book your slot easily.
+        Reply LEGAL SLOT to fix.
+      week_7: |
+        💼 Would you like our lawyer to call directly for peace of mind?
+        Reply LAW CALL.
+      week_8: |
+        🙏 Your confidence matters to us. Our legal papers remain open for viewing anytime.
+        Reply CONTACT LEGAL for immediate support.
+
+    amenities_facility_concern:
+      week_1: |
+        🏗️ Hi {{Name}}, site work is progressing quickly — roads, lighting, and park development ongoing.
+        Reply SHOW UPDATE to speak with our CRM executive.
+      week_2: |
+        🌳 Park work 50% done & streetlights installed. Want photo updates?
+        Reply SITE PHOTOS and our site manager will share.
+      week_3: |
+        💧 Water, EB, and drainage work are nearing completion.
+        Talk to our project engineer for details — reply ENGINEER CALL.
+      week_4: |
+        🏡 Amenities bring life to the project! Let's walk you through timelines.
+        Reply AMENITY CALL.
+      week_5: |
+        🛝 Kids' play area ready soon! Shall we plan a short revisit?
+        Reply PLAN VISIT.
+      week_6: |
+        🚧 Hi {{Name}}, 80% infra completed — only finishing works left.
+        Our CRM can show timeline charts — reply VIEW PLAN.
+      week_7: |
+        🏠 Site updates are impressive! Shall we schedule a video call to show progress live?
+        Reply VIDEO TOUR.
+      week_8: |
+        🙏 Amenities almost ready! Let's plan your final viewing with our BDM.
+        Reply FINAL VISIT.
+
+    timing_delay:
+      week_1: |
+        ⏰ Hi {{Name}}, completely understand timing decisions.
+        Let's keep in touch — our CRM can plan flexible payment options when you're ready.
+        Reply PLAN CALL.
+      week_2: |
+        💬 Festive season brings new deals. Want our sales consultant to explain?
+        Reply DEAL CALL.
+      week_3: |
+        📅 Let's block a tentative month for your purchase — no pressure, just clarity.
+        Reply BLOCK DATE to discuss.
+      week_4: |
+        💭 We'll keep sharing progress updates. Meanwhile, would you like a quick catch-up call with our CRM?
+        Reply CALL BACK.
+      week_5: |
+        📊 Values in {{Project Area}} have risen this quarter. Shall we review new price chart?
+        Reply REVIEW.
+      week_6: |
+        🏠 Whenever you're ready, we'll customise the plan for you.
+        Reply DISCUSS PLAN to talk.
+      week_7: |
+        📞 Let's re-connect and review best timing for your next step.
+        Reply CALL ME.
+      week_8: |
+        🙏 We'll stay in touch with latest updates. For personal guidance, reply CONTACT TEAM anytime.
+
+  developer_notes:
+    template_constraints:
+      max_chars_per_message: 1024
+      platform: "WATI compatible"
+    merge_fields:
+      - "{{Name}}"
+      - "{{Project}}"
+      - "{{Company}}"
+      - "{{Project Area}}"
+    attachments: "Optional (image/poster slot)"
+    reply_keywords:
+      - CALL ME
+      - HELP
+      - REVIEW CALL
+      - SHOW OPTIONS
+      - TALK NOW
+      - BOOK CALL
+      - HOLD UNIT
+      - JOIN VISIT
+      - LEGAL CALL
+      - CONNECT AGAIN
+    keyword_behavior: "Each reply keyword links to CRM follow-up task creation"
+
+
+# ============================================================
+# STEP 10 — CRM DASHBOARD REPORTING
+# ============================================================
+step_10_dashboard_reporting:
+  title: "Reporting & Dashboard System"
+  objective: >
+    Convert all SellBot activities into real-time visual performance dashboards
+    showing Marketing, Sales, People performance, and overall business health
+    for the promoter in a single glance.
+
+  dashboard_structure:
+
+    view_1_marketing_performance:
+      purpose: "Track how effective every rupee spent on marketing is"
+      key_metrics:
+        - Total Leads Generated (this month)
+        - Ad Budget Spent (FB, Google, Instagram etc.)
+        - Cost Per Lead (CPL)
+        - Lead Source Breakdown (% from Portals, Social Media, Walk-ins)
+        - Lead Quality Ratio (Hot + Warm % vs Cold + Junk %)
+        - "Campaign ROI = (Confirmed Bookings Value / Ad Spend)"
+        - Top 5 Performing Campaigns (Based on Conversions)
+        - "Automation Performance (WhatsApp + Email Open Rate, Response Rate)"
+      developer_notes:
+        data_source: "Lead Source and Campaign modules"
+        filters:
+          - Date Range
+          - Platform
+        kpi_widgets: "Color-coded (green = on target, red = below target)"
+
+    view_2_sales_conversion:
+      purpose: "Monitor how effectively leads are converted into site visits and bookings"
+      key_metrics:
+        - Total Qualified Leads (Hot + Warm + Cold)
+        - Site Visits Scheduled / Completed / Pending
+        - "Site Visit → Booking Conversion Rate (%)"
+        - Average Response Time from Lead → First Call
+        - "Follow-Up Compliance (% of tasks completed on time)"
+        - Booking Pipeline (Value + Count + Expected Closing Date)
+        - Total Sales Revenue This Month
+        - Top 3 Objection Reasons (Budget, Location, Loan)
+        - 60-Day Cycle Status (Active / Expired / Converted %)
+      developer_notes:
+        data_source: "Leads + Site Visit + Objection modules"
+        charts:
+          - "Bar chart for conversion flow"
+          - "Pie chart for objection distribution"
+        drill_down: "Booking value → client record"
+
+    view_3_people_performance:
+      purpose: "Evaluate how each team member performs against KPIs"
+      crm_executive_metrics:
+        - Calls Made / Tasks Completed Daily
+        - "Qualified Leads Generated (H/W/C Count)"
+        - "On-Time Follow-Up Rate (%)"
+        - "Response Rate from Clients (% who replied to WhatsApp)"
+        - Conversions Moved to Site Visit
+      bdm_metrics:
+        - Site Visits Conducted
+        - "Feedback Forms Submitted (on time %)"
+        - "Objections Captured Properly (Y/N)"
+        - "Visit → Booking Conversion Rate (%)"
+        - Customer Feedback Rating (Post-visit)
+      marketing_team_metrics:
+        - "Ad Campaigns Executed (On Time %)"
+        - CPL vs Target Variance
+        - "Ad A/B Testing Improvement (%)"
+        - Lead Quality Ratio vs Previous Month
+      developer_notes:
+        report_folders: ["CRM", "BDM", "Marketing"]
+        tl_digest: "Daily email summary auto-trigger at 6 PM"
+        performance_badges: "Gold / Silver / Bronze based on score"
+
+    view_4_business_owner_executive_summary:
+      purpose: "One-screen view for the promoter showing everything that matters"
+      widgets:
+        - Total Leads Generated + This Month Change %
+        - Site Visits Done / Booking Done / Pending Registrations
+        - Revenue Pipeline (Value Booked + Expected)
+        - Marketing Spend vs ROI (Conversion Value %)
+        - Top 5 Performing Employees
+        - Top 3 Objections This Month
+        - Project-wise Sales Progress Chart (Sold % vs Target)
+        - "Forecast → 'Expected Revenue Next 30 Days'"
+        - Customer Satisfaction Score (Avg from Feedback Forms)
+      developer_notes:
+        data_combination: "Marketing + Sales + People Dashboards"
+        date_filters: ["Today", "This Week", "This Month"]
+        layout: "Summary cards at top + charts below"
+
+  smart_automation_features:
+    - Daily Snapshot via Email to Business Owner (Top KPIs)
+    - Weekly Performance Digest to Team Leaders
+    - "Auto-Alert for Low Follow-Up Compliance (< 80%)"
+    - "Auto-Alert for Unattended Hot Leads (> 2 Days No Call)"
+    - Printable PDF Reports for Monthly Review Meetings
+
+  developer_implementation_notes:
+    tools: "Zoho Analytics / Zoho CRM Reports Builder"
+    data_sources:
+      - Leads
+      - Campaigns
+      - Tasks
+      - Site Visits
+      - Objections
+      - Bookings
+      - Payments
+    update_frequency: "Real-Time via API / Every 1 Hour Sync"
+    permissions:
+      crm_exec: "Own leads only"
+      tl: "Team data"
+      owner: "Full access"
+    color_legend:
+      on_target: "🟢 ≥ 90%"
+      average: "🟡 70–89%"
+      critical: "🔴 < 70%"
+
+  outcome:
+    - Transparent insight for every stakeholder
+    - Immediate visibility of bottlenecks
+    - Data-driven decisions on marketing spend and team efficiency
+    - Promoter can see entire sales engine health in one dashboard
+
+  monthly_review_report:
+    title: "Monthly Review Report Template"
+    description: "Auto-emailed summary for business owner at end of every month"
+    trigger: "Last day of every month at 7 PM"
+    recipients:
+      - Owner
+      - CRM Head
+      - Marketing Head
+      - BDM Lead
+    email_subject: '"{{Project}} | Monthly Growth Report – {{Month YYYY}}"'
+    attachment: "PDF snapshot (Zoho Analytics Dashboard → Export to PDF)"
+
+    sections:
+      project_overview:
+        fields:
+          - "Project Name: {{Project}}"
+          - "Month Covered: {{Month, Year}}"
+          - "Prepared By: SellBot-360 System"
+          - "Report Date: {{Date}}"
+
+      marketing_performance_summary:
+        metrics:
+          - Total Leads
+          - Ad Spend
+          - CPL
+          - Lead Source Breakdown
+          - Lead Quality Ratio
+          - Campaign ROI
+        highlights:
+          - "Top Performing Platform: {{TopPlatform}}"
+          - "Best Campaign: {{TopCampaign}}"
+          - "Under-performing Ad: {{LowCampaign}}"
+
+      sales_performance_summary:
+        metrics:
+          - Qualified Leads
+          - Site Visits
+          - Bookings
+          - Conversion Rate
+        top_3_non_closure_reasons:
+          - "{{Reason1}}"
+          - "{{Reason2}}"
+          - "{{Reason3}}"
+        kpis:
+          - "Follow-Up Efficiency: {{FollowUpCompliance%}} %"
+          - "Avg Response Time: {{AvgResponseTime}} hrs"
+
+      people_performance_summary:
+        crm_team:
+          - "Avg Calls per Day: {{CallsPerDay}}"
+          - "Follow-Ups on Time: {{OnTime%}} %"
+          - "Hot Lead Conversions: {{HotConv%}} %"
+        bdm_team:
+          - "Site Visits Handled: {{VisitsHandled}}"
+          - "Feedback Forms Submitted On Time: {{FeedbackOnTime%}} %"
+          - "Visit → Booking Conversion: {{BDMConv%}} %"
+        marketing_team:
+          - "Campaigns Executed: {{CampaignsRun}}"
+          - "CPL vs Target Variance: {{CPLVariance}} %"
+        top_performer: "🏆 {{EmployeeName}} – {{Designation}}"
+
+      customer_experience_summary:
+        fields:
+          - "CustomerQuote1: {{CustomerQuote1}}"
+          - "CustomerQuote2: {{CustomerQuote2}}"
+
+      insights_and_recommendations:
+        system_observations:
+          - "Marketing efficiency: {{CommentMarketing}}"
+          - "Lead Response Speed: {{CommentResponse}}"
+          - "CRM Follow-up Consistency: {{CommentCRM}}"
+          - "Conversion Pattern: {{CommentConversion}}"
+        action_plan_next_month:
+          - "Improve {{FocusArea1}} by {{%Goal}} %"
+          - "Launch new campaign on {{Channel}}"
+          - "Strengthen follow-ups on Hot Leads within {{Hours}} hrs"
+          - "Schedule training for {{Team}} on {{Topic}}"
+
+      financial_snapshot:
+        fields:
+          - Bookings Value Confirmed
+          - Revenue Collected
+          - Expected Collection Next 30 Days
+          - Ad Spend vs Revenue Ratio
+
+      upcoming_milestones:
+        fields:
+          - Pending Registrations
+          - Site Visits Scheduled
+          - Project Completion Milestones
+
+      final_remarks: >
+        "SellBot-360 system continues to improve lead handling, conversion tracking,
+        and automation efficiency. The upcoming month will focus on closing hot leads
+        faster, enhancing CRM discipline, and optimising ad ROI."
+
+
+# ============================================================
+# STEP 11 — CLIENT FEEDBACK & SUCCESS CAPTURE
+# ============================================================
+step_11_client_feedback_success_capture:
+  title: "Customer Feedback Form"
+  description: "To be filled by BDM / Registration Executive during customer registration"
+
+  form_sections:
+
+    project_and_customer_info:
+      fields:
+        - Project Name
+        - Customer Name
+        - Mobile Number
+        - Date of Registration
+        - BDM / Executive Name
+
+    section_A_marketing_first_impression:
+      q1_source:
+        question: "How did you first hear about our project?"
+        options:
+          - Facebook / Instagram
+          - Google / Website
+          - Real Estate Portal (99acres, MagicBricks, etc.)
+          - Referral / Friend / Family
+          - Others
+      q2_marketing_materials_rating:
+        question: "Rate your experience with our marketing communication materials"
+        scale: "1 (Poor) to 5 (Excellent)"
+      q3_clarity_of_ads:
+        question: "How clear and informative were the ads and materials you saw?"
+        options: ["Confusing", "Average", "Clear", "Very Clear"]
+      q4_response_time:
+        question: "Did the marketing team respond promptly to your initial inquiry?"
+        options: ["Yes", "No", "Somewhat"]
+
+    section_B_crm_telecalling_experience:
+      q5_crm_experience:
+        question: "How was your experience with our CRM / telecalling team?"
+        options: ["Poor", "Fair", "Good", "Excellent"]
+      q6_project_explanation:
+        question: "Did our CRM executive explain all project details clearly over call or WhatsApp?"
+        options: ["Yes", "No", "Partially"]
+      q7_followup_frequency:
+        question: "Was the follow-up frequency appropriate?"
+        options: ["Too Many Calls", "Just Right", "Too Few"]
+      q8_professionalism:
+        question: "How polite and professional was the communication?"
+        scale: "1 to 5"
+
+    section_C_site_visit_experience:
+      q9_bdm_name:
+        question: "Who handled your site visit? (BDM Name)"
+        type: "Open text"
+      q10_visit_rating:
+        question: "Rate your experience at the site visit"
+        scale: "1 to 5"
+      q11_scheduling:
+        question: "Was the site visit scheduled and coordinated smoothly?"
+        options: ["Yes", "No"]
+      q12_pressure:
+        question: "Did you feel any pressure or discomfort during the visit?"
+        options: ["Yes", "No", "Slightly"]
+      q13_impressed_by:
+        question: "What impressed you most about the project during your visit?"
+        type: "Open text"
+      q14_improvements:
+        question: "What improvements would you suggest for our site visit process?"
+        type: "Open text"
+
+    section_D_engineering_technical_team:
+      q15_queries_addressed:
+        question: "Did our engineering or site team address your queries (layout, soil, approvals)?"
+        options: ["Yes", "No", "Partially"]
+      q16_technical_confidence:
+        question: "Rate your confidence in the technical quality of the project"
+        scale: "1 to 5"
+      q17_approvals_explained:
+        question: "Were you shown or explained project approvals and documents properly?"
+        options: ["Yes", "No", "Partially"]
+      q18_additional_comments:
+        question: "Any additional comments on the technical / site team?"
+        type: "Open text"
+
+    section_E_registration_documentation:
+      q19_registration_process:
+        question: "Was the registration process smooth and transparent?"
+        options: ["Yes", "No", "Delayed"]
+      q20_coordination_rating:
+        question: "Rate the coordination during registration"
+        scale: "1 to 5"
+      q21_documents_received:
+        question: "Did you receive your original documents and receipts promptly?"
+        options: ["Yes", "No"]
+      q22_registration_suggestions:
+        question: "Suggestions to improve the registration process"
+        type: "Open text"
+
+    section_F_overall_experience:
+      q23_overall_satisfaction:
+        question: "Overall, how satisfied are you with your experience from enquiry to registration?"
+        scale: "1 (Very Dissatisfied) to 5 (Highly Satisfied)"
+      q24_recommend:
+        question: "Would you recommend our company / project to others?"
+        options: ["Definitely", "Maybe", "No"]
+      q25_future_updates:
+        question: "Would you like to receive updates on future projects and offers?"
+        options: ["Yes", "No"]
+
+    section_G_testimonial_referral:
+      q26_written_testimonial:
+        question: "Would you like to give a short written testimonial?"
+        type: "Open text"
+      q27_video_testimonial:
+        question: "Would you be open to a short video testimonial?"
+        options: ["Yes", "No"]
+      q28_referrals:
+        question: "Do you have friends or family who may be interested in similar properties?"
+        options: ["Yes", "No"]
+        if_yes:
+          fields:
+            - "Referral 1: Name + Phone"
+            - "Referral 2: Name + Phone"
+
+    final_acknowledgement:
+      text: "I hereby confirm that the above feedback was given voluntarily and truthfully."
+      fields:
+        - Customer Signature
+        - BDM / Executive Signature
+        - Date
+
+  developer_notes:
+    - Link form to Client Database module post-booking
+    - Store numeric scores for analytics (Site Visit Rating Avg, Registration Rating Avg)
+    - Enable upload of optional photo/video testimonial from mobile
+    - Auto-trigger Thank You WhatsApp message after form submission
+    - Create optional Referral Follow-Up Task when referral data is entered
+
+
+# ============================================================
+# STEP 12 — REFERRAL PROGRAM ACTIVATION
+# ============================================================
+step_12_referral_program:
+  title: "Referral Automation Flow"
+  objective: >
+    Automatically invite every satisfied customer to refer friends/family/colleagues,
+    reward them after successful bookings, and continuously engage them through
+    recognition — without any manual coordination.
+
+  trigger:
+    condition: "After Customer Feedback Form submission"
+    filter: "Satisfaction Score ≥ 4 OR 'Would you recommend us?' = Yes"
+
+  workflow:
+
+    step_1_referral_invitation:
+      timing: "Within 24 hrs of registration"
+      whatsapp_message: |
+        🌟 Hello {{CustomerName}}, thank you for trusting {{CompanyName}} and completing
+        your registration with {{ProjectName}}!
+        We're thrilled to have you in our community 🙏
+        If you know a friend, colleague, or relative looking for a property like yours,
+        simply share their number — and we'll take care of the rest.
+        Every confirmed referral earns exclusive rewards 🎁
+        Reply REFER NOW to get started or click below to submit your referral 👇
+        🔗 {{ReferralFormLink}}
+      email_subject: "Share Your Experience — Earn Rewards for Referrals 🌟"
+      email_body: |
+        Hi {{CustomerName}},
+        We're delighted to have you as part of the {{ProjectName}} family! Your support means the world to us.
+        If you enjoyed your experience with our team, help your friends and family benefit from it too.
+        When someone you refer books with us, you'll receive a special reward — cash bonus, vouchers,
+        or gold coin (based on project policy).
+        👉 Click here to refer: {{ReferralFormLink}}
+        Our CRM executive will personally connect with your referrals, keeping you informed every step of the way.
+        Thank you once again for being part of {{CompanyName}}.
+        Warm regards,
+        Customer Delight Team
+        {{CompanyName}}
+
+    step_2_referral_capture_form:
+      fields:
+        - Referrer Name
+        - Referrer Mobile
+        - Referral Name
+        - Referral Mobile
+        - Referral Email (optional)
+        - Relationship
+        - Project Interested In
+
+    step_3_internal_task_flow:
+      tasks:
+        - Assign referral lead to CRM Executive
+        - Create Welcome Call task within 24 hrs
+        - Tag lead as Referral_Source = "Customer Referral"
+        - Notify referrer: "Your referral has been registered"
+
+    step_4_referral_reward_automation:
+      trigger: "Booking linked to referral → CRM marks Referral = Confirmed"
+      whatsapp_to_referrer: |
+        🎉 Congratulations {{CustomerName}}!
+        Your referral {{ReferralName}} has successfully booked at {{ProjectName}} 🏡
+        Thank you for your trust and support ❤️
+        Your reward ({{RewardType}}) will be processed shortly.
+        To see your referral status anytime, reply MY REFERRALS.
+      email_to_referrer:
+        subject: "Congratulations! Your Referral Was Successful 🎉"
+        body: |
+          Hi {{CustomerName}},
+          We're excited to inform you that your referral, {{ReferralName}}, has just completed
+          a booking at {{ProjectName}}.
+          Your reward — {{RewardType}} — is now being processed. Our CRM team will confirm delivery shortly.
+          Thank you for spreading the word and helping others find their dream property!
+          Warm regards,
+          Referral Rewards Desk
+          {{CompanyName}}
+
+    step_5_referral_tracking_dashboard:
+      metrics:
+        - Total Referrals Submitted
+        - Referrals In Progress
+        - Referrals Converted (Bookings)
+        - Rewards Processed / Pending
+        - Top Referrers (Monthly)
+
+    step_6_reward_program_types:
+      configurable_per_project: true
+      types:
+        cash_reward: "₹10,000–₹50,000 per booking"
+        gold_coin_gift_voucher: "For each successful referral"
+        upgrade_discount: "For repeat buyers"
+        festive_offer: "Double reward during Diwali, Pongal etc."
+        monthly_lucky_draw: "All active referrers enter automatically"
+
+    step_7_recognition_retention_loop:
+      quarterly_message: |
+        🏆 Congratulations {{CustomerName}}!
+        You're among our Top 10 Referrers this quarter.
+        Thank you for helping more families join {{ProjectName}} ❤️
+      vip_actions:
+        - Add referrers to VIP Broadcast Group for early project previews
+        - Tag as "Ambassador" in CRM for priority notifications
+
+  developer_crm_integration:
+    module: "Referral Management"
+    relations: "Client Database → Referral → Leads"
+    status_flow:
+      - New
+      - In Progress
+      - Confirmed
+      - Rewarded
+    triggers:
+      after_feedback_score_gte_4: "Send Referral Invite"
+      after_booking_confirmed: "Send Reward Message"
+    dashboard_filters:
+      - Monthly
+      - Quarterly
+      - Project-wise
+
+  outcomes:
+    - Converts 10–20% of happy customers into repeat promoters
+    - Creates a zero-cost marketing funnel with automated trust loops
+    - Ensures full reward transparency and timely acknowledgment
+
+
+# ============================================================
+# STEP 13 — BUSINESS OWNER MASTER DASHBOARD
+# ============================================================
+step_13_business_owner_master_dashboard:
+  title: "Business Owner Master Dashboard"
+  subtitle: "Your Real-Time Growth Control Panel"
+  objective: >
+    Provide the business owner or director with a single easy-to-read interface
+    displaying the full sales and marketing ecosystem health — from lead generation
+    to site visit, booking, referral, and team performance — updated in real time.
+
+  dashboard_sections:
+
+    section_1_executive_snapshot:
+      description: "Visible immediately on login or daily auto-email"
+      widgets:
+        - Total Leads This Month
+        - Site Visits This Month
+        - Bookings This Month
+        - Revenue Generated
+        - Marketing Spend
+        - Active Hot Leads
+
+    section_2_marketing_engine_health:
+      purpose: "Track where enquiries come from and how efficiently marketing money is used"
+      metrics:
+        - Lead Source Breakdown (%)
+        - Cost Per Lead by Platform
+        - ROI per Platform
+        - CPL Trend (month over month)
+        - Best Performing Campaign
+      visualization:
+        - "Pie chart (source mix)"
+        - "Bar chart (ROI per platform)"
+        - "Trend line (CPL drop)"
+
+    section_3_sales_funnel_performance:
+      purpose: "Show exactly where leads stand in the journey"
+      funnel_stages:
+        - Leads Captured
+        - Leads Qualified
+        - Site Visits Booked
+        - Site Visits Completed
+        - 60-Day Follow-Up Active
+        - Bookings Confirmed
+      chart_type: "Horizontal funnel with color coding"
+      color_coding:
+        active: "Green"
+        pending: "Orange"
+        dropped: "Red"
+
+    section_4_people_team_performance:
+      highlights:
+        top_performer: "{{Name}} – {{Role}}"
+        underperforming_alert: "Auto-alert to TL & HR for staff below 60% KPI"
+        training_reminder: "List of employees pending sales training review"
+
+    section_5_project_wise_sales_tracker:
+      metrics:
+        - Units Available
+        - Units Sold
+        - Units Booked (pending registration)
+        - Revenue per Project
+      visualization:
+        chart: "Bar chart by project"
+        color_coding:
+          above_75_pct_sold: "🟢 Green"
+          between_50_75_pct: "🟡 Yellow"
+          below_50_pct: "🔴 Red"
+      drill_down: "Click project name → open detailed SellBot analytics"
+
+    section_6_objection_followup_analytics:
+      widgets:
+        - Avg Follow-Ups per Lead
+        - "Follow-Up Compliance (%)"
+        - No. of Leads Exceeding 60-Day Rule
+        - Top 3 Objection Types This Month
+        - Objection Resolution Rate
+
+    section_7_customer_experience_referrals:
+      metrics:
+        - Average Customer Satisfaction Score
+        - Total Referrals Submitted
+        - Referral Conversions
+        - Pending Rewards
+      feature: "Click 'Referrals' to view referral leaderboard and pending rewards"
+
+    section_8_financial_overview:
+      metrics:
+        - Revenue Booked This Month
+        - Revenue Collected
+        - Expected Collection (30 days)
+        - Ad Spend vs Revenue
+        - Pending Registration Value
+      visualization: "Trend lines for 3-month comparison"
+
+    section_9_forecast_business_health_meter:
+      business_health_score:
+        formula: "Weighted mix of (Conversion Rate + Follow-Up Compliance + ROI + Feedback Index)"
+        thresholds:
+          excellent: "80–100 🟢"
+          moderate: "60–79 🟡"
+          action_needed: "<60 🔴"
+
+    section_10_alerts_actionable_insights:
+      alerts:
+        - "Leads not followed in 48 hrs: {{Count}}"
+        - "Bookings awaiting registration: {{Count}}"
+        - "Overdue site visits (rescheduled >3 times): {{Count}}"
+        - "Recommended Focus Area: {{SystemTip}}"
+        - "Next Team Review Meeting: {{Date}}"
+
+  automation_and_developer_notes:
+    platform: "Zoho Analytics (connected to Zoho CRM + Campaigns)"
+    sync: "Real-time or 1-hour interval sync"
+    user_access_levels:
+      owner: "Full Access"
+      tl_department_head: "Filtered view by team"
+    automation:
+      daily_summary: "8 AM via Email / WhatsApp to Owner"
+      weekly_snapshot: "Friday 6 PM to Team"
+      monthly_pdf: "Growth Review auto-export (same as Step 10.1)"
+    visual_layout:
+      left_navigation_tabs:
+        - Marketing
+        - Sales
+        - People
+        - Projects
+        - Finance
+        - Forecast
+      top_search_bar: "Quick Filter (Project / Date / Source)"
+
+  outcome:
+    - Instantly know how the business is performing across every project
+    - Identify weak points (ads, follow-ups, conversion)
+    - Track real ROI and team productivity daily
+    - Take data-driven decisions instead of assumptions
+    - Run entire real-estate sales engine on autopilot with visibility
+
+
+# ============================================================
+# STEP 14 — LONG-TERM AUTOMATION & BRAND ENGAGEMENT
+# ============================================================
+step_14_longterm_automation_brand_engagement:
+  title: "Long-Term Automation & Brand Engagement"
+  objective: "Keep your brand alive in the buyer's mind forever"
+
+  automation_flow:
+    target_audience:
+      - All past clients
+      - Unclosed leads
+    list_name: "SEO-Bot Nurturing List"
+
+    campaign_types:
+      festival_greetings:
+        - Pongal
+        - Diwali
+        - New Year
+        - Other regional festivals
+      market_updates:
+        - Real-Estate Tips
+        - Area-wise Price Updates
+        - Infrastructure News
+      new_launches:
+        - New Project Announcements
+        - Early-Bird Offers
+        - Exclusive Preview Invitations
+      investment_education:
+        - Investment ROI Comparisons
+        - Rent vs Buy Educational Content
+        - Area Appreciation Data
+      client_success_stories:
+        - Client Testimonial Showcases
+        - Referral Reminders
+
+    re_activation:
+      frequency: "Every 90 days"
+      method: "Auto check-in WhatsApp message"
+      purpose: "Re-engage old leads with personalized updates"
+
+    channels:
+      - WhatsApp (Monthly broadcasts)
+      - Email (Monthly campaigns)
+
+  goals:
+    - Sustain trust and top-of-mind awareness
+    - Drive repeat purchases
+    - Activate referral loop
+    - Maintain engagement without manual effort
+
+
+# ============================================================
+# GLOBAL DEVELOPER REFERENCE
+# ============================================================
+global_developer_reference:
+
+  crm_fields_summary:
+    lead_module:
+      - Lead_Name
+      - Mobile_Number
+      - Email
+      - Lead_Source
+      - Campaign_Name
+      - CRM_Executive_Assigned
+      - Lead_Status
+      - Lead_Score_Total
+      - Lead_Type (Hot/Warm/Cold/Junk)
+      - TL_Approved_for_Closure
+      - Attach_from_Project_Assets (multi-select)
+      - Score_Revision_Log
+      - Visit_Status (Booked/Rescheduled/Completed)
+      - Calendar_Event_ID
+      - Reminder_Count
+      - Visit_Verified (Yes/Pending)
+      - Objection_Status (Captured/None)
+      - Urgency_Level (High/Medium/Low/Not Decided)
+      - Referral_Source
+
+    site_visit_feedback_module:
+      - Client_Photo_URL
+      - BDM_Selfie_URL
+      - Client_Signature_URL
+      - Visit_Date
+      - Visit_Time
+      - BDM_Name
+      - CRM_Executive
+      - Project_Name
+      - Overall_Impression
+      - Objection_Types (multi-select)
+      - Objection_Description
+      - Decision_Influencers
+      - Urgency_Level
+      - Next_Committed_Step
+      - Next_Step_Date
+      - BDM_Notes
+      - TL_Override (boolean)
+      - TL_Override_Reason
+
+    referral_module:
+      - Referrer_Name
+      - Referrer_Mobile
+      - Referral_Name
+      - Referral_Mobile
+      - Referral_Status (New/In Progress/Confirmed/Rewarded)
+      - Reward_Type
+      - Reward_Processed (boolean)
+
+  whatsapp_template_names:
+    - auto_welcome_message_project
+    - call_attempt_day1 through call_attempt_day5
+    - call_attempt_day6_closure
+    - site_visit_client_confirmation
+    - site_visit_bdm_notification
+    - site_visit_tl_notification
+    - visit_reminder_24hr
+    - visit_missed_next_day
+    - visit_weekly_reminder
+    - visit_final_reminder_week8
+    - post_visit_thankyou
+    - post_visit_nextstep_confirm
+    - post_visit_feedback_link
+    - objection_location_week1 through week8
+    - objection_budget_week1 through week8
+    - objection_loan_week1 through week8
+    - objection_family_week1 through week8
+    - objection_legal_week1 through week8
+    - objection_amenities_week1 through week8
+    - objection_timing_week1 through week8
+    - referral_invitation_whatsapp
+    - referral_reward_confirmed
+    - referral_top_referrer_quarterly
+
+  merge_fields_global:
+    - "{{Name}}"
+    - "{{CRM Executive}}"
+    - "{{BDM Name}}"
+    - "{{Project Name}}"
+    - "{{Project Area}}"
+    - "{{Company Name}}"
+    - "{{Date}}"
+    - "{{Time}}"
+    - "{{Next Step}}"
+    - "{{CustomerName}}"
+    - "{{ReferralName}}"
+    - "{{RewardType}}"
+    - "{{ReferralFormLink}}"
+
+  automation_triggers_summary:
+    - trigger: "Lead Created"
+      action: "Send Auto Welcome (WhatsApp + Email)"
+    - trigger: "Lead Assigned to CRM"
+      action: "Create 5 Call Attempt Tasks"
+    - trigger: "Call Not Connected"
+      action: "Send Day X WhatsApp Template"
+    - trigger: "5 Attempts Completed"
+      action: "Create TL Review Task"
+    - trigger: "Lead Qualified"
+      action: "Send Qualification WhatsApp; Create Follow-up Tasks"
+    - trigger: "Site Visit Booked"
+      action: "Send Google Calendar invite + 3 WhatsApp alerts"
+    - trigger: "Visit_Date – 1 day"
+      action: "Send 24-hour Reminder"
+    - trigger: "Visit_Status ≠ Completed (weekly)"
+      action: "Send Weekly Reminder Template; increment Reminder_Count"
+    - trigger: "BDM Marks Visit Completed"
+      action: "Open Feedback Form; Enroll in Step 9 if objection present"
+    - trigger: "Feedback Form Submitted"
+      action: "Send Thank You; Create Next Step Tasks; Pipe to Step 9"
+    - trigger: "Step 9 Weekly (8 weeks)"
+      action: "Send Objection-Specific WhatsApp Template"
+    - trigger: "Satisfaction Score ≥ 4"
+      action: "Send Referral Invitation"
+    - trigger: "Referral Booking Confirmed"
+      action: "Send Reward Message to Referrer"
+    - trigger: "Last day of month at 7 PM"
+      action: "Send Monthly Review Report Email"
+    - trigger: "Every 90 days (unclosed leads)"
+      action: "Send Re-activation WhatsApp"
+
+  permissions_matrix:
+    crm_executive:
+      access:
+        - Own leads only
+        - Call attempt tasks
+        - Qualification form
+        - Site visit booking
+        - Own dashboard KPIs
+    bdm:
+      access:
+        - Assigned site visits
+        - Site Visit Feedback Form
+        - Project assets (read)
+    team_leader:
+      access:
+        - Team leads and tasks
+        - TL approval workflows
+        - Team performance dashboard
+        - Closure approvals
+    business_owner:
+      access:
+        - Full system access
+        - Master dashboard
+        - Financial overview
+        - All reports
+
+  integrations_required:
+    - Zoho CRM (core)
+    - WATI / Interakt / Twilio (WhatsApp API)
+    - Google Calendar API
+    - Zoho Analytics
+    - Zoho WorkDrive / AWS S3 (media storage)
+    - Facebook / Google Ads (lead source tracking)
+    - Bank Partner APIs (optional for loan coordination)
+
+# ============================================================
+# END OF SELLBOT-360™ DEVELOPER BLUEPRINT
+# ============================================================

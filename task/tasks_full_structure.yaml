@@ -1,0 +1,370 @@
+tasks_module:
+  module_name: Tasks
+  internal_module_name: Tasks
+  url_pattern: /crm/org60043078423/tab/Tasks
+  total_records: 4276
+  layout_id: "955332000000425353"
+  account_id: "955332000000406001"
+  organisation: Kurinjee Promoters
+  org_id: "60043078423"
+  module_type: Standard CRM Module
+  pagination: 1 to 100 per page (approximately 43 pages total)
+  default_sort: Due Date (ascending)
+  sort_indicator: "* (asterisk on Due Date column)"
+
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/Tasks/custom-view/955332000000435996/list
+    custom_view_id: "955332000000435996"
+    active_view_label: All Tasks
+    columns_visible:
+      - name: "(Row options / Edit)"
+        type: edit_link_per_row
+        sortable: false
+      - name: "(Checkbox)"
+        type: multi_select
+        sortable: false
+      - name: "(Activity date badge)"
+        type: activity_indicator
+        sortable: false
+      - name: Subject
+        type: text_link
+        sortable: true
+        filter_dropdown: All
+        column_options: true
+      - name: Telecaller
+        type: text
+        sortable: true
+        column_options: true
+      - name: Due Date
+        type: date_DD_MM_YYYY
+        sortable: true
+        active_sort: true
+        sort_indicator: asterisk
+        column_options: true
+      - name: Status
+        type: text
+        sortable: true
+        column_options: true
+      - name: Priority
+        type: text
+        sortable: true
+        column_options: true
+      - name: Related To
+        type: link_account_or_lead
+        sortable: true
+        column_options: true
+      - name: Contact Name
+        type: link_contact
+        sortable: true
+        column_options: true
+      - name: Task Owner
+        type: text
+        sortable: true
+        column_options: true
+      - name: "(Column settings icon)"
+        type: column_configuration
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: All Tasks
+        type: custom_view
+        active: true
+        custom_view_id: "955332000000435996"
+      - name: "... more_views_dropdown"
+        options:
+          - New Custom View
+          - Manage Custom View
+          - Show custom views as Dropdown
+    view_switchers:
+      - icon: List View
+        active: true
+      - icon: Kanban / Split View
+      - icon: Canvas / Clock View
+      - icon: Custom List View
+      - icon: Tile View
+      - icon: Chevron dropdown (more views)
+    toolbar_buttons:
+      - label: Filter
+        icon: funnel
+        behavior: opens_closes_filter_panel
+      - label: Sort
+        icon: sort_arrows
+        behavior: opens_sort_options
+        active: true
+        active_indicator: "✕ (clear sort) button visible"
+      - label: Refresh Custom View
+        behavior: reloads_current_view
+      - label: Create Task
+        type: split_button
+        color: blue_solid
+        primary_nav: /tab/Tasks/create?layoutId=955332000000425353
+        secondary_arrow: "▼ dropdown"
+      - label: "Actions (...)"
+        type: overflow_menu
+        items:
+          - label: Import Tasks
+            href: /crm/org60043078423/settings/import?module=Tasks&step=1
+          - label: Mass Delete
+            href: /crm/org60043078423/tab/Tasks/actions/mass-tools?type=mass_delete
+          - label: Mass Update
+            href: /crm/org60043078423/tab/Tasks/actions/mass-tools?type=mass_update
+          - label: Manage Tags
+            href: /crm/org60043078423/settings/manage-tags?module=Tasks
+          - label: Export Tasks
+            type: in_page_action
+          - label: Print View
+            type: in_page_action
+        note: "Leaner than other modules — no Mass Email, Autoresponders, Approve, Deduplicate, Client Script, or Zoho Sheet View"
+
+  # ─────────────────────────────────────────────
+  # FILTER PANEL
+  # ─────────────────────────────────────────────
+  filter_panel:
+    title: "Filter Tasks by"
+    search_input:
+      placeholder: Search
+      type: text
+    sections:
+      system_defined_filters:
+        label: System Defined Filters
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Touched Records
+          - Untouched Records
+          - Record Action
+          - Related Records Action
+          - Locked
+        note: "Only 5 filters — fewer than Contacts/Deals (8). No Latest Email Status, Activities, or Cadences."
+      filter_by_fields:
+        label: Filter By Fields
+        collapsible: true
+        filter_type: checkbox
+        total_fields: 18
+        fields:
+          - Approver
+          - Auto Close
+          - Closed Time
+          - Contact Name
+          - Created By
+          - Created Time
+          - Due Date
+          - Last Activity Time
+          - Modified By
+          - Modified Time
+          - Priority
+          - Related To
+          - Status
+          - Subject
+          - Tag
+          - Task Owner
+          - Telecaller
+          - Type
+      filter_by_related_modules:
+        label: Filter By Related Modules
+        collapsible: true
+        filter_type: checkbox
+        modules:
+          - Notes
+        note: "Tasks only relates to Notes — very limited compared to Contacts (11 modules) and Deals (8 modules)"
+
+  # ─────────────────────────────────────────────
+  # RECORDS SAMPLE (FIRST 10 VISIBLE)
+  # ─────────────────────────────────────────────
+  records_sample:
+    - row: 1
+      subject: Eswaranagar
+      record_id: "955332000003567071"
+      telecaller: ""
+      due_date: "(none)"
+      status: Not Started
+      priority: High
+      related_to: "vijaya santhiyas (Lead)"
+      related_href: /crm/org60043078423/tab/Leads/955332000003567001
+      contact_name: ""
+      task_owner: Kurinjee Promoters
+    - row: 2
+      subject: Call
+      record_id: "955332000001682265"
+      telecaller: Sumathi
+      due_date: "(none)"
+      status: Not Started
+      priority: High
+      related_to: ""
+      contact_name: ""
+      task_owner: Kurinjee Promoters
+    - row: 3
+      subject: Register for upcoming CRM Webinars
+      record_id: "955332000000419999"
+      telecaller: ""
+      due_date: "29/06/2025"
+      status: Not Started
+      priority: Low
+      related_to: "King (Sample) (Account)"
+      related_href: /crm/org60043078423/tab/Accounts/955332000000419622
+      contact_name: Kris Marrier (Sample)
+      contact_href: /crm/org60043078423/tab/Contacts/955332000000419713
+      task_owner: Kurinjee Promoters
+    - row: 4
+      subject: Get Apporval from Manager
+      note: "Typo visible in UI"
+      record_id: "955332000000419993"
+      telecaller: ""
+      due_date: "30/06/2025"
+      status: In Progress
+      priority: High
+      related_to: "King (Sample) (Account)"
+      related_href: /crm/org60043078423/tab/Accounts/955332000000419622
+      contact_name: Kris Marrier (Sample)
+      contact_href: /crm/org60043078423/tab/Contacts/955332000000419713
+      task_owner: Kurinjee Promoters
+    - row: 5
+      subject: Call Followup
+      due_date: "05/08/2025"
+      status: Not Started
+      priority: High
+    - row: 6
+      subject: Call Followup
+      due_date: "06/08/2025"
+      status: Not Started
+      priority: High
+    - row: 7
+      subject: Call Followup
+      due_date: "07/08/2025"
+      status: Not Started
+      priority: High
+    - row: 8
+      subject: Call Followup
+      due_date: "08/08/2025"
+      status: Not Started
+      priority: High
+    - row: 9
+      subject: Call Followup
+      due_date: "09/08/2025"
+      status: Not Started
+      priority: High
+    - row: 10
+      subject: Call Followup
+      due_date: "10/08/2025"
+      status: Not Started
+      priority: High
+
+  # ─────────────────────────────────────────────
+  # STATUS & PRIORITY DISTRIBUTION
+  # ─────────────────────────────────────────────
+  status_values_visible:
+    - Not Started
+    - In Progress
+  priority_values_visible:
+    - High
+    - Normal
+    - Low
+  telecaller_values_visible:
+    - Sumathi
+    - Vijayasri
+    - "(blank — many rows have no telecaller)"
+
+  # ─────────────────────────────────────────────
+  # CREATE TASK FORM
+  # ─────────────────────────────────────────────
+  create_task_form:
+    url: /crm/org60043078423/tab/Tasks/create?layoutId=955332000000425353
+    layout_id: "955332000000425353"
+    edit_layout_link: /crm/org60043078423/settings/modules/Tasks/layouts/955332000000425353
+    form_actions:
+      - label: Save
+        type: primary_blue
+        behavior: save_and_navigate_to_detail
+      - label: Save and New
+        type: secondary_outline
+        behavior: save_and_open_fresh_form
+      - label: Cancel
+        type: secondary_outline
+        behavior: discard_and_return_to_list
+    navigation_guard:
+      message: "You have not saved your changes."
+      sub_message: "Are you sure you want to move away from this page?"
+      actions: ["Yes, Leave Page", "Stay Here"]
+    sections:
+      - section: Task Information
+        fields: [Subject, Task Owner, Due Date, Start Date, Send Notification, Hours to Complete, Task Type]
+      - section: Status & Priority
+        fields: [Status, Priority]
+      - section: Related Records
+        fields: [Related To, Contact Name, Telecaller, Approver]
+      - section: Description
+        fields: [Description]
+
+  # ─────────────────────────────────────────────
+  # DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/Tasks/{task_id}
+    access: click Subject from list view
+    edit_access: click Edit link (pencil icon) per row
+    tabs:
+      - Overview
+      - Related Lists (Notes only)
+
+  # ─────────────────────────────────────────────
+  # BOTTOM STATUS BAR (PERSISTENT)
+  # ─────────────────────────────────────────────
+  bottom_status_bar:
+    widgets:
+      - name: Visitors Online
+        type: live_counter
+      - name: Feedback on New UI
+        type: action_trigger
+        style: highlighted_purple
+      - name: Announcements
+        type: notification_list
+      - name: Mail
+        type: inbox_shortcut
+      - name: Motivator
+        type: gamification_leaderboard
+      - name: Sticky Notes
+        type: text_note_input
+      - name: Zia
+        type: ai_assistant
+      - name: Activity Reminders
+        type: reminder_list
+      - name: Recent Items
+        type: recently_viewed
+      - name: Accessibility
+        type: settings_panel
+    chat_bar:
+      - Chats
+      - Channels
+      - Contacts
+      - smart_chat_input: "Here is your Smart Chat (Ctrl+Space)"
+
+  # ─────────────────────────────────────────────
+  # SELLBOT-360 INTEGRATION
+  # ─────────────────────────────────────────────
+  sellbot_360_integration:
+    step_4_lead_assignment:
+      description: Auto-create 5 call attempt tasks on lead assignment
+      tasks_created:
+        - name: Call Attempt 1
+          due: Day 1
+        - name: Call Attempt 2
+          due: Day 2
+        - name: Call Attempt 3
+          due: Day 3
+        - name: Call Attempt 4
+          due: Day 4
+        - name: Call Attempt 5
+          due: Day 5
+      rules:
+        - Sequential progress required (cannot skip)
+        - Missed task → WhatsApp message to lead
+        - Day 6: TL review task created
+        - TL approval required to close unresponsive lead
+    hot_lead_followup:
+      tasks_created: 8
+      duration: 60 days
+    warm_lead_followup:
+      tasks_created: 4
+      duration: 30 days

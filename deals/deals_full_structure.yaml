@@ -1,0 +1,429 @@
+deals_module:
+  module_name: Deals
+  internal_module_name: Potentials
+  url_pattern: /crm/org60043078423/tab/Potentials
+  total_records: 9
+  layout_id: "955332000000425340"
+  account_id: "955332000000406001"
+  organisation: Kurinjee Promoters
+  org_id: "60043078423"
+  pagination: 1 to 9 per page (single page - all records visible)
+
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/Potentials/custom-view/955332000000441430/list?page=1
+    custom_view_id: "955332000000441430"
+    active_view_label: All Deals
+    columns_visible:
+      - name: "(Row options)"
+        type: hover_action_menu
+        sortable: false
+      - name: "(Checkbox)"
+        type: multi_select
+        sortable: false
+      - name: "(Activity date badge)"
+        type: last_activity_date
+        style: red_badge
+        sortable: false
+      - name: Contact Name
+        type: text_link
+        sortable: true
+        column_options: true
+      - name: Deal Name
+        type: text_link
+        sortable: true
+        filter_dropdown: All
+        column_options: true
+      - name: Amount
+        type: currency_INR
+        sortable: true
+        column_options: true
+      - name: Stage
+        type: text
+        sortable: true
+        column_options: true
+      - name: Closing Date
+        type: date_DD_MM_YYYY
+        sortable: true
+        column_options: true
+      - name: Deal Owner
+        type: text
+        sortable: true
+        column_options: true
+      - name: "(Column settings icon)"
+        type: column_configuration
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: All Deals
+        type: custom_view
+        active: true
+        custom_view_id: "955332000000441430"
+      - name: "... more_views_dropdown"
+        options:
+          - New Custom View
+          - Manage Custom View
+          - Show custom views as Dropdown
+    view_switchers:
+      - icon: List View
+        active: true
+      - icon: Kanban / Split View
+      - icon: Table / Grid View
+      - icon: Canvas / Clock View
+      - icon: Custom List View
+      - icon: Tile View
+      - icon: Chevron dropdown (more views)
+    toolbar_buttons:
+      - label: Filter
+        icon: funnel
+        behavior: opens_closes_filter_panel
+      - label: Sort
+        icon: sort_arrows
+        behavior: opens_sort_options
+      - label: Refresh Custom View
+        behavior: reloads_current_view
+      - label: Create Deal
+        type: split_button
+        color: blue_solid
+        primary_nav: /tab/Potentials/create?layoutId=955332000000425340
+        secondary_arrow: "▼ dropdown"
+      - label: "Actions (...)"
+        type: overflow_menu
+        items:
+          - label: Import Deals
+            href: /crm/org60043078423/settings/import?module=Potentials&step=1
+          - label: Import Notes
+            href: /crm/org60043078423/settings/import?module=Notes&step=1&parentModule=Potentials
+          - label: Mass Delete
+            href: /crm/org60043078423/tab/Potentials/actions/mass-tools?type=mass_delete
+          - label: Mass Update
+            href: /crm/org60043078423/tab/Potentials/actions/mass-tools?type=mass_update
+          - label: Manage Tags
+            href: /crm/org60043078423/settings/manage-tags?module=Potentials
+          - label: Drafts
+            href: /crm/org60043078423/tab/Potentials/actions/draft?module=Potentials
+          - label: Mass Email
+            href: /crm/org60043078423/settings/manage-mass-mail?module=Potentials
+          - label: Deduplicate Deals
+            type: in_page_action
+          - label: Create Client Script
+            type: in_page_action
+          - label: Export Deals
+            type: in_page_action
+          - label: Zoho Sheet View
+            type: in_page_action
+          - label: Print View
+            type: in_page_action
+
+  # ─────────────────────────────────────────────
+  # FILTER PANEL
+  # ─────────────────────────────────────────────
+  filter_panel:
+    title: "Filter Deals by"
+    search_input:
+      placeholder: Search
+      type: text
+    sections:
+      system_defined_filters:
+        label: System Defined Filters
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Touched Records
+          - Untouched Records
+          - Record Action
+          - Related Records Action
+          - Locked
+          - Latest Email Status
+          - Activities
+          - Cadences
+      filter_by_fields:
+        label: Filter By Fields
+        collapsible: true
+        filter_type: checkbox
+        total_fields: 130
+        fields_sample:
+          - Preferred Location (×3 duplicates)
+          - Amount
+          - Approval for Closure
+          - Attempt
+          - Authority
+          - BANT Form URL
+          - BDM
+          - BDM Feedback
+          - Budget
+          - Budget Concern Description
+          - Budget Range
+          - Budget Range Max
+          - Budget Range Min
+          - Client Comments
+          - Client Feedback after the Site Visit
+          - Client Location
+          - Client Major Concern on Purchase
+          - Client Rating
+          - Client's Overall Impression
+          - Closing Date
+          - Comfortable Price
+          - Connected To
+          - Contact Name
+          - Created By
+          - Created Time
+          - Deal Closed Time
+          - Deal Name
+          - Deal Owner
+          - Decision Influencers
+          - Down Payment
+          - Estimated Budget
+          - Expected Revenue
+          - Family Decision Involved?
+          - Lead Source
+          - Lead Type
+          - Loan Requirement
+          - Modified By
+          - Modified Time
+          - Need
+          - Next Committed Step
+          - Next Step
+          - Objection Status
+          - Payment Type
+          - Preferred Project
+          - Preferred Size (Sq.Ft or Cents)
+          - Probability (%)
+          - Purpose Of Purchase
+          - Real Objections
+          - Reason For Loss
+          - Reason For Unattempted
+          - Reason Qualified Out
+          - Rooms in BHK
+          - Sales Cycle Duration
+          - Site Visit Date
+          - Site Visit Location
+          - Site Visit URL
+          - Site Visited
+          - Stage
+          - Tag
+          - Telecaller
+          - Timeframe to Purchase
+          - Type of Property
+          - Up to Price
+          - Urgency Level
+          - Visit Date
+          - Visit Status
+          - Visit Verified
+          - Who is making the decision for this purchase?
+      filter_by_subforms:
+        label: Filter By Subforms
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Relevant Property
+      filter_by_related_modules:
+        label: Filter By Related Modules
+        collapsible: true
+        filter_type: checkbox
+        modules:
+          - Calls
+          - Deal Contact Role (Contact Roles)
+          - Deals (Referrals)
+          - Emails
+          - Leads (Converted Leads)
+          - Meetings
+          - Notes
+          - Tasks
+
+  # ─────────────────────────────────────────────
+  # RECORDS (ALL 9 DEALS)
+  # ─────────────────────────────────────────────
+  records:
+    - row: 1
+      contact_name: Prasanth
+      contact_id: "955332000004403606"
+      deal_name: Prasanth
+      deal_id: "955332000004403609"
+      amount: "₹ 25,00,000.00"
+      stage: Closed Won
+      closing_date: "27/11/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Dec 11, 2025"
+    - row: 2
+      contact_name: Amsa
+      contact_id: "955332000003267006"
+      deal_name: Amsa
+      deal_id: "955332000003267009"
+      amount: ""
+      stage: Visit Completed
+      closing_date: "04/11/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Nov 4, 2025"
+    - row: 3
+      contact_name: sakthi kumar
+      contact_id: "955332000003013075"
+      deal_name: sakthi kumar
+      deal_id: "955332000003013078"
+      amount: ""
+      stage: Visit Pending
+      closing_date: "04/01/2026"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Nov 6, 2025"
+    - row: 4
+      contact_name: Baskar
+      contact_id: "955332000002929038"
+      deal_name: Baskar
+      deal_id: "955332000002929041"
+      amount: "₹ 13,26,000.00"
+      stage: Closed Won
+      closing_date: "27/11/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Sep 11, 2025"
+    - row: 5
+      contact_name: wasil
+      contact_id: "955332000002819016"
+      deal_name: wasil
+      deal_id: "955332000002819019"
+      amount: ""
+      stage: Visit Pending
+      closing_date: "26/12/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Oct 26, 2025"
+    - row: 6
+      contact_name: Hemamurugan
+      contact_id: "955332000001978012"
+      deal_name: Hemamurugan
+      deal_id: "955332000001978015"
+      amount: ""
+      stage: Visit Pending
+      closing_date: "29/11/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "Sep 25, 2025"
+    - row: 7
+      contact_name: Krishnan
+      contact_id: "955332000001907012"
+      deal_name: Krishnan
+      deal_id: "955332000001907015"
+      amount: "₹ 75,00,000.00"
+      stage: Booking Completed
+      closing_date: "28/08/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "(none visible)"
+    - row: 8
+      contact_name: Srinivashaperumal
+      contact_id: "955332000001100136"
+      deal_name: Srinivashaperumal
+      deal_id: "955332000001100139"
+      amount: ""
+      stage: Visit Pending
+      closing_date: "24/10/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "(none visible)"
+    - row: 9
+      contact_name: Senthilkumar Rangaraj
+      contact_id: "955332000000681506"
+      deal_name: Senthilkumar Rangaraj
+      deal_id: "955332000000681509"
+      amount: "₹ 15,00,000.00"
+      stage: Visit Pending
+      closing_date: "06/08/2025"
+      deal_owner: Kurinjee Promoters
+      last_activity: "(none visible)"
+
+  # ─────────────────────────────────────────────
+  # STAGE DISTRIBUTION
+  # ─────────────────────────────────────────────
+  stage_distribution:
+    Visit_Pending: 5
+    Closed_Won: 2
+    Booking_Completed: 1
+    Visit_Completed: 1
+  amount_summary:
+    deals_with_amount: 4
+    deals_without_amount: 5
+    total_visible_pipeline: "₹ 1,28,26,000.00"
+
+  # ─────────────────────────────────────────────
+  # CREATE DEAL FORM
+  # ─────────────────────────────────────────────
+  create_deal_form:
+    url: /crm/org60043078423/tab/Potentials/create?layoutId=955332000000425340
+    layout_id: "955332000000425340"
+    edit_layout_link: /crm/org60043078423/settings/modules/Potentials/layouts/955332000000425340
+    form_actions:
+      - label: Save
+        type: primary_blue
+        behavior: save_and_navigate_to_detail
+      - label: Save and New
+        type: secondary_outline
+        behavior: save_and_open_fresh_form
+      - label: Cancel
+        type: secondary_outline
+        behavior: discard_and_return_to_list
+    navigation_guard:
+      message: "You have not saved your changes."
+      sub_message: "Are you sure you want to move away from this page?"
+      actions: ["Yes, Leave Page", "Stay Here"]
+    right_panel:
+      - label: Client Script
+        type: slide_out_tab
+        orientation: vertical
+        position: far_right_edge
+    sections:
+      - section: Lead Assessment (BANT)
+        fields: [Budget, Authority, Need, Time, Budget Range Max, Budget Range Min]
+      - section: Description Information
+        fields: [Description, Client Feedback after the Site Visit, BDM Feedback]
+      - section: Qualification Form
+        fields:
+          - Does the lead have the financial capability to purchase?
+          - Does the project match the lead's location preference?
+          - Who is making the decision for this purchase?
+          - When is the lead planning to buy?
+      - section: Client Feedback
+        fields: [Client Feedback, Feedback URL, Client Rating, Comments]
+      - section: Team Lead Section
+        fields: [Team Lead, Approval for Closure]
+      - section: Site Visit Information
+        fields: [Site Visit URL, Client Comments, BDM Form URL, When Are You Planning to Start, Visit Status, Site Visit Location, Site Visit Date, BDM]
+      - section: Site Completion Form Submission
+        fields: [Visit Date, Client's Overall Impression, Real Objections, Decision Influencers, Next Committed Step, Follow-up date, Visit Verified, Objection Status, Urgency Level, BDM Notes]
+
+  # ─────────────────────────────────────────────
+  # DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/Potentials/{record_id}
+    access: click Deal Name from list view
+    tabs:
+      - Overview
+      - Related Lists (Calls, Meetings, Tasks, Emails, Notes, Documents)
+
+  # ─────────────────────────────────────────────
+  # BOTTOM STATUS BAR (PERSISTENT)
+  # ─────────────────────────────────────────────
+  bottom_status_bar:
+    widgets:
+      - name: Visitors Online
+        type: live_counter
+      - name: Feedback on New UI
+        type: action_trigger
+        style: highlighted_purple
+      - name: Announcements
+        type: notification_list
+      - name: Mail
+        type: inbox_shortcut
+      - name: Motivator
+        type: gamification_leaderboard
+      - name: Sticky Notes
+        type: text_note_input
+      - name: Zia
+        type: ai_assistant
+      - name: Activity Reminders
+        type: reminder_list
+      - name: Recent Items
+        type: recently_viewed
+      - name: Accessibility
+        type: settings_panel
+    chat_bar:
+      - Chats
+      - Channels
+      - Contacts
+      - smart_chat_input: "Here is your Smart Chat (Ctrl+Space)"

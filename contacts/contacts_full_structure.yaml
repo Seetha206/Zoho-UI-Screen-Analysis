@@ -1,0 +1,390 @@
+contacts_module:
+  module_name: Contacts
+  url_pattern: /crm/org60043078423/tab/Contacts
+  total_records: 26
+  layout_id: "955332000000425339"
+  account_id: "955332000000406001"
+  subscription_users: 1
+  subscription_status: Limit Reached (1 user license activated)
+  pagination: 1 to 10 per page (Previous / Next buttons)
+
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/Contacts/custom-view/955332000000441440/list?page=1
+    custom_view_id: "955332000000441440"
+    active_view_label: My Contacts
+    columns_visible:
+      - name: "(Checkbox)"
+        type: multi_select
+        sortable: false
+      - name: "(Row options)"
+        type: hover_action_menu
+        sortable: false
+      - name: "(Activity date badge)"
+        type: last_activity_date
+        style: red_badge
+        sortable: false
+      - name: Contact Name
+        type: text_link
+        sortable: true
+        filter_dropdown: All
+        column_options: true
+      - name: Account Name
+        type: text
+        sortable: true
+        column_options: true
+      - name: Email
+        type: email_link
+        sortable: true
+        column_options: true
+      - name: "(Column settings icon)"
+        type: column_configuration
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: My Contacts
+        type: custom_view
+        active: true
+        custom_view_id: "955332000000441440"
+      - name: "... more_views_dropdown"
+        options:
+          - New Custom View
+          - Manage Custom View
+          - Show custom views as Dropdown
+    view_switchers:
+      - icon: List View
+        active: true
+      - icon: Kanban / Split View
+      - icon: Table / Grid View
+      - icon: Canvas / Clock View
+      - icon: Custom List View
+      - icon: Tile View
+      - icon: Chevron dropdown (more views)
+    toolbar_buttons:
+      - label: Filter
+        icon: funnel
+        behavior: opens_closes_filter_panel
+      - label: Sort
+        icon: sort_arrows
+        behavior: opens_sort_options
+      - label: Refresh Custom View
+        behavior: reloads_current_view
+      - label: Create Contact
+        type: split_button
+        color: blue_solid
+        primary_nav: /tab/Contacts/create?layoutId=955332000000425339&redirect=false
+        secondary_arrow: "▼ dropdown"
+      - label: "Actions (...)"
+        type: overflow_menu
+        items:
+          - label: Import Contacts
+            href: /crm/org60043078423/settings/import?module=Contacts&step=1
+          - label: Mass Delete
+            href: /crm/org60043078423/tab/Contacts/actions/mass-tools?type=mass_delete
+          - label: Mass Update
+            href: /crm/org60043078423/tab/Contacts/actions/mass-tools?type=mass_update
+          - label: Manage Tags
+            href: /crm/org60043078423/settings/manage-tags?module=Contacts
+          - label: Drafts
+            href: /crm/org60043078423/tab/Contacts/actions/draft?module=Contacts
+          - label: Mass Email
+            href: /crm/org60043078423/settings/manage-mass-mail?module=Contacts
+          - label: Autoresponders
+            href: /crm/org60043078423/settings/auto-responders?module=Contacts
+          - label: Approve Contacts
+            href: /crm/org60043078423/tab/Contacts/actions/approvals
+          - label: Deduplicate Contacts
+            href: (in-page action)
+          - label: Create Client Script
+            href: (in-page action)
+          - label: Export Contacts
+            href: (in-page action)
+          - label: Zoho Sheet View
+            href: (in-page action)
+          - label: Print View
+            href: (in-page action)
+
+  # ─────────────────────────────────────────────
+  # FILTER PANEL
+  # ─────────────────────────────────────────────
+  filter_panel:
+    title: "Filter Contacts by"
+    search_input:
+      placeholder: Search
+      type: text
+    sections:
+      system_defined_filters:
+        label: System Defined Filters
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Touched Records
+          - Untouched Records
+          - Record Action
+          - Related Records Action
+          - Locked
+          - Latest Email Status
+          - Activities
+          - Cadences
+      website_activity:
+        label: Website Activity
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Average Time Spent (Minutes)
+          - Days Visited
+          - First Page Visited
+          - First Visit
+          - Most Recent Visit
+          - Number Of Chats
+          - Referrer
+          - Visitor Score
+      filter_by_fields:
+        label: Filter By Fields
+        collapsible: true
+        filter_type: checkbox
+        total_fields: 70
+        fields:
+          - Account Name
+          - All Traffic Sources
+          - Assistant
+          - Asst Phone
+          - Browser
+          - City
+          - City (from IP address)
+          - Connected To
+          - Contact Name
+          - Contact Owner
+          - Country
+          - Country (from IP address)
+          - Created By
+          - Created Time
+          - Date of Birth
+          - Department
+          - Door Number
+          - Email
+          - Email Opt Out
+          - Estimated Budget
+          - First Click Campaign
+          - First Click Content
+          - First Click Landing Page
+          - First Click Landing Page Url
+          - First Click Medium
+          - First Click Source
+          - First Click Term
+          - First Click Timestamp
+          - First Name
+          - Folder ID
+          - Folder URL
+          - GA Client ID
+          - GA Measurement ID
+          - GA Session ID
+          - GCLID (GA Connector)
+          - Home Phone
+          - Index
+          - IP Address
+          - Last Activity Time
+          - Last Click Campaign
+          - Last Click Channel
+          - Last Click Content
+          - Last Click Landing Page
+          - Last Click Landing Page Url
+          - Last Click Medium
+          - Last Click Referrer
+          - Last Click Source
+          - Last Click Term
+          - Last Click Timestamp
+          - Last Name
+          - Latitude
+          - Lead Source
+          - Longitude
+          - Mobile
+          - Modified By
+          - Modified Time
+          - Operating System
+          - Pages Visited
+          - Reporting To
+          - Salutation
+          - Social Lead ID
+          - State
+          - Street
+          - Tag
+          - Time Zone
+          - Title
+          - Unsubscribed Mode
+          - Unsubscribed Time
+          - Zip
+      filter_by_related_modules:
+        label: Filter By Related Modules
+        collapsible: true
+        filter_type: checkbox
+        modules:
+          - Calls
+          - Contacts (Reporting Contacts)
+          - Deal Contact Role (Contact Roles)
+          - Deals
+          - Emails
+          - Invitees (Invited Meetings)
+          - Leads (Connected Records)
+          - Leads (Converted Leads)
+          - Meetings
+          - Notes
+          - Tasks
+
+  # ─────────────────────────────────────────────
+  # RECORDS (PAGE 1 SAMPLE)
+  # ─────────────────────────────────────────────
+  records_page_1:
+    - row: 1
+      contact_name: Prasanth
+      last_activity: "Dec 11, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000004403606"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000004403606
+    - row: 2
+      contact_name: Amsa
+      last_activity: "Nov 4, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000003267006"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000003267006
+    - row: 3
+      contact_name: sakthi kumar
+      last_activity: "Nov 6, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000003013075"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000003013075
+    - row: 4
+      contact_name: Baskar
+      last_activity: "Sep 11, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000002929038"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000002929038
+    - row: 5
+      contact_name: wasil
+      last_activity: "Oct 26, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000002819016"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000002819016
+    - row: 6
+      contact_name: Hemamurugan
+      last_activity: "Sep 25, 2025"
+      account_name: mul m (truncated in viewport)
+      email: mubarak798@gmail.com
+      record_id: "955332000001978012"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000001978012
+    - row: 7
+      contact_name: Krishnan
+      last_activity: (none visible)
+      account_name: ""
+      email: ""
+      record_id: "955332000001907012"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000001907012
+    - row: 8
+      contact_name: Bala
+      last_activity: "Sep 4, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000001254034"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000001254034
+    - row: 9
+      contact_name: Tsk. kaarthick
+      last_activity: "Aug 21, 2025"
+      account_name: ""
+      email: ""
+      record_id: "955332000001149007"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000001149007
+    - row: 10
+      contact_name: Srinivashaperumal
+      last_activity: (none visible)
+      account_name: ""
+      email: ""
+      record_id: "955332000001100136"
+      detail_url: /crm/org60043078423/tab/Contacts/955332000001100136
+
+  # ─────────────────────────────────────────────
+  # CREATE CONTACT FORM
+  # ─────────────────────────────────────────────
+  create_contact_form:
+    url: /crm/org60043078423/tab/Contacts/create?layoutId=955332000000425339&redirect=false
+    layout_id: "955332000000425339"
+    edit_layout_link: /crm/org60043078423/settings/modules/Contacts/layouts/955332000000425339
+    required_field: Last Name (red border on validation fail)
+    navigation_guard:
+      message: "You have not saved your changes."
+      actions: [Yes, Leave Page, Stay Here]
+    form_actions:
+      - label: Save
+        type: primary_blue
+      - label: Save and New
+        type: secondary
+      - label: Cancel
+        type: secondary
+    sections:
+      - section: Contact Information
+        fields: 50+  # See contacts_creation/screens.yaml for full field list
+      - section: Address Information
+        fields: [Door Number, Street, City, State, Zip, Country]
+      - section: Description Information
+        fields: [Description]
+      - section: Internal Use
+        fields: [Folder ID, Folder URL]
+      - section: Visit Summary
+        note: Section present in DOM; no visible fields in viewport
+    right_panel:
+      - Create Form Views (dropdown: Standard View)
+      - Create a custom form page (button)
+      - Client Script (slide-out tab on far-right edge)
+
+  # ─────────────────────────────────────────────
+  # DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/Contacts/{record_id}
+    access: click Contact Name from list view
+    tabs:
+      - Overview
+      - Related Deals
+      - Activities
+      - Email History
+      - Workflow
+
+  # ─────────────────────────────────────────────
+  # BOTTOM STATUS BAR (PERSISTENT)
+  # ─────────────────────────────────────────────
+  bottom_status_bar:
+    widgets:
+      - name: Visitors Online
+        type: live_counter
+        filter_options: [All Accounts, Kurinjee]
+      - name: Feedback on New UI
+        type: action_trigger
+        style: highlighted_purple
+      - name: Announcements
+        type: notification_list
+      - name: Mail
+        type: inbox_shortcut
+      - name: Motivator
+        type: gamification_leaderboard
+      - name: Sticky Notes
+        type: text_note_input
+      - name: Zia
+        type: ai_assistant
+      - name: Activity Reminders
+        type: reminder_list
+        count: 0
+        empty_state: "No Activity Reminders found."
+      - name: Recent Items
+        type: recently_viewed
+      - name: Accessibility
+        type: settings_panel
+    chat_bar:
+      - Chats
+      - Channels
+      - Contacts
+      - smart_chat_input: "Here is your Smart Chat (Ctrl+Space)"
