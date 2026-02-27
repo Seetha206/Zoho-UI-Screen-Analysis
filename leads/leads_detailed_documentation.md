@@ -30,6 +30,14 @@ The list view is a tri-zone layout:
 - "..." dropdown exposes: Created By Me group (Arthi-View, Cold Leads, Hot Leads, Junk Lead, Nurturing Leads, Pranesj, Site Visit Scheduled Leads, Telecaller Leads, Warm Leads) and Public Views group (All Leads, All Locked Leads, Converted Leads, Junk Leads, Mailing Labels, My Converted Leads, My Leads).
 - "New Custom View" and "Manage Custom View" links are available.
 - "Show custom views as Dropdown" toggle is available.
+- **"Today's Leads"** — additional confirmed custom view (not in tab bar; accessed via view selector). Filter criteria: `Created Time = Today`. Dynamic — auto-updates daily. Primary Telecaller entry point for fresh leads.
+
+#### Custom View Selector Panel
+
+Accessed by clicking the view name dropdown / "Resize handle" toggle at the top-left of the list. Panel shows:
+- System Views (All Leads, My Leads, Recently Created, Converted, Junk, Unread)
+- Custom Views (Created By Me + Public Views groups)
+- Switching views: may require up to three click interactions on the target view name (hover → select → navigate)
 
 #### View Switchers (toolbar icons, left to right)
 
@@ -48,18 +56,40 @@ Lead Name (with "All" filter chip and sort), Lead Source, Mobile (with inline ca
 
 #### Filter Panel
 
-Opens as a left sidebar panel. Sections include:
+Two separate filter mechanisms exist:
 
-- **System Defined Filters:** Touched Records, Untouched Records, Record Action, Related Records Action, Locked, Latest Email Status, Activities, Cadences.
-- **Website Activity:** Average Time Spent (Minutes), Days Visited, First Page Visited, First Visit, Most Recent Visit, Number Of Chats, Referrer, Visitor Score.
-- **Filter By Fields:** Scrollable list of all module fields.
+**1. Left sidebar filter panel**
+- Triggered by: `Filter` button in the toolbar (left side)
+- Opens as a left sidebar panel (~300px)
+- Sections:
+  - **System Defined Filters:** Touched Records, Untouched Records, Record Action, Related Records Action, Locked, Latest Email Status, Activities, Cadences.
+  - **Website Activity:** Average Time Spent (Minutes), Days Visited, First Page Visited, First Visit, Most Recent Visit, Number Of Chats, Referrer, Visitor Score.
+  - **Filter By Fields:** Scrollable list of all module fields.
+
+**2. Right-side advanced filter drawer**
+- Triggered by: `Resize handle Right` — a handle/toggle on the right edge of the list view
+- Opens as a right-side sliding panel, narrowing the list width
+- Contains a **Search** field — type a field name to filter the field list dynamically (e.g., typing "lead" shows: Lead Owner, Lead Quality, Lead Source, Lead Status, Lead Type)
+- Filter criteria row structure: `[Field] | [Operator ▾] | [Value input]`
+- Confirmed operators: `is`, `is not`, `is empty`, `is not empty`, `contains`, `does not contain`, `starts with`
+- **`Apply Filter`** button (blue, primary) at bottom — applies criteria and refreshes list
+- Single or multi-condition filtering supported
 
 #### Toolbar Actions
 
 - **Filter** button — opens/closes left filter panel.
-- **Sort** button — opens sort criteria selector.
+- **Sort** button — opens sort criteria panel (modal/dialog). Panel contains:
+  - Field selector dropdown (default: `None`; confirmed sortable field: `Country`)
+  - Order: Ascending / Descending radio buttons (default: Ascending)
+  - **`Apply`** button (blue) — executes sort; updates list and adds sort arrow `▲/▼` to column header
+  - **`Cancel`** button — closes panel; **preserves** any previously applied sort (does not clear it)
+  - Sort state encoded in URL: `?sort_order=asc|desc|unsort&sort_by={field_id}`
 - **Refresh** (circular arrow) — refreshes the current custom view.
 - **Create Lead** (primary blue button, with split dropdown arrow for alternate layouts).
+- **Column settings icon** (arrows/grid icon, top-right of header row) — opens dropdown menu:
+  - `Manage Columns` — opens two-pane column selector (Available | Selected); drag to reorder; Save button; per-user setting
+  - `Resize Columns` — drag-to-resize column widths
+  - `Reset Columns` — restores default column configuration
 - **Actions (...) menu:** Mass Delete, Mass Update, Mass Convert, Manage Tags, Drafts, Mass Email, Autoresponders, Approve Leads, Deduplicate Leads, Create Client Script ✨, Export Leads, Zoho Sheet View, Print View ✨.
 
 #### Row-Level Actions (hover "..." on row)
@@ -69,7 +99,8 @@ More submenu: Create Call (sub: Schedule a call, Log a call), Create Meeting.
 
 #### Pagination
 
-## Shows "Total Records 2077" at bottom left. "1 to 100" shown at bottom right with Previous (`<`) and Next (`>`) navigation buttons.
+Shows "Total Records 2077" at bottom left. Page navigation at bottom right with Previous (`<`) and Next (`>`) buttons.
+**Records per page** is a user-configurable dropdown (not fixed). Confirmed options: 10, 20, 25, 50, 100, 200. Values of 20 and 100 confirmed observed. Setting persists per user session.
 
 ### 2.2 Lead Detail View
 
@@ -102,9 +133,24 @@ Notes (1), Connected Records, Open Activities (2), Cadences, Projects, Referrals
 **Sub-sections (top to bottom):**
 **Blueprint State Bar**
 
-- Label: "Current State: Attempted"
-- "View configured actions" link (top right)
-- Transition buttons: Re Attempted, Contact in Future, Lead, Site Visit Completed, Qualify Out, Junk, Exit Blueprint.
+- Label: "Current State: [Stage Name]" (e.g., `Current State: Attempted`)
+- "View configured actions" link (top right of bar)
+- Transition buttons depend on current state (see full sequence below)
+
+**Blueprint Stage Sequence — confirmed from Scribe recordings + DOM scan:**
+
+| Stage | Entry Transition | Mandatory Fields in Transition Modal |
+|-------|-----------------|--------------------------------------|
+| New Lead | (created) | none |
+| Enquiry Stage | `Enquiry` button | Email |
+| Lead Qualification | `Lead` button | Estimated Budget, Budget Variation, Authority (Select authority), Need (Select need), Timeline (Select time), Matched Projects |
+| Attempted | (auto after qualification) | — |
+
+**Transition buttons for state "Attempted":**
+Re Attempted, Contact in Future, Lead, Site Visit Completed, Qualify Out, Junk, Exit Blueprint
+
+> `Enquiry` and `Lead` are the first two gated transitions for a **new** lead. `Attempted` state buttons are what's visible on existing qualified leads.
+> See `leads_blueprint_transitions.md` for complete modal structures and confirmed dropdown values.
   **Business Card Details (always visible)**
 - Mobile: (988) 421-0274 (call icon)
 - Email: —
@@ -213,17 +259,45 @@ The Lead Owner field is a user lookup field. It can be changed via:
 ## 4. Stage Movement Logic
 
 Stage is governed by the **Lead Qualification Blueprint**. The Lead Status field is **locked** (padlock icon in edit form) — it cannot be freely edited. Stage changes occur only through Blueprint transition buttons.
-**Current State** is displayed in a dedicated bar at the top of the Overview tab.
-**Transition buttons available** depend on current state:
 
-- For state "Attempted": Re Attempted, Contact in Future, Lead, Site Visit Completed, Qualify Out, Junk, Exit Blueprint.
-  **Each transition triggers:**
+**Current State** is displayed in a dedicated bar at the top of the Overview tab.
+
+**Full confirmed stage sequence:**
+
+```
+New Lead Created
+    │
+    ▼  [Enquiry transition — mandatory: Email]
+Enquiry Stage
+    │
+    ▼  [Lead transition — mandatory: Estimated Budget, Budget Variation,
+    │   Authority, Need, Timeline, Matched Projects]
+Lead Qualification Stage
+    │
+    ▼
+Attempted State
+    ├── Re Attempted
+    ├── Contact in Future
+    ├── Lead
+    ├── Site Visit Completed
+    ├── Qualify Out
+    ├── Junk
+    └── Exit Blueprint
+```
+
+**On new lead creation, automated actions fire immediately:**
+- Field Update: `Update Attempt Field`
+- Field Update: `Update Lead Status`
+- Function: `[Lead] Send Welcome Message` (WhatsApp/SMS notification)
+
+**Each Blueprint transition triggers:**
 - Automated functions (e.g., RescheduleFollowUps)
 - Workflow rules (e.g., Update Mobile Number)
 - Auto-task creation (e.g., Attempt 2)
 - Auto-note creation (e.g., UnAttempted Reason)
 - Field updates logged in Timeline > History
-  **History tracking:** All state changes are recorded in Timeline > History with timestamp, actor, transition name, Blueprint name, and date.
+
+**History tracking:** All state changes are recorded in Timeline > History with timestamp, actor, transition name, Blueprint name, and date.
 
 ---
 

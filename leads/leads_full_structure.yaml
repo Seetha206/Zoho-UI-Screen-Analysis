@@ -57,6 +57,10 @@ leads_module:
             - Show custom views as Dropdown (toggle)
             - New Custom View (link)
             - Manage Custom View (link)
+          additional_confirmed_custom_views:
+            - Today's Leads
+              filter_criteria: Created Time = Today (dynamic — auto-updates daily)
+              business_use: Telecallers' morning entry point for fresh leads
     view_switchers:
       - type: List View
         icon: list icon
@@ -75,8 +79,17 @@ leads_module:
         icon: chevron down
     toolbar_actions:
       filter:
-        trigger: Filter button (left of toolbar)
-        panel_label: "Filter Leads by"
+        triggers:
+          - type: toolbar_button
+            label: Filter
+            position: left of toolbar
+            panel_side: left
+            panel_label: "Filter Leads by"
+          - type: resize_handle_right
+            label: Resize handle Right
+            position: right edge of list view
+            panel_side: right
+            notes: Opens right-side advanced filter drawer — distinct from left-sidebar filter panel
         panel_sections:
           - section: System Defined Filters
             options:
@@ -102,12 +115,75 @@ leads_module:
             options:
               - "1. Preferred (location)"
               - (more field filters below scroll)
-        search_box: true (inside filter panel)
+        search_box: true (inside filter panel — searches field names dynamically)
+        apply_filter_button:
+          label: Apply Filter
+          type: primary button (blue)
+          position: bottom of filter panel
+          behavior: applies criteria and refreshes list
+        filter_operators_confirmed:
+          - is
+          - is not
+          - is empty
+          - is not empty
+          - contains
+          - does not contain
+          - starts with
       sort:
-        trigger: Sort button
-        behavior: opens sort criteria selector
+        trigger: Sort button (toolbar, above records table)
+        behavior: opens sort criteria panel (modal/dialog)
+        panel_structure:
+          field_selector:
+            label: Sort By
+            type: dropdown
+            default: None (unsorted)
+            confirmed_sortable_fields:
+              - Country
+              - (all other Lead module fields)
+          order_selector:
+            type: radio buttons
+            options: [Ascending, Descending]
+            default: Ascending
+          buttons:
+            - label: Apply
+              type: primary (blue)
+              behavior: executes sort, closes panel, updates list and column header indicator
+            - label: Cancel
+              type: secondary
+              behavior: closes panel — does NOT clear active sort; preserves previously applied sort
+        url_params_on_sort:
+          sort_order: asc | desc | unsort
+          sort_by: "{field_id}"
+          confirmed_field_ids:
+            - "955332000000427928"
+            - "955332000000427944"
+          notes: Sort state is encoded in URL — views are bookmarkable with active sort
       refresh:
         trigger: Refresh Custom View button (circular arrow icon)
+    pagination:
+      display: "Total Records {N}" (bottom left)
+      navigation: Previous / Next buttons
+      per_page_selector:
+        type: user-configurable dropdown
+        position: pagination bar (bottom or top of list)
+        confirmed_options: [10, 20, 25, 50, 100, 200]
+        confirmed_values_observed: [20, 100]
+        notes: Not a fixed value — each user can change records per page; persists in session
+    column_settings:
+      trigger_icon: column-settings icon (arrows/grid icon) — top-right of list header row
+      dropdown_menu_items:
+        - Manage Columns
+          behavior: opens column selector panel (checklist of available vs selected fields; drag to reorder)
+        - Resize Columns
+          behavior: drag-to-resize column widths
+        - Reset Columns
+          behavior: restores default column configuration
+      manage_columns_panel:
+        layout: two-pane (Available Fields | Selected Columns)
+        actions: check/uncheck to show/hide; drag to reorder
+        confirmed_column_added: Lead Owner
+        save_button: true
+        notes: Column configuration is per-user, not shared across team
     bulk_actions_menu (three_dots top-right "Actions"):
       items:
         - Mass Delete
@@ -293,7 +369,8 @@ leads_module:
         fields:
           - Last Name (required, text)
           - Mobile (text)
-          - Lead Type (dropdown: -None-)
+          - Lead Type (dropdown: -None-; options: Hot, Warm, Cold, Junk — custom field)
+          - Lead Quality (dropdown: -None-; options: Hot, Warm, Cold, Junk — standard Zoho CRM field; distinct from Lead Type; confirmed set to Junk in Update flow)
           - Lead Source (dropdown: Offline Marketing, Meta Ads, MagicBicks, etc.)
           - Client Location (text)
           - Lead Status (dropdown, lock icon: Attempted)
@@ -429,29 +506,51 @@ leads_module:
   # ─────────────────────────────────────────────
   stage_change_flow:
     mechanism: Blueprint (Lead Qualification Blueprint)
-    current_state_display: shown in Overview tab top bar
     blueprint_name: Lead Qualification
-    current_state: Attempted
-    transition_buttons_visible_for_state:
-      - Re Attempted
-      - Contact in Future
-      - Lead
-      - Site Visit Completed
-      - Qualify Out
-      - Junk
-      - Exit Blueprint
-    additional_option: View configured actions (link)
+    current_state_display: shown in Blueprint State Bar — top of Overview tab
+    additional_option: "View configured actions" link (top-right of Blueprint bar)
+    full_stage_sequence:
+      - stage: New Lead (created)
+        next_transition: Enquiry
+      - stage: Enquiry Stage
+        transition_name: Enquiry
+        mandatory_fields:
+          - Email (text input)
+        next_transition: Lead
+      - stage: Lead Qualification
+        transition_name: Lead
+        mandatory_fields:
+          - Estimated Budget (currency/numeric input)
+          - Select budget variation (picklist — confirmed: Matched)
+          - Select authority (picklist — confirmed: Close Relatives)
+          - Select need (picklist — confirmed: 5-10 Km)
+          - Select time (picklist — confirmed: Within a Month)
+          - Select matched projects (lookup/dropdown — confirmed: Mullai Nagar)
+        notes: See leads_blueprint_transitions.md for full modal structure and confirmed options
+      - stage: Attempted
+        transition_buttons:
+          - Re Attempted
+          - Contact in Future
+          - Lead
+          - Site Visit Completed
+          - Qualify Out
+          - Junk
+          - Exit Blueprint
+    validation_rules:
+      - Lead Status field has lock icon in Edit form (Blueprint-managed, not freely editable)
     history_tracking:
       location: Timeline > History tab
       entry_format: "Function [name] was called via [Workflow/Blueprint] Transition [StateName]"
       example: "Function RescheduleFollowUps was called by Kurinjee Promoters through Transition - Attempted in Blueprint - Lead Qualification. Feb 26, 2026"
-    validation_rules:
-      - Lead Status field has lock icon in Edit form (Blueprint-managed, not freely editable)
     automated_actions_on_transition:
       - Functions triggered (e.g., RescheduleFollowUps, [Leads] Update Mobile Number)
       - Tasks auto-created (e.g., Attempt 2 via Function RescheduleFollowUps)
       - Notes auto-added
       - Workflow Rules fire (e.g., Update Mobile Number)
+    automated_actions_on_create:
+      - Field Update: Update Attempt Field
+      - Field Update: Update Lead Status
+      - Function: "[Lead] Send Welcome Message" (WhatsApp/SMS)
   # ─────────────────────────────────────────────
   # CONVERT LEAD FLOW
   # ─────────────────────────────────────────────

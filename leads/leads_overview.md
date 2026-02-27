@@ -36,18 +36,25 @@ Without a dedicated Leads module, the Contacts and Deals modules would fill up w
        ↓
 [Lead Created] ← manual / import / web form / social media
        ↓
-[Lead Qualification Blueprint]
+[Blueprint: Enquiry transition] ← mandatory: Email captured
+       ↓
+[Blueprint: Lead transition] ← mandatory: BANT fields + Matched Projects
+  (Budget, Budget Variation, Authority, Need, Timeline, Matched Projects)
+       ↓
+[Attempted state — full transition set available]
   ├── Re Attempted
   ├── Contact in Future
-  ├── Site Visit Scheduled
   ├── Site Visit Completed
   ├── Qualify Out
-  └── Junk
+  ├── Junk
+  └── Exit Blueprint
        ↓
 [Lead Converted] ──→ Contact + Account + Deal
                               ↓
                      [Sales / Deals Pipeline]
 ```
+
+> See `leads_blueprint_transitions.md` for complete transition field requirements and modal structures.
 
 The Blueprint enforces that a lead cannot jump directly from "New" to "Converted" — every transition must be logged, which creates an audit trail.
 
@@ -64,6 +71,8 @@ The Blueprint enforces that a lead cannot jump directly from "New" to "Converted
 | **Calls** | Outbound calls logged directly against the lead |
 | **Meetings** | Site visits and consultations are tracked as Meetings linked to the lead |
 | **Notes** | Sales notes, objections, and qualification comments are stored on the lead |
+| **Schedules (CustomModule6)** | Linked via related list on Lead detail view; `SCH` auto-number prefix; 14,888+ records confirmed — heavily used module for scheduling telecaller follow-ups |
+| **Projects Portfolio (CustomModule3)** | Linked via `Select matched projects` field in Blueprint `Lead` transition; confirmed project: `Mullai Nagar` |
 
 ---
 
@@ -77,8 +86,9 @@ The Blueprint enforces that a lead cannot jump directly from "New" to "Converted
 | Total leads observed | 2,077 |
 | Active Blueprint | Lead Qualification |
 | Lead Source examples | Advertisement, referral, walkin, cold call |
-| Custom views in use | Hot Leads, Cold Leads, Warm Leads, Junk Lead, Nurturing Leads, Telecaller Leads, Site Visit Scheduled Leads |
+| Custom views in use | Hot Leads, Cold Leads, Warm Leads, Junk Lead, Nurturing Leads, Telecaller Leads, Site Visit Scheduled Leads, **Today's Leads** (time-based: Created Time = Today) |
 | Key custom fields | Preferred Location, Purpose Of Purchase, Down Payment, Payment Type, Land Area in Cents, Comfortable Price, Rooms in BHK, Up to Price, Requirement Property Type, Client Major Concern on Purchase |
+| Key standard fields active | Lead Quality (Hot/Warm/Cold/Junk — standard Zoho CRM field, confirmed active; distinct from custom `Lead Type` field) |
 
 The high lead count (2,077) relative to contacts (26) confirms this is a top-of-funnel module where most enquiries are disqualified or in-progress — not yet converted.
 

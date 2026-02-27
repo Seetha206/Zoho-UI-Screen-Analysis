@@ -36,3 +36,47 @@ state "My Deals Closing This Month" as DCM {
   DCM : No Deals found (current state)
 }
 state "Dashboard Controls" as DC {
+  DC : Add Component (+ icon)
+  DC : Customize Dashboard
+  DC : Widget rename / move / resize
+  DC : Export Dashboard as Image
+}
+state "Home Page Customization (Scribe Flow)" as HPC {
+  HPC : Entry: 9-level nested navigation (13 steps)
+  HPC : Named page: "Kurinjee Promoters's Home"
+  HPC : View Type: Classic View (confirmed)
+  HPC : Roles Assigned: 2
+  HPC : Button: "Customize Home page" (CTA)
+  HPC : Badge: "2 Roles" (clickable — opens role assignment)
+}
+state "Customization Navigation Path" as CNP {
+  CNP : Step 1 — /tab/Home/begin
+  CNP : Step 2 — Click settings trigger (unlabeled)
+  CNP : Step 3 — Click sub-panel (unlabeled)
+  CNP : Step 4 — Click "More" (expand)
+  CNP : Step 5 — Click panel item (unlabeled)
+  CNP : Step 6 — Click "More" (second expand)
+  CNP : Step 7 — Click icon (unlabeled)
+  CNP : Step 8 — Select "Home" module section
+  CNP : Step 9 — Select "Kurinjee Promoters's Home"
+  CNP : Step 10/11 — Click "Classic View" x2
+  CNP : Step 12 — Click "Customize Home page"
+  CNP : Step 13 — Click "2 Roles"
+}
+state "Role Hierarchy (Settings/Roles)" as RH {
+  RH : URL: /settings/roles
+  RH : CEO / Administrator (Sri)
+  RH :     └── Manager
+  RH :             └── Telecaller (Sumathi)
+  RH : Home page assigned to 2 of these roles
+}
+Home_Dashboard --> KPI
+Home_Dashboard --> TOW
+Home_Dashboard --> MMW
+Home_Dashboard --> PDS
+Home_Dashboard --> DCM
+Home_Dashboard --> DC
+DC --> HPC : Customize trigger
+HPC --> CNP : navigation flow
+HPC --> RH : "2 Roles" → role assignment
+@enduml

@@ -1,4 +1,5 @@
 @startuml Accounts_Lifecycle_Zoho_CRM
+!pragma layout smetana
 skinparam backgroundColor #FAFAFA
 skinparam state {
   BackgroundColor #EEF4FF
@@ -72,6 +73,7 @@ state AccountsList {
     TB : ... Actions Menu (see ActionsMenu state)
   }
   state "ActionsMenu" as AM {
+    AM : Button label: "Actions" (confirmed via Scribe export flow)
     AM : Import Accounts → /settings/import?module=Accounts&step=1
     AM : Mass Delete → /tab/Accounts/actions/mass-tools?type=mass_delete
     AM : Mass Update → /tab/Accounts/actions/mass-tools?type=mass_update
@@ -79,11 +81,32 @@ state AccountsList {
     AM : Drafts → /tab/Accounts/actions/draft?module=Accounts
     AM : Deduplicate Accounts
     AM : Create Client Script ✨
-    AM : Export Accounts
+    AM : Export Accounts (confirmed via Scribe — see ExportDialog)
     AM : Zoho Sheet View
     AM : Print View ▶ (sub-menu)
     AM :   └─ Print Default view
     AM :   └─ Print Using Canvas
+  }
+  state "ExportDialog (Scribe Confirmed)" as ED {
+    ED : Trigger: Actions → Export Accounts
+    ED : Modal title: "Export Accounts"
+    ED : Radio option 1: "Fields from custom view" (exports active view columns only)
+    ED : Radio option 2: "All Fields" (exports all available fields — standard + custom)
+    ED : Button: Export (triggers CSV download)
+    ED : Button: Cancel
+    ED : Output format: .csv
+  }
+  state "ImportWizard (Scribe Confirmed)" as IW {
+    IW : Trigger: Actions → Import Accounts
+    IW : Step 1 — Upload File: drag-and-drop or browse
+    IW :   Formats: .csv | .xls | .xlsx
+    IW :   Max size: 5 MB | Max records: 30,000
+    IW :   Import type: Add New / Update Existing / Add and Update
+    IW : Step 2 — Map Fields: CSV column → CRM field
+    IW : Step 3 — Preview & Import: review count, duplicate handling
+    IW :   Duplicate check field: Account Name
+    IW :   Button: Import Now (async job for large files)
+    IW : Post-import: notification banner; error log CSV available
   }
   state "FilterPanel" as FP {
     FP : Label: Filter Accounts by

@@ -80,10 +80,41 @@ The Contacts module is **mid-funnel** — it sits between the top-of-funnel Lead
 The low contact count (26) relative to leads (2,077) is expected in real estate — only a small fraction of enquiries are converted into managed customer relationships. The Contacts module in this org is used to track genuine buyers who are in or past the qualification stage.
 
 Notable Contacts module fields specific to this org:
-- **Estimated Budget** (currency, ₹) — captures buyer's stated budget
+- **Estimated Budget ₹** (currency) — captures buyer's stated budget; confirmed present in Create Contact form (visible in form section label containing multiple fields)
 - **Connected To** (lookup → Leads) — traces back to the original lead
 - **Reporting To** — hierarchy within buyer groups or corporate contacts
 - **UTM/Click tracking fields** (Last Click Source, First Click Campaign, etc.) — tracks digital marketing attribution for how the contact was acquired
+
+### Known Real Contact Records
+
+| Name | Owner | Significance |
+|---|---|---|
+| Prasanth | Sri | Appears in Clone flow (Flow 12) and linked to a Deal record; visible on page 1 of 10-per-page list |
+
+### Record Creation Interactions (Scribe Flow Confirmed)
+
+| Interaction | Detail |
+|---|---|
+| Create button label | `Create Contact` (not just "+New") |
+| Form action buttons | `Save` \| `Save and New` \| `Cancel` |
+| **Save and New** | Saves current record + immediately opens a fresh blank form for rapid batch entry |
+| Only mandatory field | Last Name (`*`) |
+| Date format | `DD/MM/YYYY` (Indian date format — Zoho India instance) |
+| per_page default | `10` records per page (confirmed via `per_page=10` URL param in Clone flow) |
+
+### Clone Operation (Scribe Flow Confirmed)
+
+Path: **Contact detail view → More actions (`⋮`) → Clone**
+
+| Step | Action |
+|---|---|
+| 1 | Open Contact detail view (click record name in list) |
+| 2 | Click `⋮` (More actions) button in detail view header |
+| 3 | Select **Clone** from the dropdown |
+| 4 | Contact creation form opens pre-filled with source record's field values |
+| 5 | User edits required fields and saves as a new record |
+
+Clone is useful for entering multiple members of the same family who share most contact details (lead source, budget, account).
 
 ---
 
@@ -98,3 +129,12 @@ Notable Contacts module fields specific to this org:
 | Edit layout | `/crm/org60043078423/settings/modules/Contacts/layouts/955332000000425339` |
 | Import Contacts | `/crm/org60043078423/settings/import?module=Contacts&step=1` |
 | Manage Tags | `/crm/org60043078423/settings/manage-tags?module=Contacts` |
+
+---
+
+## Scribe Flows Documented
+
+| Flow | Steps | Duration | Key Finding |
+|---|---|---|---|
+| Save and New (Contact) | 6 | ~20s | `Create Contact` button; form fields including `Estimated Budget ₹`; `Save and New` batch pattern; Last Name only mandatory field |
+| Clone (Contact) | 4 | ~8s | Contact detail → `⋮ More` → `Clone`; pre-fills form with source record values; "Prasanth" used as source |

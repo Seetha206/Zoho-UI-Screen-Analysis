@@ -161,6 +161,22 @@ CRM Teamspace dropdown options: New Teamspace, Create Folder, Associate Modules,
 ### Data Creation Methods
 - Manual: "Create Contact" button → form
 - Lead conversion (Lead Conversion flow)
+- **Save and New** (Scribe confirmed) — saves current record + immediately opens fresh blank form for batch entry
+- **Clone** (Scribe confirmed) — duplicate existing record; Contact detail view → `⋮ More` → Clone
+
+### Record Creation — Save Actions (Scribe Confirmed)
+
+| Button | Behavior |
+|---|---|
+| `Save` | Save record, navigate to detail view |
+| `Save and New` | Save record, open fresh blank form (batch entry mode) |
+| `Cancel` | Discard form, return to list view |
+
+### Custom Fields in Create Form (Scribe Confirmed)
+
+| Field | Type | Notes |
+|---|---|---|
+| Estimated Budget ₹ | Currency | Visible in form section header "Title / Last Name / Estimated Budget ₹ / Lead Source..." |
 
 ### Key Associations
 - Assign to Account (Account Name field — lookup)
@@ -168,6 +184,12 @@ CRM Teamspace dropdown options: New Teamspace, Create Folder, Associate Modules,
 - Add Tasks and Events
 - Link to Deals
 - Connected To: Leads (lookup field in create form)
+
+### Known Real Contact Records
+
+| Name | Context |
+|---|---|
+| Prasanth | Real client — used in Clone flow (Scribe); also linked to Deal "Prasanth" (₹25,00,000 Closed Won) |
 
 ### Visible Data Points in List View
 - Contact Name (clickable → detail view)

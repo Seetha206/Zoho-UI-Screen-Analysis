@@ -5,7 +5,33 @@ page:
   organization: Kurinjee Promoters
   org_id: "60043078423"
   active_user: Kurinjee
-  active_dashboard: "Kurinjee Promoters's Home"
+  active_dashboard: "Kurinjee Promoters's Home"  # Scribe confirmed — home_customize_homepage_scribe_flow Step 9
+  view_type: Classic View  # Scribe confirmed — home_customize_homepage_scribe_flow Step 10/11
+  roles_assigned: 2  # Scribe confirmed — home_customize_homepage_scribe_flow Step 13
+
+  # ─────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────
+  scribe_flows_documented:
+    - flow: home_customize_homepage_scribe_flow
+      steps: 13
+      duration: "~2 min"
+      confirms:
+        - Named home page "Kurinjee Promoters's Home" (Step 9)
+        - View type "Classic View" (Steps 10–11)
+        - "Customize Home page" as primary CTA button label (Step 12)
+        - Home page assigned to 2 Roles (Step 13 — "2 Roles" badge clickable)
+        - 9-level nested navigation path to reach customization UI
+    - flow: settings_add_role_scribe_flow
+      steps: 7
+      confirms:
+        - "New Role" button label in /settings/roles
+        - Role form has "Please select one role from the list" dropdown (parent role field)
+    - flow: settings_edit_role_scribe_flow
+      steps: 7
+      confirms:
+        - /settings/roles URL confirmed
+        - Role hierarchy tree: Administrator (CEO/Sri) → Manager → Telecaller (Sumathi)
 layout:
   header:
     logo: Zoho CRM
@@ -130,6 +156,14 @@ layout:
               - Add Component
               - Reorder
               - View in Full Screen
+        - customize_cta:
+            label: "Customize Home page"  # Scribe confirmed — home_customize_homepage_scribe_flow Step 12
+            scribe_confirmed: true
+            behavior: opens_home_page_customization_panel
+            roles_badge:
+              label: "2 Roles"
+              scribe_confirmed: true  # home_customize_homepage_scribe_flow Step 13
+              behavior: opens_role_assignment_panel
     widgets:
       row_1:
         type: kpi_summary
@@ -313,3 +347,68 @@ footer:
     - Activity Reminders
     - Recent Items
     - Accessibility
+
+# ─────────────────────────────────────────
+# SETTINGS — ROLES (Scribe Confirmed)
+# ─────────────────────────────────────────
+settings_roles:
+  url: /crm/org60043078423/settings/roles
+  scribe_confirmed: true  # settings_edit_role_scribe_flow
+  role_hierarchy:
+    - role: Administrator
+      label: "CEO / Administrator"
+      user: Sri (Kurinjee Promoters account)
+      type: top_level
+      children:
+        - role: Manager
+          user: "(test/intermediate role)"
+          children:
+            - role: Telecaller
+              user: Sumathi
+              type: leaf_role
+  new_role_form:
+    scribe_confirmed: true  # settings_add_role_scribe_flow
+    button_label: "New Role"
+    fields:
+      - label: Role Name
+        type: text_input
+        required: true
+      - label: "Please select one role from the list"
+        type: dropdown
+        description: Parent role selection
+        required: true
+
+# ─────────────────────────────────────────
+# HOME CUSTOMIZATION NAVIGATION PATH
+# ─────────────────────────────────────────
+home_customization_navigation:
+  scribe_confirmed: true  # home_customize_homepage_scribe_flow (13 steps)
+  path:
+    - step: 1
+      action: Navigate to /tab/Home/begin
+    - step: 2
+      action: Click settings trigger (unlabeled icon)
+    - step: 3
+      action: Click sub-panel (unlabeled)
+    - step: 4
+      action: Click "More" (first expand)
+    - step: 5
+      action: Click panel item (unlabeled)
+    - step: 6
+      action: Click "More" (second expand)
+    - step: 7
+      action: Click icon (unlabeled)
+    - step: 8
+      action: Select "Home" module section
+    - step: 9
+      action: "Select 'Kurinjee Promoters's Home'"
+    - step: 10
+      action: Click "Classic View" (first click)
+    - step: 11
+      action: Click "Classic View" (second click — confirm selection)
+    - step: 12
+      action: Click "Customize Home page" (primary CTA)
+    - step: 13
+      action: "Click '2 Roles' badge (opens role assignment)"
+  nesting_depth: 9
+  complexity_note: "Deep navigation — unlabeled steps indicate icon-based UI with no text labels in Scribe recording"

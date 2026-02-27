@@ -1,13 +1,26 @@
 deals_module:
   module_name: Deals
-  internal_module_name: Potentials
-  url_pattern: /crm/org60043078423/tab/Potentials
+  internal_module_name: Potentials  # Scribe confirmed — deals_record_print_preview_scribe_flow URL: /tab/Potentials/
+  url_pattern: /crm/org60043078423/tab/Potentials  # Scribe confirmed via print preview flow
   total_records: 9
   layout_id: "955332000000425340"
   account_id: "955332000000406001"
   organisation: Kurinjee Promoters
   org_id: "60043078423"
   pagination: 1 to 9 per page (single page - all records visible)
+  custom_view_id: "955332000000441430"  # Scribe confirmed via deals_record_print_preview_scribe_flow
+
+  # ─────────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────────
+  scribe_flows_documented:
+    - flow: deals_record_print_preview_scribe_flow
+      steps: 4
+      confirms:
+        - /tab/Potentials/ as internal URL path (Deals display name, Potentials internal name)
+        - Print Preview in More Options menu on deal detail view
+        - Prasanth deal: ₹25,00,000 Closed Won (deal_id 955332000004403609)
+        - custom_view_id 955332000000441430 in list URL
 
   # ─────────────────────────────────────────────
   # LIST VIEW
@@ -246,6 +259,7 @@ deals_module:
       closing_date: "27/11/2025"
       deal_owner: Kurinjee Promoters
       last_activity: "Dec 11, 2025"
+      scribe_note: "Real client — Print Preview flow used this deal (deals_record_print_preview_scribe_flow). Linked to Contact 'Prasanth' (contact_id 955332000004403606)."
     - row: 2
       contact_name: Amsa
       contact_id: "955332000003267006"
@@ -395,6 +409,15 @@ deals_module:
     tabs:
       - Overview
       - Related Lists (Calls, Meetings, Tasks, Emails, Notes, Documents)
+    more_options_menu:  # ⋮ More button — Scribe confirmed via deals_record_print_preview_scribe_flow
+      scribe_confirmed: true
+      items:
+        - label: Print Preview
+          scribe_confirmed: true  # deals_record_print_preview_scribe_flow Step 3
+          path: "Detail View → ⋮ More → Print Preview"
+          use_cases:
+            - Client-ready deal summary
+            - Physical filing / archiving
 
   # ─────────────────────────────────────────────
   # BOTTOM STATUS BAR (PERSISTENT)

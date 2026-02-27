@@ -6,7 +6,29 @@ contacts_module:
   account_id: "955332000000406001"
   subscription_users: 1
   subscription_status: Limit Reached (1 user license activated)
-  pagination: 1 to 10 per page (Previous / Next buttons)
+  pagination:
+    display: 1 to 10 per page (Previous / Next buttons)
+    per_page: 10
+    per_page_confirmed: true  # Scribe confirmed — contact_clone_scribe_flow URL params: per_page=10
+  custom_view_id: "955332000000441440"  # Scribe confirmed via contact_clone_scribe_flow URL
+
+  # ─────────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────────
+  scribe_flows_documented:
+    - flow: contact_save_and_new_scribe_flow
+      steps: 6
+      confirms:
+        - "Save and New" button label (secondary button in create form)
+        - Estimated Budget ₹ as custom currency field (visible in form section label)
+        - Create Contact form at /tab/Contacts/create?layoutId=955332000000425339
+    - flow: contact_clone_scribe_flow
+      steps: 4
+      confirms:
+        - Clone via record detail view → ⋮ More → Clone
+        - Prasanth is a real contact (record_id 955332000004403606, owner: Sri)
+        - per_page=10 in list view URL params
+        - custom_view_id 955332000000441440 in list URL
 
   # ─────────────────────────────────────────────
   # LIST VIEW
@@ -243,6 +265,7 @@ contacts_module:
       email: ""
       record_id: "955332000004403606"
       detail_url: /crm/org60043078423/tab/Contacts/955332000004403606
+      scribe_note: "Real client — used in Clone flow (contact_clone_scribe_flow). Owner: Sri. Linked to Deal 'Prasanth' (₹25,00,000 Closed Won)."
     - row: 2
       contact_name: Amsa
       last_activity: "Nov 4, 2025"
@@ -321,10 +344,21 @@ contacts_module:
     form_actions:
       - label: Save
         type: primary_blue
+        behavior: save_record_navigate_to_detail
       - label: Save and New
         type: secondary
+        behavior: save_record_open_fresh_blank_form  # Scribe confirmed — contact_save_and_new_scribe_flow
+        scribe_confirmed: true
       - label: Cancel
         type: secondary
+        behavior: discard_return_to_list
+    custom_fields_confirmed:
+      - label: "Estimated Budget ₹"
+        type: currency
+        currency_symbol: "₹"
+        section: Contact Information
+        scribe_confirmed: true  # Visible in form section label in contact_save_and_new_scribe_flow Step 3
+        note: "Custom field — not standard Zoho CRM. Visible in create form field group header."
     sections:
       - section: Contact Information
         fields: 50+  # See contacts_creation/screens.yaml for full field list
@@ -353,6 +387,13 @@ contacts_module:
       - Activities
       - Email History
       - Workflow
+    more_options_menu:  # ⋮ More button — Scribe confirmed via contact_clone_scribe_flow
+      scribe_confirmed: true
+      items:
+        - label: Clone
+          behavior: duplicate_record_open_prefilled_form
+          scribe_confirmed: true
+          path: "Detail View → ⋮ More → Clone"
 
   # ─────────────────────────────────────────────
   # BOTTOM STATUS BAR (PERSISTENT)

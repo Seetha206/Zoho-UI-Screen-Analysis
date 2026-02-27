@@ -1,0 +1,19 @@
+Lead Create Record - https://scribehow.com/viewer/Create_New_Lead_Record_in_Zoho_CRM__Hkm4hw2XTB6w3-sbh_Wmgg
+Lead Update Record - https://scribehow.com/viewer/Update_Lead_in_Zoho_CRM__z7bhcBkxSbeu2TgL1vuegQ
+Lead Delete Record - https://scribehow.com/viewer/How_to_Delete_a_Lead_in_Zoho_CRM__QYcZwYelSda4EbSDpH_HwA
+Lead Related List  - https://scribehow.com/viewer/Lead__Related_List_Flow__vgDNSGhiR-SFdFjLXWSeuw
+Lead Filter Flow   - https://scribehow.com/viewer/Filter_in_Leads_List_View__162JA0TtTgOb6w3THkMqSw
+Lead Sort Flow - https://scribehow.com/viewer/Sort_By_Flow_in_Zoho_CRMLead__y3uy3X_kSwGGCPJwnA9R7g
+Manage Columns and Record Limit in Zoho CRM - https://scribehow.com/viewer/Manage_Columns_and_Record_Limit_in_Zoho_CRM__WLwf_7s1Tni7Pol1RQOEKg
+Lead Module - BluePrint Flow in CRM - https://scribehow.com/viewer/Lead_Module__BluePrint_Flow_in_CRM__CzUDuGLrRw2IfepoHwWqsg
+Lead Custom View - https://scribehow.com/viewer/Lead__Custom_View__VAC1y59USAyVSDfMyKlRFA
+Module Link - https://scribehow.com/viewer/Module__Link_Flow_Lead__IrDZtKcKSYmqnroEdZnHhA
+Module - Save and New Flow (Contact) - https://scribehow.com/viewer/Module_Save_with_New_Flow_in_Zoho_CRMContact__xkCXbj56Q_Sadha20WRGDQ
+Module Clone Flow in Zoho CRM (Contant) - https://scribehow.com/viewer/Module_Clone_Flow_in_Zoho_CRM_Contant__qcO_Tqb7QEmg88qVuQTWTA
+Module Record Import in CRM (Accounts) - https://scribehow.com/viewer/Module_Record_Import_in_CRM_Accounts__Twz5-RybQgu5mUlD49YU-w
+Export Module Records in CRM (Accounts) - https://scribehow.com/viewer/Export_Module_Records_in_CRM_Accounts__3K4_k1k4TqWsZYdqsdKO7Q
+Customize  Homepage in Zoho CRM - https://scribehow.com/viewer/Customize_Homepage_in_Zoho_CRM__ERCScDBmQbuLkgiaJL1_YQ
+Module Record Print Preview in Zoho CRM - https://scribehow.com/viewer/Module_Record_Print_Preview_in_Zoho_CRM__yue5DQAESPa0fGEmHaoG-Q
+Create a New Task in Zoho CRM - https://scribehow.com/viewer/Create_a_New_Task_in_Zoho_CRM__Xm-2tDfLRoyy3IfffP40Tg
+Edit Role in Zoho CRM - https://scribehow.com/viewer/Edit_Role_in_Zoho_CRM__YMGhlp7FShaS0TUB1gdNRg
+Add Role in Zoho CRM - https://scribehow.com/viewer/Create_a_New_Role_in_Zoho_CRM__JwpIwIBsT4Ol-UFLj7qQgQ

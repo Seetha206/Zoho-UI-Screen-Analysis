@@ -83,6 +83,42 @@ The Deals module is **bottom-of-funnel** — it represents opportunities where t
 
 ---
 
+## Record Detail View Actions
+
+### Primary Actions Bar
+| Button | Function |
+|---|---|
+| Edit | Open record in edit mode |
+| Send Email | Send an email linked to this deal |
+| Convert | — |
+| Delete | Delete the deal record |
+| More ▾ (`⋮`) | Opens overflow/secondary actions dropdown |
+
+### More Actions Dropdown (Scribe Flow Confirmed)
+
+| Menu Item | Function |
+|---|---|
+| Send Email | Compose email |
+| Log a Call | Log a phone call |
+| Create Task | Create a follow-up task |
+| Clone | Create a duplicate of this deal record |
+| **Print Preview** | Open a print-formatted view of all deal fields ← confirmed in Scribe flow |
+| Delete | Delete the deal |
+
+### Print Preview (Scribe Flow Confirmed)
+
+Path: **Deal detail view → `⋮ More` → Print Preview**
+
+Print Preview opens a formatted, printable layout of the full deal record in a new browser tab or print dialog. Includes all visible field data, related info, and the org header. Used for:
+- Client meeting preparation
+- Internal manager review
+- Deal closure documentation
+- Audit trail capture
+
+> Note: The module internal name is **Potentials** (URL: `/tab/Potentials/`) while the display name is **Deals**. Both are used interchangeably.
+
+---
+
 ## Kurinjee Promoters — Business Context
 
 | Detail | Value |
@@ -109,7 +145,7 @@ The Deals module is **bottom-of-funnel** — it represents opportunities where t
 | Deal | Amount | Stage |
 |---|---|---|
 | Krishnan | ₹ 75,00,000.00 | Booking Completed |
-| Prasanth | ₹ 25,00,000.00 | Closed Won |
+| Prasanth | ₹ 25,00,000.00 | Closed Won | ← linked to Contact "Prasanth" (real client record) |
 | Baskar | ₹ 13,26,000.00 | Closed Won |
 | Senthilkumar Rangaraj | ₹ 15,00,000.00 | Visit Pending |
 | **Total Visible Pipeline** | **₹ 1,28,26,000.00** | — |
@@ -194,3 +230,11 @@ The Deals module has **130+ fields**, including extensive custom fields for real
 |---|---|
 | `Dealsflow.md` | Full DOM scan with 130+ field definitions, form structure |
 | `deals_overview.md` | This file — business context and usage |
+
+---
+
+## Scribe Flows Documented
+
+| Flow | Steps | Duration | Key Finding |
+|---|---|---|---|
+| Record Print Preview (Potentials) | 4 | ~53s | URL: `/tab/Potentials/`; deal "Prasanth" (₹25,00,000 — Closed Won); path: detail view → `⋮ More` → `Print Preview` |

@@ -1,6 +1,8 @@
 @startuml
 title Leads - Blueprint Lifecycle (Zoho CRM UI DOM Scan)
-[*] --> Not_Contacted : Lead Created (entry)
+[*] --> Enquiry_Stage            : Lead Created → "Enquiry" transition (mandatory: Email)
+Enquiry_Stage --> Lead_Qualification : "Lead" transition (mandatory: Budget, Budget Variation, Authority, Need, Timeline, Matched Projects)
+Lead_Qualification --> Not_Contacted : [lead enters calling queue]
 Not_Contacted --> Attempted         : [initial attempt made]
 Not_Contacted --> Junk_Lead         : [marked junk]
 Attempted --> Re_Attempted          : Re Attempted (transition button)
@@ -50,10 +52,23 @@ state "List Views" as LV {
   LV : All Leads
   LV : Open Leads
   LV : Site Visit Scheduled Leads
+  LV : Today's Leads (Created Time = Today)
+  LV : Hot Leads
+  LV : Cold Leads
+  LV : Warm Leads
+  LV : Junk Lead
+  LV : Nurturing Leads
+  LV : Telecaller Leads
+  LV : Arthi-View
+  LV : All Locked Leads
+  LV : Converted Leads
+  LV : My Leads
+  LV : My Converted Leads
 }
 state "Lead Fields" as LF {
   LF : Lead Name
   LF : Lead Type
+  LF : Lead Quality (standard: Hot/Warm/Cold/Junk)
   LF : Client Location
   LF : Company
   LF : Telecaller
@@ -86,7 +101,7 @@ state "Related Lists" as LRL {
   LRL : Emails
   LRL : Closed Activities
   LRL : Invited Meetings
-  LRL : Schedules
+  LRL : Schedules (CustomModule6 — SCH prefix — 14888+ records)
   LRL : Voice of the Customer
   LRL : Customer Feedback
 }

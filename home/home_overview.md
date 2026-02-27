@@ -107,6 +107,32 @@ Without a Home Dashboard, users would need to manually navigate to each module a
 | Dashboard Switcher | Classic View / Kurinjee Promoters's Home / Manager's Home |
 | More Options | Add Component / Reorder / View in Full Screen |
 
+### Home Page Customization (Scribe Flow Confirmed)
+The home dashboard customization is accessed through a **9-level nested navigation path** (13 steps, ~2 minutes):
+
+```
+Home Dashboard (/tab/Home/begin)
+  └── [Click settings trigger — unlabeled icon]
+      └── [Click sub-panel — unlabeled]
+          └── [More] (expand options)
+              └── [Click panel item — unlabeled]
+                  └── [More] (expand second level)
+                      └── [Click icon — unlabeled]
+                          └── Select "Home" module section
+                              └── Select "Kurinjee Promoters's Home" (named home page)
+                                  └── Click "Classic View" × 2
+                                      └── Click "Customize Home page" (CTA button)
+                                          └── Click "2 Roles" (role assignment badge)
+```
+
+| Navigation Element | Confirmed Value |
+|---|---|
+| Named Home Page | `Kurinjee Promoters's Home` |
+| View Type | Classic View |
+| Roles Assigned | 2 |
+| Customization Button Label | `Customize Home page` |
+| Role Assignment Badge | `2 Roles` (clickable — opens role assignment panel) |
+
 ### Widget Drill-Down
 | Widget | Clickable Elements | Destination |
 |---|---|---|
@@ -126,11 +152,23 @@ Without a Home Dashboard, users would need to manually navigate to each module a
 | Organisation | Kurinjee Promoters |
 | Org ID | 60043078423 |
 | Industry | Real estate (property sales) |
-| Active Dashboard | Kurinjee Promoters's Home |
-| Alternative Dashboards | Classic View, Manager's Home (New!) |
+| Active Dashboard | Kurinjee Promoters's Home (named home page — confirmed) |
+| View Type | Classic View (confirmed via Scribe flow) |
+| Roles Assigned | 2 (confirmed via Scribe flow "2 Roles" badge) |
+| Alternative Dashboards | Classic View, Manager's Home |
 | Total Leads (KPI) | 2,076 |
 | Open Deals (KPI) | 6 |
 | Pipeline Stages Tracked | Visit Pending, Visit Completed |
+
+### Role Hierarchy (Confirmed)
+
+| Level | Role | Users |
+|---|---|---|
+| Top | Administrator (CEO) | Sri (recorder/admin) |
+| Mid | Manager | Manager Testing (test account) |
+| Field | Telecaller | Sumathi, others |
+
+> The home page "Kurinjee Promoters's Home" is assigned to **2 of these roles**. The 2 roles are most likely Administrator and Telecaller (confirmed from Settings → Roles flows and Home customization flow).
 
 The Home Dashboard reflects a **low-activity sales pipeline** — zero calls today, zero untouched deals, and no deals closing this month. This suggests either:
 - A slow sales period
@@ -172,6 +210,22 @@ The funnel chart showing 5 deals in "Visit Pending" and only 1 in "Visit Complet
 
 ---
 
+## Settings — Roles Reference
+
+The role management UI is accessible at `/settings/roles` (Admin only). Confirmed role hierarchy:
+
+```
+CEO / Administrator
+    └── Manager
+            └── Telecaller
+```
+
+**New Role form fields:** Role Name (mandatory), Reports To / "Please select one role from the list" (mandatory dropdown), Description (optional), Share data with peers (toggle, default: No).
+
+**Edit Role path:** `/settings/roles` → Click edit icon (✎) on role → Edit form opens.
+
+---
+
 ## Related Documentation
 
 | File | Description |
@@ -179,3 +233,11 @@ The funnel chart showing 5 deals in "Visit Pending" and only 1 in "Visit Complet
 | `home_screen.yml` | Machine-readable layout structure |
 | `zoho_crm_home_dom_scan.md` | Full DOM analysis with component hierarchy |
 | `home_overview.md` | This file — business context and usage |
+
+## Scribe Flows Documented
+
+| Flow | Steps | Duration | Key Finding |
+|---|---|---|---|
+| Customize Homepage | 13 | ~2 min | Named page "Kurinjee Promoters's Home"; Classic View; 2 Roles; "Customize Home page" CTA |
+| Edit Role (Settings) | 7 | ~2 min | `/settings/roles`; 6/7 unlabeled steps; role hierarchy confirmed |
+| Add Role (Settings) | 7 | ~24s | "New Role" button; "Please select one role from the list" placeholder |

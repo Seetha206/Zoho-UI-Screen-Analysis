@@ -256,7 +256,11 @@ tasks_module:
   # ─────────────────────────────────────────────
   status_values_visible:
     - Not Started
+    - Attempt  # custom value — confirmed via Scribe task_create_scribe_flow; call attempted but no answer
     - In Progress
+    - Completed
+    - Deferred
+    - Waiting for Input
   priority_values_visible:
     - High
     - Normal

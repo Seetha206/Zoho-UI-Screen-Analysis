@@ -1,60 +1,817 @@
 @startuml
-title Tasks - Lifecycle (Zoho CRM UI DOM Scan)
-[*] --> Not_Started : Create Task
-Not_Started --> In_Progress       : [Status changed to In Progress]
-Not_Started --> Deferred          : [Status changed to Deferred]
-Not_Started --> Waiting_for_input : [Status changed to Waiting for input]
-Not_Started --> Completed         : [Status changed to Completed]
-In_Progress --> Not_Started       : [Status changed to Not Started]
-In_Progress --> Deferred          : [Status changed to Deferred]
-In_Progress --> Waiting_for_input : [Status changed to Waiting for input]
-In_Progress --> Completed         : Close Task button
-In_Progress --> Completed         : [Status changed to Completed]
-Deferred --> Not_Started          : [Status changed to Not Started]
-Deferred --> In_Progress          : [Status changed to In Progress]
-Deferred --> Waiting_for_input    : [Status changed to Waiting for input]
-Deferred --> Completed            : [Status changed to Completed]
-Waiting_for_input --> Not_Started : [Status changed to Not Started]
-Waiting_for_input --> In_Progress : [Status changed to In Progress]
-Waiting_for_input --> Deferred    : [Status changed to Deferred]
-Waiting_for_input --> Completed   : [Status changed to Completed]
-Completed --> [*]
-state "Status Options (visible in dropdown)" as SO {
-  SO : Not Started
-  SO : Deferred
-  SO : In Progress
-  SO : Waiting for input
-  SO : Completed
+!pragma layout smetana
+title Zoho CRM – Tasks Module: Full DOM + Business + Automation Lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam state {
+  BackgroundColor #E8F4FD
+  BorderColor #2E86AB
+  FontSize 12
 }
-state "Header Actions" as HA {
-  HA : Close Task
-  HA : Edit
-  HA : New Appointment (dropdown)
-  HA : Clone (More Options)
-  HA : Delete (More Options)
-  HA : Print Preview (More Options)
-  HA : Customize Business Card (More Options)
-  HA : Organize Task Details (More Options)
-  HA : Create Button (More Options)
+skinparam ArrowColor #2E86AB
+skinparam NoteBackgroundColor #FFF8DC
+skinparam NoteBorderColor #DAA520
+' ─────────────────────────────────────────────
+' TOP-LEVEL ENTRY
+' ─────────────────────────────────────────────
+[*] --> ModuleLoad : Navigate to /tab/Tasks
+state ModuleLoad {
+  [*] --> RenderListView
 }
-state "Task Fields" as TF {
-  TF : Subject
-  TF : Type
-  TF : Due Date
-  TF : Status
-  TF : Priority (High / Normal / Low)
-  TF : Telecaller
-  TF : Approver
-  TF : Related To
-  TF : Repeat
-  TF : Auto Close
-  TF : Closed Time
-  TF : Reminder
+ModuleLoad --> TasksListView
+' ─────────────────────────────────────────────
+' STATE: TASKS LIST VIEW
+' ─────────────────────────────────────────────
+state TasksListView {
+  ' ── LEFT NAVIGATION ───────────────────────
+  state LeftNavigation {
+    state "Home" as NavHome
+    state "Reports" as NavReports
+    state "Analytics" as NavAnalytics
+    state "My Requests" as NavMyRequests
+    state "CRM Teamspace" as NavTeamspace
+    state "Leads" as NavLeads
+    state "Workqueue" as NavWorkqueue
+    state "Contacts" as NavContacts
+    state "Accounts" as NavAccounts
+    state "Deals" as NavDeals
+    state "Projects Portfolio" as NavProjects
+    state "Employee Portfolio" as NavEmployee
+    state "Customer Feedback" as NavCustomerFB
+    state "Tasks (active)" as NavTasks
+    state "Meetings" as NavMeetings
+    state "Calls" as NavCalls
+    state "Prospecting Leads" as NavProspecting
+    state "Logs" as NavLogs
+    state "Scheduler" as NavScheduler
+    state "Voice of the Customer" as NavVoice
+  }
+  state TeamspaceMenu {
+    state "New Teamspace" as TsNew
+    state "Create Folder" as TsFolder
+    state "Associate Modules" as TsAssoc
+    state "Manage CRM Teamspace" as TsManage
+    state "View All Teamspace" as TsViewAll
+  }
+  NavTeamspace --> TeamspaceMenu : click
+  ' ── TOP BAR ───────────────────────────────
+  state TopBar {
+    state "Search Records" as TopSearch
+    state "Ask Zia" as TopZia
+    state "Signals" as TopSignals
+    state "Calendar" as TopCalendar
+    state "Marketplace" as TopMarket
+    state "Setup" as TopSetup
+    state "Profile" as TopProfile
+  }
+  ' ── CUSTOM VIEW TAB BAR ───────────────────
+  state CustomViewTabBar {
+    state "All Tasks (active)" as CVAllTasks
+    state "More Custom Views (dropdown)" as CVMore
+    state "New Custom View" as CVNew
+    state "Manage Custom View" as CVManage
+    state "Show as Dropdown" as CVDropdown
+    state "More Options (···) on tab" as CVTabOptions
+  }
+  CVMore --> CVNew : open
+  CVMore --> CVManage : open
+  CVMore --> CVDropdown : open
+  ' ── TOOLBAR / VIEW CONTROLS ───────────────
+  state Toolbar {
+    state "Filter Toggle" as TbFilter
+    state "Sort (active, with clear X)" as TbSort
+    state "Refresh Custom View" as TbRefresh
+    state "View Settings (column config)" as TbSettings
+  }
+  state ViewTypeToggle {
+    state "List View (active)" as VtList
+    state "Kanban View" as VtKanban
+    state "Chart View" as VtChart
+    state "Timeline View" as VtTimeline
+    state "Split View" as VtSplit
+    state "More Views Dropdown" as VtMore
+    state "Canvas View (in More)" as VtCanvas
+    state "Card View (in More)" as VtCard
+    state "Table View (in More)" as VtTable
+    note right of ViewTypeToggle
+      Tasks module does NOT have
+      Grid/Sheet View (unlike Contacts).
+      Available: List, Kanban, Chart,
+      Timeline, Split, Canvas, Card, Table
+    end note
+  }
+  VtMore --> VtCanvas : expand
+  VtMore --> VtCard : expand
+  VtMore --> VtTable : expand
+  ' ── HEADER ACTION BUTTONS ─────────────────
+  state HeaderActions {
+    state "Create Task" as HaCreate
+    state "More Dropdown (import)" as HaMore
+    state "Actions Dropdown (bulk)" as HaActions
+  }
+  state MoreDropdown {
+    state "Import Tasks" as MdImport
+    state "Import Notes" as MdImportNotes
+    note right of MoreDropdown
+      Tasks "More" contains only import actions.
+      No Approve, Deduplicate, Autoresponders,
+      Mass Email, Zoho Sheet View, or Drafts
+      (unlike Contacts module).
+    end note
+  }
+  HaMore --> MoreDropdown : click
+  state ActionsDropdown {
+    state "Mass Delete" as AdDelete
+    state "Mass Update" as AdUpdate
+    state "Manage Tags" as AdTags
+    state "Export Tasks" as AdExport
+    state "Print View" as AdPrint
+    note right of ActionsDropdown
+      Tasks Actions menu has fewer items
+      than Contacts. No Mass Email,
+      Autoresponders, or Approve Tasks
+      option in this org's Actions dropdown.
+    end note
+  }
+  HaActions --> ActionsDropdown : click (with/without selection)
+  ' ── ADVANCED FILTER PANEL ─────────────────
+  state AdvancedFilterPanel {
+    state "Search Filter Box" as FpSearch
+    state SystemDefinedFilters {
+      state "Touched Records" as SfTouched
+      state "Untouched Records" as SfUntouched
+      state "Record Action" as SfRecordAction
+      state "Related Records Action" as SfRelatedAction
+      state "Locked" as SfLocked
+      note right of SystemDefinedFilters
+        Tasks does NOT have: Latest Email Status,
+        Activities, Cadences filters (Contacts-specific).
+      end note
+    }
+    state FilterByFields {
+      state "Approver" as FfApprover
+      state "Auto Close" as FfAutoClose
+      state "Closed Time" as FfClosedTime
+      state "Contact Name" as FfContact
+      state "Created By" as FfCreatedBy
+      state "Created Time" as FfCreatedTime
+      state "Due Date" as FfDueDate
+      state "Last Activity Time" as FfLastActivity
+      state "Modified By" as FfModifiedBy
+      state "Modified Time" as FfModifiedTime
+      state "Priority" as FfPriority
+      state "Related To" as FfRelatedTo
+      state "Status" as FfStatus
+      state "Subject" as FfSubject
+      state "Tag" as FfTag
+      state "Task Owner" as FfTaskOwner
+      state "Telecaller" as FfTelecaller
+      state "Type" as FfType
+      state "Notes" as FfNotes
+    }
+    state FilterByRelatedModules {
+      note "Related module filters for Tasks\\nbased on parent records\\n(Leads, Contacts, Accounts, Deals, etc.)"
+    }
+    note right of AdvancedFilterPanel
+      Tasks filter panel has 3 sections:
+      System Defined Filters,
+      Filter By Fields,
+      Filter By Related Modules.
+      NO Website Activity section
+      (that is Contacts/Leads specific).
+    end note
+  }
+  TbFilter --> AdvancedFilterPanel : toggle open/close
+  ' ── LIST VIEW TABLE ───────────────────────
+  state ListViewTable {
+    state "Column: Subject (All filter)" as ColSubject
+    state "Column: Telecaller" as ColTelecaller
+    state "Column: Due Date (sortable, required sort indicator)" as ColDueDate
+    state "Column: Status" as ColStatus
+    state "Column: Priority" as ColPriority
+    state "Row: Task record (×100 per page)" as ListRow
+    note right of ListViewTable
+      Tasks list shows 100 records per page
+      (not 10 like standard modules).
+      Total: 4285 records in this org.
+    end note
+    state RowLevelActions {
+      state "Row More Options (···)" as RaMore
+    }
+    state RowMoreMenu {
+      state "Edit" as RmEdit
+      state "Delete" as RmDelete
+      state "Mark as Completed" as RmComplete
+      note right of RowMoreMenu
+        Tasks row menu has 'Mark as Completed'
+        instead of Contacts' 'Print' options.
+      end note
+    }
+    ListRow --> RowLevelActions : hover
+    RaMore --> RowMoreMenu : click
+  }
+  ' ── MASS ACTION BAR ───────────────────────
+  state MassActionBar {
+    note "Visible when 1+ tasks checked"
+    state "Mass Delete (selected)" as MaDelete
+    state "Mass Update (selected)" as MaUpdate
+    state "Manage Tags (selected)" as MaTags
+    state "Export Selected" as MaExport
+  }
+  ListViewTable --> MassActionBar : check task row(s)
+  ' ── PAGINATION ────────────────────────────
+  state Pagination {
+    state "Previous Page" as PgPrev
+    state "Next Page" as PgNext
+    state "Total: 4285 records | page indicator" as PgInfo
+  }
+  ' ── BOTTOM RIGHT UTILITY BAR ──────────────
+  state UtilityBar {
+    state "Visitors Online" as UbVisitors
+    state "Feedback on New UI" as UbFeedback
+    state "Announcements" as UbAnnouncements
+    state "Mail" as UbMail
+    state "Motivator" as UbMotivator
+    state "Sticky Notes" as UbNotes
+    state "Zia Assistant" as UbZia
+    state "Activity Reminders" as UbReminders
+    state "Recent Items" as UbRecent
+    state "Accessibility" as UbAccessibility
+    state "Chat Widget" as UbChat
+  }
+  ' ── MODAL DIALOGS (hidden / contextual) ───
+  state ModalDialogs {
+    state "Delete Confirmation Modal" as MdlDelete
+    state "Mass Update Modal" as MdlMassUpdate
+    state "Import Wizard Modal" as MdlImport
+    state "Export in Progress Modal" as MdlExport
+    state "Leave Page Confirmation" as MdlLeavePage
+    state "Cannot Make Call Modal" as MdlCallError
+    state "User Limit Reached Modal" as MdlUserLimit
+    state "Import Scheduled Confirmation" as MdlImportSched
+    note right of ModalDialogs
+      All lyte-modal dialogs present in DOM
+      but rendered hidden (lyteMenuClosed)
+      until triggered by corresponding action.
+    end note
+  }
+  ' ── BLUEPRINT STATE BAR ───────────────────
+  state BlueprintListNote {
+    note "Blueprint state bar does not render\\nin List View. Appears only in Task\\nDetail View if Blueprint is active."
+  }
 }
-state "Side Panel" as SP {
-  SP : Info (Contact card)
-  SP : Conversations
-  SP : Deal Summary
-  SP : Open Activities (Tasks / Meetings / Calls)
+' ─────────────────────────────────────────────
+' STATE: TASK DETAIL VIEW
+' ─────────────────────────────────────────────
+state TaskDetailView {
+  ' ── DETAIL HEADER ACTIONS ─────────────────
+  state DetailHeaderActions {
+    state "Back to Tasks" as DhBack
+    state "Add Tags" as DhTags
+    state "Close Task (primary button)" as DhCloseTask
+    state "Edit" as DhEdit
+    state "Fetch Lead Status (primary)" as DhFetchLead
+    state "More Options (···)" as DhMore
+    state "Previous Record" as DhPrev
+    state "Next Record" as DhNext
+  }
+  note right of DetailHeaderActions
+    'Close Task' is the PRIMARY action button
+    (replaces 'Send Email' seen in Contacts).
+    Clicking sets Status = Completed
+    and writes a Closed Time timestamp.
+  end note
+  state FetchLeadStatusDropdown {
+    state "Fetch Lead Status (execute)" as FlsAction
+    state "New Appointment" as FlsAppt
+    state "Email Booking URL" as FlsEmailUrl
+    state "Create Button" as FlsCreateBtn
+    state "Manage Buttons" as FlsManageBtn
+    note right of FetchLeadStatusDropdown
+      'Fetch Lead Status' is a custom button
+      linked to the Related Lead's status field.
+      Tasks module shows: Tasks (no custom buttons),
+      Leads (Fetch Lead Status, New Appointment,
+      Email Booking URL, Create Button, Manage Buttons).
+    end note
+  }
+  DhFetchLead --> FetchLeadStatusDropdown : click dropdown arrow
+  state MoreOptionsMenu {
+    state "Clone" as MoClone
+    state "Delete" as MoDelete
+    state "Print Preview" as MoPrint
+    state "Customize Business Card" as MoCustomizeBiz
+    state "Organize Task Details" as MoOrganize
+    state "Create Button" as MoCreateBtn
+    note right of MoreOptionsMenu
+      Tasks More Options is simpler than Contacts:
+      No Mail Merge, No Find & Merge Duplicates,
+      No Review History, No Enroll to Cadence,
+      No Add Kiosk, No Create Client Script,
+      No Add Related List option.
+    end note
+  }
+  DhMore --> MoreOptionsMenu : click
+  ' ── DETAIL VIEW TABS ─────────────────────
+  state DetailViewTabs {
+    state "Overview (active)" as DvOverview
+    state "Timeline" as DvTimeline
+  }
+  ' ── OVERVIEW PANEL ───────────────────────
+  state OverviewPanel {
+    state BusinessCardSummary {
+      state "Priority (field)" as OvPriority
+      state "Due Date (field)" as OvDueDate
+      state "Status (field)" as OvStatus
+      state "Related To (link to Lead/Contact/Account)" as OvRelatedTo
+      state "Task Owner (field)" as OvTaskOwner
+      state "Last Update timestamp" as OvLastUpdate
+    }
+    state "Hide/Show Details Toggle" as OvToggleDetails
+    state TaskInformationSection {
+      state "Subject" as OvSubject
+      state "Type" as OvType
+      state "Due Date" as OvDueDateDetail
+      state "Status" as OvStatusDetail
+      state "Priority" as OvPriorityDetail
+      state "Telecaller" as OvTelecaller
+      state "Approver" as OvApprover
+      state "Repeat" as OvRepeat
+      state "Auto Close" as OvAutoClose
+      state "Closed Time" as OvClosedTime
+      state "Reminder" as OvReminder
+    }
+    state DescriptionInformationSection {
+      state "Description (text)" as OvDescription
+    }
+    state InternalUseSection {
+      state "Related To (Lead/Contact link)" as OvWho
+      state "Task Owner" as OvOwnerDetail
+    }
+  }
+  ' ── TIMELINE PANEL ────────────────────────
+  state TimelinePanel {
+    state TimelineSubTabs {
+      state "History (only tab - no Interactions)" as TlHistory
+      note right of TimelineSubTabs
+        Tasks Timeline has ONLY History tab.
+        Unlike Contacts, there is NO
+        'Interactions' tab in Tasks.
+      end note
+    }
+    state TimelineHistoryView {
+      state "Timeline Filter Button" as TlFilter
+      state "0 Upcoming Automated Actions (expandable)" as TlUpcoming
+      state "History Event: Task Created" as TlEvtCreate
+      state "History Event: Task Edited (field diff)" as TlEvtEdit
+      state "History Event: Status Changed" as TlEvtStatus
+      state "History Event: Task Closed" as TlEvtClose
+      state "History Event: Reminder triggered" as TlEvtReminder
+      state "History Event: Automation Function fired" as TlEvtFunction
+    }
+    state TimelineFilterPanel {
+      state "Modules dropdown (All Modules)" as TfModules
+      state "Users dropdown (All / Active / Inactive / Deleted)" as TfUsers
+      state "Time filter (Any Time / Today / Yesterday / Last 7 days / Last 30 days / Custom Range / Specific date)" as TfTime
+      state "Sources dropdown (All Sources)" as TfSources
+    }
+    TlFilter --> TimelineFilterPanel : click
+    state UpcomingAutomatedActionsPanel {
+      state "Pending Workflow Rules" as UpWorkflow
+      state "Pending Scheduled Actions" as UpScheduled
+      state "Pending Functions" as UpFunctions
+    }
+    TlUpcoming --> UpcomingAutomatedActionsPanel : expand
+  }
+  ' ── RIGHT PANEL TABS ─────────────────────
+  state RightPanelTabs {
+    state "Info Tab (active)" as RpInfo
+    state "Conversations Tab" as RpConversations
+  }
+  state InfoTabContent {
+    state RelatedRecordCard {
+      state "Related Lead/Contact name link" as RcName
+      state "Module badge (Lead / Contact)" as RcBadge
+      state "Send Email button" as RcSendEmail
+      state "Phone (mobile)" as RcPhone
+      state "Office phone" as RcOffice
+      state "Email icon" as RcEmail
+      state "More Info link (opens Lead/Contact detail)" as RcMoreInfo
+    }
+    state OpenActivitiesSection {
+      state "+ New button (Add activity)" as OaSNew
+      state "Tasks (count, expandable)" as OaTaskCount
+      state "Meetings (count, expandable)" as OaMeetCount
+      state "Calls (count, expandable)" as OaCallCount
+    }
+    note right of InfoTabContent
+      The right panel shows context from the
+      Related Lead/Contact record linked to this Task.
+      'Send Email' sends to the linked record.
+      'More Info' navigates to that record's detail.
+    end note
+  }
+  RpInfo --> InfoTabContent
+  state ConversationsTabContent {
+    note "Internal conversation / comment thread\\nassociated with this Task record"
+  }
+  RpConversations --> ConversationsTabContent
+  ' ── BLUEPRINT STATE BAR (CONDITIONAL) ────
+  state BlueprintStateBarDetail {
+    note "Blueprint state bar renders HERE in Detail View\\nwhen a Blueprint process is active on this Task.\\n\\nNOT currently active on scanned Task record\\nin this org.\\n\\nWhen active renders:\\n  - Current Blueprint State name\\n  - Transition buttons\\n  - Locked field indicators (padlock)\\n  - Pre-transition required field validation\\n  - Notes/reason field for transition\\n  - Auto-logs each transition to Timeline History"
+  }
+}
+' ─────────────────────────────────────────────
+' STATE: CREATE TASK FORM
+' ─────────────────────────────────────────────
+state CreateTaskForm {
+  state FormSections {
+    state "Task Information section" as CfTaskInfo
+    state "Description Information section" as CfDescInfo
+    state "Internal Use section" as CfInternal
+  }
+  state TaskInformationFields {
+    state "Subject (required, red underline)" as CfSubject
+    state "Type (picklist: -None-, Call, Meeting, Email, Demo, Follow-up)" as CfType
+    state "Due Date (date picker DD/MM/YYYY)" as CfDueDate
+    state "Status (picklist: Not Started, Attempt [custom], In Progress, Completed, Waiting for input, Deferred)" as CfStatus
+    state "Priority (picklist: High, Normal, Low)" as CfPriority
+    state "Telecaller (lookup)" as CfTelecaller
+    state "Approver (lookup)" as CfApprover
+    state "Account (optional lookup to parent account)" as CfAccount
+    state "Repeat (toggle: None / Daily / Weekly / Monthly / Yearly)" as CfRepeat
+    state "Auto Close (checkbox)" as CfAutoClose
+    state "Reminder (toggle → datetime + Email/Popup notify)" as CfReminder
+  }
+  state DescriptionInfoFields {
+    state "Description (textarea)" as CfDescription
+  }
+  state InternalUseFields {
+    state "Related To / Who (Lead or Contact lookup)" as CfWho
+    state "Task Owner (user lookup)" as CfTaskOwner
+  }
+  state FormActions {
+    state "Save" as CfSave
+    state "Save and New" as CfSaveNew
+    state "Cancel" as CfCancel
+    state "Edit Page Layout link" as CfEditLayout
+  }
+  CfTaskInfo --> TaskInformationFields
+  CfDescInfo --> DescriptionInfoFields
+  CfInternal --> InternalUseFields
+  note right of CreateTaskForm
+    Subject is the only required field.
+    Default Status = Not Started.
+    Default Priority = High.
+    Repeat field can chain tasks on schedule.
+    Auto Close: closes task when Due Date passes.
+    Reminder: sends Email or Popup notification.
+    Task Owner defaults to current user.
+    Triggered from:
+    - Header 'Create Task' button
+    - Related list 'Add New → Task' from Contacts/Leads/Deals
+    - Open Activities quick-add
+    - Workflow / Blueprint auto-create
+    - Clone existing task
+  end note
+}
+' ─────────────────────────────────────────────
+' STATE: EDIT TASK FORM
+' ─────────────────────────────────────────────
+state EditTaskForm {
+  state EditFormSections {
+    state "Task Information section" as EcTaskInfo
+    state "Description Information section" as EcDescInfo
+    state "Internal Use section" as EcInternal
+  }
+  state EditFormActions {
+    state "Save" as EcSave
+    state "Save and New" as EcSaveNew
+    state "Cancel" as EcCancel
+    state "Edit Page Layout link" as EcEditLayout
+  }
+  state InlineEditSupport {
+    note "All fields support inline edit\\ndirectly from Detail View\\nby clicking any field value"
+  }
+  state ChangeOwnerInEdit {
+    state "Task Owner field (user lookup)" as EcOwnerField
+    state "Search and select new owner" as EcOwnerSearch
+    state "Confirm new owner assignment" as EcOwnerConfirm
+  }
+  EcInternal --> ChangeOwnerInEdit : change Task Owner
+  note right of EditTaskForm
+    Edit form is identical to Create form.
+    Accessed via:
+    - 'Edit' button on Detail View
+    - Inline field click in Detail View
+    - Row-level Edit action in List View
+    - Mass Update tool (multiple records)
+    On Save: Timeline logs field-level diff.
+    On Save: Workflow Rules may re-trigger.
+    Status change to 'Completed' auto-sets Closed Time.
+  end note
+}
+' ─────────────────────────────────────────────
+' FULL TASK RECORD LIFECYCLE STATES
+' ─────────────────────────────────────────────
+state TaskLifecycle {
+  [*] --> TaskNotExists
+  state TaskNotExists {
+    note "No task record exists yet"
+  }
+  state TaskCreated {
+    note "Created via:\\n- Create Task form (manual)\\n- Related list Add New → Task\\n- Clone existing task\\n- Import (CSV)\\n- API / Integration\\n- Workflow Rule auto-create\\n- Blueprint transition auto-create\\n- Function (Deluge script)\\n- Lead/Contact conversion trigger\\n  (e.g. [Lead] Send Welcome Message)"
+  }
+  state TaskNotStarted {
+    note "Status: Not Started\\nDefault initial status.\\nVisible in Open Activities.\\nCountable in related record sidebar."
+  }
+  state TaskAttempt {
+    note "Status: Attempt (CUSTOM — Kurinjee Promoters)\\nCall dialled but not answered.\\nDistinct from Not Started (not yet tried)\\nand In Progress (actively working).\\nConfirmed via Scribe task_create_scribe_flow."
+  }
+  state TaskInProgress {
+    note "Status: In Progress\\nWork has begun.\\nStill open / not completed."
+  }
+  state TaskWaitingForInput {
+    note "Status: Waiting for input\\nBlocked on external dependency."
+  }
+  state TaskDeferred {
+    note "Status: Deferred\\nPostponed. Still open.\\nNot counted as active in some views."
+  }
+  state TaskCompleted {
+    note "Status: Completed\\nClosed Time auto-stamped.\\nMoves from Open Activities\\nto Closed Activities on parent record.\\nAuto Close: system closes when overdue."
+  }
+  state TaskDeleted {
+    note "Soft-deleted.\\nMoves to Recycle Bin.\\nRetained up to 60 days."
+  }
+  state TaskPermanentlyDeleted {
+    note "Permanent deletion:\\n- Manual from Recycle Bin\\n- 60-day auto-purge\\n- Mass Delete Permanently"
+  }
+  state TaskRepeating {
+    note "When Repeat is enabled:\\nOn task close, a new task is\\nauto-created with the next due date\\nbased on repeat interval."
+  }
+  TaskNotExists --> TaskCreated : Create / Import / Workflow / Function / API
+  TaskCreated --> TaskNotStarted : default on creation
+  TaskNotStarted --> TaskAttempt : Status changed → Attempt (call made, no answer)
+  TaskAttempt --> TaskNotStarted : no further action
+  TaskAttempt --> TaskInProgress : Status changed → In Progress (contact made)
+  TaskAttempt --> TaskCompleted : Close Task / Status → Completed
+  TaskNotStarted --> TaskInProgress : Status changed → In Progress
+  TaskNotStarted --> TaskWaitingForInput : Status changed → Waiting for input
+  TaskNotStarted --> TaskDeferred : Status changed → Deferred
+  TaskNotStarted --> TaskCompleted : Close Task / Status → Completed / Auto Close
+  TaskInProgress --> TaskCompleted : Close Task / Status → Completed
+  TaskInProgress --> TaskWaitingForInput : Status changed
+  TaskInProgress --> TaskDeferred : Status changed
+  TaskWaitingForInput --> TaskInProgress : resumed
+  TaskWaitingForInput --> TaskCompleted : closed
+  TaskDeferred --> TaskNotStarted : reopened
+  TaskDeferred --> TaskInProgress : resumed
+  TaskCompleted --> TaskNotStarted : re-opened (Status changed back)
+  TaskCompleted --> TaskRepeating : if Repeat enabled
+  TaskRepeating --> TaskCreated : new task auto-generated
+  TaskNotStarted --> TaskDeleted : Delete action
+  TaskInProgress --> TaskDeleted : Delete action
+  TaskCompleted --> TaskDeleted : Delete action
+  TaskDeleted --> TaskNotStarted : Restore from Recycle Bin
+  TaskDeleted --> TaskPermanentlyDeleted : Permanent delete / 60-day purge
+}
+' ─────────────────────────────────────────────
+' STATE: TASK STATUS CHANGE MODELING
+' ─────────────────────────────────────────────
+state TaskStatusChangeFlow {
+  state ManualStatusChange {
+    state "Inline click on Status field" as ScInline
+    state "Status picklist opens" as ScPicklist
+    state "Select: Not Started / Attempt [custom] / In Progress / Completed / Waiting for input / Deferred" as ScSelect
+    state "Save inline edit" as ScSave
+    state "Timeline logs: Status changed from X to Y" as ScTimeline
+    state "If Completed: Closed Time auto-stamped" as ScClosedTime
+    state "Workflow Rules re-evaluate on save" as ScWorkflow
+    ScInline --> ScPicklist
+    ScPicklist --> ScSelect
+    ScSelect --> ScSave
+    ScSave --> ScTimeline
+    ScSave --> ScClosedTime
+    ScSave --> ScWorkflow
+  }
+  state CloseTaskButton {
+    state "Click 'Close Task' primary button" as CtbClick
+    state "Status set to Completed" as CtbStatus
+    state "Closed Time stamped automatically" as CtbClosedTime
+    state "Timeline entry written" as CtbTimeline
+    state "Task moves to Closed Activities on parent" as CtbMoved
+    state "If Repeat enabled: new task spawned" as CtbRepeat
+    CtbClick --> CtbStatus
+    CtbStatus --> CtbClosedTime
+    CtbClosedTime --> CtbTimeline
+    CtbTimeline --> CtbMoved
+    CtbMoved --> CtbRepeat
+  }
+  state AutoCloseFlow {
+    state "Auto Close checkbox enabled on task" as AcEnabled
+    state "Due Date passes without manual close" as AcDueDatePassed
+    state "System auto-sets Status = Completed" as AcAutoSet
+    state "Closed Time stamped" as AcClosedTime
+    state "Timeline logs auto-close event" as AcTimeline
+    AcEnabled --> AcDueDatePassed
+    AcDueDatePassed --> AcAutoSet
+    AcAutoSet --> AcClosedTime
+    AcClosedTime --> AcTimeline
+  }
+  state BlueprintControlledStatusChange {
+    note "When Blueprint is active:\\nStatus field may be locked.\\nStatus changes only occur via\\nBlueprint transition buttons.\\nEach transition logs to Timeline.\\nPre/post field rules enforced."
+  }
+}
+' ─────────────────────────────────────────────
+' STATE: DELETE → RECYCLE FLOW
+' ─────────────────────────────────────────────
+state DeleteFlow {
+  state "Initiate Delete (single or mass)" as DfInitiate
+  state "Delete Confirmation Modal" as DfConfirm
+  state "Notify Owner checkbox" as DfNotify
+  state "Confirm Delete button" as DfConfirmBtn
+  state "Cancel button (abort)" as DfCancel
+  state "Task moves to Recycle Bin" as DfRecycleBin
+  state "Recycle Bin: Restore" as DfRestore
+  state "Recycle Bin: Delete Permanently" as DfPermDelete
+  DfInitiate --> DfConfirm : click Delete (row / detail / mass)
+  DfConfirm --> DfNotify : toggle notify
+  DfConfirm --> DfConfirmBtn : proceed
+  DfConfirm --> DfCancel : abort
+  DfConfirmBtn --> DfRecycleBin : soft delete
+  DfRecycleBin --> DfRestore : restore
+  DfRecycleBin --> DfPermDelete : permanent delete / 60-day purge
+  DfRestore --> TaskNotStarted : task back in active list
+}
+' ─────────────────────────────────────────────
+' STATE: REPEAT / RECURRING TASK FLOW
+' ─────────────────────────────────────────────
+state RepeatTaskFlow {
+  state "Task created with Repeat enabled" as RtfCreate
+  state "Repeat type set (Daily/Weekly/Monthly/Yearly)" as RtfType
+  state "Task closed / completed" as RtfClose
+  state "System evaluates Repeat setting" as RtfEvaluate
+  state "New task auto-generated with next due date" as RtfNewTask
+  state "Original task remains Completed" as RtfOrigDone
+  state "Repeat continues until manually disabled" as RtfContinue
+  RtfCreate --> RtfType
+  RtfType --> RtfClose : task completed
+  RtfClose --> RtfEvaluate
+  RtfEvaluate --> RtfNewTask : Repeat = Daily/Weekly/Monthly/Yearly
+  RtfEvaluate --> RtfOrigDone : Repeat = None
+  RtfNewTask --> RtfOrigDone
+  RtfNewTask --> RtfContinue
+  RtfContinue --> RtfClose : next task closed
+}
+' ─────────────────────────────────────────────
+' STATE: REMINDER FLOW
+' ─────────────────────────────────────────────
+state ReminderFlow {
+  state "Reminder toggle enabled on task" as RfEnable
+  state "Set reminder datetime" as RfDatetime
+  state "Set reminder offset (X Day(s) of due date at HH:MM)" as RfOffset
+  state "Set notification channel: Email or Popup" as RfChannel
+  state "Save task" as RfSave
+  state "Reminder scheduled in system" as RfScheduled
+  state "Reminder time reached" as RfTriggered
+  state "Email notification sent to Task Owner" as RfEmail
+  state "Popup notification shown in CRM" as RfPopup
+  state "Activity Reminders utility bar item shows count" as RfBar
+  RfEnable --> RfDatetime
+  RfDatetime --> RfOffset
+  RfOffset --> RfChannel
+  RfChannel --> RfSave
+  RfSave --> RfScheduled
+  RfScheduled --> RfTriggered
+  RfTriggered --> RfEmail : channel = Email
+  RfTriggered --> RfPopup : channel = Popup
+  RfPopup --> RfBar
+}
+' ─────────────────────────────────────────────
+' STATE: CHANGE OWNER / ASSIGNMENT LOGIC
+' ─────────────────────────────────────────────
+state ChangeOwnerFlow {
+  state InlineOwnerChange {
+    state "Click Task Owner field (detail view)" as CocInlineClick
+    state "Lookup popup: search users" as CocInlineSearch
+    state "Select new owner" as CocInlineSelect
+    state "Save inline edit" as CocInlineSave
+    state "Timeline logs: Task Owner changed from X to Y" as CocInlineLog
+    state "Workflow rules re-evaluate" as CocWorkflow
+    CocInlineClick --> CocInlineSearch
+    CocInlineSearch --> CocInlineSelect
+    CocInlineSelect --> CocInlineSave
+    CocInlineSave --> CocInlineLog
+    CocInlineSave --> CocWorkflow
+  }
+  state EditFormOwnerChange {
+    state "Edit form: Task Owner field (Internal Use section)" as CocEditField
+    state "Lookup search" as CocEditSearch
+    state "Select user" as CocEditUser
+    state "Save form" as CocEditSave
+    state "Timeline entry written" as CocEditLog
+    CocEditField --> CocEditSearch
+    CocEditSearch --> CocEditUser
+    CocEditUser --> CocEditSave
+    CocEditSave --> CocEditLog
+  }
+  state MassUpdateOwnerChange {
+    state "Mass Update: criteria step (Field | Condition | Value)" as CocMassFilter
+    state "Field: Task Owner" as CocMassField
+    state "New value: select user" as CocMassValue
+    state "Execute Mass Update" as CocMassExec
+    state "All matching tasks owner updated" as CocMassDone
+    state "Timeline entry written per task" as CocMassLog
+    CocMassFilter --> CocMassField
+    CocMassField --> CocMassValue
+    CocMassValue --> CocMassExec
+    CocMassExec --> CocMassDone
+    CocMassDone --> CocMassLog
+  }
+  note right of ChangeOwnerFlow
+    Task Owner change also triggered by:
+    - Workflow Rule (assign owner action)
+    - Blueprint transition (auto-assign rule)
+    - Round Robin Assignment (Workqueue module)
+    Telecaller field is separate from Task Owner
+    and can be set independently.
+  end note
+}
+' ─────────────────────────────────────────────
+' STATE: BLUEPRINT MODELING (CONDITIONAL)
+' ─────────────────────────────────────────────
+state BlueprintModel {
+  note "Blueprint state bar NOT active on scanned Task record.\\nNo Blueprint process configured for Tasks module\\nin this org at time of scan.\\n\\nThe following models expected Blueprint behavior\\nbased on Zoho CRM platform capabilities."
+  state BlueprintInactive {
+    note "No Blueprint active.\\nAll fields freely editable.\\nStatus changed via picklist.\\nNo transition buttons shown."
+  }
+  state BlueprintActive {
+    state "Blueprint State Bar visible in Task Detail View" as BpBar
+    state BlueprintStates {
+      state "State 1 (e.g. New Task)" as BpS1
+      state "State 2 (e.g. Assigned)" as BpS2
+      state "State 3 (e.g. In Review)" as BpS3
+      state "State 4 (e.g. Completed)" as BpS4
+      state "State N (custom defined)" as BpSN
+    }
+    state BlueprintTransitions {
+      state "Transition button 1 (e.g. Start Task)" as BpT1
+      state "Transition button 2 (e.g. Submit for Review)" as BpT2
+      state "Transition button 3 (e.g. Approve)" as BpT3
+      state "Transition button N" as BpTN
+      state "Pre-transition: required fields validation" as BpPreValidate
+      state "Transition notes / reason field" as BpNotes
+      state "Post-transition: fields auto-updated" as BpPostUpdate
+      state "Post-transition: Status field auto-set" as BpStatusSet
+    }
+    state BlueprintLockedFields {
+      note "Fields with padlock icon = read-only\\nin current Blueprint state.\\nStatus field may be locked,\\nonly changeable via transition button."
+    }
+    state BlueprintTimelineLogging {
+      note "Every Blueprint transition auto-logs:\\n- Transition name\\n- From state → To state\\n- User who executed transition\\n- Timestamp\\n- Notes entered\\nVisible in Timeline > History"
+    }
+    BpBar --> BlueprintStates
+    BpBar --> BlueprintTransitions
+    BpBar --> BlueprintLockedFields
+    BlueprintTransitions --> BlueprintTimelineLogging : on each transition
+    BpS1 --> BpS2 : Transition button
+    BpS2 --> BpS3 : Transition button
+    BpS3 --> BpS4 : Approve
+    BpS3 --> BpS2 : Reject → revert
+  }
+  BlueprintInactive --> BlueprintActive : admin enables Blueprint on Tasks
+}
+' ─────────────────────────────────────────────
+' STATE: AUTOMATION MODELING
+' ─────────────────────────────────────────────
+state AutomationModel {
+  state WorkflowRules {
+    state "Trigger: Task Created" as WfCreate
+    state "Trigger: Task Edited" as WfEdit
+    state "Trigger: Field value change (Status, Priority, Due Date, Owner)" as WfFieldChange
+    state "Trigger: Due Date reached / overdue" as WfDueDate
+    state "Condition evaluation" as WfCondition
+    state "Action: Send Email notification" as WfEmail
+    state "Action: Assign Task Owner" as WfAssign
+    state "Action: Update field value" as WfUpdate
+    state "Action: Create Task (follow-up task)" as WfCreateTask
+    state "Action: Create Note" as WfNote
+    state "Action: Call Function (Deluge)" as WfFunction
+    state "Action: Webhook" as WfWebhook
+    state "Action: Add Tag" as WfTag
+    state "Workflow logged in Upcoming Automated Actions" as WfLogged
+    WfCreate --> WfCondition
+    WfEdit --> WfCondition
+    WfFieldChange --> WfCondition
+    WfDueDate --> WfCondition
+    WfCondition --> WfEmail
+    WfCondition --> WfAssign
+    WfCondition --> WfUpdate
+    WfCondition --> WfCreateTask
+    WfCondition --> WfNote
+    WfCondition --> WfFunction
+    WfCondition --> WfWebhook
+    WfCondition --> WfTag
+    WfCondition --> WfLogged
+  }
 }
 @enduml

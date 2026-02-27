@@ -1,0 +1,664 @@
+@startuml EmployeePortfolio_Lifecycle_Zoho_CRM
+!pragma layout smetana
+skinparam backgroundColor #FAFAFA
+skinparam state {
+  BackgroundColor #EEF4FF
+  BorderColor #4A6CF7
+  FontColor #1A1A2E
+  ArrowColor #4A6CF7
+}
+skinparam note {
+  BackgroundColor #FFF8E1
+  BorderColor #FFC107
+}
+title Zoho CRM — Employee Portfolio Module Lifecycle\\n(Org: Kurinjee Promoters | Module: CustomModule5)
+' ─────────────────────────────────────
+' ENTRY POINTS
+' ─────────────────────────────────────
+[*] --> Home : Launch CRM
+Home --> EmployeePortfolioList : Sidebar → Employee Portfolio (active)
+' ─────────────────────────────────────
+' EMPLOYEE PORTFOLIO LIST VIEW
+' ─────────────────────────────────────
+state EmployeePortfolioList {
+  state "List View" as LV {
+    LV : Page Title: Employee Portfolio
+    LV : Module ID: CustomModule5
+    LV : Active Custom View: All Employee Portfolio
+    LV : Custom View ID: 955332000001288053
+    LV : URL: /tab/CustomModule5/custom-view/955332000001288053/list
+    LV : ── Visible Columns ──
+    LV : Employee Name (sortable + filter dropdown: All ▼)
+    LV : Type (sortable)
+    LV : Mobile (sortable, clickable phone link)
+    LV : Email (sortable, clickable mailto link)
+    LV : Row: checkbox | More options (…) | Employee Name link
+    LV : Total Records: 8 | Pagination: 1 to 8 (all on one page)
+    LV : Pagination controls: ◀ Previous | Next ▶
+    LV : View Settings button (column configuration)
+  }
+  state "SampleRecords" as SR {
+    SR : Row 1 — Vijayasri   | Telecaller | (no mobile) | (no email)
+    SR : Row 2 — Sumathi     | Telecaller | (no mobile) | (no email)
+    SR : Row 3 — Arun pandian | BDM       | (915) 002-4013 | (no email)
+    SR : Row 4 — Dinesh kumar | BDM       | (915) 002-4014 | (no email)
+    SR : Row 5 — Vinoth kumar | BDM       | (915) 002-4021 | (no email)
+    SR : Row 6 — Elangovan    | CEO       | (978) 927-7775 | (no email)
+    SR : Row 7 — Moorthy      | BDM       | (915) 002-4015 | (no email)
+    SR : Row 8 — Radhakrishnan| BDM       | (915) 002-4018 | kurinjeepromoters.cbe@gmail.com
+  }
+  state "ViewSwitchers" as VS {
+    VS : List View (active — lines icon)
+    VS : Split View (dual-panel icon)
+    VS : Table View (grid icon)
+    VS : Activity View (clock icon)
+    VS : Kanban / Pipeline View
+    VS : Compact View
+    VS : More Views ˅ (chevron dropdown)
+    VS : Refresh Custom View (↻ icon)
+  }
+  state "CustomViewManagement" as CVM {
+    CVM : Active Tab: All Employee Portfolio
+    CVM : ... (ellipsis) → more options
+    CVM : New Custom View → /tab/CustomModule5/custom-views/create
+    CVM : Manage Custom View → /tab/CustomModule5/custom-views/manage
+    CVM : Show custom views as Dropdown toggle
+  }
+  state "Toolbar" as TB {
+    TB : Filter button (toggle filter panel)
+    TB : Sort button (open sort options)
+    TB : Create Employee Portfolios (primary blue CTA)
+    TB : ▼ Create Dropdown arrow
+    TB : ... Actions Menu (see ActionsMenu)
+  }
+  state "ActionsMenu" as AM {
+    AM : Import Employee Portfolio
+    AM :   → /settings/import?module=CustomModule5&step=1
+    AM : Mass Delete
+    AM :   → /tab/CustomModule5/actions/mass-tools?type=mass_delete
+    AM : Mass Update
+    AM :   → /tab/CustomModule5/actions/mass-tools?type=mass_update
+    AM : Manage Tags
+    AM :   → /settings/manage-tags?module=CustomModule5
+    AM : Drafts
+    AM :   → /tab/CustomModule5/actions/draft?module=CustomModule5
+    AM : Mass Email
+    AM :   → /settings/manage-mass-mail?module=CustomModule5
+    AM : Autoresponders
+    AM :   → /settings/auto-responders?module=CustomModule5
+    AM : Approve Employee Portfolio
+    AM :   → /tab/CustomModule5/actions/approvals
+    AM : Deduplicate Employee Portfolio
+    AM : Create Client Script ✨
+    AM : Export Employee Portfolio
+    AM : Zoho Sheet View
+    AM : Print View ▶ (sub-menu)
+    AM :   └─ Print Default view
+    AM :   └─ Print Using Canvas ✨
+  }
+  state "FilterPanel" as FP {
+    FP : Label: Filter Employee Portfolio by
+    FP : Search box (filters field list)
+    FP : ── System Defined Filters (collapsible) ──
+    FP : ☐ Touched Records
+    FP : ☐ Untouched Records
+    FP : ☐ Record Action
+    FP : ☐ Related Records Action
+    FP : ☐ Locked
+    FP : ☐ Latest Email Status
+    FP : ☐ Activities
+    FP : ☐ Cadences
+    FP : ── Filter By Fields (collapsible) ──
+    FP : ☐ Broker Type
+    FP : ☐ Created By
+    FP : ☐ Created Time
+    FP : ☐ Email
+    FP : ☐ Employee Name
+    FP : ☐ Employee Portfolios Owner
+    FP : ☐ Last Activity Time
+    FP : ☐ Location
+    FP : ☐ Manager
+    FP : ☐ Mobile
+    FP : ☐ Modified By
+    FP : ☐ Modified Time
+    FP : ☐ Secondary Email
+    FP : ☐ Tag
+    FP : ☐ Type
+    FP : ☐ Unsubscribed Mode
+    FP : ☐ Unsubscribed Time
+    FP : ☐ Verified Broker
+    FP : ☐ Year of Experience
+    FP : ── Filter By Related Modules (collapsible) ──
+    FP : ☐ Calls
+    FP : ☐ Deals (Deals BDM)
+    FP : ☐ Emails
+    FP : ☐ Employee Portfolio (Brokers)
+    FP : ☐ Leads (Leads BDM)
+    FP : ☐ Leads (Leads Telecaller)
+    FP : ☐ Leads (Manager)
+    FP : ☐ Meetings
+    FP : ☐ Notes
+    FP : ☐ Tasks
+  }
+}
+' ─────────────────────────────────────
+' CREATE EMPLOYEE PORTFOLIO FORM
+' ─────────────────────────────────────
+EmployeePortfolioList --> CreateEmployeePortfolio : Click "Create Employee Portfolios" button
+state CreateEmployeePortfolio {
+  state "FormHeader" as FH {
+    FH : Title: Create Employee Portfolios
+    FH : Link: Edit Page Layout
+    FH : Layout ID: 955332000001288040
+    FH : URL: /tab/CustomModule5/create
+    FH :   ?layoutId=955332000001288040&redirect=false
+    FH : Buttons: Save | Save and New | Cancel
+    FH : Bottom: Create Form Views → Standard View ▼
+    FH : Bottom: Create a custom form page (button)
+    FH : Side panel: Client Script (collapsible)
+  }
+  state "Section: Employee Portfolios Information" as SEPI {
+    SEPI : Employee Name [text — REQUIRED, red border]
+    SEPI : Email (text)
+    SEPI : Secondary Email (text)
+    SEPI : Type (combobox — default: -None-)
+    SEPI : Mobile (text)
+  }
+  state "Section: Broker Information" as SBI {
+    SBI : Broker Type (combobox — default: -None-)
+    SBI : Year of Experience (text)
+    SBI : Location (combobox / multiselect)
+    SBI : Manager (lookup → Employee Portfolios,
+    SBI :   New Employee Portfolios option)
+    SBI : Verified Broker (checkbox — boolean)
+  }
+  state "Section: Internal Use" as SIU {
+    SIU : Employee Portfolios Owner
+    SIU :   (combobox — default: Kurinjee Promoters)
+    SIU :   (lookup to CRM users)
+    SIU :   Search Users textbox
+    SIU :   Maximum limit warning if exceeded
+  }
+  state "HiddenFormSections" as HFS {
+    HFS : Quick Create (region — layout/display)
+    HFS : Business Card (region — layout/display)
+  }
+}
+note right of CreateEmployeePortfolio
+  Layout ID: 955332000001288040
+  Edit Page Layout link:
+  /settings/modules/CustomModule5/
+    layouts/955332000001288040
+  Required field: Employee Name (red border)
+  Default owner: Kurinjee Promoters
+  Form sections: Employee Portfolios Information,
+    Broker Information, Internal Use
+end note
+' ─────────────────────────────────────
+' EMPLOYEE PORTFOLIO DETAIL PAGE
+' ─────────────────────────────────────
+CreateEmployeePortfolio --> EmployeeDetail : Click Save\\n(record created)
+EmployeePortfolioList --> EmployeeDetail : Click Employee Name link\\n(e.g. /tab/CustomModule5/955332000001289466)
+state EmployeeDetail {
+  state "DetailHeader" as DH {
+    DH : ← Back (returns to list)
+    DH : Record Title: [Employee Name]
+    DH :   e.g. "Radhakrishnan"
+    DH : 🏷 Add Tags button
+    DH : Send Email (primary blue button)
+    DH : Edit (white button)
+    DH : ... More Options (dropdown — see MoreOptionsMenu)
+    DH : Run Macro (combobox button)
+    DH : ◀ Previous Record | Next Record ▶
+    DH : Last Update: 11:24 AM
+    DH : Breadcrumb module: Employee Portfolio
+  }
+  state "MoreOptionsMenu" as MOM {
+    MOM : Clone
+    MOM : Delete
+    MOM : Print Preview
+    MOM : Find and Merge Duplicates
+    MOM : Mail Merge
+    MOM : Run Macro
+    MOM : Customize Business Card
+    MOM : Organize Employee Portfolios Details
+    MOM : Add Related List
+    MOM : Review History
+    MOM : Add Kiosk ✨
+    MOM : Create Button
+    MOM : Create Client Script ✨
+  }
+  state "Tab: Overview" as OVW {
+    state "BusinessCardSection" as BCS {
+      BCS : Field: Employee Portfolios Owner (inline editable)
+      BCS : Value: Kurinjee Promoters
+      BCS : Business Card configurable fields:
+      BCS :   Broker Type | Manager | Year of Experience
+      BCS :   Verified Broker | Location | Created By
+      BCS :   Employee Portfolios Owner (✓ active)
+      BCS : Additional displayed fields:
+      BCS :   Email — kurinjeepromoters.cbe@gmail.com (clickable)
+      BCS :   Modified By — Kurinjee Promoters | Thu, 26 Feb 2026 11:24 AM
+    }
+    state "HideDetails toggle" as HDT {
+      HDT : Button: Hide Details / Show Details
+      HDT : Collapses/expands Record Details region
+    }
+    state "RecordDetails" as RD {
+      state "Employee Portfolios Information fields" as EPIF {
+        EPIF : Employee Name — Radhakrishnan (inline editable)
+        EPIF : Email — kurinjeepromoters.cbe@gmail.com
+        EPIF :   (clickable mailto link)
+        EPIF : Secondary Email — — (empty, inline editable)
+        EPIF : Type — BDM (inline editable)
+        EPIF : Mobile — (915) 002-4018 (inline editable)
+      }
+      state "Broker Information fields" as BRIF {
+        BRIF : Broker Type — — (empty, inline editable)
+        BRIF : Year of Experience — — (empty, inline editable)
+        BRIF : Location — — (empty, inline editable)
+        BRIF : Manager — — (empty, inline editable — lookup)
+        BRIF : Verified Broker — — (empty, inline editable — checkbox)
+      }
+      state "Internal Use fields" as IUF {
+        IUF : Created By — Kurinjee Promoters
+        IUF :   Thu, 4 Sep 2025 12:58 PM
+        IUF : Modified By — Kurinjee Promoters
+        IUF :   Thu, 26 Feb 2026 11:24 AM
+        IUF : Employee Portfolios Owner — Kurinjee Promoters
+        IUF :   (inline editable)
+      }
+    }
+  }
+  state "Tab: Timeline" as TL {
+    TL : Sub-tab: History (active)
+    TL : Header: Timeline History
+    TL : Filter icon (funnel) with filter options:
+    TL :   Modules: All Modules ▼
+    TL :   Users: All Users ▼
+    TL :   Status: All ▼ (Active/Inactive/Deleted)
+    TL :   Time: Any Time ▼
+    TL :     (Today/Yesterday/Last 7 days/Last 30 days
+    TL :      /Custom Range/Specific date)
+    TL :   Sources: All Sources ▼
+    TL :   Apply Filter button
+    TL : Counter: 0 Upcoming Automated Actions ˅
+    TL : ── Timeline History Entries ──
+    TL : Dec 11, 2025
+    TL :   05:03 PM — Type updated: Manager → BDM
+    TL :     by Kurinjee Promoters
+    TL :   04:59 PM — Type updated: BDM → Manager
+    TL :     by Kurinjee Promoters
+    TL :   04:58 PM — Type updated: Manager → BDM
+    TL :     by Kurinjee Promoters
+    TL : Nov 21, 2025
+    TL :   03:52 PM — Type updated: BDM → Manager
+    TL :     by Kurinjee Promoters
+    TL : Nov 3, 2025
+    TL :   05:14 PM — Email updated:
+    TL :     blank → kurinjeepromoters.cbe@gmail.com
+    TL :     by Kurinjee Promoters
+    TL :   05:13 PM — Mobile updated:
+    TL :     blank → 9150024018
+    TL :     by Kurinjee Promoters
+    TL : Sep 4, 2025
+    TL :   12:58 PM — Employee Portfolios Created
+    TL :     by Kurinjee Promoters
+    TL : Each entry has: Add Note | Hide Note buttons
+  }
+}
+note right of EmployeeDetail
+  URL pattern: /tab/CustomModule5/{record_id}
+  Sample record: Radhakrishnan
+  Record ID: 955332000001289466
+  All fields support inline editing:
+    click field → type → Save | Cancel
+  Record page view: Standard View
+  Option: Create a custom record page
+  Last Update timestamp: 11:24 AM
+end note
+' ─────────────────────────────────────
+' INLINE EDIT FLOW
+' ─────────────────────────────────────
+EmployeeDetail --> InlineEdit : Click any field value
+state InlineEdit {
+  InlineEdit : Field becomes editable
+  InlineEdit :   (text input / combobox / checkbox / lookup)
+  InlineEdit : Save button (confirms change)
+  InlineEdit : Cancel button (reverts)
+  InlineEdit : Applies to ALL fields in Record Details
+  InlineEdit : Also applies to Owner in Business Card
+}
+InlineEdit --> EmployeeDetail : Save (field updated)\\nOR Cancel (no change)
+' ─────────────────────────────────────
+' FULL EDIT MODE
+' ─────────────────────────────────────
+EmployeeDetail --> FullEdit : Click "Edit" button (header)
+state FullEdit {
+  FullEdit : Opens same layout as Create form
+  FullEdit : All sections editable simultaneously:
+  FullEdit :   Employee Portfolios Information
+  FullEdit :   Broker Information
+  FullEdit :   Internal Use
+  FullEdit : Buttons: Save | Cancel
+}
+FullEdit --> EmployeeDetail : Save OR Cancel
+' ─────────────────────────────────────
+' LEFT PANEL — RELATED LIST NAVIGATION
+' ─────────────────────────────────────
+state "RelatedListPanel" as RLP {
+  RLP : Label: Related List
+  RLP : Organise CustomModule5 Details button
+  RLP : ─────────────────────────────────
+  RLP : Notes
+  RLP : Connected Records
+  RLP : Attachments
+  RLP : Emails
+  RLP : Open Activities
+  RLP : Closed Activities
+  RLP : Leads BDM  (badge: 10+)
+  RLP : Manager    (badge: 5)
+  RLP : Deals BDM
+  RLP : Brokers
+  RLP : Leads Telecaller
+  RLP : Add Related List (link)
+  RLP : ─────────────────────────────────
+  RLP : Links section
+  RLP : No Links Found
+  RLP : Add Link button
+}
+EmployeeDetail --> RelatedSections : Scroll / click Related List item
+' ─────────────────────────────────────
+' RELATED SECTIONS (in detail page body)
+' ─────────────────────────────────────
+state RelatedSections {
+  state "Notes" as NS {
+    NS : Sort dropdown: Recent First | Recent Last
+    NS : Inline input: "Add a note" (text box)
+    NS : + Add button
+  }
+  state "Connected Records" as CRS {
+    CRS : Button: Add New ▼ (dropdown)
+    CRS : Status: (no records shown)
+  }
+  state "Attachments" as ATS {
+    ATS : Attach link (dropdown)
+  }
+  state "Emails" as ES {
+    ES : Button: Compose Email (×2)
+    ES : Sub-tabs: Mails | Drafts | Scheduled
+    ES : Filter: Accounts - Sent emails from CRM ▼
+    ES : Actions: Clear | Delete
+  }
+  state "Open Activities" as OAS {
+    OAS : Button: Add New ▼
+    OAS :   └─ Task
+    OAS :   └─ Meeting
+    OAS :   └─ Call
+  }
+  state "Closed Activities" as CAS {
+    CAS : Button: Add ▼
+  }
+  state "Leads BDM" as LBDM {
+    LBDM : Record count: 10+
+    LBDM : Buttons: Assign | New | Edit
+    LBDM : Customize List Popup button
+    LBDM : ── Columns ──
+    LBDM : Lead Name | Company | Email
+    LBDM : Lead Source | Lead Status | Lead Owner
+    LBDM : Per row: Edit link | Unassign button
+    LBDM : ── Sample Entries ──
+    LBDM : Bala — Site Visit Completed
+    LBDM : Dhanalakshmi nagaraj — Offline Marketing — Confirm Site Visit
+    LBDM : Sathiya priya — Confirm Site Visit
+    LBDM : chelladurai — Meta Ads — Confirm Site Visit
+    LBDM : Thusendran rathinam — Site Visit Completed
+    LBDM : Bharathan chelliah — Meta Ads — Site Visit Scheduled
+    LBDM : saravanan — Meta Ads — Confirm Site Visit
+    LBDM : Manikandan suresh — Meta Ads — Confirm Site Visit
+    LBDM : sreedhar — Meta Ads — Confirm Site Visit
+    LBDM : Kanda samy — Meta Ads — Site Visit Completed
+    LBDM : Pagination: 1–10 shown
+  }
+  state "Manager" as MGR {
+    MGR : Record count: 5
+    MGR : Buttons: Assign | New | Edit
+    MGR : Customize List Popup button
+    MGR : ── Columns ──
+    MGR : Lead Name | Company | Email
+    MGR : Lead Source | Lead Status | Lead Owner
+    MGR : Per row: Edit link | Unassign button
+    MGR : ── Sample Entries ──
+    MGR : Chanran — Offline Marketing — Site Visit Completed
+    MGR : Mani — Walkins — Not Contacted
+    MGR : (unnamed) — Meta Ads — Junk Lead
+    MGR : Vijiyan — Offline Marketing — Site Visit Completed
+    MGR : M. Guru Prakash — Meta Ads — Contact in Future
+  }
+  state "Deals BDM" as DBDM {
+    DBDM : Buttons: Assign | New Deal | Edit
+    DBDM : Status: No records found
+  }
+  state "Brokers" as BRK {
+    BRK : Buttons: Assign | New | Edit
+    BRK : Status: No records found
+    BRK : (Links to other Employee Portfolio records
+    BRK :  who are brokers under this employee)
+  }
+  state "Leads Telecaller" as LTC {
+    LTC : Buttons: Assign | New | Edit
+    LTC : Status: No records found
+    LTC : (Leads assigned to this Telecaller employee)
+  }
+  state "AddRelatedList" as ARL {
+    ARL : Button: Add Related List
+    ARL : Record detail page views: Standard View ▼
+    ARL : Button: Create a custom record page
+  }
+}
+' ─────────────────────────────────────
+' ACTIONS FROM DETAIL PAGE
+' ─────────────────────────────────────
+EmployeeDetail --> SendEmail      : Click "Send Email" button
+EmployeeDetail --> FullEdit       : Click "Edit" button
+EmployeeDetail --> CloneRecord    : More Options → Clone
+EmployeeDetail --> DeleteRecord   : More Options → Delete
+EmployeeDetail --> PrintPreview   : More Options → Print Preview
+EmployeeDetail --> MergeDups      : More Options → Find and Merge Duplicates
+EmployeeDetail --> MailMerge      : More Options → Mail Merge
+EmployeeDetail --> RunMacro       : More Options → Run Macro
+EmployeeDetail --> ReviewHistory  : More Options → Review History
+EmployeeDetail --> AddKiosk       : More Options → Add Kiosk ✨
+EmployeeDetail --> CreateButton   : More Options → Create Button
+EmployeeDetail --> ClientScript   : More Options → Create Client Script ✨
+state SendEmail {
+  SendEmail : Opens compose email dialog
+  SendEmail : Pre-fills recipient from Email field
+}
+state CloneRecord {
+  CloneRecord : Duplicates all field values into new form
+  CloneRecord : Opens pre-filled Create form
+}
+state DeleteRecord {
+  DeleteRecord : Confirmation dialog appears
+  DeleteRecord : Note: "This action can't be undone"
+  DeleteRecord : ☐ Notify Owner (checkbox)
+  DeleteRecord : Buttons: Delete | Cancel
+}
+state ReviewHistory {
+  ReviewHistory : Full audit trail — all field changes
+  ReviewHistory : Timestamped change log
+  ReviewHistory : Field-by-field diff view
+}
+state MergeDups {
+  MergeDups : Search for duplicate Employee Portfolio records
+  MergeDups : Select master record
+  MergeDups : Merge field values
+}
+state RunMacro {
+  RunMacro : Trigger a saved macro sequence
+  RunMacro : Available via combobox in header + More Options
+}
+' ─────────────────────────────────────
+' RELATED RECORD CREATION FROM DETAIL
+' ─────────────────────────────────────
+EmployeeDetail --> NewLeadBDM       : Leads BDM → New button
+EmployeeDetail --> AssignLeadBDM    : Leads BDM → Assign button
+EmployeeDetail --> NewManagerLead   : Manager → New button
+EmployeeDetail --> AssignManagerLead: Manager → Assign button
+EmployeeDetail --> NewDealBDM       : Deals BDM → New Deal button
+EmployeeDetail --> AssignDealBDM    : Deals BDM → Assign button
+EmployeeDetail --> NewBroker        : Brokers → New button
+EmployeeDetail --> AssignBroker     : Brokers → Assign button
+EmployeeDetail --> NewTelecallerLead  : Leads Telecaller → New button
+EmployeeDetail --> AssignTelecallerLead : Leads Telecaller → Assign button
+EmployeeDetail --> NewTask          : Open Activities → Task
+EmployeeDetail --> NewMeeting       : Open Activities → Meeting
+EmployeeDetail --> NewCall          : Open Activities → Call
+EmployeeDetail --> ComposeEmail     : Emails → Compose Email
+EmployeeDetail --> AddNote          : Notes → Add a note
+EmployeeDetail --> AddLink          : Links → Add Link
+' ─────────────────────────────────────
+' NAVIGATION FLOWS
+' ─────────────────────────────────────
+EmployeeDetail --> EmployeePortfolioList : Click ← Back button
+EmployeeDetail --> EmployeeDetail        : Click ◀ Previous Record
+EmployeeDetail --> EmployeeDetail        : Click Next Record ▶
+' ─────────────────────────────────────
+' EMPLOYEE TYPE TRANSITIONS (observed in Timeline)
+' ─────────────────────────────────────
+state EmployeeTypeTransition {
+  EmployeeTypeTransition : Type field is mutable — changed via Edit or Inline Edit
+  EmployeeTypeTransition : Known Type values observed in UI:
+  EmployeeTypeTransition :   BDM (Business Development Manager)
+  EmployeeTypeTransition :   Telecaller
+  EmployeeTypeTransition :   CEO
+  EmployeeTypeTransition :   Manager
+  EmployeeTypeTransition : Type changes recorded in Timeline History
+  EmployeeTypeTransition : Example (Radhakrishnan):
+  EmployeeTypeTransition :   Created as BDM (Sep 4, 2025)
+  EmployeeTypeTransition :   → Manager (Nov 21, 2025)
+  EmployeeTypeTransition :   → BDM (Dec 11, 2025 04:58)
+  EmployeeTypeTransition :   → Manager (Dec 11, 2025 04:59)
+  EmployeeTypeTransition :   → BDM (Dec 11, 2025 05:03) ← current
+}
+EmployeeDetail --> EmployeeTypeTransition : Edit "Type" field\\n(inline or full edit)
+EmployeeTypeTransition --> EmployeeDetail : Save → type updated\\nrecorded in Timeline
+' ─────────────────────────────────────
+' APPROVAL WORKFLOW
+' ─────────────────────────────────────
+state ApprovalWorkflow {
+  ApprovalWorkflow : Trigger: Actions Menu → Approve Employee Portfolio
+  ApprovalWorkflow : URL: /tab/CustomModule5/actions/approvals
+  ApprovalWorkflow : Used for record-level approval process
+  ApprovalWorkflow : Also supports: Autoresponders
+  ApprovalWorkflow :   → /settings/auto-responders?module=CustomModule5
+}
+EmployeePortfolioList --> ApprovalWorkflow : Actions → Approve Employee Portfolio
+' ─────────────────────────────────────
+' TERMINAL / END STATES
+' ─────────────────────────────────────
+DeleteRecord           --> [*] : Record permanently deleted\\n(irreversible — no trash/recycle)
+EmployeePortfolioList  --> [*] : User navigates to another module
+' ─────────────────────────────────────
+' GLOBAL UI ELEMENTS (always visible)
+' ─────────────────────────────────────
+state GlobalTopBar {
+  GlobalTopBar : Page Title: Employee Portfolio
+  GlobalTopBar : Search records (global search bar)
+  GlobalTopBar : [+] Quick Create button
+  GlobalTopBar : Ask Zia (AI assistant icon)
+  GlobalTopBar : Signals (Bell / Notifications)
+  GlobalTopBar : Calendar → /calendar?date=26-02-2026&viewType=day
+  GlobalTopBar : Marketplace → /settings/extensions/all
+  GlobalTopBar : Setup (Gear) → /settings/index
+  GlobalTopBar : Profile Avatar: K (Kurinjee — CEO, Administrator)
+  GlobalTopBar : App Switcher (9-dot waffle grid)
+}
+state GlobalSidebar {
+  GlobalSidebar : Logo: Zoho CRM | Hide Menu button
+  GlobalSidebar : Home → /tab/Home/begin
+  GlobalSidebar : Reports → /tab/Reports
+  GlobalSidebar : Analytics → /tab/Dashboards
+  GlobalSidebar : My Requests → /tab/Requesters
+  GlobalSidebar : CRM Teamspace ▼
+  GlobalSidebar : [Search box]
+  GlobalSidebar : Leads → /tab/Leads
+  GlobalSidebar : Workqueue ✨ → /tab/Workqueue
+  GlobalSidebar : Contacts → /tab/Contacts
+  GlobalSidebar : Accounts → /tab/Accounts
+  GlobalSidebar : Deals → /tab/Potentials
+  GlobalSidebar : Projects Portfolio → /tab/CustomModule3
+  GlobalSidebar : Employee Portfolio → /tab/CustomModule5  ◄ ACTIVE
+  GlobalSidebar : Customer Feedback → /tab/CustomModule7
+  GlobalSidebar : Tasks → /tab/Tasks
+  GlobalSidebar : Meetings → /tab/Events
+  GlobalSidebar : Calls → /tab/Calls
+  GlobalSidebar : Prospecting Leads → /tab/CustomModule1
+  GlobalSidebar : Logs → /tab/CustomModule4
+  GlobalSidebar : Scheduler → /tab/CustomModule6
+}
+state GlobalFooter {
+  GlobalFooter : Smart Chat: "Here is your Smart Chat (Ctrl+Space)"
+  GlobalFooter : Visitors Online | Feedback on New UI (purple)
+  GlobalFooter : Announcements | Mail | Motivator
+  GlobalFooter : Sticky Notes | Zia | Activity Reminders
+  GlobalFooter : Recent Items | Accessibility
+  GlobalFooter : Tabs: Chats | Channels | Contacts
+}
+state GlobalLegalFooter {
+  GlobalLegalFooter : Privacy Policy → http://www.zoho.in/privacy.html
+  GlobalLegalFooter : Terms of Service → http://www.zoho.in/crm/zohocrm-terms.html
+  GlobalLegalFooter : © 2026 Corp. All rights reserved.
+}
+' ─────────────────────────────────────
+' NOTES — KEY BUSINESS CONTEXT
+' ─────────────────────────────────────
+note bottom of EmployeePortfolioList
+  Employee Types visible in UI:
+  BDM (Business Development Manager) — 5 records
+  Telecaller — 2 records
+  CEO — 1 record
+  (Manager type exists — see timeline)
+  ─────────────────────────────────────
+  All 8 records are owned by: Kurinjee Promoters
+  Total Records: 8 (all visible on 1 page)
+end note
+note bottom of EmployeeDetail
+  Live record: Radhakrishnan
+  Record ID: 955332000001289466
+  Type: BDM (current)
+  Email: kurinjeepromoters.cbe@gmail.com
+  Mobile: (915) 002-4018 / 9150024018
+  Created: Thu, 4 Sep 2025 12:58 PM
+  Last Modified: Thu, 26 Feb 2026 11:24 AM
+  ─────────────────────────────────────
+  Leads BDM linked: 10+ leads
+    (Bala, Dhanalakshmi nagaraj, Sathiya priya,
+     chelladurai, Thusendran rathinam,
+     Bharathan chelliah, saravanan,
+     Manikandan suresh, sreedhar, Kanda samy…)
+  Manager leads linked: 5 leads
+    (Chanran, Mani, unnamed, Vijiyan,
+     M. Guru Prakash)
+  ─────────────────────────────────────
+  Organisation: Kurinjee Promoters
+  Admin: CEO / Administrator
+  Subscription: 1 user license active
+end note
+note bottom of EmployeeTypeTransition
+  Timeline confirms Type field history
+  for record Radhakrishnan:
+  Sep 4, 2025  12:58 PM → Record Created (as BDM)
+  Nov 3, 2025  05:13 PM → Mobile set: 9150024018
+  Nov 3, 2025  05:14 PM → Email set: kurinjeepromoters.cbe@gmail.com
+  Nov 21, 2025 03:52 PM → Type: BDM → Manager
+  Dec 11, 2025 04:58 PM → Type: Manager → BDM
+  Dec 11, 2025 04:59 PM → Type: BDM → Manager
+  Dec 11, 2025 05:03 PM → Type: Manager → BDM (current)
+  ─────────────────────────────────────
+  0 Upcoming Automated Actions
+  Timeline filter supports:
+    Modules / Users / Status / Time / Sources
+end note
+@enduml

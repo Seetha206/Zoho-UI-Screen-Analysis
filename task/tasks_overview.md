@@ -85,21 +85,55 @@ The Tasks module is **cross-functional** — it integrates with every other modu
 ### Status & Priority
 | Field | Values | Purpose |
 |---|---|---|
-| Status | Not Started, In Progress, Completed, Deferred, Waiting on Input | Current progress state |
+| Status | Not Started, **Attempt** (custom), In Progress, Completed, Deferred, Waiting on Input | Current progress state |
 | Priority | High, Normal, Low | Urgency level |
+
+> **"Attempt"** is a **custom Status value** added by Kurinjee Promoters — not a standard Zoho CRM task status. It captures the intermediate state where a Telecaller has dialled a lead/contact but has not yet connected (phone rang with no answer, or busy). This distinct from "Not Started" (not yet tried) and "In Progress" (actively being worked). Confirmed via Scribe Create Task flow.
 
 ### Relationship Fields
 | Field | Lookup | Purpose |
 |---|---|---|
 | Related To | Account/Lead | Links task to a sales record |
 | Contact Name | Contact | Person associated with the task |
-| Telecaller | Employee Portfolio | Telecaller assigned (custom field) |
-| Approver | User | Manager who must approve task completion |
+| Telecaller | Dropdown (custom) | Telecaller assigned to execute the task — e.g., `Sumathi` (real team member confirmed) |
+| Approver | Dropdown (custom) | Manager who reviews/approves task outcome — e.g., `Manager Testing` |
 
 ### Description
 | Field | Type | Purpose |
 |---|---|---|
 | Description | Text Area | Detailed notes about what needs to be done |
+
+---
+
+## Task Creation Form (Scribe Flow Confirmed)
+
+The full Task creation form field set for Kurinjee Promoters (confirmed via Scribe task_create_scribe_flow):
+
+| Field | Type | Mandatory | Custom | Notes |
+|---|---|---|---|---|
+| Subject | Text | **Yes** | No | Task title; e.g., "Testing Task" |
+| Due Date | Date | No | No | Format: `DD/MM/YYYY` (Indian date format) |
+| Status | Dropdown | No | Partially | Includes custom value "Attempt" |
+| Priority | Dropdown | No | No | High, Normal, Low |
+| Telecaller | Dropdown | No | **Yes** | Assigns a Telecaller; e.g., Sumathi |
+| Approver | Dropdown | No | **Yes** | Assigns a Manager/Approver; e.g., Manager Testing |
+| Account | Lookup | No | No | Links task to an Account record |
+| Type | Dropdown | No | No | Call, Meeting, Email, etc. |
+| Repeat | Dropdown | No | No | Recurring task settings |
+| Auto Close | Toggle | No | No | Auto-complete on activity |
+| Reminder | Dropdown | No | No | Pre-due reminder timing |
+| Description | Text Area | No | No | Detailed task notes |
+
+**Form action buttons (bottom of form):** `Save` | `Save and New` | `Cancel`
+
+### Team Members Confirmed
+
+| Name | Role | First Appearance |
+|---|---|---|
+| Sri | Administrator / Recorder | Flows 1–19 (record owner) |
+| Sumathi | Telecaller | Scribe task_create_scribe_flow (Telecaller dropdown) |
+| Manager Testing | Test Manager account | Scribe task_create_scribe_flow (Approver dropdown) |
+| Prasanth | Real Contact / Client | Scribe clone + print preview flows |
 
 ---
 
@@ -115,6 +149,7 @@ The Tasks module is **cross-functional** — it integrates with every other modu
 | Module Type | Standard CRM Module |
 | Active view | All Tasks (custom_view_id: 955332000000435996) |
 | Default sort | Due Date (ascending) |
+| Custom view age | Older than Lead/Contact/Accounts views (ID suffix `435996` vs `441406+`) |
 
 ### Task Distribution (Observed Sample)
 
@@ -180,7 +215,11 @@ The Tasks module is **cross-functional** — it integrates with every other modu
        ↓
 [Status: Not Started]
        ↓
-[Work Begun]
+[Call Attempted — no answer]
+       ↓
+[Status: Attempt]  ← custom status (Kurinjee Promoters)
+       ↓
+[Work Begun / Connected]
        ↓
 [Status: In Progress]
        ↓
@@ -192,6 +231,7 @@ The Tasks module is **cross-functional** — it integrates with every other modu
 ```
 
 **Alternative Paths:**
+- **Attempt:** Call dialled but not answered — specific to telecalling workflow
 - **Deferred:** Task postponed to later date
 - **Waiting on Input:** Blocked until external input received
 - **Cancelled:** Task no longer needed
@@ -240,6 +280,14 @@ In the **SellBot-360** blueprint (Step 4: Lead Assignment & Call Attempts), task
 |---|---|
 | `Tasks.md` | Full DOM scan with 18 field definitions, list view structure |
 | `tasks_overview.md` | This file — business context and usage |
+
+---
+
+## Scribe Flows Documented
+
+| Flow | Steps | Duration | Key Finding |
+|---|---|---|---|
+| Create Task | 14 | ~45s | Full form confirmed: Subject, Due Date (DD/MM/YYYY), Status (incl. "Attempt" custom), Priority, Telecaller (Sumathi), Approver (Manager Testing), Account, Type, Repeat, Auto Close, Reminder; custom view ID `955332000000435996` |
 
 ---
 

@@ -171,27 +171,81 @@ toolbar:
     - label: Refresh Custom View
       behavior: reload_current_view
   actions_menu:
-    - label: Import Accounts
-      href: /crm/org60043078423/settings/import?module=Accounts&step=1
-    - label: Mass Delete
-      href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_delete
-    - label: Mass Update
-      href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_update
-    - label: Manage Tags
-      href: /crm/org60043078423/settings/manage-tags?module=Accounts
-    - label: Drafts
-      href: /crm/org60043078423/tab/Accounts/actions/draft?module=Accounts
-    - label: Deduplicate Accounts
-      type: in_page_action
-    - label: Create Client Script
-      type: in_page_action
-    - label: Export Accounts
-      type: in_page_action
-    - label: Zoho Sheet View
-      type: in_page_action
-    - label: Print View
-      type: in_page_action
+    button_label: Actions  # Scribe confirmed — accounts_record_export_scribe_flow Step 2
+    scribe_confirmed: true
+    items:
+      - label: Import Accounts
+        href: /crm/org60043078423/settings/import?module=Accounts&step=1
+        scribe_confirmed: true  # accounts_record_import_scribe_flow
+      - label: Mass Delete
+        href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_delete
+      - label: Mass Update
+        href: /crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_update
+      - label: Manage Tags
+        href: /crm/org60043078423/settings/manage-tags?module=Accounts
+      - label: Drafts
+        href: /crm/org60043078423/tab/Accounts/actions/draft?module=Accounts
+      - label: Deduplicate Accounts
+        type: in_page_action
+      - label: Create Client Script
+        type: in_page_action
+      - label: Export Accounts
+        type: in_page_action
+        scribe_confirmed: true  # accounts_record_export_scribe_flow
+        export_dialog:
+          scribe_confirmed: true
+          radio_options:
+            - label: "Fields from custom view"
+              value: custom_view_fields
+              description: Export only the columns shown in the current custom view
+            - label: "All Fields"
+              value: all_fields
+              description: Export all account fields regardless of current view
+          primary_button: Export
+          secondary_button: Cancel
+      - label: Zoho Sheet View
+        type: in_page_action
+      - label: Print View
+        type: in_page_action
   note: "No Mass Email or Autoresponders — Accounts are entities, not individual people"
+
+  # ─────────────────────────────────────────
+  # IMPORT WIZARD (Scribe Confirmed)
+  # ─────────────────────────────────────────
+  import_wizard:
+    scribe_confirmed: true  # accounts_record_import_scribe_flow
+    entry: Actions button → Import Accounts → /settings/import?module=Accounts&step=1
+    steps:
+      - step: 1
+        label: Upload File
+        description: Select and upload source file
+        supported_formats: [CSV, XLS, XLSX]
+        max_file_size: 5MB
+        max_records: 30000
+      - step: 2
+        label: Map Fields
+        description: Match columns from uploaded file to Accounts module fields
+      - step: 3
+        label: Preview & Import
+        description: Review mapped data and confirm import
+
+  # ─────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────
+  scribe_flows_documented:
+    - flow: accounts_record_export_scribe_flow
+      steps: 5
+      confirms:
+        - "Actions" button label (toolbar overflow menu)
+        - Export dialog with 2 radio options (Fields from custom view / All Fields)
+        - Export button as primary CTA in dialog
+    - flow: accounts_record_import_scribe_flow
+      steps: 4
+      confirms:
+        - Import wizard entry via Actions → Import Accounts
+        - 3-step wizard (Upload File → Map Fields → Preview & Import)
+        - Supported formats: CSV / XLS / XLSX
+        - Limits: 5MB file size / 30,000 records max
 
 # ─────────────────────────────────────────
 # CREATE ACCOUNT FORM (fields inferred from filter panel + module conventions)

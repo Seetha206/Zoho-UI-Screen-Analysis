@@ -1,0 +1,347 @@
+@startuml
+!pragma layout smetana
+title Zoho CRM – Contacts Module: Full DOM Lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam state {
+  BackgroundColor #E8F4FD
+  BorderColor #2E86AB
+  FontSize 12
+}
+skinparam ArrowColor #2E86AB
+skinparam NoteBackgroundColor #FFF8DC
+skinparam NoteBorderColor #DAA520
+' ─────────────────────────────────────────────
+' TOP-LEVEL STATE: MODULE ENTRY
+' ─────────────────────────────────────────────
+[*] --> ModuleLoad : Navigate to /tab/Contacts
+state ModuleLoad {
+  [*] --> RenderListView
+}
+ModuleLoad --> ContactsListView
+' ─────────────────────────────────────────────
+' STATE: CONTACTS LIST VIEW
+' ─────────────────────────────────────────────
+state ContactsListView {
+  ' ── LEFT NAV ──────────────────────────────
+  state LeftNavigation {
+    state "Home" as NavHome
+    state "Reports" as NavReports
+    state "Analytics" as NavAnalytics
+    state "My Requests" as NavMyRequests
+    state "CRM Teamspace" as NavTeamspace
+    state "Leads" as NavLeads
+    state "Workqueue" as NavWorkqueue
+    state "Contacts (active)" as NavContacts
+    state "Accounts" as NavAccounts
+    state "Deals" as NavDeals
+    state "Projects Portfolio" as NavProjects
+    state "Employee Portfolio" as NavEmployee
+    state "Customer Feedback" as NavCustomerFB
+    state "Tasks" as NavTasks
+    state "Meetings" as NavMeetings
+    state "Calls" as NavCalls
+    state "Prospecting Leads" as NavProspecting
+    state "Logs" as NavLogs
+    state "Scheduler" as NavScheduler
+    state "Voice of the Customer" as NavVoice
+  }
+  state TeamspaceMenu {
+    state "New Teamspace" as TsNew
+    state "Create Folder" as TsFolder
+    state "Associate Modules" as TsAssoc
+    state "Manage CRM Teamspace" as TsManage
+    state "View All Teamspace" as TsViewAll
+  }
+  NavTeamspace --> TeamspaceMenu : click
+  ' ── TOP BAR ───────────────────────────────
+  state TopBar {
+    state "Search Records" as TopSearch
+    state "Ask Zia" as TopZia
+    state "Signals" as TopSignals
+    state "Calendar" as TopCalendar
+    state "Marketplace" as TopMarket
+    state "Setup" as TopSetup
+    state "Profile" as TopProfile
+  }
+  ' ── CUSTOM VIEW TAB BAR ───────────────────
+  state CustomViewTabBar {
+    state "My Contacts (active)" as CVMyContacts
+    state "More Custom Views (dropdown)" as CVMore
+    state "New Custom View" as CVNew
+    state "Manage Custom View" as CVManage
+    state "Show as Dropdown" as CVDropdown
+  }
+  CVMore --> CVNew : open
+  CVMore --> CVManage : open
+  CVMore --> CVDropdown : open
+  ' ── TOOLBAR / VIEW CONTROLS ───────────────
+  state Toolbar {
+    state "Filter Toggle" as TbFilter
+    state "Sort" as TbSort
+    state "Refresh Custom View" as TbRefresh
+    state "View Settings" as TbSettings
+  }
+  state ViewTypeToggle {
+    state "List View (active)" as VtList
+    state "Kanban View" as VtKanban
+    state "Grid View" as VtGrid
+    state "Chart View" as VtChart
+    state "Timeline View" as VtTimeline
+    state "Split View" as VtSplit
+    state "Canvas View" as VtCanvas
+    state "Card View" as VtCard
+    state "Table View" as VtTable
+    state "More Views Dropdown" as VtMore
+  }
+  ' ── HEADER ACTION BUTTONS ─────────────────
+  state HeaderActions {
+    state "Create Contact" as HaCreate
+    state "More Dropdown" as HaMore
+    state "Actions Dropdown" as HaActions
+  }
+  state MoreDropdown {
+    state "Custom List View" as MdCLV
+    state "Tile View" as MdTile
+    state "Table View" as MdTable
+    state "Import Contacts" as MdImport
+    state "Mass Delete" as MdMassDelete
+    state "Mass Update" as MdMassUpdate
+    state "Manage Tags" as MdTags
+    state "Drafts" as MdDrafts
+    state "Mass Email" as MdMassEmail
+    state "Autoresponders" as MdAutoResp
+    state "Approve Contacts" as MdApprove
+    state "Deduplicate Contacts" as MdDedup
+    state "Create Client Script" as MdClientScript
+    state "Export Contacts" as MdExport
+    state "Zoho Sheet View" as MdSheetView
+    state "Print View" as MdPrint
+  }
+  HaMore --> MoreDropdown : click
+  state ActionsDropdown {
+    state "Mass Delete (action)" as AdDelete
+    state "Mass Update (action)" as AdUpdate
+    state "Mass Email (action)" as AdEmail
+    state "Convert (action)" as AdConvert
+    state "Manage Tags (action)" as AdTags
+    state "Export (action)" as AdExport
+  }
+  HaActions --> ActionsDropdown : click (after selection)
+  ' ── ADVANCED FILTER PANEL ─────────────────
+  state AdvancedFilterPanel {
+    state "Search Filter Box" as FpSearch
+    state SystemDefinedFilters {
+      state "Touched Records" as SfTouched
+      state "Untouched Records" as SfUntouched
+      state "Record Action" as SfRecordAction
+      state "Related Records Action" as SfRelatedAction
+      state "Locked" as SfLocked
+      state "Latest Email Status" as SfEmailStatus
+      state "Activities" as SfActivities
+      state "Cadences" as SfCadences
+    }
+    state WebsiteActivityFilters {
+      state "Average Time Spent (Minutes)" as WaAvgTime
+      state "Days Visited" as WaDays
+      state "First Page Visited" as WaFirstPage
+      state "First Visit" as WaFirstVisit
+      state "Most Recent Visit" as WaRecent
+      state "Number Of Chats" as WaChats
+      state "Referrer" as WaReferrer
+      state "Visitor Score" as WaScore
+    }
+    state FilterByFields {
+      state "Account Name" as FfAccount
+      state "Contact Name" as FfContact
+      state "Contact Owner" as FfOwner
+      state "Email" as FfEmail
+      state "Mobile" as FfMobile
+      state "Lead Source" as FfLeadSource
+      state "Department" as FfDept
+      state "Title" as FfTitle
+      state "City / State / Country" as FfLocation
+      state "Created Time / Modified Time" as FfTime
+      state "Tag" as FfTag
+      state "Email Opt Out" as FfEmailOptOut
+      state "(+ 60 more fields)" as FfOther
+    }
+    state FilterByRelatedModules {
+      state "Calls" as FrCalls
+      state "Contacts (Reporting Contacts)" as FrReportingContacts
+      state "Deal Contact Role" as FrDealRole
+      state "Deals" as FrDeals
+      state "Emails" as FrEmails
+      state "Invitees (Invited Meetings)" as FrInvitees
+      state "Leads (Connected Records)" as FrLeadsConn
+      state "Leads (Converted Leads)" as FrLeadsConv
+      state "Meetings" as FrMeetings
+      state "Notes" as FrNotes
+      state "Tasks" as FrTasks
+    }
+  }
+  TbFilter --> AdvancedFilterPanel : toggle open/close
+  ' ── LIST VIEW RECORDS TABLE ───────────────
+  state ListViewTable {
+    state "Column: Contact Name (All filter)" as ColName
+    state "Column: Account Name" as ColAccount
+    state "Column: Email" as ColEmail
+    state "Row: Record (×10 per page)" as ListRow
+    state RowLevelActions {
+      state "Edit (inline quick link)" as RaEdit
+      state "Row More Options (···)" as RaMore
+    }
+    state RowMoreMenu {
+      state "Edit" as RmEdit
+      state "Delete" as RmDelete
+      state "Print Default view" as RmPrintDefault
+      state "Print Using Canvas" as RmPrintCanvas
+    }
+    ListRow --> RowLevelActions : hover
+    RaMore --> RowMoreMenu : click
+  }
+  ' ── RECORD SELECTION MASS ACTION BAR ──────
+  state MassActionBar {
+    note "Visible when 1+ records checked"
+    state "Delete Selected" as MaDelete
+    state "Mass Update" as MaUpdate
+    state "Mass Email" as MaEmail
+    state "Export Selected" as MaExport
+    state "Manage Tags" as MaTags
+    state "Approve" as MaApprove
+  }
+  ListViewTable --> MassActionBar : check record(s)
+  ' ── PAGINATION ────────────────────────────
+  state Pagination {
+    state "Previous Page" as PgPrev
+    state "Next Page" as PgNext
+    state "Total: 26 records | 1–10 shown" as PgInfo
+  }
+  ' ── BOTTOM RIGHT UTILITY BAR ──────────────
+  state UtilityBar {
+    state "Visitors Online" as UbVisitors
+    state "Feedback on New UI" as UbFeedback
+    state "Announcements" as UbAnnouncements
+    state "Mail" as UbMail
+    state "Motivator" as UbMotivator
+    state "Sticky Notes" as UbNotes
+    state "Zia Assistant" as UbZia
+    state "Activity Reminders" as UbReminders
+    state "Recent Items" as UbRecent
+    state "Accessibility" as UbAccessibility
+    state "Chat Widget" as UbChat
+  }
+  ' ── MODAL DIALOGS (hidden / contextual) ───
+  state ModalDialogs {
+    state "Delete Confirmation Modal" as MdlDelete
+    state "Mass Update Modal" as MdlMassUpdate
+    state "Import Wizard Modal" as MdlImport
+    state "Export in Progress Modal" as MdlExport
+    state "Deduplicate Modal" as MdlDedup
+    state "Approve Contacts Modal" as MdlApprove
+    state "Leave Page Confirmation" as MdlLeavePage
+    state "Cannot Make Call Modal" as MdlCallError
+    state "User Limit Reached Modal" as MdlUserLimit
+    state "Lookup Field Limit Modal" as MdlLookupLimit
+    state "Import Scheduled Modal" as MdlImportSched
+  }
+  note right of ModalDialogs
+    All lyte-modal dialogs present in DOM
+    but rendered hidden (lyteMenuClosed)
+    until triggered by corresponding action.
+  end note
+  ' ── BLUEPRINT STATE BAR ───────────────────
+  state BlueprintStateBar {
+    note "Not rendered in List View.\\nAppears only inside Contact Detail View\\nwhen a Blueprint process is active."
+  }
+}
+' ─────────────────────────────────────────────
+' STATE: RECORD DETAIL VIEW (drill-in)
+' ─────────────────────────────────────────────
+state ContactDetailView {
+  state "Contact Summary Panel" as CdSummary
+  state "Related Lists Panel" as CdRelated
+  state "Blueprint State Bar (if active)" as CdBlueprint
+  state "Timeline / Activity Feed" as CdTimeline
+  state "Edit Record" as CdEdit
+  state "Delete Record" as CdDelete
+  state "Clone Record" as CdClone
+  state "Send Email" as CdSendEmail
+  state "Log Call" as CdLogCall
+  state "Create Task" as CdTask
+  state "Create Meeting" as CdMeeting
+  state "Convert Contact" as CdConvert
+  state RelatedLists {
+    state "Deals" as RlDeals
+    state "Contacts (Reporting)" as RlReporting
+    state "Activities (Tasks/Calls/Meetings)" as RlActivities
+    state "Emails" as RlEmails
+    state "Notes" as RlNotes
+    state "Attachments" as RlAttachments
+    state "Leads (Converted)" as RlLeads
+    state "Invited Meetings" as RlMeetings
+    state "Social" as RlSocial
+  }
+  CdRelated --> RelatedLists
+}
+' ─────────────────────────────────────────────
+' STATE: CREATE CONTACT
+' ─────────────────────────────────────────────
+state CreateContactForm {
+  state "Fill Contact Fields" as CfFill
+  state "Name field (Last Name mandatory)" as CfName
+  state "Estimated Budget ₹ (custom field — Scribe confirmed)" as CfBudget
+  state "Lead Source (dropdown)" as CfLeadSource
+  state "Save" as CfSave
+  state "Save and New (Scribe confirmed — batch entry)" as CfSaveNew
+  state "Cancel" as CfCancel
+  note right of CreateContactForm
+    Button label confirmed: "Create Contact" (not just "+New").
+    "Save and New" saves the record and immediately
+    opens a fresh blank form for rapid batch entry.
+    Only mandatory field: Last Name (*).
+    Custom field confirmed: "Estimated Budget ₹"
+    (visible in form section label in Scribe flow).
+    URL params: /tab/Contacts/custom-view/955332000000441440/list?page=1
+    per_page=10 confirmed (from Clone flow URL params).
+    Real contact: "Prasanth" (visible on page 1, owner: Sri).
+  end note
+}
+' ─────────────────────────────────────────────
+' STATE: IMPORT WIZARD
+' ─────────────────────────────────────────────
+state ImportWizard {
+  state "Step 1: Select File" as IwFile
+  state "Step 2: Map Fields" as IwMap
+  state "Step 3: Confirm" as IwConfirm
+  state "Import Scheduled" as IwDone
+}
+' ─────────────────────────────────────────────
+' TRANSITIONS BETWEEN MAJOR STATES
+' ─────────────────────────────────────────────
+ContactsListView --> ContactDetailView : click Contact Name link
+ContactsListView --> CreateContactForm : click "Create Contact"
+ContactsListView --> ImportWizard : More → Import Contacts
+ContactsListView --> ContactsListView : Filter / Sort / Change View / Paginate
+ContactDetailView --> ContactsListView : Back / breadcrumb
+CreateContactForm --> ContactsListView : Save or Cancel
+ImportWizard --> ContactsListView : Complete / Cancel
+ContactsListView --> [*] : Navigate away via Left Nav
+note bottom of ContactsListView
+  DOM Scan Summary:
+  • Buttons: Create Contact, Filter, Sort, Refresh, View Settings,
+    Previous, Next + 10 view-type toggles + utility bar buttons
+  • Dropdowns: Custom View selector, More (16 items), Actions,
+    View Type (9 options), Teamspace Menu, Column Options
+  • Tabs: My Contacts (active), More Custom Views
+  • View Modes: List, Kanban, Grid, Chart, Timeline, Split, Canvas, Card, Table
+  • Filter Panel: 4 expandable sections, 60+ field checkboxes
+  • Related List Filters: Calls, Deals, Emails, Meetings, Notes, Tasks,
+    Reporting Contacts, Converted Leads, Invited Meetings
+  • Row Actions: Edit link, ··· menu (Edit, Delete, Print)
+  • Mass Actions: Delete, Update, Email, Export, Tags, Approve
+  • Header Actions: Create Contact, More, Actions
+  • Blueprint Bar: Not present in list view
+  • Modals: 10+ modal dialogs (hidden, context-triggered)
+  • Pagination: 26 total records, 10 per page
+end note
+@enduml                                                              

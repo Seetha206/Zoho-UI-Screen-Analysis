@@ -117,6 +117,58 @@ Full UTM and Google Analytics tracking at the Account level — mirrors the same
 
 ---
 
+## Bulk Data Operations (Scribe Flow Confirmed)
+
+### Actions Menu (Toolbar — List View)
+
+The **Actions** dropdown button in the Accounts list view toolbar contains:
+
+| Menu Item | Function |
+|---|---|
+| Mass Update | Update a field across multiple selected records at once |
+| Mass Delete | Delete multiple selected records |
+| Import Accounts | Opens the Import Wizard (multi-step) |
+| Export Accounts | Opens the Export dialog (single modal) |
+| Deduplicate | Find and merge duplicate account records |
+
+### Import Accounts — Wizard Steps
+
+Entry: `Actions → Import Accounts`
+
+| Step | Description |
+|---|---|
+| Step 1 — Upload File | Drag-and-drop or browse; formats: `.csv`, `.xls`, `.xlsx`; max 5 MB; max 30,000 records |
+| Step 2 — Map Fields | Match CSV column headers to CRM fields; skip unwanted columns |
+| Step 3 — Preview & Import | Review count, set duplicate handling (Add / Update / Add+Update), click `Import Now` |
+
+Import runs asynchronously for large files. Failed records downloadable as an error CSV.
+
+### Export Accounts — Dialog Options
+
+Entry: `Actions → Export Accounts`
+
+The Export dialog presents a **radio button choice**:
+
+| Option | What is exported |
+|---|---|
+| **Fields from custom view** | Only the columns visible in the current custom view (`955332000000441417`) |
+| **All Fields** | Every available field — standard + custom (full data export) |
+
+File output: `.csv` download. The final "Export" button click triggers the browser download.
+
+### Custom View ID Registry (Cross-Module)
+
+| Module | Custom View ID | Sequence |
+|---|---|---|
+| Leads | `955332000000441406` | 1st (oldest) |
+| Accounts | `955332000000441417` | 2nd |
+| Potentials (Deals) | `955332000000441430` | 3rd |
+| Contacts | `955332000000441440` | 4th (newest) |
+
+All four IDs were created in a single CRM customisation session (sequential IDs).
+
+---
+
 ## Module URL Reference
 
 | Screen | URL |
@@ -125,9 +177,10 @@ Full UTM and Google Analytics tracking at the Account level — mirrors the same
 | All Accounts custom view | `/crm/org60043078423/tab/Accounts/custom-view/955332000000441417/list` |
 | Create Account form | `/crm/org60043078423/tab/Accounts/create` |
 | Account detail view | `/crm/org60043078423/tab/Accounts/{record_id}` |
-| Import Accounts | `/crm/org60043078423/settings/import?module=Accounts&step=1` |
+| Import Accounts (Actions menu → Import Accounts) | `/crm/org60043078423/settings/import?module=Accounts&step=1` |
 | Manage Tags | `/crm/org60043078423/settings/manage-tags?module=Accounts` |
 | Approve records | `/crm/org60043078423/tab/Accounts/actions/approvals` |
+| Export Accounts (Actions menu → Export Accounts) | Via Actions dropdown on list view |
 | Drafts | `/crm/org60043078423/tab/Accounts/actions/draft?module=Accounts` |
 | Mass Delete | `/crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_delete` |
 | Mass Update | `/crm/org60043078423/tab/Accounts/actions/mass-tools?type=mass_update` |
@@ -136,3 +189,12 @@ Full UTM and Google Analytics tracking at the Account level — mirrors the same
 | Calendar | `/crm/org60043078423/calendar?date=26-02-2026&viewType=day` |
 | Marketplace | `/crm/org60043078423/settings/extensions/all` |
 | Setup | `/crm/org60043078423/settings/index` |
+
+---
+
+## Scribe Flows Documented
+
+| Flow | Steps | Duration | Key Finding |
+|---|---|---|---|
+| Record Import (Accounts) | 4 | ~17s | `Actions → Import Accounts`; 3-step wizard; CSV/XLS/XLSX; 5MB max; 30,000 records max |
+| Record Export (Accounts) | 5 | ~23s | `Actions → Export Accounts`; radio choice: Fields from custom view / All Fields; CSV output |
