@@ -94,6 +94,23 @@ The high lead count (2,077) relative to contacts (26) confirms this is a top-of-
 
 ---
 
+---
+
+## Confirmed Automation Triggers (Scribe Evidence)
+
+Triggered on the **Timeline** Blueprint transition (`lead_blueprint_scribe_flow` — observed in the automated actions section of the transition modal):
+
+| Automation Name | Trigger Point | Type |
+|---|---|---|
+| `RescheduleFollowUps` | Timeline transition | Workflow Rule / Function |
+| `Update Mobile Number` | Timeline transition | Workflow Rule / Function |
+| `Update Attempt Field` | Timeline transition | Workflow Rule / Function |
+| `[Lead] Send Welcome Message` | Timeline transition | Workflow Rule (likely WhatsApp/SMS action) |
+
+> **Note:** These are the only confirmed automation triggers from Scribe recordings. A full automation rule inventory requires a live scan of `/settings/automation/workflow-rules`.
+
+---
+
 ## Module URL Reference
 
 | Screen | URL |

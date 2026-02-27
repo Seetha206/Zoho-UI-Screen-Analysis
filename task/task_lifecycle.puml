@@ -136,41 +136,34 @@ state TasksListView {
   ' ── ADVANCED FILTER PANEL ─────────────────
   state AdvancedFilterPanel {
     state "Search Filter Box" as FpSearch
-    state SystemDefinedFilters {
-      state "Touched Records" as SfTouched
-      state "Untouched Records" as SfUntouched
-      state "Record Action" as SfRecordAction
-      state "Related Records Action" as SfRelatedAction
-      state "Locked" as SfLocked
-      note right of SystemDefinedFilters
-        Tasks does NOT have: Latest Email Status,
-        Activities, Cadences filters (Contacts-specific).
-      end note
-    }
-    state FilterByFields {
-      state "Approver" as FfApprover
-      state "Auto Close" as FfAutoClose
-      state "Closed Time" as FfClosedTime
-      state "Contact Name" as FfContact
-      state "Created By" as FfCreatedBy
-      state "Created Time" as FfCreatedTime
-      state "Due Date" as FfDueDate
-      state "Last Activity Time" as FfLastActivity
-      state "Modified By" as FfModifiedBy
-      state "Modified Time" as FfModifiedTime
-      state "Priority" as FfPriority
-      state "Related To" as FfRelatedTo
-      state "Status" as FfStatus
-      state "Subject" as FfSubject
-      state "Tag" as FfTag
-      state "Task Owner" as FfTaskOwner
-      state "Telecaller" as FfTelecaller
-      state "Type" as FfType
-      state "Notes" as FfNotes
-    }
-    state FilterByRelatedModules {
-      note "Related module filters for Tasks\\nbased on parent records\\n(Leads, Contacts, Accounts, Deals, etc.)"
-    }
+    AdvancedFilterPanel : ── System Defined Filters ──
+    AdvancedFilterPanel : Touched Records
+    AdvancedFilterPanel : Untouched Records
+    AdvancedFilterPanel : Record Action
+    AdvancedFilterPanel : Related Records Action
+    AdvancedFilterPanel : Locked
+    AdvancedFilterPanel : ── Filter By Fields ──
+    AdvancedFilterPanel : Approver
+    AdvancedFilterPanel : Auto Close
+    AdvancedFilterPanel : Closed Time
+    AdvancedFilterPanel : Contact Name
+    AdvancedFilterPanel : Created By
+    AdvancedFilterPanel : Created Time
+    AdvancedFilterPanel : Due Date
+    AdvancedFilterPanel : Last Activity Time
+    AdvancedFilterPanel : Modified By
+    AdvancedFilterPanel : Modified Time
+    AdvancedFilterPanel : Priority
+    AdvancedFilterPanel : Related To
+    AdvancedFilterPanel : Status
+    AdvancedFilterPanel : Subject
+    AdvancedFilterPanel : Tag
+    AdvancedFilterPanel : Task Owner
+    AdvancedFilterPanel : Telecaller
+    AdvancedFilterPanel : Type
+    AdvancedFilterPanel : Notes
+    AdvancedFilterPanel : ── Filter By Related Modules ──
+    AdvancedFilterPanel : Related module filters for Tasks based on parent records (Leads, Contacts, Accounts, Deals, etc.)
     note right of AdvancedFilterPanel
       Tasks filter panel has 3 sections:
       System Defined Filters,
@@ -178,6 +171,8 @@ state TasksListView {
       Filter By Related Modules.
       NO Website Activity section
       (that is Contacts/Leads specific).
+      Tasks does NOT have: Latest Email Status,
+      Activities, Cadences filters (Contacts-specific).
     end note
   }
   TbFilter --> AdvancedFilterPanel : toggle open/close
@@ -194,20 +189,18 @@ state TasksListView {
       (not 10 like standard modules).
       Total: 4285 records in this org.
     end note
-    state RowLevelActions {
-      state "Row More Options (···)" as RaMore
-    }
-    state RowMoreMenu {
-      state "Edit" as RmEdit
-      state "Delete" as RmDelete
-      state "Mark as Completed" as RmComplete
-      note right of RowMoreMenu
-        Tasks row menu has 'Mark as Completed'
-        instead of Contacts' 'Print' options.
-      end note
-    }
-    ListRow --> RowLevelActions : hover
-    RaMore --> RowMoreMenu : click
+    state "Row More Options (···)" as RaMore
+    state "Edit" as RmEdit
+    state "Delete" as RmDelete
+    state "Mark as Completed" as RmComplete
+    note right of RmComplete
+      Tasks row menu has 'Mark as Completed'
+      instead of Contacts' 'Print' options.
+    end note
+    ListRow --> RaMore : hover
+    RaMore --> RmEdit : click
+    RaMore --> RmDelete : click
+    RaMore --> RmComplete : click
   }
   ' ── MASS ACTION BAR ───────────────────────
   state MassActionBar {
@@ -318,91 +311,83 @@ state TaskDetailView {
   }
   ' ── OVERVIEW PANEL ───────────────────────
   state OverviewPanel {
-    state BusinessCardSummary {
-      state "Priority (field)" as OvPriority
-      state "Due Date (field)" as OvDueDate
-      state "Status (field)" as OvStatus
-      state "Related To (link to Lead/Contact/Account)" as OvRelatedTo
-      state "Task Owner (field)" as OvTaskOwner
-      state "Last Update timestamp" as OvLastUpdate
-    }
+    OverviewPanel : ── Business Card Summary ──
+    OverviewPanel : Priority (field)
+    OverviewPanel : Due Date (field)
+    OverviewPanel : Status (field)
+    OverviewPanel : Related To (link to Lead/Contact/Account)
+    OverviewPanel : Task Owner (field)
+    OverviewPanel : Last Update timestamp
     state "Hide/Show Details Toggle" as OvToggleDetails
-    state TaskInformationSection {
-      state "Subject" as OvSubject
-      state "Type" as OvType
-      state "Due Date" as OvDueDateDetail
-      state "Status" as OvStatusDetail
-      state "Priority" as OvPriorityDetail
-      state "Telecaller" as OvTelecaller
-      state "Approver" as OvApprover
-      state "Repeat" as OvRepeat
-      state "Auto Close" as OvAutoClose
-      state "Closed Time" as OvClosedTime
-      state "Reminder" as OvReminder
-    }
-    state DescriptionInformationSection {
-      state "Description (text)" as OvDescription
-    }
-    state InternalUseSection {
-      state "Related To (Lead/Contact link)" as OvWho
-      state "Task Owner" as OvOwnerDetail
-    }
+    OverviewPanel : ── Task Information Section ──
+    OverviewPanel : Subject
+    OverviewPanel : Type
+    OverviewPanel : Due Date
+    OverviewPanel : Status
+    OverviewPanel : Priority
+    OverviewPanel : Telecaller
+    OverviewPanel : Approver
+    OverviewPanel : Repeat
+    OverviewPanel : Auto Close
+    OverviewPanel : Closed Time
+    OverviewPanel : Reminder
+    OverviewPanel : ── Description Information Section ──
+    OverviewPanel : Description (text)
+    OverviewPanel : ── Internal Use Section ──
+    OverviewPanel : Related To (Lead/Contact link)
+    OverviewPanel : Task Owner
   }
   ' ── TIMELINE PANEL ────────────────────────
   state TimelinePanel {
-    state TimelineSubTabs {
-      state "History (only tab - no Interactions)" as TlHistory
-      note right of TimelineSubTabs
-        Tasks Timeline has ONLY History tab.
-        Unlike Contacts, there is NO
-        'Interactions' tab in Tasks.
-      end note
-    }
-    state TimelineHistoryView {
-      state "Timeline Filter Button" as TlFilter
-      state "0 Upcoming Automated Actions (expandable)" as TlUpcoming
-      state "History Event: Task Created" as TlEvtCreate
-      state "History Event: Task Edited (field diff)" as TlEvtEdit
-      state "History Event: Status Changed" as TlEvtStatus
-      state "History Event: Task Closed" as TlEvtClose
-      state "History Event: Reminder triggered" as TlEvtReminder
-      state "History Event: Automation Function fired" as TlEvtFunction
-    }
-    state TimelineFilterPanel {
-      state "Modules dropdown (All Modules)" as TfModules
-      state "Users dropdown (All / Active / Inactive / Deleted)" as TfUsers
-      state "Time filter (Any Time / Today / Yesterday / Last 7 days / Last 30 days / Custom Range / Specific date)" as TfTime
-      state "Sources dropdown (All Sources)" as TfSources
-    }
-    TlFilter --> TimelineFilterPanel : click
-    state UpcomingAutomatedActionsPanel {
-      state "Pending Workflow Rules" as UpWorkflow
-      state "Pending Scheduled Actions" as UpScheduled
-      state "Pending Functions" as UpFunctions
-    }
-    TlUpcoming --> UpcomingAutomatedActionsPanel : expand
+    TimelinePanel : ── Timeline Sub-Tabs ──
+    TimelinePanel : History (only tab - no Interactions)
+    note right of TimelinePanel
+      Tasks Timeline has ONLY History tab.
+      Unlike Contacts, there is NO
+      'Interactions' tab in Tasks.
+    end note
+    TimelinePanel : ── Timeline History View ──
+    state "Timeline Filter Button" as TlFilter
+    TimelinePanel : 0 Upcoming Automated Actions (expandable)
+    TimelinePanel : History Event: Task Created
+    TimelinePanel : History Event: Task Edited (field diff)
+    TimelinePanel : History Event: Status Changed
+    TimelinePanel : History Event: Task Closed
+    TimelinePanel : History Event: Reminder triggered
+    TimelinePanel : History Event: Automation Function fired
+    TimelinePanel : ── Timeline Filter Panel ──
+    state "Modules dropdown (All Modules)" as TfModules
+    state "Users dropdown (All / Active / Inactive / Deleted)" as TfUsers
+    state "Time filter (Any Time / Today / Yesterday / Last 7 days / Last 30 days / Custom Range / Specific date)" as TfTime
+    state "Sources dropdown (All Sources)" as TfSources
+    TimelinePanel : ── Upcoming Automated Actions Panel ──
+    state "Pending Workflow Rules" as UpWorkflow
+    state "Pending Scheduled Actions" as UpScheduled
+    state "Pending Functions" as UpFunctions
   }
+  TlFilter --> TfModules : click
+  TlFilter --> TfUsers : click
+  TlFilter --> TfTime : click
+  TlFilter --> TfSources : click
   ' ── RIGHT PANEL TABS ─────────────────────
   state RightPanelTabs {
     state "Info Tab (active)" as RpInfo
     state "Conversations Tab" as RpConversations
   }
   state InfoTabContent {
-    state RelatedRecordCard {
-      state "Related Lead/Contact name link" as RcName
-      state "Module badge (Lead / Contact)" as RcBadge
-      state "Send Email button" as RcSendEmail
-      state "Phone (mobile)" as RcPhone
-      state "Office phone" as RcOffice
-      state "Email icon" as RcEmail
-      state "More Info link (opens Lead/Contact detail)" as RcMoreInfo
-    }
-    state OpenActivitiesSection {
-      state "+ New button (Add activity)" as OaSNew
-      state "Tasks (count, expandable)" as OaTaskCount
-      state "Meetings (count, expandable)" as OaMeetCount
-      state "Calls (count, expandable)" as OaCallCount
-    }
+    InfoTabContent : ── Related Record Card ──
+    InfoTabContent : Related Lead/Contact name link
+    InfoTabContent : Module badge (Lead / Contact)
+    InfoTabContent : Send Email button
+    InfoTabContent : Phone (mobile)
+    InfoTabContent : Office phone
+    InfoTabContent : Email icon
+    InfoTabContent : More Info link (opens Lead/Contact detail)
+    InfoTabContent : ── Open Activities Section ──
+    InfoTabContent : + New button (Add activity)
+    InfoTabContent : Tasks (count, expandable)
+    InfoTabContent : Meetings (count, expandable)
+    InfoTabContent : Calls (count, expandable)
     note right of InfoTabContent
       The right panel shows context from the
       Related Lead/Contact record linked to this Task.
@@ -746,37 +731,27 @@ state BlueprintModel {
   }
   state BlueprintActive {
     state "Blueprint State Bar visible in Task Detail View" as BpBar
-    state BlueprintStates {
-      state "State 1 (e.g. New Task)" as BpS1
-      state "State 2 (e.g. Assigned)" as BpS2
-      state "State 3 (e.g. In Review)" as BpS3
-      state "State 4 (e.g. Completed)" as BpS4
-      state "State N (custom defined)" as BpSN
-    }
-    state BlueprintTransitions {
-      state "Transition button 1 (e.g. Start Task)" as BpT1
-      state "Transition button 2 (e.g. Submit for Review)" as BpT2
-      state "Transition button 3 (e.g. Approve)" as BpT3
-      state "Transition button N" as BpTN
-      state "Pre-transition: required fields validation" as BpPreValidate
-      state "Transition notes / reason field" as BpNotes
-      state "Post-transition: fields auto-updated" as BpPostUpdate
-      state "Post-transition: Status field auto-set" as BpStatusSet
-    }
-    state BlueprintLockedFields {
-      note "Fields with padlock icon = read-only\\nin current Blueprint state.\\nStatus field may be locked,\\nonly changeable via transition button."
-    }
-    state BlueprintTimelineLogging {
-      note "Every Blueprint transition auto-logs:\\n- Transition name\\n- From state → To state\\n- User who executed transition\\n- Timestamp\\n- Notes entered\\nVisible in Timeline > History"
-    }
-    BpBar --> BlueprintStates
-    BpBar --> BlueprintTransitions
-    BpBar --> BlueprintLockedFields
-    BlueprintTransitions --> BlueprintTimelineLogging : on each transition
-    BpS1 --> BpS2 : Transition button
-    BpS2 --> BpS3 : Transition button
-    BpS3 --> BpS4 : Approve
-    BpS3 --> BpS2 : Reject → revert
+    BlueprintActive : ── Blueprint States ──
+    BlueprintActive : State 1 (e.g. New Task)
+    BlueprintActive : State 2 (e.g. Assigned)
+    BlueprintActive : State 3 (e.g. In Review)
+    BlueprintActive : State 4 (e.g. Completed)
+    BlueprintActive : State N (custom defined)
+    BlueprintActive : ── Blueprint Transitions ──
+    BlueprintActive : Transition button 1 (e.g. Start Task)
+    BlueprintActive : Transition button 2 (e.g. Submit for Review)
+    BlueprintActive : Transition button 3 (e.g. Approve)
+    BlueprintActive : Transition button N
+    BlueprintActive : Pre-transition: required fields validation
+    BlueprintActive : Transition notes / reason field
+    BlueprintActive : Post-transition: fields auto-updated
+    BlueprintActive : Post-transition: Status field auto-set
+    BlueprintActive : ── Blueprint Locked Fields ──
+    BlueprintActive : Fields with padlock icon = read-only in current Blueprint state
+    BlueprintActive : Status field may be locked, only changeable via transition button
+    BlueprintActive : ── Blueprint Timeline Logging ──
+    BlueprintActive : Every Blueprint transition auto-logs: Transition name, From state to To state, User who executed transition, Timestamp, Notes entered
+    BlueprintActive : Visible in Timeline > History
   }
   BlueprintInactive --> BlueprintActive : admin enables Blueprint on Tasks
 }

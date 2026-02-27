@@ -9,6 +9,17 @@ employee_portfolio_module:
   org_id: "60043078423"
   module_type: Custom Module
   pagination: 1 to 8 per page (single page - all records visible)
+  custom_view_id: "955332000001288053"
+
+  # ─────────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────────
+  scribe_flows_documented:
+    note: "No Scribe flows recorded for Employee Portfolio module as of 2026-02-27. All data sourced from live DOM scan (EmployeePortfolio.md)."
+    pending_flows:
+      - employee_create_scribe_flow
+      - employee_update_scribe_flow
+      - employee_delete_scribe_flow
 
   # ─────────────────────────────────────────────
   # LIST VIEW
@@ -67,6 +78,68 @@ employee_portfolio_module:
       - icon: Custom List View
       - icon: Tile View
       - icon: Chevron dropdown (more views)
+    toolbar_actions:
+      filter:
+        triggers:
+          - type: toolbar_button
+            label: Filter
+            icon: funnel
+            behavior: opens_closes_filter_panel
+        filter_operators_confirmed:
+          - is
+          - is not
+          - is empty
+          - is not empty
+          - contains
+          - does not contain
+          - starts with
+          - ends with
+        apply_filter_button:
+          label: Apply Filter
+          type: primary button (blue)
+          position: bottom of filter panel
+      sort:
+        trigger: Sort button (toolbar)
+        panel_structure:
+          field_selector:
+            label: Sort By
+            type: dropdown
+            default: None (unsorted)
+          order_selector:
+            type: radio buttons
+            options: [Ascending, Descending]
+            default: Ascending
+          buttons:
+            - label: Apply
+              type: primary (blue)
+            - label: Cancel
+              type: secondary
+              behavior: preserves previously applied sort
+        url_params_on_sort:
+          sort_order: asc | desc | unsort
+          sort_by: "{field_id}"
+      refresh:
+        trigger: Refresh Custom View button
+    per_page_selector:
+      type: user-configurable dropdown
+      confirmed_options: [10, 20, 25, 50, 100, 200]
+      note: "With only 8 records total, pagination is not active; all records fit on page 1"
+    column_settings:
+      trigger_icon: column-settings icon (top-right of list header)
+      dropdown_menu_items:
+        - Manage Columns
+        - Resize Columns
+        - Reset Columns
+      manage_columns_panel:
+        layout: two-pane (Available Fields | Selected Columns)
+        actions: check/uncheck to show/hide; drag to reorder
+        save_button: true
+        default_selected_columns:
+          - Employee Name
+          - Type
+          - Mobile
+          - Email
+        notes: Column configuration is per-user
     toolbar_buttons:
       - label: Filter
         icon: funnel
@@ -297,6 +370,60 @@ employee_portfolio_module:
     tabs:
       - Overview
       - Related Lists (Leads, Deals, Tasks, Calls, Meetings, Emails, Notes)
+    header_action_buttons:
+      - label: Edit
+      - label: More Options (...)
+        type: icon button
+        dropdown_items:
+          - label: Clone
+          - label: Delete
+            confirmation_modal:
+              title: "Delete Employee Portfolio"
+              body: "Are you sure you want to delete this employee portfolio?"
+              buttons:
+                - label: Cancel
+                  type: secondary
+                  behavior: closes_modal_no_action
+                - label: Delete
+                  type: primary (red/destructive)
+                  behavior: deletes_record_redirects_to_list
+              post_delete_behavior:
+                toast_message: "Employee Portfolio deleted successfully"
+                redirect: list view
+                recycle_bin: record_retained_60_days
+          - label: Print Preview
+    related_list_sidebar:
+      items:
+        - Notes
+        - Open Activities (Tasks, Calls, Meetings)
+        - Closed Activities
+        - Emails
+        - Leads BDM (Leads assigned to this BDM)
+        - Leads Telecaller (Leads assigned to this Telecaller)
+        - Deals BDM (Deals managed by this BDM)
+        - Brokers (sub-Employee Portfolio related records)
+        - Add Related List (button)
+
+  # ─────────────────────────────────────────────
+  # ASSIGNMENT FLOW
+  # ─────────────────────────────────────────────
+  assignment_flow:
+    owner_field:
+      field_name: Employee Portfolios Owner
+      type: lookup (user)
+      current_default: Kurinjee Promoters
+    trigger_methods:
+      - method: edit_form
+        steps:
+          - Click Edit header button → full Edit Employee Portfolio form
+          - Employee Portfolios Owner field in Employee Information section
+          - Select from user lookup dropdown
+          - Click Save
+      - method: mass_update
+        steps:
+          - Select checkboxes in list view
+          - Actions menu → Mass Update → set Employee Portfolios Owner
+    confirmation: Save button on edit form
 
   # ─────────────────────────────────────────────
   # BOTTOM STATUS BAR (PERSISTENT)

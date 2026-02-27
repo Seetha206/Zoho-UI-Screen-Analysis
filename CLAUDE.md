@@ -19,7 +19,11 @@ Zoho UI-Screen Analysis/
 ├── task/                    # Tasks module (single DOM scan file)
 ├── employ-porfolio/         # Employee Portfolio (CustomModule5)
 ├── projects-porfolio/       # Projects Portfolio (CustomModule3)
-└── Sellbot-plan/            # SellBot-360 automation blueprint
+├── Sellbot-plan/            # SellBot-360 automation blueprint (SellBot_Developer_Specific.yml)
+├── sellbot/
+│   └── ui_screen/           # SellBot UI Implementation Plan — 16 files (Steps 1–14)
+├── VERIFIED_REPORT.md       # Full coverage audit (updated 2026-02-27, avg 68%)
+└── AUDIT_REPORT.md          # Earlier audit (superseded by VERIFIED_REPORT.md)
 ```
 
 ## File Naming Conventions
@@ -41,6 +45,22 @@ File patterns vary by how recently the screen was documented. Two conventions ex
 | `Tasks.md` / `EmployeePortfolio.md` / etc. | Combined DOM scan (all sections in one file) |
 | `deals_lifecycle.puml` | Navigation flow diagram |
 | `deals_overview.md` | Business context |
+
+### SellBot UI Implementation Plan (`sellbot/ui_screen/`)
+| File | Purpose |
+|---|---|
+| `00_overview.md` | Master map: Zoho module → SellBot step, UI patterns, WhatsApp template registry, new field list |
+| `01_project_setup.md` – `14_longterm_engagement.md` | One file per SellBot step: screen design, field tables, automation triggers, implementation delta |
+| `field_inventory.md` | Complete field list for all 7 SellBot modules |
+
+Each step file structure:
+```
+## 1. SellBot Objective
+## 2. Source Zoho CRM Analysis   — which module(s) this maps to
+## 3. Screen / Form Design       — fields, layout, interactions
+## 4. Automation Triggers        — conditions and actions
+## N. Implementation Delta       — what's new vs existing Zoho patterns
+```
 
 ## Document Structure Inside DOM Scan Files
 
@@ -108,6 +128,22 @@ Use `.puml` extension with `@startuml`/`@enduml` markers. Skinparam colors: back
 LEADS (2,077) ──▶ CONTACTS (26) ──▶ DEALS (9)
 Blueprint stages: Lead Qualification → Site Visit → Booking → Closed Won
 ```
+
+## SellBot-360™ Workflow (14 steps — implementation plan in sellbot/ui_screen/)
+
+```
+Step 1: Project Setup → Step 2: Lead Capture → Step 3: Auto Welcome
+→ Step 4: Assignment + 5 Call Attempts → Step 5: BANT Qualification
+→ Step 6: Site Visit Invitation → Step 7: Visit Reminders (8-week)
+→ Step 8: Post-Visit Feedback + Objection Capture
+→ Step 9: 60-Day Nurturing (7 objection tracks × 8 WA templates)
+→ Step 10: CRM Dashboard → Step 11: Client Feedback
+→ Step 12: Referral Program → Step 13: Business Owner Dashboard
+→ Step 14: Long-Term Brand Engagement (90-day re-activation)
+```
+
+Key new modules: Site_Visit_Feedback · Referral_Management · Client_Feedback · Project_Assets_Library
+Key new Lead fields: Lead_Type (Hot/Warm/Cold/Junk) · Lead_Score_Total · Visit_Status · Reminder_Count · Objection_Status
 
 ## Adding a New Screen
 

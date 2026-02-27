@@ -170,6 +170,58 @@ toolbar:
       behavior: open_sort_options
     - label: Refresh Custom View
       behavior: reload_current_view
+  toolbar_actions:
+    filter:
+      filter_operators_confirmed:
+        - is
+        - is not
+        - is empty
+        - is not empty
+        - contains
+        - does not contain
+        - starts with
+        - ends with
+      apply_filter_button:
+        label: Apply Filter
+        type: primary button (blue)
+        position: bottom of filter panel
+    sort:
+      panel_structure:
+        field_selector:
+          label: Sort By
+          type: dropdown
+          default: None (unsorted)
+        order_selector:
+          type: radio buttons
+          options: [Ascending, Descending]
+          default: Ascending
+        buttons:
+          - label: Apply
+            type: primary (blue)
+          - label: Cancel
+            type: secondary
+            behavior: preserves previously applied sort
+      url_params_on_sort:
+        sort_order: asc | desc | unsort
+        sort_by: "{field_id}"
+  per_page_selector:
+    type: user-configurable dropdown
+    confirmed_options: [10, 20, 25, 50, 100, 200]
+    notes: Persists per user session
+  column_settings:
+    trigger_icon: column-settings icon (top-right of list header)
+    dropdown_menu_items:
+      - Manage Columns
+      - Resize Columns
+      - Reset Columns
+    manage_columns_panel:
+      layout: two-pane (Available Fields | Selected Columns)
+      actions: check/uncheck to show/hide; drag to reorder
+      save_button: true
+      default_selected_columns:
+        - Account Name
+        - Account Owner
+      notes: Only 2 data columns by default — minimal layout
   actions_menu:
     button_label: Actions  # Scribe confirmed — accounts_record_export_scribe_flow Step 2
     scribe_confirmed: true
@@ -421,3 +473,76 @@ inline_popup_observed:
     phone: "9597736066"
   email_link: clickable
   phone_displayed: true
+
+# ─────────────────────────────────────────
+# DETAIL VIEW
+# ─────────────────────────────────────────
+detail_view:
+  url_pattern: /crm/org60043078423/tab/Accounts/{record_id}
+  access: click Account Name from list view
+  tabs:
+    - Overview
+    - Related Lists (Contacts, Deals, Leads, Calls, Meetings, Tasks, Emails, Notes)
+  header_action_buttons:
+    - label: Edit
+    - label: More Options (...)
+      type: icon button
+      dropdown_items:
+        - label: Clone
+        - label: Delete
+          confirmation_modal:
+            title: "Delete Account"
+            body: "Are you sure you want to delete this account?"
+            buttons:
+              - label: Cancel
+                type: secondary
+                behavior: closes_modal_no_action
+              - label: Delete
+                type: primary (red/destructive)
+                behavior: deletes_record_redirects_to_list
+            post_delete_behavior:
+              toast_message: "Account deleted successfully"
+              redirect: list view
+              recycle_bin: record_retained_60_days
+        - label: Print Preview
+        - label: Find and Merge Duplicates
+  related_list_sidebar:
+    items:
+      - Contacts (related contacts)
+      - Deals
+      - Leads (Converted Leads)
+      - Notes
+      - Open Activities (Tasks, Calls, Meetings)
+      - Closed Activities
+      - Emails
+      - Documents
+      - Member Accounts
+      - Plots Owned By
+      - Add Related List (button)
+
+# ─────────────────────────────────────────
+# ASSIGNMENT FLOW
+# ─────────────────────────────────────────
+assignment_flow:
+  owner_field:
+    field_name: Account Owner
+    type: lookup (user)
+    current_default: Kurinjee Promoters
+  trigger_methods:
+    - method: inline_edit_on_detail_view
+      steps:
+        - Hover over Account Owner field
+        - Pencil (edit) icon appears → click to make inline editable
+        - Type or select new owner
+        - Save by clicking away or pressing Enter
+    - method: edit_form
+      steps:
+        - Click Edit header button → full Edit Account form
+        - Account Owner field in Account Information section
+        - Select from user lookup dropdown
+        - Click Save
+    - method: mass_update
+      steps:
+        - Select checkboxes in list view
+        - Actions menu → Mass Update → set Account Owner
+  confirmation: auto-save on inline edit; Save button on full edit form

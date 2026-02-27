@@ -152,59 +152,56 @@ state DealsListView {
   ' ── ADVANCED FILTER PANEL ─────────────────
   state AdvancedFilterPanel {
     state "Search Filter Box" as FpSearch
-    state SystemDefinedFilters {
-      state "Touched Records" as SfTouched
-      state "Untouched Records" as SfUntouched
-      state "Record Action" as SfRecordAction
-      state "Related Records Action" as SfRelatedAction
-      state "Locked" as SfLocked
-      state "Latest Email Status" as SfEmailStatus
-      state "Activities" as SfActivities
-      state "Cadences" as SfCadences
-    }
-    state FilterByFields {
-      state "1. Preferred Location" as Ff1Loc
-      state "2. Preferred Location" as Ff2Loc
-      state "3. Preferred Location" as Ff3Loc
-      state "Ads Form Name / ID" as FfAds
-      state "Ads Lead Created Time / ID" as FfAdsLead
-      state "All Traffic Sources" as FfTraffic
-      state "Amount" as FfAmount
-      state "Approval for Closure" as FfApproval
-      state "Attempt" as FfAttempt
-      state "Authority (BANT)" as FfAuthority
-      state "BANT Form URL" as FfBANT
-      state "BDM / BDM Feedback / BDM Form URL" as FfBDM
-      state "Browser" as FfBrowser
-      state "Budget (BANT)" as FfBudget
-      state "Budget Concern Description" as FfBudgetDesc
-      state "Budget Range / Max / Min" as FfBudgetRange
-      state "City (from IP address)" as FfCity
-      state "Client Comments / Feedback / Location / Rating" as FfClient
-      state "Closing Date" as FfClosingDate
-      state "Comfortable Price" as FfComfPrice
-      state "Comments" as FfComments
-      state "Connected To" as FfConnected
-      state "Contact Name" as FfContact
-      state "Country (from IP address)" as FfCountry
-      state "Created By / Created Time" as FfCreated
-      state "Deal Closed Time" as FfDealClosed
-      state "Deal Name" as FfDealName
-      state "Deal Owner" as FfDealOwner
-      state "Decision Influencers" as FfDecision
-      state "Relevant Property" as FfRelevant
-      state "(+ many more custom fields)" as FfMore
-    }
-    state FilterByRelatedModules {
-      state "Calls" as FrCalls
-      state "Deal Contact Role (Contact Roles)" as FrContactRole
-      state "Deals (Referrals)" as FrReferrals
-      state "Emails" as FrEmails
-      state "Leads (Converted Leads)" as FrLeads
-      state "Meetings" as FrMeetings
-      state "Notes" as FrNotes
-      state "Tasks" as FrTasks
-    }
+    AdvancedFilterPanel : ── System Defined Filters ──
+    AdvancedFilterPanel : Touched Records
+    AdvancedFilterPanel : Untouched Records
+    AdvancedFilterPanel : Record Action
+    AdvancedFilterPanel : Related Records Action
+    AdvancedFilterPanel : Locked
+    AdvancedFilterPanel : Latest Email Status
+    AdvancedFilterPanel : Activities
+    AdvancedFilterPanel : Cadences
+    AdvancedFilterPanel : ── Filter By Fields ──
+    AdvancedFilterPanel : 1. Preferred Location
+    AdvancedFilterPanel : 2. Preferred Location
+    AdvancedFilterPanel : 3. Preferred Location
+    AdvancedFilterPanel : Ads Form Name / ID
+    AdvancedFilterPanel : Ads Lead Created Time / ID
+    AdvancedFilterPanel : All Traffic Sources
+    AdvancedFilterPanel : Amount
+    AdvancedFilterPanel : Approval for Closure
+    AdvancedFilterPanel : Attempt
+    AdvancedFilterPanel : Authority (BANT)
+    AdvancedFilterPanel : BANT Form URL
+    AdvancedFilterPanel : BDM / BDM Feedback / BDM Form URL
+    AdvancedFilterPanel : Browser
+    AdvancedFilterPanel : Budget (BANT)
+    AdvancedFilterPanel : Budget Concern Description
+    AdvancedFilterPanel : Budget Range / Max / Min
+    AdvancedFilterPanel : City (from IP address)
+    AdvancedFilterPanel : Client Comments / Feedback / Location / Rating
+    AdvancedFilterPanel : Closing Date
+    AdvancedFilterPanel : Comfortable Price
+    AdvancedFilterPanel : Comments
+    AdvancedFilterPanel : Connected To
+    AdvancedFilterPanel : Contact Name
+    AdvancedFilterPanel : Country (from IP address)
+    AdvancedFilterPanel : Created By / Created Time
+    AdvancedFilterPanel : Deal Closed Time
+    AdvancedFilterPanel : Deal Name
+    AdvancedFilterPanel : Deal Owner
+    AdvancedFilterPanel : Decision Influencers
+    AdvancedFilterPanel : Relevant Property
+    AdvancedFilterPanel : (+ many more custom fields)
+    AdvancedFilterPanel : ── Filter By Related Modules ──
+    AdvancedFilterPanel : Calls
+    AdvancedFilterPanel : Deal Contact Role (Contact Roles)
+    AdvancedFilterPanel : Deals (Referrals)
+    AdvancedFilterPanel : Emails
+    AdvancedFilterPanel : Leads (Converted Leads)
+    AdvancedFilterPanel : Meetings
+    AdvancedFilterPanel : Notes
+    AdvancedFilterPanel : Tasks
   }
   TbFilter --> AdvancedFilterPanel : toggle open/close
   ' ── LIST VIEW TABLE ───────────────────────
@@ -214,20 +211,19 @@ state DealsListView {
     state "Column: Amount" as ColAmount
     state "Column: Stage (colored badge)" as ColStage
     state "Row: Deal record (×N per page)" as ListRow
-    state RowLevelActions {
-      state "Row More Options (···)" as RaMore
-    }
-    state RowMoreMenu {
-      state "Edit" as RmEdit
-      state "Delete" as RmDelete
-      state "Print Default view" as RmPrint
-      state "Print Using Canvas" as RmPrintCanvas
-    }
-    ListRow --> RowLevelActions : hover
-    RaMore --> RowMoreMenu : click
+    state "Row More Options (···)" as RaMore
+    state "Edit" as RmEdit
+    state "Delete" as RmDelete
+    state "Print Default view" as RmPrint
+    state "Print Using Canvas" as RmPrintCanvas
+    ListRow --> RaMore : hover
+    RaMore --> RmEdit : click
+    RaMore --> RmDelete : click
+    RaMore --> RmPrint : click
+    RaMore --> RmPrintCanvas : click
   }
   state KanbanView {
-    note "Kanban View for Deals:\\n- Columns = Deal Stages\\n- Cards = individual Deals\\n- Drag card = stage change\\n- Click card = open detail\\n- Stage column total = sum of Amount\\n- 'New Deal' button per column"
+    note "Kanban View for Deals:\n- Columns = Deal Stages\n- Cards = individual Deals\n- Drag card = stage change\n- Click card = open detail\n- Stage column total = sum of Amount\n- 'New Deal' button per column"
   }
   VtKanban --> KanbanView : activate
   ' ── MASS ACTION BAR ───────────────────────
@@ -280,7 +276,7 @@ state DealsListView {
   }
   ' ── BLUEPRINT LIST NOTE ───────────────────
   state BlueprintListNote {
-    note "Blueprint state bar not rendered\\nin List View. Appears only in Deal\\nDetail View when Blueprint is active."
+    note "Blueprint state bar not rendered\nin List View. Appears only in Deal\nDetail View when Blueprint is active."
   }
 }
 ' ─────────────────────────────────────────────
@@ -342,30 +338,34 @@ state DealDetailView {
   }
   ' ── STAGE PIPELINE BAR (DEALS UNIQUE) ────
   state StagePipelineBar {
-    note "DEALS-UNIQUE FEATURE\\nVisual stage progress bar at top of detail view.\\nShows: START date (left) → CLOSING date (right)\\nCurrent stage highlighted in green.\\nLost stages shown with thumbs-down icon in red."
+    note "DEALS-UNIQUE FEATURE\nVisual stage progress bar at top of detail view.\nShows: START date (left) → CLOSING date (right)\nCurrent stage highlighted in green.\nLost stages shown with thumbs-down icon in red."
     state "START date (deal creation date)" as SpbStart
     state "CLOSING date (expected close date)" as SpbClosing
-    state ActiveStages {
-      note "Stage buttons shown as progress pipeline.\\nCurrent stage = green filled pill.\\nPast stages = checkmark.\\nFuture stages = empty pill.\\nLost stages = red thumbs-down pill."
-    }
-    state StagePipelineActions {
-      state "Thumbs Up dropdown (mark as Won)" as SpaThumsbUp
-      state "Thumbs Down dropdown (mark as Lost)" as SpaThumsbDown
-      state ThumbsUpDropdown {
-        state "Closed Won" as TuClosed
-        note "Selects Closed Won stage\\nSets probability to 100%\\nAuto-sets Deal Closed Time"
-      }
-      state ThumbsDownDropdown {
-        state "Closed Lost" as TdLost
-        state "Closed Lost to Competition" as TdLostComp
-        note "Selects lost stage.\\nMay prompt for Lost Reason.\\nSets probability to 0%.\\nAuto-sets Deal Closed Time."
-      }
-      SpaThumsbUp --> ThumbsUpDropdown : click
-      SpaThumsbDown --> ThumbsDownDropdown : click
-    }
-    state StageClickTransition {
-      note "Click any stage pill in the bar\\n→ Deal stage changes immediately\\n→ Probability auto-updated\\n→ Stage History entry written\\n→ Timeline event logged\\n→ Workflow Rules re-evaluate"
-    }
+    StagePipelineBar : ── Active Stages ──
+    StagePipelineBar : Stage buttons shown as progress pipeline.
+    StagePipelineBar : Current stage = green filled pill.
+    StagePipelineBar : Past stages = checkmark.
+    StagePipelineBar : Future stages = empty pill.
+    StagePipelineBar : Lost stages = red thumbs-down pill.
+    state "Thumbs Up dropdown (mark as Won)" as SpaThumsbUp
+    state "Thumbs Down dropdown (mark as Lost)" as SpaThumsbDown
+    state "Closed Won" as TuClosed
+    state "Closed Lost" as TdLost
+    state "Closed Lost to Competition" as TdLostComp
+    SpaThumsbUp --> TuClosed : click
+    SpaThumsbDown --> TdLost : click
+    SpaThumsbDown --> TdLostComp : click
+    StagePipelineBar : ── Stage Pipeline Actions ──
+    StagePipelineBar : Thumbs Up → Closed Won (probability 100%, auto-sets Deal Closed Time)
+    StagePipelineBar : Thumbs Down → Closed Lost / Closed Lost to Competition
+    StagePipelineBar : (May prompt for Lost Reason, probability 0%, auto-sets Deal Closed Time)
+    StagePipelineBar : ── Stage Click Transition ──
+    StagePipelineBar : Click any stage pill in the bar
+    StagePipelineBar : → Deal stage changes immediately
+    StagePipelineBar : → Probability auto-updated
+    StagePipelineBar : → Stage History entry written
+    StagePipelineBar : → Timeline event logged
+    StagePipelineBar : → Workflow Rules re-evaluate
   }
   ' ── BUSINESS CARD SUMMARY ────────────────
   state BusinessCardSummary {
@@ -387,66 +387,59 @@ state DealDetailView {
   state NextActionWidget {
     state "Overdue date badge (red)" as NaDate
     state "Task/Cadence name link" as NaLink
-    note "Shows next overdue task or cadence action\\nLinked to full Task/Meeting record"
+    note "Shows next overdue task or cadence action\nLinked to full Task/Meeting record"
   }
   ' ── OVERVIEW PANEL SECTIONS ──────────────
   state OverviewPanel {
     state "Hide/Show Details Toggle" as OvToggle
-    state DealInformationSection {
-      state "Deal Name" as OvDealName
-      state "Closing Date" as OvClosingDate
-      state "Stage (badge)" as OvStage
-      state "Probability (%)" as OvProbability
-      state "Expected Revenue" as OvExpRevenue
-      state "Budget Range" as OvBudgetRange
-      state "Contact Name (link)" as OvContact
-      state "Amount" as OvAmount
-      state "Estimated Budget" as OvEstBudget
-      state "Deal Closed Time" as OvClosedTime
-      state "Deal Owner" as OvOwner
-    }
-    state LeadAssessmentSection {
-      state "Budget (BANT)" as OvBANTBudget
-      state "Need (BANT)" as OvBANTNeed
-      state "Authority (BANT)" as OvBANTAuth
-      state "Time (BANT)" as OvBANTTime
-      state "Budget Range Max" as OvBudgetMax
-      state "Budget Range Min" as OvBudgetMin
-    }
-    state DescriptionSection {
-      state "Description (text)" as OvDesc
-      state "Client Feedback after Site Visit" as OvClientFB
-      state "BDM Feedback" as OvBDMFB
-    }
-    state QualificationFormSection {
-      state "Does lead have financial capability?" as OvQual1
-      state "Does project match location preference?" as OvQual2
-      state "Who is making the purchase decision?" as OvQual3
-      state "When is lead planning to buy?" as OvQual4
-    }
-    state ClientFeedbackSection {
-      state "Feedback URL" as OvFBUrl
-      state "Comments" as OvComments
-      state "Client Rating" as OvRating
-    }
-    state TeamLeadSection {
-      state "Approval for Closure" as OvApproval
-    }
-    state SiteVisitInfoSection {
-      state "Site Visit URL" as OvSVUrl
-      state "Visit Status" as OvVisitStatus
-      state "Client Comments" as OvClientComments
-      state "Site Visit Location" as OvSVLocation
-      state "BDM Form URL" as OvBDMUrl
-      state "Site Visit Date" as OvSVDate
-      state "When Are You Planning to Start" as OvStartPlan
-      state "BDM" as OvBDM
-      state "Is There Any Other Specific Concerns" as OvConcerns
-      state "Visit Date" as OvVisitDate
-      state "Client's Overall Impression" as OvImpression
-      state "Real Objections" as OvObjections
-      state "Decision Influencers" as OvDecision
-    }
+    OverviewPanel : ── Deal Information ──
+    OverviewPanel : Deal Name
+    OverviewPanel : Closing Date
+    OverviewPanel : Stage (badge)
+    OverviewPanel : Probability (%)
+    OverviewPanel : Expected Revenue
+    OverviewPanel : Budget Range
+    OverviewPanel : Contact Name (link)
+    OverviewPanel : Amount
+    OverviewPanel : Estimated Budget
+    OverviewPanel : Deal Closed Time
+    OverviewPanel : Deal Owner
+    OverviewPanel : ── Lead Assessment (BANT) ──
+    OverviewPanel : Budget (BANT)
+    OverviewPanel : Need (BANT)
+    OverviewPanel : Authority (BANT)
+    OverviewPanel : Time (BANT)
+    OverviewPanel : Budget Range Max
+    OverviewPanel : Budget Range Min
+    OverviewPanel : ── Description ──
+    OverviewPanel : Description (text)
+    OverviewPanel : Client Feedback after Site Visit
+    OverviewPanel : BDM Feedback
+    OverviewPanel : ── Qualification Form ──
+    OverviewPanel : Does lead have financial capability?
+    OverviewPanel : Does project match location preference?
+    OverviewPanel : Who is making the purchase decision?
+    OverviewPanel : When is lead planning to buy?
+    OverviewPanel : ── Client Feedback ──
+    OverviewPanel : Feedback URL
+    OverviewPanel : Comments
+    OverviewPanel : Client Rating
+    OverviewPanel : ── Team Lead Section ──
+    OverviewPanel : Approval for Closure
+    OverviewPanel : ── Site Visit Information ──
+    OverviewPanel : Site Visit URL
+    OverviewPanel : Visit Status
+    OverviewPanel : Client Comments
+    OverviewPanel : Site Visit Location
+    OverviewPanel : BDM Form URL
+    OverviewPanel : Site Visit Date
+    OverviewPanel : When Are You Planning to Start
+    OverviewPanel : BDM
+    OverviewPanel : Is There Any Other Specific Concerns
+    OverviewPanel : Visit Date
+    OverviewPanel : Client's Overall Impression
+    OverviewPanel : Real Objections
+    OverviewPanel : Decision Influencers
   }
   ' ── SALES SUMMARY PANEL (DEALS UNIQUE) ───
   state SalesSummaryPanel {
@@ -463,225 +456,185 @@ state DealDetailView {
   }
   ' ── TIMELINE PANEL ────────────────────────
   state TimelinePanel {
-    state TimelineSubTabs {
-      state "History (only tab)" as TlHistory
-      note right of TimelineSubTabs
-        Deals Timeline has ONLY History tab.
-        Like Tasks, NO 'Interactions' tab.
-        Unlike Contacts which has both.
-      end note
-    }
-    state TimelineHistoryView {
-      state "Timeline Filter Button" as TlFilter
-      state "0 Upcoming Automated Actions (expandable)" as TlUpcoming
-      state "Event: Deal created by converting the Lead" as TlEvtCreate
-      state "View Lead History link" as TlViewLeadHistory
-      state "Event: Task added via Function [Lead] Send Welcome Message" as TlEvtFunction
-      state "Event: Stage changed from X to Y" as TlEvtStage
-      state "Event: Field edited (field-level diff)" as TlEvtEdit
-      state "Event: Deal Owner changed" as TlEvtOwner
-      state "Event: Amount updated" as TlEvtAmount
-      state "Event: Note added" as TlEvtNote
-      state "Event: Task added / completed" as TlEvtTask
-      state "Event: Email sent / received" as TlEvtEmail
-      state "Event: Cadence enrolled / action" as TlEvtCadence
-    }
-    state TimelineFilterPanel {
-      state "Modules dropdown (All Modules)" as TfModules
-      state "Users dropdown (All / Active / Inactive / Deleted)" as TfUsers
-      state "Time filter (Any Time / Today / Yesterday / Last 7/30 days / Custom / Specific)" as TfTime
-      state "Sources dropdown (All Sources)" as TfSources
-    }
-    TlFilter --> TimelineFilterPanel : click
-    state UpcomingAutomatedActionsPanel {
-      state "Pending Workflow Rules" as UpWorkflow
-      state "Pending Scheduled Actions" as UpScheduled
-      state "Pending Functions" as UpFunctions
-    }
-    TlUpcoming --> UpcomingAutomatedActionsPanel : expand
+    TimelinePanel : ── Timeline Sub-Tabs ──
+    TimelinePanel : History (only tab)
+    TimelinePanel : Note: Deals Timeline has ONLY History tab.
+    TimelinePanel : Like Tasks, NO 'Interactions' tab.
+    TimelinePanel : Unlike Contacts which has both.
+    state "Timeline Filter Button" as TlFilter
+    state "0 Upcoming Automated Actions (expandable)" as TlUpcoming
+    state "Event: Deal created by converting the Lead" as TlEvtCreate
+    state "View Lead History link" as TlViewLeadHistory
+    state "Event: Task added via Function [Lead] Send Welcome Message" as TlEvtFunction
+    state "Event: Stage changed from X to Y" as TlEvtStage
+    state "Event: Field edited (field-level diff)" as TlEvtEdit
+    state "Event: Deal Owner changed" as TlEvtOwner
+    state "Event: Amount updated" as TlEvtAmount
+    state "Event: Note added" as TlEvtNote
+    state "Event: Task added / completed" as TlEvtTask
+    state "Event: Email sent / received" as TlEvtEmail
+    state "Event: Cadence enrolled / action" as TlEvtCadence
+    TimelinePanel : ── Timeline Filter Options ──
+    TimelinePanel : Modules dropdown (All Modules)
+    TimelinePanel : Users dropdown (All / Active / Inactive / Deleted)
+    TimelinePanel : Time filter (Any Time / Today / Yesterday / Last 7/30 days / Custom / Specific)
+    TimelinePanel : Sources dropdown (All Sources)
+    TimelinePanel : ── Upcoming Automated Actions ──
+    TimelinePanel : Pending Workflow Rules
+    TimelinePanel : Pending Scheduled Actions
+    TimelinePanel : Pending Functions
   }
   ' ── BLUEPRINT STATE BAR (CONDITIONAL) ────
   state BlueprintStateBarDetail {
-    note "Blueprint state bar renders HERE in Detail View\\nwhen a Blueprint process is active on this Deal.\\n\\nNOT currently active on scanned Deal record\\nin this org.\\n\\nWhen active renders:\\n  - Current Blueprint State name\\n  - Transition buttons (e.g. Qualify → Propose → Negotiate)\\n  - Locked field indicators (padlock icon)\\n  - Pre-transition required field validation\\n  - Notes/reason field for transition\\n  - Auto-logs each transition to Timeline History\\n  - Can control Stage field via Blueprint transitions"
+    note "Blueprint state bar renders HERE in Detail View\nwhen a Blueprint process is active on this Deal.\n\nNOT currently active on scanned Deal record\nin this org.\n\nWhen active renders:\n  - Current Blueprint State name\n  - Transition buttons (e.g. Qualify → Propose → Negotiate)\n  - Locked field indicators (padlock icon)\n  - Pre-transition required field validation\n  - Notes/reason field for transition\n  - Auto-logs each transition to Timeline History\n  - Can control Stage field via Blueprint transitions"
   }
   ' ── RELATED LISTS PANEL ──────────────────
   state RelatedListsPanel {
-    state RlNotes {
-      state "Add a note (inline textarea)" as RlNoteAdd
-      state "Note row: Edit" as RlNoteEdit
-      state "Note row: Delete" as RlNoteDelete
-    }
-    state RlConnectedRecords {
-      state "Add New (dropdown)" as RlCrAdd
-    }
-    state RlAttachments {
-      state "Attach dropdown" as RlAttBtn
-      state AttachDropdown {
-        state "Upload File" as AttUpload
-        state "Zoho WorkDrive" as AttWorkDrive
-        state "Other Cloud Drives" as AttOtherCloud
-        state "Link (URL)" as AttLink
-      }
-      RlAttBtn --> AttachDropdown : click
-    }
-    state RlStageHistory {
-      note "DEALS-UNIQUE Related List.\\nAudit trail of all stage changes.\\nColumns: Stage, Amount, Probability (%),\\nExpected Revenue, Closing Date,\\nStage Duration (Calendar Days),\\nModified Time, Modified By.\\nRead-only / no add action."
-      state "Show Customize List Popup (column selector)" as RlShColConfig
-    }
-    state RlCompetitors {
-      state "New (add competitor)" as RlCompNew
-      state "Competitor row: Name, Strengths, Weaknesses" as RlCompRow
-      state "Competitor row: Edit" as RlCompEdit
-      state "Competitor row: Delete" as RlCompDelete
-      note right of RlCompetitors
-        DEALS-UNIQUE Related List.
-        Track competing products/companies.
-        Fields: Competitor Name, Strengths, Weaknesses.
-      end note
-    }
-    state RlCadences {
-      state "Enroll" as RlCadEnroll
-      state "Un-enroll" as RlCadUnenroll
-      state "Cadence row: Name, Status, Next Action" as RlCadRow
-    }
-    state RlOpenActivities {
-      state "Add New dropdown" as RlOaAdd
-      state AddNewActivitiesMenu {
-        state "Task" as AnaTask
-        state "Meeting" as AnaMeeting
-        state "Call" as AnaCall
-      }
-      RlOaAdd --> AddNewActivitiesMenu : click
-      state "Column View / Tab View / Chronological View" as OaViews
-      state "Open Tasks count" as RlOaTasks
-      state "Open Meetings count" as RlOaMeetings
-      state "Open Calls count" as RlOaCalls
-    }
-    state RlClosedActivities {
-      state "Closed Task rows" as RlCaTaskRows
-      state "Closed Call rows" as RlCaCallRows
-      state "Closed Meeting rows" as RlCaMeetRows
-    }
-    state RlContactRoles {
-      note "DEALS-UNIQUE Related List.\\nMultiple contacts linked to a single deal\\nwith their role in the purchase decision."
-      state "Add Contacts Roles" as RlCrRoleAdd
-      state "Edit All" as RlCrRoleEditAll
-      state "Show Customize List Popup" as RlCrRoleConfig
-      state "Contact Role row: Contact, Role, Decision Maker, Phone, Email" as RlCrRoleRow
-      state "Unassign (remove role)" as RlCrRoleUnassign
-    }
-    state RlEmails {
-      state "Compose Email button" as RlEmCompose
-      state "Mails tab" as RlEmMails
-      state "Drafts tab" as RlEmDrafts
-      state "Scheduled tab" as RlEmScheduled
-      state "Email row: Reply / Delete" as RlEmActions
-    }
-    state RlZohoProjects {
-      state "New Project" as RlZpNew
-      state "Associate Project" as RlZpAssoc
-    }
-    state RlZohoDesk {
-      state "All Tickets / Overdue / High Priority filters" as RlZdFilter
-      state "Ticket row: Update Field" as RlZdUpdate
-      state "Ticket row: Close" as RlZdClose
-      state "Ticket row: Delete" as RlZdDelete
-    }
-    state RlDocuments {
-      note "Document library integration\\n(Zoho WorkDrive linked docs)"
-    }
-    state RlReferrals {
-      note "DEALS-UNIQUE Related List.\\nTrack referral relationships between deals."
-      state "Assign (link a referral)" as RlRefAssign
-      state "New Deal (from referral)" as RlRefNewDeal
-      state "Edit referral row" as RlRefEdit
-    }
-    state LinksSection {
-      state "Workdrive link" as LsWorkdrive
-      state "Add Link" as LsAddLink
-    }
-    state AddRelatedListButton {
-      note "Add optional related lists\\nfrom available CRM modules"
-    }
+    RelatedListsPanel : ── Notes ──
+    RelatedListsPanel : Add a note (inline textarea)
+    RelatedListsPanel : Note row: Edit
+    RelatedListsPanel : Note row: Delete
+    RelatedListsPanel : ── Connected Records ──
+    RelatedListsPanel : Add New (dropdown)
+    RelatedListsPanel : ── Attachments ──
+    RelatedListsPanel : Attach dropdown: Upload File
+    RelatedListsPanel : Attach dropdown: Zoho WorkDrive
+    RelatedListsPanel : Attach dropdown: Other Cloud Drives
+    RelatedListsPanel : Attach dropdown: Link (URL)
+    RelatedListsPanel : ── Stage History (DEALS-UNIQUE) ──
+    RelatedListsPanel : Audit trail of all stage changes.
+    RelatedListsPanel : Columns: Stage, Amount, Probability (%),
+    RelatedListsPanel : Expected Revenue, Closing Date,
+    RelatedListsPanel : Stage Duration (Calendar Days),
+    RelatedListsPanel : Modified Time, Modified By.
+    RelatedListsPanel : Read-only / no add action.
+    RelatedListsPanel : Show Customize List Popup (column selector)
+    RelatedListsPanel : ── Competitors (DEALS-UNIQUE) ──
+    RelatedListsPanel : New (add competitor)
+    RelatedListsPanel : Competitor row: Name, Strengths, Weaknesses
+    RelatedListsPanel : Competitor row: Edit
+    RelatedListsPanel : Competitor row: Delete
+    RelatedListsPanel : Track competing products/companies.
+    RelatedListsPanel : ── Cadences ──
+    RelatedListsPanel : Enroll
+    RelatedListsPanel : Un-enroll
+    RelatedListsPanel : Cadence row: Name, Status, Next Action
+    RelatedListsPanel : ── Open Activities ──
+    RelatedListsPanel : Add New dropdown: Task
+    RelatedListsPanel : Add New dropdown: Meeting
+    RelatedListsPanel : Add New dropdown: Call
+    RelatedListsPanel : Column View / Tab View / Chronological View
+    RelatedListsPanel : Open Tasks count
+    RelatedListsPanel : Open Meetings count
+    RelatedListsPanel : Open Calls count
+    RelatedListsPanel : ── Closed Activities ──
+    RelatedListsPanel : Closed Task rows
+    RelatedListsPanel : Closed Call rows
+    RelatedListsPanel : Closed Meeting rows
+    RelatedListsPanel : ── Contact Roles (DEALS-UNIQUE) ──
+    RelatedListsPanel : Multiple contacts linked to a single deal
+    RelatedListsPanel : with their role in the purchase decision.
+    RelatedListsPanel : Add Contacts Roles
+    RelatedListsPanel : Edit All
+    RelatedListsPanel : Show Customize List Popup
+    RelatedListsPanel : Contact Role row: Contact, Role, Decision Maker, Phone, Email
+    RelatedListsPanel : Unassign (remove role)
+    RelatedListsPanel : ── Emails ──
+    RelatedListsPanel : Compose Email button
+    RelatedListsPanel : Mails tab
+    RelatedListsPanel : Drafts tab
+    RelatedListsPanel : Scheduled tab
+    RelatedListsPanel : Email row: Reply / Delete
+    RelatedListsPanel : ── Zoho Projects ──
+    RelatedListsPanel : New Project
+    RelatedListsPanel : Associate Project
+    RelatedListsPanel : ── Zoho Desk ──
+    RelatedListsPanel : All Tickets / Overdue / High Priority filters
+    RelatedListsPanel : Ticket row: Update Field
+    RelatedListsPanel : Ticket row: Close
+    RelatedListsPanel : Ticket row: Delete
+    RelatedListsPanel : ── Documents ──
+    RelatedListsPanel : Document library integration (Zoho WorkDrive linked docs)
+    RelatedListsPanel : ── Referrals (DEALS-UNIQUE) ──
+    RelatedListsPanel : Track referral relationships between deals.
+    RelatedListsPanel : Assign (link a referral)
+    RelatedListsPanel : New Deal (from referral)
+    RelatedListsPanel : Edit referral row
+    RelatedListsPanel : ── Links Section ──
+    RelatedListsPanel : Workdrive link
+    RelatedListsPanel : Add Link
+    RelatedListsPanel : ── Add Related List Button ──
+    RelatedListsPanel : Add optional related lists from available CRM modules
   }
 }
 ' ─────────────────────────────────────────────
 ' STATE: CREATE DEAL FORM
 ' ─────────────────────────────────────────────
 state CreateDealForm {
-  state FormSections {
-    state "Deal Information section" as CfDealInfo
-    state "Lead Assessment section (BANT)" as CfLeadAssess
-    state "Description Information section" as CfDescInfo
-    state "Qualification Form section" as CfQualForm
-    state "Client Feedback section" as CfClientFB
-    state "Team Lead Section" as CfTeamLead
-    state "Site Visit Infomation section" as CfSiteVisit
-  }
-  state DealInformationFields {
-    state "Deal Name (required)" as CfDealName
-    state "Closing Date (required)" as CfClosingDate
-    state "Stage (picklist, required)" as CfStage
-    state "Contact Name (lookup)" as CfContact
-    state "Amount" as CfAmount
-    state "Probability (%) - auto-set by stage" as CfProbability
-    state "Expected Revenue (computed = Amount × Probability)" as CfExpRevenue
-    state "Deal Owner (user lookup)" as CfDealOwner
-    state "Account Name (lookup)" as CfAccount
-    state "Lead Source (picklist)" as CfLeadSource
-    state "Campaign Source" as CfCampaign
-    state "Comfortable Price" as CfComfortPrice
-    state "Relevant Property" as CfRelevantProp
-    state "Estimated Budget" as CfEstBudget
-  }
-  state LeadAssessmentFields {
-    state "Budget (BANT picklist)" as CfBANTBudget
-    state "Need (BANT picklist)" as CfBANTNeed
-    state "Authority (BANT picklist)" as CfBANTAuth
-    state "Time (BANT picklist)" as CfBANTTime
-    state "Budget Range Max" as CfBudgetMax
-    state "Budget Range Min" as CfBudgetMin
-  }
-  state DescriptionFields {
-    state "Description (textarea)" as CfDesc
-    state "Client Feedback after the Site Visit (textarea)" as CfClientFBText
-    state "BDM Feedback (textarea)" as CfBDMFB
-  }
-  state QualificationFields {
-    state "Does lead have financial capability? (checkbox)" as CfQual1
-    state "Does project match location preference? (dropdown)" as CfQual2
-    state "Who is making the decision? (dropdown)" as CfQual3
-    state "When is lead planning to buy? (dropdown)" as CfQual4
-  }
-  state ClientFeedbackFields {
-    state "Feedback URL" as CfFBUrl
-    state "Comments (textarea)" as CfComments
-    state "Client Rating" as CfRating
-  }
-  state TeamLeadFields {
-    state "Approval for Closure (checkbox/picklist)" as CfApproval
-  }
-  state SiteVisitFields {
-    state "Site Visit URL" as CfSVUrl
-    state "Visit Status" as CfVisitStatus
-    state "Client Comments" as CfClientComm
-    state "Site Visit Location" as CfSVLocation
-    state "BDM Form URL" as CfBDMUrl
-    state "Site Visit Date" as CfSVDate
-    state "When Are You Planning to Start" as CfStartPlan
-    state "BDM" as CfBDM
-    state "Is There Any Other Specific Concerns" as CfConcerns
-    state "Visit Date" as CfVisitDate
-    state "Client's Overall Impression" as CfImpression
-    state "Real Objections" as CfObjections
-    state "Decision Influencers" as CfDecision
-  }
-  state FormActions {
-    state "Save" as CfSave
-    state "Save and New" as CfSaveNew
-    state "Cancel" as CfCancel
-    state "Edit Page Layout link" as CfEditLayout
-  }
+  CreateDealForm : ── Form Sections ──
+  CreateDealForm : Deal Information section
+  CreateDealForm : Lead Assessment section (BANT)
+  CreateDealForm : Description Information section
+  CreateDealForm : Qualification Form section
+  CreateDealForm : Client Feedback section
+  CreateDealForm : Team Lead Section
+  CreateDealForm : Site Visit Infomation section
+  CreateDealForm : ── Deal Information Fields ──
+  CreateDealForm : Deal Name (required)
+  CreateDealForm : Closing Date (required)
+  CreateDealForm : Stage (picklist, required)
+  CreateDealForm : Contact Name (lookup)
+  CreateDealForm : Amount
+  CreateDealForm : Probability (%) - auto-set by stage
+  CreateDealForm : Expected Revenue (computed = Amount × Probability)
+  CreateDealForm : Deal Owner (user lookup)
+  CreateDealForm : Account Name (lookup)
+  CreateDealForm : Lead Source (picklist)
+  CreateDealForm : Campaign Source
+  CreateDealForm : Comfortable Price
+  CreateDealForm : Relevant Property
+  CreateDealForm : Estimated Budget
+  CreateDealForm : ── Lead Assessment Fields (BANT) ──
+  CreateDealForm : Budget (BANT picklist)
+  CreateDealForm : Need (BANT picklist)
+  CreateDealForm : Authority (BANT picklist)
+  CreateDealForm : Time (BANT picklist)
+  CreateDealForm : Budget Range Max
+  CreateDealForm : Budget Range Min
+  CreateDealForm : ── Description Fields ──
+  CreateDealForm : Description (textarea)
+  CreateDealForm : Client Feedback after the Site Visit (textarea)
+  CreateDealForm : BDM Feedback (textarea)
+  CreateDealForm : ── Qualification Fields ──
+  CreateDealForm : Does lead have financial capability? (checkbox)
+  CreateDealForm : Does project match location preference? (dropdown)
+  CreateDealForm : Who is making the decision? (dropdown)
+  CreateDealForm : When is lead planning to buy? (dropdown)
+  CreateDealForm : ── Client Feedback Fields ──
+  CreateDealForm : Feedback URL
+  CreateDealForm : Comments (textarea)
+  CreateDealForm : Client Rating
+  CreateDealForm : ── Team Lead Fields ──
+  CreateDealForm : Approval for Closure (checkbox/picklist)
+  CreateDealForm : ── Site Visit Fields ──
+  CreateDealForm : Site Visit URL
+  CreateDealForm : Visit Status
+  CreateDealForm : Client Comments
+  CreateDealForm : Site Visit Location
+  CreateDealForm : BDM Form URL
+  CreateDealForm : Site Visit Date
+  CreateDealForm : When Are You Planning to Start
+  CreateDealForm : BDM
+  CreateDealForm : Is There Any Other Specific Concerns
+  CreateDealForm : Visit Date
+  CreateDealForm : Client's Overall Impression
+  CreateDealForm : Real Objections
+  CreateDealForm : Decision Influencers
+  CreateDealForm : ── Form Actions ──
+  CreateDealForm : Save
+  CreateDealForm : Save and New
+  CreateDealForm : Cancel
+  CreateDealForm : Edit Page Layout link
   note right of CreateDealForm
     Deal Name, Closing Date, Stage are required.
     Probability auto-updates when Stage changes.
@@ -702,32 +655,32 @@ state CreateDealForm {
 ' STATE: EDIT DEAL FORM
 ' ─────────────────────────────────────────────
 state EditDealForm {
-  state EditFormSections {
-    note "All same sections as Create form:\\nDeal Information, Lead Assessment, Description,\\nQualification Form, Client Feedback,\\nTeam Lead Section, Site Visit Infomation"
-  }
-  state EditFormActions {
-    state "Save" as EcSave
-    state "Save and New" as EcSaveNew
-    state "Cancel" as EcCancel
-    state "Edit Page Layout link" as EcEditLayout
-  }
-  state InlineEditSupport {
-    note "All fields support inline edit\\ndirectly from Detail View\\nby clicking any field value"
-  }
-  state ChangeOwnerInEdit {
-    state "Deal Owner field (user lookup)" as EcOwnerField
-    state "Search and select new owner" as EcOwnerSearch
-    state "Confirm new owner" as EcOwnerConfirm
-  }
-  state StageChangeInEdit {
-    state "Stage picklist in form" as EcStageField
-    state "Select new stage" as EcStageSelect
-    state "Probability auto-updates" as EcProbUpdate
-    state "Expected Revenue recalculates" as EcRevCalc
-    state "On Save: Stage History entry written" as EcStageHistory
-    state "On Save: Timeline event logged" as EcTimeline
-    state "On Save: Workflow Rules re-evaluate" as EcWorkflow
-  }
+  EditDealForm : ── Edit Form Sections ──
+  EditDealForm : All same sections as Create form:
+  EditDealForm : Deal Information, Lead Assessment, Description,
+  EditDealForm : Qualification Form, Client Feedback,
+  EditDealForm : Team Lead Section, Site Visit Infomation
+  EditDealForm : ── Edit Form Actions ──
+  state "Save" as EcSave
+  state "Save and New" as EcSaveNew
+  state "Cancel" as EcCancel
+  state "Edit Page Layout link" as EcEditLayout
+  EditDealForm : ── Inline Edit Support ──
+  EditDealForm : All fields support inline edit
+  EditDealForm : directly from Detail View
+  EditDealForm : by clicking any field value
+  EditDealForm : ── Change Owner In Edit ──
+  state "Deal Owner field (user lookup)" as EcOwnerField
+  state "Search and select new owner" as EcOwnerSearch
+  state "Confirm new owner" as EcOwnerConfirm
+  EditDealForm : ── Stage Change In Edit ──
+  state "Stage picklist in form" as EcStageField
+  state "Select new stage" as EcStageSelect
+  state "Probability auto-updates" as EcProbUpdate
+  state "Expected Revenue recalculates" as EcRevCalc
+  state "On Save: Stage History entry written" as EcStageHistory
+  state "On Save: Timeline event logged" as EcTimeline
+  state "On Save: Workflow Rules re-evaluate" as EcWorkflow
   EcStageField --> EcStageSelect
   EcStageSelect --> EcProbUpdate
   EcProbUpdate --> EcRevCalc
@@ -754,34 +707,34 @@ state DealLifecycle {
     note "No deal record exists yet"
   }
   state DealCreated {
-    note "Created via:\\n- Create Deal form (manual)\\n- Lead Conversion (contact + account + deal)\\n- Clone existing deal\\n- Import (CSV / Excel)\\n- API / Integration\\n- Workflow Rule auto-create\\n- Blueprint transition auto-create\\n- Function (Deluge script)\\n- Referral → New Deal action\\n- Related list 'New Deal' from Contact/Account"
+    note "Created via:\n- Create Deal form (manual)\n- Lead Conversion (contact + account + deal)\n- Clone existing deal\n- Import (CSV / Excel)\n- API / Integration\n- Workflow Rule auto-create\n- Blueprint transition auto-create\n- Function (Deluge script)\n- Referral → New Deal action\n- Related list 'New Deal' from Contact/Account"
   }
   state DealQualification {
-    note "Stage: Qualification / Needs Analysis\\n(custom stage names per org config)\\nBANT fields assessed:\\n- Budget, Authority, Need, Time"
+    note "Stage: Qualification / Needs Analysis\n(custom stage names per org config)\nBANT fields assessed:\n- Budget, Authority, Need, Time"
   }
   state DealProposal {
-    note "Stage: Value Proposition / Proposal/Price Quote\\nProposal sent to prospect.\\nSite Visit may be scheduled."
+    note "Stage: Value Proposition / Proposal/Price Quote\nProposal sent to prospect.\nSite Visit may be scheduled."
   }
   state DealNegotiation {
-    note "Stage: Negotiation / Review\\nPrice and terms negotiated.\\nApproval for Closure may be triggered."
+    note "Stage: Negotiation / Review\nPrice and terms negotiated.\nApproval for Closure may be triggered."
   }
   state DealClosedWon {
-    note "Stage: Closed Won\\nProbability = 100%\\nDeal Closed Time auto-stamped\\nExpected Revenue = Amount\\nSales Cycle Duration computed\\nWorkflow / Blueprint triggers fire\\nStage History entry created"
+    note "Stage: Closed Won\nProbability = 100%\nDeal Closed Time auto-stamped\nExpected Revenue = Amount\nSales Cycle Duration computed\nWorkflow / Blueprint triggers fire\nStage History entry created"
   }
   state DealClosedLost {
-    note "Stage: Closed Lost\\nProbability = 0%\\nDeal Closed Time auto-stamped\\nLost Reason may be captured\\nStage History entry created"
+    note "Stage: Closed Lost\nProbability = 0%\nDeal Closed Time auto-stamped\nLost Reason may be captured\nStage History entry created"
   }
   state DealClosedLostToCompetition {
-    note "Stage: Closed Lost to Competition\\nProbability = 0%\\nCompetitor tracked in Competitors list\\nDeal Closed Time auto-stamped\\nStage History entry created"
+    note "Stage: Closed Lost to Competition\nProbability = 0%\nCompetitor tracked in Competitors list\nDeal Closed Time auto-stamped\nStage History entry created"
   }
   state DealDeleted {
-    note "Soft-deleted.\\nMoves to Recycle Bin.\\nRetained up to 60 days.\\nRelated records orphaned or cleaned per config."
+    note "Soft-deleted.\nMoves to Recycle Bin.\nRetained up to 60 days.\nRelated records orphaned or cleaned per config."
   }
   state DealPermanentlyDeleted {
-    note "Permanent deletion:\\n- Manual from Recycle Bin\\n- 60-day auto-purge\\n- Mass Delete Permanently"
+    note "Permanent deletion:\n- Manual from Recycle Bin\n- 60-day auto-purge\n- Mass Delete Permanently"
   }
   state DealMerged {
-    note "Result of Find and Merge Duplicates.\\nMaster record survives.\\nDuplicate merged-deleted.\\nRelated records re-parented to master."
+    note "Result of Find and Merge Duplicates.\nMaster record survives.\nDuplicate merged-deleted.\nRelated records re-parented to master."
   }
   DealNotExists --> DealCreated : Create / Import / Workflow / API
   DealCreated --> DealQualification : enter Qualification stage

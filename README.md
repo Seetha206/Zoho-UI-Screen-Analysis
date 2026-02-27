@@ -3,7 +3,7 @@
 **Organisation:** Kurinjee Promoters (Org ID: `60043078423`)
 **Industry:** Real Estate — Property Sales (South India)
 **Platform:** Zoho CRM (`crm.zoho.in`)
-**Scan Date:** 2026-02-26
+**Scan Date:** 2026-02-27 (updated)
 
 ---
 
@@ -80,6 +80,7 @@ Zoho UI-Screen Analysis/
 ├── projects-porfolio/
 │   ├── projects_porfolio.puml
 │   ├── ProjectsPortfolio.md
+│   ├── projects_portfolio_full_structure.yaml   ← NEW (2026-02-27)
 │   ├── projects_portfolio_overview.md
 │   └── reporting_standardization.yaml
 │
@@ -107,8 +108,28 @@ Zoho UI-Screen Analysis/
 │       └── settings_add_role_scribe_flow.md
 │
 ├── Sellbot-plan/
-│   └── SellBot_Developer_Specific.yml     ⚠️ NOT linked to any screen — see note below
+│   └── SellBot_Developer_Specific.yml     (14-step automation blueprint — 95KB)
 │
+├── sellbot/
+│   └── ui_screen/                          ← NEW (2026-02-27) — SellBot UI Implementation Plan
+│       ├── 00_overview.md                  (master map: Zoho module → SellBot step, patterns, template registry)
+│       ├── 01_project_setup.md             (Step 1: Project Assets Library)
+│       ├── 02_lead_capture.md              (Step 2: Lead Capture Form)
+│       ├── 03_welcome_automation.md        (Step 3: Auto Welcome WhatsApp + Email)
+│       ├── 04_lead_assignment.md           (Step 4: Lead Assignment + 5 Call Attempt Tasks)
+│       ├── 05_lead_qualification.md        (Step 5: BANT 8-Question Scoring + Lead_Type)
+│       ├── 06_site_visit_invitation.md     (Step 6: Site Visit Booking + Google Calendar)
+│       ├── 07_site_visit_reminders.md      (Step 7: 24hr Reminder + 8-Week Cycle)
+│       ├── 08_post_visit_feedback.md       (Step 8: Mobile Proof Form + Objection Capture)
+│       ├── 09_60day_nurturing.md           (Step 9: 7 Objection Tracks × 8 Weekly WA Templates)
+│       ├── 10_crm_dashboard.md             (Step 10: 4 Dashboard Views + Monthly PDF)
+│       ├── 11_client_feedback.md           (Step 11: 28-Question Post-Registration Form)
+│       ├── 12_referral_program.md          (Step 12: Referral Capture + Reward Automation)
+│       ├── 13_business_owner_dashboard.md  (Step 13: 10-Section Master Dashboard)
+│       ├── 14_longterm_engagement.md       (Step 14: Festival Broadcasts + 90-Day Re-activation)
+│       └── field_inventory.md              (All fields: Leads/Tasks/Feedback/Referral/Feedback/Projects)
+│
+├── VERIFIED_REPORT.md                      ← NEW (2026-02-27) — full coverage audit (avg 68%)
 ├── AUDIT_REPORT.md
 ├── CLAUDE.md
 └── README.md
@@ -258,36 +279,67 @@ Scribe flows are screen recordings that confirm exact UI behaviour. Each flow fi
 
 ## Audit Status
 
-Full details in `AUDIT_REPORT.md`.
+Full details in `VERIFIED_REPORT.md` (updated 2026-02-27, supersedes `AUDIT_REPORT.md`).
 
-| Module | Coverage | Verdict |
+**Repository Average Coverage: 68%** (12-dimension × 8-module audit)
+
+| Module | Coverage | Status |
 |---|---|---|
-| Home | 90% | ✅ Safe for Reverse Engineering |
-| Leads | 98% | ✅ Safe for Reverse Engineering |
-| Contacts | 95% | ✅ Safe for Reverse Engineering |
-| Accounts | 75% | ⚠️ Needs Fix — create form not yet scanned |
-| Deals | 96% | ✅ Safe for Reverse Engineering |
-| Tasks | 99% | ✅ Safe for Reverse Engineering |
-| Employee Portfolio | 96% | ✅ Safe for Reverse Engineering |
-| Projects Portfolio | 94% | ✅ Safe for Reverse Engineering |
+| Leads | 92% | ✅ Ready for Reverse Engineering (10 Scribe flows) |
+| Contacts | 75% | ✅ Ready |
+| Deals | 78% | ✅ Ready |
+| Accounts | 72% | ⚠️ Create form inferred — not directly scanned |
+| Tasks | 68% | ✅ Ready (1 Scribe flow) |
+| Home | 65% | ✅ Ready (1 Scribe flow) |
+| Employee Portfolio | 42% | ⚠️ No Scribe flows recorded |
+| Projects Portfolio | 45% | ⚠️ No Scribe flows recorded |
+
+**Critical Gaps Remaining:**
+- Employee Portfolio + Projects Portfolio: 0 Scribe flows (3 flows each pending)
+- Approval workflows: undocumented across all modules
+- Automation rules inventory: not yet captured
 
 ---
 
-## Sellbot-plan — Disconnected from This Repository
+## SellBot-360™ — UI Implementation Plan
 
-The `Sellbot-plan/` folder contains **`SellBot_Developer_Specific.yml`** — a 14-step WhatsApp-driven sales automation design for real estate lead management (WhatsApp via WATI/Interakt, Google Calendar, Zoho Analytics).
+`Sellbot-plan/SellBot_Developer_Specific.yml` is a 14-step WhatsApp-driven sales
+automation design for real estate lead management (WhatsApp via WATI, Google Calendar,
+Zoho Analytics). **As of 2026-02-27, this blueprint is fully mapped to the Zoho CRM
+reverse-engineering in `sellbot/ui_screen/`.**
 
-**This blueprint is NOT used anywhere in this repository and is NOT linked to any screen documentation.**
+### What `sellbot/ui_screen/` Contains
 
-| What it is | What it is NOT |
-|---|---|
-| A planning / design document | A scanned UI artifact |
-| Intended future automation | Confirmed live CRM configuration |
-| Self-contained blueprint | Referenced by any screen folder |
+Each of the 14 SellBot steps has a dedicated implementation file that specifies:
+- Which Zoho CRM module(s) and screens it maps to
+- Exact field definitions (new fields + existing Zoho fields)
+- Screen layout, form sections, and interaction states
+- WhatsApp template text and merge fields
+- Automation triggers and conditions
+- Implementation delta — what changes from Zoho vs what is new in SellBot
 
-**Do not use `Sellbot-plan/` as evidence of live CRM behaviour when reverse engineering.**
+### Key SellBot Sub-Modules (New — Not in Live Zoho)
 
-To verify whether SellBot-360 automation is active, independently scan:
+| Sub-Module | Purpose | Step |
+|---|---|---|
+| Project Assets Library | Digital asset storage (brochure, videos, map, posters) | Step 1 |
+| BANT Qualification Form | 8-question scoring → Hot/Warm/Cold/Junk | Step 5 |
+| Site Visit Booking | Google Calendar integration + Visit_Status field | Step 6 |
+| Site Visit Feedback | Mobile proof form (camera-only, geotagged) + objection capture | Step 8 |
+| Referral Management | Referral capture, reward tracking, ambassador recognition | Step 12 |
+| Client Feedback | 28-question post-registration form with NPS | Step 11 |
+
+### New Fields Added to Leads Module (summary)
+
+`Lead_Score_Total` · `Lead_Type` · `Visit_Status` · `Calendar_Event_ID` ·
+`Reminder_Count` · `Visit_Verified` · `Objection_Status` · `Urgency_Level` ·
+`TL_Approved_for_Closure` · `Attach_from_Project_Assets` · `Campaign_Name` ·
+`Score_Revision_Log` · `Referral_Source` · `In_Nurture_Program` · `Nurture_Track`
+
+**Do not use `Sellbot-plan/` or `sellbot/ui_screen/` as evidence of live Zoho CRM
+behaviour.** These are implementation design documents, not confirmed live configuration.
+
+To verify whether SellBot-360 automation is active in the live CRM, scan:
 - CRM → Settings → Workflow Rules
 - CRM → Settings → Blueprints
 - CRM → Settings → Functions

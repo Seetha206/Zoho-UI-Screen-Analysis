@@ -1,0 +1,610 @@
+# projects_portfolio_full_structure.yaml
+# Source: Live DOM scan (ProjectsPortfolio.md) + Leads structural template
+# Scan Date: 2026-02-26
+# Organisation: Kurinjee Promoters (org60043078423)
+# Module: Projects Portfolio (CustomModule3)
+
+projects_portfolio_module:
+  module_name: Projects Portfolio
+  internal_module_name: CustomModule3
+  url_pattern: /crm/org60043078423/tab/CustomModule3
+  total_records: 3
+  layout_id: "955332000000425393"
+  account_id: "955332000000406001"
+  organisation: Kurinjee Promoters
+  org_id: "60043078423"
+  module_type: Custom Module
+  pagination: 1 to 3 per page (single page — all records visible)
+  custom_view_id: "955332000000436287"
+
+  # ─────────────────────────────────────────────
+  # SCRIBE FLOWS DOCUMENTED
+  # ─────────────────────────────────────────────
+  scribe_flows_documented:
+    note: "No Scribe flows recorded for Projects Portfolio module as of 2026-02-27. All data sourced from live DOM scan (ProjectsPortfolio.md)."
+    pending_flows:
+      - project_create_scribe_flow
+      - project_update_scribe_flow
+      - project_delete_scribe_flow
+
+  # ─────────────────────────────────────────────
+  # LIST VIEW
+  # ─────────────────────────────────────────────
+  list_view:
+    url: /crm/org60043078423/tab/CustomModule3/custom-view/955332000000436287/list
+    custom_view_id: "955332000000436287"
+    active_view_label: All Projects Portfolio
+    columns_visible:
+      - name: "(Row options)"
+        type: hover_action_menu
+        sortable: false
+      - name: "(Checkbox)"
+        type: multi_select
+        sortable: false
+      - name: "(Activity date badge)"
+        type: last_activity_date
+        style: none_visible
+        sortable: false
+      - name: Project Portfolio Name
+        type: text_link
+        sortable: true
+        filter_dropdown: All
+        column_options: true
+      - name: Budget
+        type: currency_INR
+        sortable: true
+        column_options: true
+      - name: Project Type
+        type: text
+        sortable: true
+        column_options: true
+      - name: Created Time
+        type: date_DD_MM_YYYY_HH_MM
+        sortable: true
+        column_options: true
+      - name: "(Column settings icon)"
+        type: column_configuration
+    column_settings_icon: visible (top-right of header row)
+    view_tabs:
+      - name: All Projects Portfolio
+        type: custom_view
+        active: true
+        custom_view_id: "955332000000436287"
+      - name: "... more_views_dropdown"
+        options:
+          - New Custom View
+          - Manage Custom View
+          - Show custom views as Dropdown
+    view_switchers:
+      - icon: List View
+        active: true
+      - icon: Kanban / Split View
+      - icon: Table / Grid View
+      - icon: Canvas / Clock View
+      - icon: Custom List View
+      - icon: Tile View
+      - icon: Chevron dropdown (more views)
+    toolbar_actions:
+      filter:
+        triggers:
+          - type: toolbar_button
+            label: Filter
+            icon: funnel
+            behavior: opens_closes_filter_panel
+        filter_operators_confirmed:
+          - is
+          - is not
+          - is empty
+          - is not empty
+          - contains
+          - does not contain
+          - starts with
+          - ends with
+        apply_filter_button:
+          label: Apply Filter
+          type: primary button (blue)
+          position: bottom of filter panel
+      sort:
+        trigger: Sort button (toolbar)
+        panel_structure:
+          field_selector:
+            label: Sort By
+            type: dropdown
+            default: None (unsorted)
+          order_selector:
+            type: radio buttons
+            options: [Ascending, Descending]
+            default: Ascending
+          buttons:
+            - label: Apply
+              type: primary (blue)
+            - label: Cancel
+              type: secondary
+              behavior: preserves previously applied sort
+        url_params_on_sort:
+          sort_order: asc | desc | unsort
+          sort_by: "{field_id}"
+      refresh:
+        trigger: Refresh Custom View button
+    per_page_selector:
+      type: user-configurable dropdown
+      confirmed_options: [10, 20, 25, 50, 100, 200]
+      note: "With only 3 records total, pagination is not active; all records fit on page 1"
+    column_settings:
+      trigger_icon: column-settings icon (top-right of list header)
+      dropdown_menu_items:
+        - Manage Columns
+        - Resize Columns
+        - Reset Columns
+      manage_columns_panel:
+        layout: two-pane (Available Fields | Selected Columns)
+        actions: check/uncheck to show/hide; drag to reorder
+        save_button: true
+        default_selected_columns:
+          - Project Portfolio Name
+          - Budget
+          - Project Type
+          - Created Time
+        notes: Column configuration is per-user
+    toolbar_buttons:
+      - label: Filter
+        icon: funnel
+        behavior: opens_closes_filter_panel
+      - label: Sort
+        icon: sort_arrows
+        behavior: opens_sort_options
+      - label: Refresh Custom View
+        behavior: reloads_current_view
+      - label: Create Project Portfolio
+        type: split_button
+        color: blue_solid
+        truncated_label: "Create Project P..."
+        primary_nav: /tab/CustomModule3/create?layoutId=955332000000425393&redirect=false
+        secondary_arrow: "▼ dropdown"
+      - label: "Actions (...)"
+        type: overflow_menu
+        items:
+          - label: Import Projects Portfolio
+            href: /crm/org60043078423/settings/import?module=CustomModule3&step=1
+          - label: Mass Delete
+            href: /crm/org60043078423/tab/CustomModule3/actions/mass-tools?type=mass_delete
+          - label: Mass Update
+            href: /crm/org60043078423/tab/CustomModule3/actions/mass-tools?type=mass_update
+          - label: Manage Tags
+            href: /crm/org60043078423/settings/manage-tags?module=CustomModule3
+          - label: Drafts
+            href: /crm/org60043078423/tab/CustomModule3/actions/draft?module=CustomModule3
+          - label: Mass Email
+            href: /crm/org60043078423/settings/manage-mass-mail?module=CustomModule3
+          - label: Autoresponders
+            href: /crm/org60043078423/settings/auto-responders?module=CustomModule3
+          - label: Approve Projects Portfolio
+            href: /crm/org60043078423/tab/CustomModule3/actions/approvals
+          - label: Deduplicate Projects Portfolio
+            type: in_page_action
+          - label: Create Client Script
+            type: in_page_action
+          - label: Export Projects Portfolio
+            type: in_page_action
+          - label: Zoho Sheet View
+            type: in_page_action
+          - label: Print View
+            type: in_page_action
+
+  # ─────────────────────────────────────────────
+  # FILTER PANEL
+  # ─────────────────────────────────────────────
+  filter_panel:
+    title: "Filter Projects Portfolio by"
+    search_input:
+      placeholder: Search
+      type: text
+    sections:
+      system_defined_filters:
+        label: System Defined Filters
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Touched Records
+          - Untouched Records
+          - Record Action
+          - Related Records Action
+          - Locked
+          - Latest Email Status
+          - Activities
+          - Cadences
+      filter_by_fields:
+        label: Filter By Fields
+        collapsible: true
+        filter_type: checkbox
+        fields:
+          - Airport Name
+          - Annual Appreciation Rate
+          - Approach Roads Condition
+          - Banks
+          - Base Price Per Unit
+          - Budget
+          - Bus Stop Name
+          - Buyer Age Range Max
+          - Buyer Age Range Min
+          - Childrens Park
+          - City
+          - Colleges
+          - Completion Stage
+          - Compound Wall
+          - Connected To
+          - Created By
+          - Created Time
+          - Customization Available
+          - Development Stage
+          - Distance from Airport
+          - Distance from Bus Stop
+          - Distance from Railway Station
+          - District
+          - DTCP Approval Number
+          - DTCP Approved
+          - Electricity Connection
+          - Estimated Completion Date
+          - Expected Conversion Rate
+          - Folder ID
+          - Folder URL
+          - Gated Community
+          - Grocery
+          - Highway Distance
+          - Hospitals
+          - Income Level Max
+          - Income Level Min
+          - Index
+          - Job Creation Opportunities
+          - Land Area
+          - Land Ownership Verified
+          - Landmarks
+          - Last Activity Time
+          - Litigation Risk
+          - Local Population Growth
+          - Major Infrastructure Projects
+          - Map Link
+          - Marketing Budget Digital
+          - Marketing Budget Offline
+          - Marketing Budget Partnerships
+          - Modified By
+          - Modified Time
+          - Monthly Lead Target
+          - Monthly Maintenance Fee
+          - Nearest NH
+          - No Of Units
+          - Pincode
+          - Project Portfolio Name
+          - Project Portfolio Owner
+          - Project Type
+          - Railway Station Name
+          - RERA Number
+          - RERA Registered
+          - Restaurants
+          - Road Type
+          - Sales Revenue Target
+          - Solar Street Light
+          - State
+          - Storm Water Drainage
+          - Street
+          - Tag
+          - Unsubscribed Mode
+          - Unsubscribed Time
+          - Water Supply
+          - Website Project Link
+      filter_by_subforms:
+        label: Filter By Subforms
+        collapsible: true
+        filter_type: checkbox
+        options:
+          - Competitive Analysis
+      filter_by_related_modules:
+        label: Filter By Related Modules
+        collapsible: true
+        filter_type: checkbox
+        modules:
+          - Calls
+          - Deals (Deals Site Visit Location)
+          - Emails
+          - Leads (Leads Site Visit Location)
+          - Meetings
+          - Notes
+          - Tasks
+
+  # ─────────────────────────────────────────────
+  # RECORDS (ALL 3 PROJECTS)
+  # ─────────────────────────────────────────────
+  records:
+    - row: 1
+      project_name: Mettupalayam
+      record_id: "955332000003796012"
+      record_href: /crm/org60043078423/tab/CustomModule3/955332000003796012
+      budget: "₹ 20,00,000.00"
+      project_type: Plots
+      created_time: "24/11/2025 01:36 PM"
+      last_activity: "(none visible)"
+    - row: 2
+      project_name: Mullai Nagar
+      record_id: "955332000000490001"
+      record_href: /crm/org60043078423/tab/CustomModule3/955332000000490001
+      budget: "₹ 67,00,000.00"
+      project_type: Mixed Use
+      created_time: "29/06/2025 09:29 PM"
+      last_activity: "(none visible)"
+      note: "Referenced in Blueprint Lead transition — 'Select Matched Projects' field"
+    - row: 3
+      project_name: Eswara Nagar
+      record_id: "955332000000488002"
+      record_href: /crm/org60043078423/tab/CustomModule3/955332000000488002
+      budget: "₹ 25,00,000.00"
+      project_type: Mixed Use
+      created_time: "29/06/2025 09:25 PM"
+      last_activity: "(none visible)"
+
+  project_type_summary:
+    Plots: 1
+    Mixed_Use: 2
+  budget_summary:
+    total_visible: "₹ 1,12,00,000.00"
+    breakdown:
+      - "₹ 20,00,000.00 — Mettupalayam (Plots)"
+      - "₹ 67,00,000.00 — Mullai Nagar (Mixed Use)"
+      - "₹ 25,00,000.00 — Eswara Nagar (Mixed Use)"
+
+  # ─────────────────────────────────────────────
+  # CREATE PROJECT PORTFOLIO FORM
+  # ─────────────────────────────────────────────
+  create_form:
+    url: /crm/org60043078423/tab/CustomModule3/create?layoutId=955332000000425393&redirect=false
+    layout_id: "955332000000425393"
+    edit_layout_link: /crm/org60043078423/settings/modules/CustomModule3/layouts/955332000000425393
+    form_actions:
+      - label: Save
+        type: primary_blue
+        behavior: save_and_navigate_to_detail
+      - label: Save and New
+        type: secondary_outline
+        behavior: save_and_open_fresh_form
+      - label: Cancel
+        type: secondary_outline
+        behavior: discard_and_return_to_list
+    navigation_guard:
+      message: "You have not saved your changes."
+      sub_message: "Are you sure you want to move away from this page?"
+      actions: ["Yes, Leave Page", "Stay Here"]
+    right_panel:
+      - label: Client Script
+        type: slide_out_tab
+        position: far_right_edge
+    sections:
+      - section: Project Overview
+        required_fields: [Project Portfolio Name, Project Type, Street]
+        fields:
+          - label: Project Portfolio Name
+            type: text_input
+            required: true
+          - label: Budget
+            type: currency_INR
+            required: false
+          - label: Project Type
+            type: dropdown
+            required: true
+            observed_options: [Plots, Mixed Use]
+          - label: Land Area
+            type: text_input
+            placeholder: "in Acres"
+          - label: No Of Units
+            type: text_input
+          - label: Development Stage
+            type: dropdown
+          - label: Completion Stage
+            type: dropdown
+          - label: Base Price Per Unit
+            type: currency_INR
+          - label: Estimated Completion Date
+            type: date_DD_MM_YYYY
+          - label: Price Advantages
+            type: textarea
+          - label: Connected To
+            type: lookup
+            target_module: Leads
+      - section: Location
+        fields:
+          - label: Street
+            type: text_input
+            required: true
+          - label: City
+            type: text_input
+          - label: District
+            type: text_input
+          - label: State
+            type: dropdown
+            default: Tamil Nadu
+          - label: Pincode
+            type: text_input
+          - label: Nearest NH
+            type: text_input
+          - label: Highway Distance
+            type: text_input
+          - label: Landmarks
+            type: text_input
+      - section: Location and Accessibility
+        fields:
+          - Railway Station Name
+          - Bus Stop Name
+          - Distance from Bus Stop
+          - Airport Name
+          - Distance from Airport
+          - Distance from Railway Station
+          - Restaurants
+          - Colleges
+          - Banks
+          - Grocery
+          - Hospitals
+          - Major Infrastructure Projects
+          - Approach Roads Condition
+          - Annual Appreciation Rate
+          - Local Population Growth
+          - Property Value Trends
+          - Job Creation Opportunities
+          - Map Link
+      - section: Project Features
+        fields:
+          - DTCP Approved
+          - DTCP Approval Number
+          - RERA Registered
+          - RERA Number
+          - Land Ownership Verified
+          - Litigation Risk
+          - Gated Community
+          - Road Type
+          - Compound Wall
+          - Road Widths
+          - Water Supply
+          - Storm Water Drainage
+          - Electricity Connection
+          - Solar Street Light
+          - Childrens Park
+          - Customization Available
+          - Other Amenities
+          - Customization Options
+          - Monthly Maintenance Fee
+          - Unique Selling Points
+          - Maintenance Services
+      - section: Competitive Analysis
+        type: subform
+        note: "Repeatable rows — each row = one competitor"
+        columns:
+          - Competitor Name
+          - Competitor Location
+          - Distance From Highway
+          - Price Range Per Cent
+          - Key Strengths
+          - Key Weaknesses
+      - section: Target Audience
+        fields:
+          - Target Professions
+          - Buyer Age Range Min
+          - Buyer Age Range Max
+          - Income Level Min
+          - Income Level Max
+          - Pain Points Addressed
+          - Lifestyle Preferences
+      - section: Marketing and Sales Strategy
+        fields:
+          - Digital Marketing Channels (textarea)
+          - Offline Marketing Strategies (textarea)
+          - Monthly Lead Target
+          - Expected Conversion Rate
+          - Sales Revenue Target (currency ₹)
+          - Marketing Budget Digital (currency ₹)
+          - Marketing Budget Offline (currency ₹)
+          - Marketing Budget Partnerships (currency ₹)
+      - section: Internal Use
+        fields:
+          - label: Project Portfolio Owner
+            type: lookup (user)
+            default: Kurinjee Promoters
+            system_alert: "Maximum number of Projects Portfolio for this user is reached."
+          - Website Project Link
+          - Folder ID
+          - Folder URL
+
+  # ─────────────────────────────────────────────
+  # DETAIL VIEW
+  # ─────────────────────────────────────────────
+  detail_view:
+    url_pattern: /crm/org60043078423/tab/CustomModule3/{record_id}
+    access: click Project Portfolio Name from list view
+    tabs:
+      - Overview
+      - Related Lists (Leads, Deals, Calls, Meetings, Tasks, Emails, Notes)
+    header_action_buttons:
+      - label: Edit
+      - label: More Options (...)
+        type: icon button
+        dropdown_items:
+          - label: Clone
+          - label: Delete
+            confirmation_modal:
+              title: "Delete Projects Portfolio"
+              body: "Are you sure you want to delete this projects portfolio?"
+              buttons:
+                - label: Cancel
+                  type: secondary
+                  behavior: closes_modal_no_action
+                - label: Delete
+                  type: primary (red/destructive)
+                  behavior: deletes_record_redirects_to_list
+              post_delete_behavior:
+                toast_message: "Projects Portfolio deleted successfully"
+                redirect: list view
+                recycle_bin: record_retained_60_days
+          - label: Print Preview
+    related_list_sidebar:
+      items:
+        - Notes
+        - Open Activities (Tasks, Calls, Meetings)
+        - Closed Activities
+        - Emails
+        - Leads Site Visit Location (Leads linked to this project)
+        - Deals Site Visit Location (Deals linked to this project)
+        - Documents
+        - Add Related List (button)
+
+  # ─────────────────────────────────────────────
+  # ASSIGNMENT FLOW
+  # ─────────────────────────────────────────────
+  assignment_flow:
+    owner_field:
+      field_name: Project Portfolio Owner
+      type: lookup (user)
+      current_default: Kurinjee Promoters
+      system_alert: "Maximum number of Projects Portfolio for this user is reached."
+    trigger_methods:
+      - method: edit_form
+        steps:
+          - Click Edit header button → full Edit Project Portfolio form
+          - Project Portfolio Owner field in Internal Use section
+          - Select from user lookup dropdown
+          - Click Save
+      - method: mass_update
+        steps:
+          - Select checkboxes in list view
+          - Actions menu → Mass Update → set Project Portfolio Owner
+    confirmation: Save button on edit form
+
+  # ─────────────────────────────────────────────
+  # BOTTOM STATUS BAR (PERSISTENT)
+  # ─────────────────────────────────────────────
+  bottom_status_bar:
+    widgets:
+      - name: Visitors Online
+        type: live_counter
+        filter_options: [All Accounts, Kurinjee]
+      - name: Feedback on New UI
+        type: action_trigger
+        style: highlighted_purple
+      - name: Announcements
+        type: notification_list
+      - name: Mail
+        type: inbox_shortcut
+      - name: Motivator
+        type: gamification_leaderboard
+      - name: Sticky Notes
+        type: text_note_input
+      - name: Zia
+        type: ai_assistant
+      - name: Activity Reminders
+        type: reminder_list
+        count: 0
+        empty_state: "No Activity Reminders found."
+      - name: Recent Items
+        type: recently_viewed
+      - name: Accessibility
+        type: settings_panel
+    chat_bar:
+      - Chats
+      - Channels
+      - Contacts
+      - smart_chat_input: "Here is your Smart Chat (Ctrl+Space)"

@@ -130,54 +130,24 @@ state ContactsListView {
   ' ── ADVANCED FILTER PANEL ─────────────────
   state AdvancedFilterPanel {
     state "Search Filter Box" as FpSearch
-    state SystemDefinedFilters {
-      state "Touched Records" as SfTouched
-      state "Untouched Records" as SfUntouched
-      state "Record Action" as SfRecordAction
-      state "Related Records Action" as SfRelatedAction
-      state "Locked" as SfLocked
-      state "Latest Email Status" as SfEmailStatus
-      state "Activities" as SfActivities
-      state "Cadences" as SfCadences
-    }
-    state WebsiteActivityFilters {
-      state "Average Time Spent (Minutes)" as WaAvgTime
-      state "Days Visited" as WaDays
-      state "First Page Visited" as WaFirstPage
-      state "First Visit" as WaFirstVisit
-      state "Most Recent Visit" as WaRecent
-      state "Number Of Chats" as WaChats
-      state "Referrer" as WaReferrer
-      state "Visitor Score" as WaScore
-    }
-    state FilterByFields {
-      state "Account Name" as FfAccount
-      state "Contact Name" as FfContact
-      state "Contact Owner" as FfOwner
-      state "Email" as FfEmail
-      state "Mobile" as FfMobile
-      state "Lead Source" as FfLeadSource
-      state "Department" as FfDept
-      state "Title" as FfTitle
-      state "City / State / Country" as FfLocation
-      state "Created Time / Modified Time" as FfTime
-      state "Tag" as FfTag
-      state "Email Opt Out" as FfEmailOptOut
-      state "(+ 60 more fields)" as FfOther
-    }
-    state FilterByRelatedModules {
-      state "Calls" as FrCalls
-      state "Contacts (Reporting Contacts)" as FrReportingContacts
-      state "Deal Contact Role" as FrDealRole
-      state "Deals" as FrDeals
-      state "Emails" as FrEmails
-      state "Invitees (Invited Meetings)" as FrInvitees
-      state "Leads (Connected Records)" as FrLeadsConn
-      state "Leads (Converted Leads)" as FrLeadsConv
-      state "Meetings" as FrMeetings
-      state "Notes" as FrNotes
-      state "Tasks" as FrTasks
-    }
+    AdvancedFilterPanel : ── System Defined Filters ──
+    AdvancedFilterPanel : Touched Records | Untouched Records | Record Action
+    AdvancedFilterPanel : Related Records Action | Locked | Latest Email Status
+    AdvancedFilterPanel : Activities | Cadences
+    AdvancedFilterPanel : ── Website Activity Filters ──
+    AdvancedFilterPanel : Avg Time Spent | Days Visited | First Page Visited
+    AdvancedFilterPanel : First Visit | Most Recent Visit | Number Of Chats
+    AdvancedFilterPanel : Referrer | Visitor Score
+    AdvancedFilterPanel : ── Filter By Fields ──
+    AdvancedFilterPanel : Account Name | Contact Name | Contact Owner | Email
+    AdvancedFilterPanel : Mobile | Lead Source | Department | Title
+    AdvancedFilterPanel : City / State / Country | Created Time / Modified Time
+    AdvancedFilterPanel : Tag | Email Opt Out | (+ 60 more fields)
+    AdvancedFilterPanel : ── Filter By Related Modules ──
+    AdvancedFilterPanel : Calls | Contacts (Reporting) | Deal Contact Role
+    AdvancedFilterPanel : Deals | Emails | Invitees (Invited Meetings)
+    AdvancedFilterPanel : Leads (Connected) | Leads (Converted) | Meetings
+    AdvancedFilterPanel : Notes | Tasks
   }
   TbFilter --> AdvancedFilterPanel : toggle open/close
   ' ── LIST VIEW RECORDS TABLE ───────────────
@@ -186,18 +156,10 @@ state ContactsListView {
     state "Column: Account Name" as ColAccount
     state "Column: Email" as ColEmail
     state "Row: Record (×10 per page)" as ListRow
-    state RowLevelActions {
-      state "Edit (inline quick link)" as RaEdit
-      state "Row More Options (···)" as RaMore
-    }
-    state RowMoreMenu {
-      state "Edit" as RmEdit
-      state "Delete" as RmDelete
-      state "Print Default view" as RmPrintDefault
-      state "Print Using Canvas" as RmPrintCanvas
-    }
-    ListRow --> RowLevelActions : hover
-    RaMore --> RowMoreMenu : click
+    ListViewTable : ── Row Level Actions (on hover) ──
+    ListViewTable : Edit (inline quick link) | Row More Options (···)
+    ListViewTable : ── Row More Menu ──
+    ListViewTable : Edit | Delete | Print Default view | Print Using Canvas
   }
   ' ── RECORD SELECTION MASS ACTION BAR ──────
   state MassActionBar {
